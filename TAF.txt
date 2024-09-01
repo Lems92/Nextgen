@@ -1,0 +1,35 @@
+- lien bouton (F.A.Q)
+- contenue footer et menu
+- font*****
+// photo malalaka (testimonials ovaina)****
+- partenaire*****
+- responsivité*****
+- Titre page
+- Navbar dropdown ******
+- active/non active bouton
+- hover btn *****
+
+- lien direct vers job
+------------------------------------
+Entreprise
+- Entreprise form (étape) vita
+- Entreprise dashboard ( css )
+- Entreprise publier offre (front efa vitavita) 
+- Page : voir tous les offres ()
+- Page : voir tous les candidats (apina an'le offre npostulevany) 
+- 
+
+-----------------------------------
+Etudiant 
+- Inscription étudiant (css) 
+
+CV ao amin'ny profil sa isaky ny emploi + lettre de motivation 
+- Job browser 
+- Profil étudiant (edit) avec header
+- Application job
+- pop up validation ou echec
+-----------------------------------
+ 
+
+ (admin dashboard)
+
