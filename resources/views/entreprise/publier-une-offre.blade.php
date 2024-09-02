@@ -4,7 +4,7 @@
 
 @section('content')
 
-@include('header.header')
+@include('header.entreprise')
 
 <div class="page-wrapper">
     <div class="preloader"></div>
@@ -117,7 +117,7 @@
                             </div>
 
                             <div class="form-group col-lg-12 col-md-12 text-right">
-                                <a href="#" class="theme-btn btn-style-one">Demander une approbation</a>
+                                <a href="#" class="theme-btn btn-style-one">Publier</a>
                             </div>
                         </div>
                     </form>

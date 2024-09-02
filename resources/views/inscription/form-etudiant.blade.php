@@ -14,14 +14,14 @@
         <div class="auto-container">
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-10">
-                    <div class="upper-title-box text-center mb-4">
-                        <h3>Formulaire d'Inscription Étudiant</h3>
+                    <div class="sec-title -type-2 text-center">
+                        <h2>Formulaire d'Inscription Étudiant</h2>
                     </div>
 
                     <form id="default-form">
 
                         <fieldset class="form-section">
-                            <legend class="text-primary">Informations Personnelles</legend>
+                            <legend><h4> Personnelles </h4></legend>
                             <div class="row">
                                 <div class="form-group col-lg-12 col-md-12 mt-4">
                                     <label for="prenom" class="form-label">Prénom :</label>
@@ -88,7 +88,7 @@
 
                         <!-- Éducation -->
                         <fieldset class="form-section">
-                            <legend class="text-primary">Éducation</legend>
+                            <legend><h4>Éducation</h4></legend>
                             <div class="mb-3">
                                 <label for="nom-ecole" class="form-label">Nom de l'école ou de l'université :</label>
                                 <input type="text" id="nom-ecole" name="nom_ecole" class="form-control" required>
@@ -134,77 +134,93 @@
 
                         <!-- Expérience Académique -->
                         <fieldset class="form-section">
-                            <legend class="text-primary">Expérience Académique</legend>
+                            <legend><h4>Expérience Académique</h4></legend>
                             <div class="mb-3">
-                                <h4>Stage Académique</h4>
+                                <h6>Stage Académique</h6>
+                                <p>ex: Stage de recherche, Stage en laboratoire, Stage en entreprise...</p> 
                                 <div id="stage_academique_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-one" onclick="ajouterChamp('stage_academique')">Ajouter</button>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('stage_academique')">Ajouter</button>
                             </div>
 
                             <div class="mb-3">
-                                <h4>Projet Académique</h4>
+                                <h6>Projet Académique</h6>
+                                <p>ex. Projet de groupe, projet individuel, projet fin d'étude, projet de recherche...</p>
                                 <div id="projet_academique_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-one" onclick="ajouterChamp('projet_academique')">Ajouter</button>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('projet_academique')">Ajouter</button>
                             </div>
 
                             <div class="mb-3">
-                                <h4>Thèse et Mémoire</h4>
+                                <h6>Thèse et Mémoire</h6>
+                                <p>ex: Thèse de doctorat, Mémoire de Master, Mémoire de Licence, Dissertation...</p> 
                                 <div id="these_memoire_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-one" onclick="ajouterChamp('these_memoire')">Ajouter</button>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('these_memoire')">Ajouter</button>
                             </div>
 
                             <div class="mb-3">
-                                <h4>Réalisations</h4>
+                                <h6>Réalisations</h6>
+                                <p>ex: Publication dans une revue académique, Présentation à une conférence universitaire, Récompense ou distinction académique, Participation à un concours académique...</p> 
                                 <div id="realisations_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-one" onclick="ajouterChamp('realisations')">Ajouter</button>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('realisations')">Ajouter</button>
                             </div>
 
                             <div class="mb-3">
-                                <h4>Cours Spécialisés</h4>
+                                <h6>Cours Spécialisés</h6>
+                                <p>ex: Cours de spécialisation, Séminaire, Atelier spécialisé</p> 
                                 <div id="cours_speciaux_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-one" onclick="ajouterChamp('cours_speciaux')">Ajouter</button>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('cours_speciaux')">Ajouter</button>
                             </div>
 
                             <div class="mb-3">
-                                <h4>Autres Expériences</h4>
+                                <h6>Autres Expériences</h6>
+                                <p>ex: Participation à des Evenements académiques, recherche, encadrement, activités Parascolaires; programmes d'échange, Certificats et diplômes complémentaires...</p> 
                                 <div id="autres_experiences_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-one" onclick="ajouterChamp('autres_experiences')">Ajouter</button>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('autres_experiences')">Ajouter</button>
                             </div>
                         </fieldset>
 
                         <!-- Compétences -->
                         <fieldset class="form-section">
-                            <legend class="text-primary">Compétences</legend>
+                            <legend><h4>Compétences</h4></legend>
                             <div class="mb-3">
-                                <h4>Compétences techniques</h4>
+                                <h6>Compétences techniques</h6>
+                                <p>ex: Compétences en Informatiques (Bureautique, programmation, gestion de bases de données, systèmes d'information, cybersécurité...)</p> 
                                 <div id="competences_techniques_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-one" onclick="ajouterChamp('competences_techniques')">Ajouter</button>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_techniques')">Ajouter</button>
                             </div>
                             <div class="mb-3">
-                                <h4>Compétences en Communication :</h4>
+                                <h6>Compétences en Recherche et Analyse :</h6>
+                                <p>ex: Recherche documentaire, Analyse de donnée, Rédaction de rapports</p> 
                                 <div id="competences_en_communication_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-one" onclick="ajouterChamp('competences_en_communication')">Ajouter</button>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_en_recherche_et_analyse')">Ajouter</button>
                             </div>
                             <div class="mb-3">
-                                <h4>Compétences en Gestion de Projet :</h4>
-                                <div id="competences_gestion_projet_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-one" onclick="ajouterChamp('competences_gestion_projet')">Ajouter</button>
+                                <h6>Compétences en Communication :</h6>
+                                <p>ex: Communication orale/ecrite, compétence en négociation</p> 
+                                <div id="competences_en_communication_conteneur"></div>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_en_communication')">Ajouter</button>
+                            </div>
+                            <div class="mb-3">
+                                <h6>Autres compétences</h6>
+                                <p>ex: Compétences interpersonnelles, Résolutions des problèmes, adaptabilités, gestion du stress, leadership, Ethique et responsabilité, gestion financière, langues...</p> 
+                                <div id="autres_competences_conteneur"></div>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('autres_competences')">Ajouter</button>
                             </div>
                         </fieldset>
 
                         <!-- Expérience Professionnelle -->
                         <fieldset class="form-section">
-                            <legend class="text-primary">Expérience Professionnelle</legend>
+                            <legend><h4>Expérience Professionnelle</h4></legend>
                             <div class="mb-3">
-                                <h4>Expérience Professionnelle :</h4>
+                                <h6>Expérience Professionnelle :</h6>
+                                <p>ex: Stage en Entreprise, Emplois à temps partiel, Expérience de travail pertinente, projets professionnels, bénévolat, entrepreneuriat, formations professionnelles, responsabilités additionnelles, expérience internationale, publications et contributions...</p> 
                                 <div id="experiences_professionnelles_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-one" onclick="ajouterChamp('experiences_professionnelles')">Ajouter</button>
+                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('experiences_professionnelles')">Ajouter</button>
                             </div>
                         </fieldset>
 
                         <!-- Portfolio -->
                         <fieldset class="form-section">
-                            <legend class="text-primary">Portfolio</legend>
+                            <legend><h4>Portfolio</h4></legend>
                             <div class="mb-3">
                                 <label for="portfolio" class="form-label">Liens vers des projets, articles, créations artistiques :</label>
                                 <textarea id="portfolio" name="portfolio" class="form-control" rows="4" required></textarea>
@@ -213,7 +229,7 @@
 
                         <!-- Centres d'Intérêt -->
                         <fieldset class="form-section">
-                            <legend class="text-primary">Centres d'Intérêt</legend>
+                            <legend><h4>Centres d'Intérêt</h4></legend>
                             <div class="mb-3">
                                 <label for="centres-interet" class="form-label">Hobbies et intérêts personnels :</label>
                                 <textarea id="centres-interet" name="centres_interet" class="form-control" rows="4" required></textarea>
@@ -222,7 +238,7 @@
 
                         <!-- Documents -->
                         <fieldset class="form-section">
-                            <legend class="text-primary">Documents</legend>
+                            <legend><h4>Documents</h4></legend>
                             <div class="mb-3">
                                 <label for="diplome" class="form-label">Diplôme :</label>
                                 <input type="file" id="diplome" name="diplome" class="form-control" accept=".pdf,.doc,.docx" required>
@@ -235,24 +251,130 @@
 
                         <!-- Préférences de Carrière -->
                         <fieldset class="form-section">
-                            <legend class="text-primary">Préférences de Carrière</legend>
+                            <legend><h4>Préférences de Carrière</h4></legend>
+                            
+                            <!-- Secteur d'activité préféré -->
                             <div class="mb-3">
                                 <label for="secteur-activite" class="form-label">Secteur d'activité préféré :</label>
-                                <input type="text" id="secteur-activite" name="secteur_activite" class="form-control" required>
+                                <select id="secteur-activite" name="secteur_activite[]" class="chosen-select multiple" multiple required>
+                                    <optgroup label="Technologie de l'Information">
+                                        <option value="Développement logiciel">Développement logiciel</option>
+                                        <option value="Cybersécurité">Cybersécurité</option>
+                                        <option value="Intelligence artificielle">Intelligence artificielle</option>
+                                        <option value="Gestion de systèmes informatiques">Gestion de systèmes informatiques</option>
+                                    </optgroup>
+                                    <optgroup label="Santé">
+                                        <option value="Médecine">Médecine</option>
+                                        <option value="Soins infirmiers">Soins infirmiers</option>
+                                        <option value="Pharmacie">Pharmacie</option>
+                                        <option value="Médecine vétérinaire">Médecine vétérinaire</option>
+                                    </optgroup>
+                                    <optgroup label="Finance et Comptabilité">
+                                        <option value="Banque et assurance">Banque et assurance</option>
+                                        <option value="Gestion de portefeuille">Gestion de portefeuille</option>
+                                        <option value="Comptabilité">Comptabilité</option>
+                                        <option value="Analyse financière">Analyse financière</option>
+                                    </optgroup>
+                                    <optgroup label="Ingénierie">
+                                        <option value="Génie civil">Génie civil</option>
+                                        <option value="Génie mécanique">Génie mécanique</option>
+                                        <option value="Génie électrique">Génie électrique</option>
+                                        <option value="Génie chimique">Génie chimique</option>
+                                    </optgroup>
+                                    <optgroup label="Commerce et Marketing">
+                                        <option value="Vente et distribution">Vente et distribution</option>
+                                        <option value="Marketing digital">Marketing digital</option>
+                                        <option value="Gestion de marque">Gestion de marque</option>
+                                        <option value="Analyse de marché">Analyse de marché</option>
+                                    </optgroup>
+                                    <optgroup label="Éducation et Formation">
+                                        <option value="Enseignement">Enseignement</option>
+                                        <option value="Formation professionnelle">Formation professionnelle</option>
+                                        <option value="Pédagogie">Pédagogie</option>
+                                        <option value="Gestion éducative">Gestion éducative</option>
+                                    </optgroup>
+                                    <optgroup label="Arts et Création">
+                                        <option value="Design graphique">Design graphique</option>
+                                        <option value="Arts visuels">Arts visuels</option>
+                                        <option value="Musique et spectacle">Musique et spectacle</option>
+                                        <option value="Design d'intérieur">Design d'intérieur</option>
+                                    </optgroup>
+                                    <optgroup label="Sciences et Recherche">
+                                        <option value="Biologie">Biologie</option>
+                                        <option value="Physique">Physique</option>
+                                        <option value="Chimie">Chimie</option>
+                                        <option value="Recherche scientifique">Recherche scientifique</option>
+                                    </optgroup>
+                                    <optgroup label="Tourisme et Hôtellerie">
+                                        <option value="Gestion hôtelière">Gestion hôtelière</option>
+                                        <option value="Planification de voyages">Planification de voyages</option>
+                                        <option value="Gestion d'événements">Gestion d'événements</option>
+                                        <option value="Tourisme durable">Tourisme durable</option>
+                                    </optgroup>
+                                    <optgroup label="Droit et Juridique">
+                                        <option value="Droit pénal">Droit pénal</option>
+                                        <option value="Droit civil">Droit civil</option>
+                                        <option value="Droit international">Droit international</option>
+                                        <option value="Droit commercial">Droit commercial</option>
+                                    </optgroup>
+                                    <optgroup label="Agriculture et Environnement">
+                                        <option value="Gestion agricole">Gestion agricole</option>
+                                        <option value="Sciences de l'environnement">Sciences de l'environnement</option>
+                                        <option value="Agriculture durable">Agriculture durable</option>
+                                        <option value="Conservation de la biodiversité">Conservation de la biodiversité</option>
+                                    </optgroup>
+                                    <optgroup label="Énergie et Ressources Naturelles">
+                                        <option value="Énergies renouvelables">Énergies renouvelables</option>
+                                        <option value="Gestion des ressources">Gestion des ressources</option>
+                                        <option value="Ingénierie énergétique">Ingénierie énergétique</option>
+                                        <option value="Exploration minière">Exploration minière</option>
+                                    </optgroup>
+                                    <optgroup label="Transport et Logistique">
+                                        <option value="Gestion de la chaîne d'approvisionnement">Gestion de la chaîne d'approvisionnement</option>
+                                        <option value="Logistique et distribution">Logistique et distribution</option>
+                                        <option value="Transport international">Transport international</option>
+                                        <option value="Gestion des infrastructures de transport">Gestion des infrastructures de transport</option>
+                                    </optgroup>
+                                    <optgroup label="Développement et Humanitaire">
+                                        <option value="Aide au développement">Aide au développement</option>
+                                        <option value="ONG et organisations humanitaires">ONG et organisations humanitaires</option>
+                                        <option value="Gestion des projets de développement">Gestion des projets de développement</option>
+                                        <option value="Travail social">Travail social</option>
+                                    </optgroup>
+                                    <optgroup label="Télécommunications">
+                                        <option value="Réseaux de communication">Réseaux de communication</option>
+                                        <option value="Gestion des infrastructures télécom">Gestion des infrastructures télécom</option>
+                                        <option value="Services Internet">Services Internet</option>
+                                        <option value="Développement de technologies de communication">Développement de technologies de communication</option>
+                                    </optgroup>
+                                </select>
                             </div>
+                            
+                            <!-- Type d'emploi recherché -->
                             <div class="mb-3">
                                 <label for="type-emploi" class="form-label">Type d'emploi recherché :</label>
-                                <input type="text" id="type-emploi" name="type_emploi" class="form-control" required>
+                                <select id="type-emploi" name="type_emploi[]" class="chosen-select multiples" multiple required>
+                                    <option value="CDI">CDI</option>
+                                    <option value="Stage">Stage</option>
+                                    <option value="Contrat à durée déterminée">Contrat à durée déterminée</option>
+                                    <option value="Freelance">Freelance</option>
+                                    <option value="Alternance">Alternance</option>
+                                </select>
                             </div>
+                            
+                            <!-- Localisation géographique préférée -->
                             <div class="mb-3">
                                 <label for="localisation-preferree" class="form-label">Localisation géographique préférée :</label>
                                 <input type="text" id="localisation-preferree" name="localisation_preferree" class="form-control" required>
                             </div>
+                            
+                            <!-- Salaire souhaité -->
                             <div class="mb-3">
                                 <label for="salaire-souhaite" class="form-label">Salaire souhaité :</label>
                                 <input type="text" id="salaire-souhaite" name="salaire_souhaite" class="form-control" required>
                             </div>
                         </fieldset>
+                        
 
                         <div class="text-center mt-4">
                             <button type="submit" class="theme-btn btn-style-one">Soumettre</button>
@@ -263,6 +385,103 @@
         </div>
     </section>
 </div>
+
+<style>
+    .sec-title{
+        margin-top:50px;
+    }
+    .contact-section {
+        padding: 40px 0;
+    }
+
+    /* Style pour les titres de sections */
+    .sec-title h2 {
+        margin-bottom: 30px;
+        font-size: 28px;
+        color: #333;
+    }
+
+    /* Style pour les fieldsets */
+    .form-section {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+        background: #f9f9f9;
+    }
+
+    .form-section legend {
+        font-size: 20px;
+        color: #66022b;
+        border-bottom: 2px solid #66022b;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    /* Style pour les labels et les champs de formulaire */
+    .form-label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        color: #333;
+    }
+
+    .form-control, .form-select {
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #66022b;
+        box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+    }
+
+    /* Style pour les sections d'ajout de champs dynamiques */
+    .mb-3 {
+        margin-bottom: 20px;
+    }
+
+    .champ-academique {
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #fff;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border: none;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 40px;
+        cursor: pointer;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    .btn-style-four{
+        padding :10px 20px;
+        border : 1px solid;
+    }
+
+    /* Style pour les champs de texte multilignes */
+    textarea.form-control {
+        resize: vertical;
+    }
+
+    .d-flex{
+        padding-bottom: 5px;
+    }
+    .chosen-container .chosen-drop, .chosen-container .chosen-results{
+        color:#66022b;
+    }
+</style>
 
 <!-- Lien vers Bootstrap JS et dépendances Popper.js -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
@@ -279,6 +498,9 @@
         const div = document.createElement('div');
         div.classList.add('champ-academique');
         div.innerHTML = `
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-danger btn-sm" onclick="supprimerChamp(this)">X</button>
+            </div>
             <div class="mb-3">
                 <input type="text" name="${secteur}_titre[]" class="form-control" placeholder="Titre" required>
             </div>
@@ -286,9 +508,11 @@
                 <input type="text" name="${secteur}_annee[]" class="form-control" placeholder="Année" required>
             </div>
             <div class="mb-3">
+                <input type="text" name="${secteur}_durree[]" class="form-control" placeholder="Durrée" required>
+            </div>
+            <div class="mb-3">
                 <textarea name="${secteur}_description[]" class="form-control" placeholder="Description" rows="4" required></textarea>
             </div>
-            <button type="button" class="btn btn-danger btn-sm" onclick="supprimerChamp(this)">-</button>
         `;
 
         conteneur.appendChild(div);

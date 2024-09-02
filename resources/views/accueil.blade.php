@@ -247,7 +247,7 @@
                   <div class="testimonial-block">
                     <div class="inner-box">
                       <h4 class="title">Good theme</h4>
-                      <div class="text">Without JobHunt i’d be homeless, they found me a job and got me sorted out quickly with everything! Can’t quite… The Mitech team works really hard to ensure high level of quality</div>
+                      <div class="text">Without NextGen i’d be homeless, they found me a job and got me sorted out quickly with everything! Can’t quite… The Mitech team works really hard to ensure high level of quality</div>
                       <div class="info-box">
                         <div class="thumb"><img src="images/resource/testi-thumb-1.png" alt=""></div>
                         <h4 class="name">Nicole Wells</h4>
@@ -260,7 +260,7 @@
                   <div class="testimonial-block">
                     <div class="inner-box">
                       <h4 class="title">Great quality!</h4>
-                      <div class="text">Without JobHunt i’d be homeless, they found me a job and got me sorted out quickly with everything! Can’t quite… The Mitech team works really hard to ensure high level of quality</div>
+                      <div class="text">Without NextGen i’d be homeless, they found me a job and got me sorted out quickly with everything! Can’t quite… The Mitech team works really hard to ensure high level of quality</div>
                       <div class="info-box">
                         <div class="thumb"><img src="images/resource/testi-thumb-2.png" alt=""></div>
                         <h4 class="name">Gabriel Nolan</h4>
@@ -273,7 +273,7 @@
                   <div class="testimonial-block">
                     <div class="inner-box">
                       <h4 class="title">Awesome Design </h4>
-                      <div class="text">Without JobHunt i’d be homeless, they found me a job and got me sorted out quickly with everything! Can’t quite… The Mitech team works really hard to ensure high level of quality</div>
+                      <div class="text">Without NextGen i’d be homeless, they found me a job and got me sorted out quickly with everything! Can’t quite… The Mitech team works really hard to ensure high level of quality</div>
                       <div class="info-box">
                         <div class="thumb"><img src="images/resource/testi-thumb-3.png" alt=""></div>
                         <h4 class="name">Ashley Jenkins</h4>

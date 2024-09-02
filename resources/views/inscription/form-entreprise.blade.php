@@ -180,82 +180,81 @@
     <section class="pricing-section" data-step-content="2" style="display:none;">
         <div class="auto-container">
             <div class="sec-title text-center">
-                <h2>Pricing Packages</h2>
-                <div class="text">Lorem ipsum dolor sit amet elit, sed do eiusmod tempor.</div>
+                <h2>Les offres pour les entreprises</h2>
             </div>
         
       
                 <!--Tabs Container-->
                 <div class="tabs-content">
-      
-                  <!--Tab / Active Tab-->
-                  <div class="tab active-tab" id="monthly">
-                    <div class="content">
-                      <div class="row">
-                        <!-- Pricing Table -->
-                        <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
-                          <div class="inner-box">
-                            <div class="title">Basic</div>
-                            <div class="price">$199 <span class="duration">/ monthly</span></div>
-                            <div class="table-content">
-                              <ul>
-                                <li><span>1 job posting</span></li>
-                                <li><span>0 featured job</span></li>
-                                <li><span>Job displayed for 20 days</span></li>
-                                <li><span>Premium Support 24/7 </span></li>
-                              </ul>
+                    <!--Tab / Active Tab-->
+                    <div class="tab active-tab" id="monthly">
+                        <div class="content">
+                            <div class="row">
+                                <!-- Pricing Table - Standard -->
+                                <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
+                                    <div class="inner-box">
+                                        <div class="title">Standard</div>
+                                        <div class="price">Ar XXX,XXX <span class="duration">/ mois</span></div>
+                                        <div class="table-content">
+                                            <ul>
+                                                <li><span>1 job posting</span></li>
+                                                <li><span>0 featured job</span></li>
+                                                <li><span>Job displayed for 20 days</span></li>
+                                                <li><span>Premium Support 24/7</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="table-footer">
+                                            <a href="#" class="theme-btn btn-style-three" onclick="selectOffer(this, 'Standard')">Sélectionner</a>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <!-- Pricing Table - Gold -->
+                                <div class="pricing-table tagged col-lg-4 col-md-6 col-sm-12">
+                                    <div class="inner-box">
+                                        <span class="tag">Recommendé</span>
+                                        <div class="title">Gold</div>
+                                        <div class="price">Ar XXX,XXX <span class="duration">/ mois</span></div>
+                                        <div class="table-content">
+                                            <ul>
+                                                <li><span>1 job posting</span></li>
+                                                <li><span>0 featured job</span></li>
+                                                <li><span>Job displayed for 20 days</span></li>
+                                                <li><span>Premium Support 24/7</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="table-footer">
+                                            <a href="#" class="theme-btn btn-style-three" onclick="selectOffer(this, 'Gold')">Sélectionner</a>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <!-- Pricing Table - Premium -->
+                                <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
+                                    <div class="inner-box">
+                                        <div class="title">Prémium</div>
+                                        <div class="price">Ar XXX,XXX <span class="duration">/ mois</span></div>
+                                        <div class="table-content">
+                                            <ul>
+                                                <li><span>1 job posting</span></li>
+                                                <li><span>0 featured job</span></li>
+                                                <li><span>Job displayed for 20 days</span></li>
+                                                <li><span>Premium Support 24/7</span></li>
+                                            </ul>
+                                        </div>
+                                        <div class="table-footer">
+                                            <a href="#" class="theme-btn btn-style-three" onclick="selectOffer(this, 'Premium')">Sélectionner</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="table-footer">
-                              <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                            </div>
-                          </div>
                         </div>
-      
-                        <!-- Pricing Table -->
-                        <div class="pricing-table tagged col-lg-4 col-md-6 col-sm-12">
-                          <div class="inner-box">
-                            <span class="tag">Recommended</span>
-                            <div class="title">Standard</div>
-                            <div class="price">$499 <span class="duration">/ monthly</span></div>
-                            <div class="table-content">
-                              <ul>
-                                <li><span>1 job posting</span></li>
-                                <li><span>0 featured job</span></li>
-                                <li><span>Job displayed for 20 days</span></li>
-                                <li><span>Premium Support 24/7 </span></li>
-                              </ul>
-                            </div>
-                            <div class="table-footer">
-                              <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                            </div>
-                          </div>
-                        </div>
-      
-                        <!-- Pricing Table -->
-                        <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
-                          <div class="inner-box">
-                            <div class="title">Extended</div>
-                            <div class="price">$799 <span class="duration">/ monthly</span></div>
-                            <div class="table-content">
-                              <ul>
-                                <li><span>1 job posting</span></li>
-                                <li><span>0 featured job</span></li>
-                                <li><span>Job displayed for 20 days</span></li>
-                                <li><span>Premium Support 24/7 </span></li>
-                              </ul>
-                            </div>
-                            <div class="table-footer">
-                              <a href="#" class="theme-btn btn-style-three">View Profile</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                  </div>
-      
-                  <!--Tab-->
                 </div>
-              </div>
+                
+                <!-- Hidden input to store selected offer -->
+                <input type="hidden" id="selected-offer" name="selected_offer" value="">
+                
             <!-- Back and Next buttons -->
             <div class="col-lg-12 col-md-12 col-sm-12 form-group" style="display: flex; justify-content: space-between;">
                 <button class="theme-btn btn-style-one" type="button" id="back-btn">Retour</button>
@@ -309,9 +308,20 @@
         font-size: 14px;
         color: #333;
     }
-    .progress-step.active .step-icon {
-        background-color: #3498db;
+
+    .contact-section .contact-form h3 {
+        font-size: 20px;
+        color: #66022b;
+        border-bottom: 2px solid #66022b;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
     }
+    .theme-btn.btn-style-three.selected {
+    border: #66022b solid 1px;
+    background-color: #fff; 
+    color: #66022b;/* Text color for selected button */
+}
+
 </style>
 
 <script>
@@ -389,6 +399,21 @@ document.getElementById('submit-btn').addEventListener('click', function() {
         console.error('Error:', error);
     });
 });
+function selectOffer(element, offer) {
+    // Remove 'selected' class from all buttons
+    const buttons = document.querySelectorAll('.theme-btn.btn-style-three');
+    buttons.forEach(btn => {
+        btn.classList.remove('selected');
+        btn.textContent = 'Sélectionner'; // Reset text to 'Sélectionner'
+    });
+
+    // Add 'selected' class to the clicked button
+    element.classList.add('selected');
+    element.textContent = 'Sélectionné'; // Change text to 'Sélectionné'
+
+    // Store the selected offer in a hidden input
+    document.getElementById('selected-offer').value = offer;
+}
 
 </script>
 
