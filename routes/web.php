@@ -16,12 +16,22 @@ Route::post('/inscription-etudiant', [RegistrationController::class, 'register']
 Route::get('/inscription-etudiant', function () {return view('inscription.form-etudiant');})->name('inscription-etu');
 Route::post('/inscription-entreprise', [RegistrationController::class, 'register'])->name('form-entreprise');
 Route::get('/inscription-entreprise', function () {return view('inscription.form-entreprise');})->name('form-entreprise');
-Route::get('/inscritpion-service-carriere', function () {return view('service.carriere');})->name('service.carriere');
-Route::get('/inscription-service-carriere', [RegistrationController::class, 'register'])->name('service.carriere');
+Route::get('/inscription-service-carriere', function () {return view('inscription.form-service-carriere');})->name('service.carriere');
+Route::post('/inscription-service-carriere', [RegistrationController::class, 'register'])->name('service.carriere');
 // Tableau de bord
 Route::get('/dashboard-entreprise', function () {return view('entreprise.tableau-de-bord');})->name('entreprise.tableau-de-bord');
 Route::get('/dashboard-etudiant', function() {return view('etudiant.tableau-de-bord');})->name('etudiant.dashboard');
+Route::get('/dashboard-service', function() {return view('universite.tableau-de-bord');})->name('univ-dashboard');
 Route::get('/offre', function () {return view('entreprise.publier-une-offre');})->name('offre');
 Route::get('/profil', function () {return view('etudiant.portfolio');})->name('profil');
+Route::get('/gerer-offre', function () {return view('entreprise.gerer-offre');})->name('gerer-offre');
+Route::get('/gerer-candidat', function () {return view('entreprise.gerer-candidat');})->name('gerer-candidat');
+Route::get('/gerer-event', function () {return view('universite.gerer-event');})->name('gerer-event');
+Route::get('/gestion-etudiants', function () {return view('universite.gestion-etudiants');})->name('gestion-etudiants');
+Route::get('/publier-event', function() {return view('universite.publier-evenements');})->name('publier-event');
+Route::get('/postuler', function() {return view('etudiant.postuler');})->name('postuler');
+Route::get('/candidature', function() {return view('etudiant.candidatures');})->name('candidature');
+Route::get('/explorer-offre', function() {return view('etudiant.explorer-offres');})->name('explorer-offre');
+
 
 

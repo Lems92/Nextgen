@@ -2,336 +2,490 @@
 
 @section('content')
 
-@include('header.header')
-<style>
-       .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-    }
+@include('header.etudiant')
 
-    .group-result{
-        color: #66022b;
-    }
-
-    .remove-event{
-        border-radius: 50px;
-    }
-
-    h2{
-        padding-top: 50px;
-    }
-    .form-group label {
-        font-weight: bold;
-    }
-
-    .form-group select[multiple] {
-        height: auto;
-    }
-
-    .d-flex {
-        display: flex;
-    }
-
-    .justify-content-between {
-        justify-content: space-between;
-    }
-
-    .align-items-center {
-        align-items: center;
-    }
-    .contact-section .contact-form .theme-btn {
-        margin-top: 20px;
-        border: 1px solid;
-    }
-</style>
-<section class="contact-section bgc-home20" id="contact-section" data-step-content="1">
+<section class="ls-section">
     <div class="auto-container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="sec-title -type-2 text-center">
-                    <h2>Formulaire pour les services carrieres</h2>
-                    <div class="text">Avant de pouvoir activer votre compte sur notre plateforme, veuillez remplir le formulaire suivant pour que nous puissions entrer en contact avec vous.</div>
+      <div class="filters-backdrop"></div>
+
+      <div class="row">
+
+        <!-- Filters Column -->
+        <div class="filters-column col-lg-4 col-md-12 col-sm-12">
+          <div class="inner-column">
+            <div class="filters-outer">
+              <button type="button" class="theme-btn close-filters">X</button>
+
+              <!-- Filter Block -->
+              <div class="filter-block">
+                <h4>Search by Keywords</h4>
+                <div class="form-group">
+                  <input type="text" name="listing-search" placeholder="Job title, keywords, or company">
+                  <span class="icon flaticon-search-3"></span>
                 </div>
+              </div>
+
+              <!-- Filter Block -->
+              <div class="filter-block">
+                <h4>Location</h4>
+                <div class="form-group">
+                  <input type="text" name="listing-search" placeholder="City or postcode">
+                  <span class="icon flaticon-map-locator"></span>
+                </div>
+                <p>Radius around selected destination</p>
+                <div class="range-slider-one">
+                  <div class="area-range-slider"></div>
+                  <div class="input-outer">
+                    <div class="amount-outer"><span class="area-amount"></span>km</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Filter Block -->
+              <div class="filter-block">
+                <h4>Category</h4>
+                <div class="form-group">
+                  <select class="chosen-select">
+                    <option>Choose a category</option>
+                    <option>Residential</option>
+                    <option>Commercial</option>
+                    <option>Industrial</option>
+                    <option>Apartments</option>
+                    <option>Residential</option>
+                    <option>Commercial</option>
+                    <option>Industrial</option>
+                    <option>Apartments</option>
+                    <option>Residential</option>
+                    <option>Commercial</option>
+                    <option>Industrial</option>
+                    <option>Apartments</option>
+                  </select>
+                  <span class="icon flaticon-briefcase"></span>
+                </div>
+              </div>
+
+              <!-- Switchbox Outer -->
+              <div class="switchbox-outer">
+                <h4>Job type</h4>
+                <ul class="switchbox">
+                  <li>
+                    <label class="switch">
+                      <input type="checkbox" checked>
+                      <span class="slider round"></span>
+                      <span class="title">Freelance</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                      <span class="title">Full Time</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                      <span class="title">Internship</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                      <span class="title">Part Time</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                      <span class="title">Temporary</span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Checkboxes Ouer -->
+              <div class="checkbox-outer">
+                <h4>Date Posted</h4>
+                <ul class="checkboxes">
+                  <li>
+                    <input id="check-f" type="checkbox" name="check">
+                    <label for="check-f">All</label>
+                  </li>
+                  <li>
+                    <input id="check-a" type="checkbox" name="check">
+                    <label for="check-a">Last Hour</label>
+                  </li>
+                  <li>
+                    <input id="check-b" type="checkbox" name="check">
+                    <label for="check-b">Last 24 Hours</label>
+                  </li>
+                  <li>
+                    <input id="check-c" type="checkbox" name="check">
+                    <label for="check-c">Last 7 Days</label>
+                  </li>
+                  <li>
+                    <input id="check-d" type="checkbox" name="check">
+                    <label for="check-d">Last 14 Days</label>
+                  </li>
+                  <li>
+                    <input id="check-e" type="checkbox" name="check">
+                    <label for="check-e">Last 30 Days</label>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Checkboxes Ouer -->
+              <div class="checkbox-outer">
+                <h4>Experience Level</h4>
+                <ul class="checkboxes square">
+                  <li>
+                    <input id="check-ba" type="checkbox" name="check">
+                    <label for="check-ba">All</label>
+                  </li>
+                  <li>
+                    <input id="check-bb" type="checkbox" name="check">
+                    <label for="check-bb">Internship</label>
+                  </li>
+                  <li>
+                    <input id="check-bc" type="checkbox" name="check">
+                    <label for="check-bc">Entry level</label>
+                  </li>
+                  <li>
+                    <input id="check-bd" type="checkbox" name="check">
+                    <label for="check-bd">Associate</label>
+                  </li>
+                  <li>
+                    <input id="check-be" type="checkbox" name="check">
+                    <label for="check-be">Mid-Senior level4</label>
+                  </li>
+                  <li>
+                    <button class="view-more"><span class="icon flaticon-plus"></span> View More</button>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Filter Block -->
+              <div class="filter-block">
+                <h4>Salary</h4>
+
+                <div class="range-slider-one salary-range">
+                  <div class="salary-range-slider"></div>
+                  <div class="input-outer">
+                    <div class="amount-outer">
+                      <span class="amount salary-amount">
+                        $<span class="min">0</span>
+                        $<span class="max">0</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Filter Block -->
+              <div class="filter-block">
+                <h4>Tags</h4>
+                <ul class="tags-style-one">
+                  <li><a href="#">app</a></li>
+                  <li><a href="#">administrative</a></li>
+                  <li><a href="#">android</a></li>
+                  <li><a href="#">wordpress</a></li>
+                  <li><a href="#">design</a></li>
+                  <li><a href="#">react</a></li>
+                </ul>
+              </div>
             </div>
+
+            <!-- Call To Action -->
+            <div class="call-to-action-four">
+              <h5>Recruiting?</h5>
+              <p>Advertise your jobs to millions of monthly users and search 15.8 million CVs in our database.</p>
+              <a href="#" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Start Recruiting Now</span></a>
+              <div class="image" style="background-image: url(images/resource/ads-bg-4.png);"></div>
+            </div>
+            <!-- End Call To Action -->
+          </div>
         </div>
-        <div class="contact-form default-form">
-            <form>
-                <!-- Informations Générales de l'Établissement -->
-                <div class="form-group">
-                    <label>Nom complet de l'établissement :</label>
-                    <input type="text" class="form-control" name="nom_etablissement">
-                </div>
-                <div class="form-group">
-                    <label>Adresse de l'établissement :</label>
-                    <input type="text" class="form-control" name="adresse_etablissement">
-                </div>
-                <div class="form-group">
-                    <label>Site Web :</label>
-                    <input type="text" class="form-control" name="site_web">
-                </div>
-            
-                <!-- Personne de Contact -->
-                <div class="form-group">
-                    <label>Nom et fonction :</label>
-                    <input type="text" class="form-control" name="nom_fonction">
-                </div>
-                <div class="form-group">
-                    <label>Adresse e-mail :</label>
-                    <input type="email" class="form-control" name="email">
-                </div>
-                <div class="form-group">
-                    <label>Numéro de téléphone :</label>
-                    <input type="text" class="form-control" name="telephone">
-                </div>
-            
-                <!-- Détails sur les Étudiants -->
-                <div class="form-group">
-                    <label>Nombre d'étudiants inscrits :</label>
-                    <select class="form-control" name="nombre_etudiants">
-                        <option>Moins de 100</option>
-                        <option>100 à 499</option>
-                        <option>500 à 999</option>
-                        <option>1 000 à 4 999</option>
-                        <option>5 000 à 9 999</option>
-                    </select>
-                </div>
-            
-                <!-- Domaines d'études proposés -->
-                <div class="form-group">
-                    <label>Domaines d'études proposés :</label>
-                    <select class="chosen-select multiple" multiple>
-                        <optgroup label="Arts et Humanités">
-                            <option>Histoire</option>
-                            <option>Littérature</option>
-                            <option>Philosophie</option>
-                            <option>Langues étrangères</option>
-                            <option>Études culturelles</option>
-                            <option>Arts visuels</option>
-                            <option>Musique</option>
-                        </optgroup>
-                        <optgroup label="Sciences Sociales">
-                            <option>Psychologie</option>
-                            <option>Sociologie</option>
-                            <option>Sciences politiques</option>
-                            <option>Économie</option>
-                            <option>Géographie</option>
-                            <option>Relations internationales</option>
-                            <option>Travail social</option>
-                        </optgroup>
-                        <optgroup label="Sciences Naturelles">
-                            <option>Biologie</option>
-                            <option>Chimie</option>
-                            <option>Physique</option>
-                            <option>Mathématiques</option>
-                            <option>Géologie</option>
-                            <option>Sciences de l'environnement</option>
-                            <option>Astronomie</option>
-                        </optgroup>
-                        <optgroup label="Ingénierie et Technologies">
-                            <option>Génie civil</option>
-                            <option>Génie mécanique</option>
-                            <option>Génie électrique</option>
-                            <option>Génie chimique</option>
-                            <option>Informatique</option>
-                            <option>Télécommunications</option>
-                            <option>Énergies renouvelables</option>
-                        </optgroup>
-                        <optgroup label="Médecine et Santé">
-                            <option>Médecine</option>
-                            <option>Sciences infirmières</option>
-                            <option>Pharmacie</option>
-                            <option>Médecine vétérinaire</option>
-                            <option>Santé publique</option>
-                            <option>Réhabilitation et physiothérapie</option>
-                            <option>Nutrition</option>
-                        </optgroup>
-                        <optgroup label="Commerce et Gestion">
-                            <option>Administration des affaires</option>
-                            <option>Marketing</option>
-                            <option>Finance</option>
-                            <option>Ressources humaines</option>
-                            <option>Gestion de projet</option>
-                            <option>Entrepreneuriat</option>
-                            <option>Logistique et Supply Chain</option>
-                        </optgroup>
-                        <optgroup label="Droit">
-                            <option>Droit pénal</option>
-                            <option>Droit civil</option>
-                            <option>Droit international</option>
-                            <option>Droit commercial</option>
-                            <option>Droit du travail</option>
-                            <option>Droit public</option>
-                            <option>Droit de la propriété intellectuelle</option>
-                        </optgroup>
-                        <optgroup label="Éducation">
-                            <option>Pédagogie</option>
-                            <option>Gestion de l'éducation</option>
-                            <option>Formation des enseignants</option>
-                            <option>Psychologie de l'éducation</option>
-                            <option>Technologies éducatives</option>
-                        </optgroup>
-                        <optgroup label="Architecture et Urbanisme">
-                            <option>Architecture</option>
-                            <option>Urbanisme</option>
-                            <option>Design d'intérieur</option>
-                            <option>Aménagement du territoire</option>
-                            <option>Conservation du patrimoine</option>
-                        </optgroup>
-                        <optgroup label="Sciences et Technologies de l'Information">
-                            <option>Développement logiciel</option>
-                            <option>Sécurité informatique</option>
-                            <option>Intelligence artificielle</option>
-                            <option>Big Data</option>
-                            <option>Réseaux et systèmes</option>
-                            <option>Design web et UX</option>
-                        </optgroup>
-                        <optgroup label="Agriculture et Environnement">
-                            <option>Sciences agronomiques</option>
-                            <option>Gestion des ressources naturelles</option>
-                            <option>Agronomie</option>
-                            <option>Écologie</option>
-                            <option>Développement durable</option>
-                            <option>Gestion de l'eau</option>
-                        </optgroup>
-                        <optgroup label="Tourisme et Hôtellerie">
-                            <option>Gestion hôtelière</option>
-                            <option>Gestion du tourisme</option>
-                            <option>Planification d'événements</option>
-                            <option>Marketing touristique</option>
-                            <option>Gestion des loisirs</option>
-                        </optgroup>
-                        <optgroup label="Sciences Politiques et Relations Internationales">
-                            <option>Théorie politique</option>
-                            <option>Relations internationales</option>
-                            <option>Diplomatie</option>
-                            <option>Analyse des politiques publiques</option>
-                            <option>Études de sécurité</option>
-                        </optgroup>
-                    </select>
-                </div>
-            
-                <!-- Niveaux d'études proposés -->
-                <div class="form-group">
-                    <label>Niveaux d'études proposés :</label>
-                    <select class="chosen-select multiple" multiple>
-                        <option>Licence générale</option>
-                        <option>Licence professionnelle</option>
-                        <option>Licence en alternance</option>
-                        <option>Master 1</option>
-                        <option>Master 2</option>
-                        <option>Master Recherche</option>
-                        <option>Master Professionnel</option>
-                        <option>Doctorat</option>
-                        <option>Thèse de Doctorat</option>
-                        <option>Post-doctorat</option>
-                        <option>Certificat de Compétences Professionnelles</option>
-                        <option>Diplôme Universitaire</option>
-                        <option>Diplôme d'Études Supérieures Spécialisées</option>
-                        <option>Diplôme d'Études Supérieures</option>
-                        <option>Formations courtes spécialisées</option>
-                        <option>Certificats de spécialisation</option>
-                        <option>Diplômes de formation continue</option>
-                        <option>Double diplôme en partenariat avec d’autres institutions académiques</option>
-                    </select>
-                </div>
-            
-                <!-- Activités et Événements -->
-                <!-- Section Calendrier Événement -->
-                <div class="form-group">
-                    <div class="form-group d-flex justify-content-between align-items-center">
-                        <h4>Calendrier des Événements</h4>
-                    </div>
-                    <div class="event-section">
-                        <!-- X Button positioned to the right after "Calendrier des Événements" -->
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-danger remove-event">X</button>
-                        </div>
-                        
-                        
-                        <!-- Titre de l'événement -->
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="event-title">Titre de l'événement</label>
-                                <input type="text" id="event-title" name="event_title[]" class="form-control" placeholder="Titre de l'événement" required>
-                            </div>
-                        </div>
-                
-                        <!-- Dates et Heure -->
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="start-date">Date de début</label>
-                                <input type="date" id="start-date" name="start_date[]" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="end-date">Date de fin</label>
-                                <input type="date" id="end-date" name="end_date[]" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="start-time">Heure de début</label>
-                                <input type="time" id="start-time" name="start_time[]" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="end-time">Heure fin</label>
-                                <input type="time" id="end-time" name="end_time[]" class="form-control" required>
-                            </div>
-                        </div>
-                        
-                        <!-- Description -->
-                        <div class="row">
-                            <div class="col-md-12 form-group">
-                                <label for="event-description">Description</label>
-                                <textarea id="event-description" name="event_description[]" class="form-control" rows="4" placeholder="Description de l'événement" required></textarea>
-                            </div>
-                        </div>
-                        
-                    </div>
-                
-                    <!-- Ajouter un autre événement -->
-                    <div class="row">
-                        <div class="d-flex justify-content-center">
-                            <button type="button" class="theme-btn btn-style-four add-event">Ajouter un autre événement</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="d-flex justify-content-center">
-                            <button type="button" class="theme-btn btn-style-one">Envoyer</button>
-                        </div>
-                    </div>
-                </div>
-                
-</section>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Event listener to remove the event section when "X" is clicked
-    document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('remove-event')) {
-            const eventSection = event.target.closest('.event-section');
-            if (eventSection) {
-                eventSection.remove();
-            }
-        }
-    });
 
-    // Event listener to clone the event section when "Ajouter un autre événement" is clicked
-    const addEventButton = document.querySelector('.add-event');
-    const eventSection = document.querySelector('.event-section');
+        <!-- Content Column -->
+        <div class="content-column col-lg-8 col-md-12 col-sm-12">
+          <div class="ls-outer">
+            <button type="button" class="theme-btn btn-style-two toggle-filters">Show Filters</button>
 
-    addEventButton.addEventListener('click', function() {
-        // Clone the event section
-        const newEventSection = eventSection.cloneNode(true);
+            <!-- ls Switcher -->
+            <div class="ls-switcher">
+              <div class="showing-result">
+                <div class="text">Showing <strong>41-60</strong> of <strong>944</strong> jobs</div>
+              </div>
+              <div class="sort-by">
+                <select class="chosen-select">
+                  <option>New Jobs</option>
+                  <option>Freelance</option>
+                  <option>Full Time</option>
+                  <option>Internship</option>
+                  <option>Part Time</option>
+                  <option>Temporary</option>
+                </select>
 
-        // Reset the input values in the cloned section
-        newEventSection.querySelectorAll('input, textarea').forEach(function(input) {
-            input.value = '';
-        });
+                <select class="chosen-select">
+                  <option>Show 10</option>
+                  <option>Show 20</option>
+                  <option>Show 30</option>
+                  <option>Show 40</option>
+                  <option>Show 50</option>
+                  <option>Show 60</option>
+                </select>
+              </div>
+            </div>
 
-        // Insert the new section before the "Ajouter un autre événement" button
-        addEventButton.closest('.row').insertAdjacentElement('beforebegin', newEventSection);
-    });
-});
 
-</script>
+            <!-- Job Block -->
+            <div class="job-block">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="images/resource/company-logo/1-1.png" alt=""></span>
+                  <h4><a href="#">Software Engineer (Android), Libraries</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul>
+                  <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Block -->
+            <div class="job-block">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="images/resource/company-logo/1-2.png" alt=""></span>
+                  <h4><a href="#">Recruiting Coordinator</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul>
+                  <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Block -->
+            <div class="job-block">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="images/resource/company-logo/1-3.png" alt=""></span>
+                  <h4><a href="#">Product Manager, Studio</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul>
+                  <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Block -->
+            <div class="job-block">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="images/resource/company-logo/1-4.png" alt=""></span>
+                  <h4><a href="#">Senior Product Designer</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul>
+                  <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Block -->
+            <div class="job-block">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="images/resource/company-logo/1-5.png" alt=""></span>
+                  <h4><a href="#">Senior Full Stack Engineer, Creator Success</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul>
+                  <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Block -->
+            <div class="job-block">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="images/resource/company-logo/1-6.png" alt=""></span>
+                  <h4><a href="#">Software Engineer (Android), Libraries</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul>
+                  <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Block -->
+            <div class="job-block">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="images/resource/company-logo/1-7.png" alt=""></span>
+                  <h4><a href="#">Software Engineer (Android), Libraries</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul>
+                  <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Block -->
+            <div class="job-block">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="images/resource/company-logo/1-8.png" alt=""></span>
+                  <h4><a href="#">Recruiting Coordinator</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul>
+                  <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Block -->
+            <div class="job-block">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="images/resource/company-logo/1-9.png" alt=""></span>
+                  <h4><a href="#">Product Manager, Studio</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul>
+                  <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Job Block -->
+            <div class="job-block">
+              <div class="inner-box">
+                <div class="content">
+                  <span class="company-logo"><img src="images/resource/company-logo/1-1.png" alt=""></span>
+                  <h4><a href="#">Senior Product Designer</a></h4>
+                  <ul class="job-info">
+                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
+                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
+                  </ul>
+                  <ul class="job-other-info">
+                    <li class="time">Full Time</li>
+                    <li class="privacy">Private</li>
+                    <li class="required">Urgent</li>
+                  </ul>
+                  <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Listing Show More -->
+            <div class="ls-show-more">
+              <p>Showing 36 of 497 Jobs</p>
+              <div class="bar"><span class="bar-inner" style="width: 40%"></span></div>
+              <button class="show-more">Show More</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="js/jquery.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
+  <script src="js/chosen.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.fancybox.js"></script>
+  <script src="js/jquery.modal.min.js"></script>
+  <script src="js/mmenu.polyfills.js"></script>
+  <script src="js/mmenu.js"></script>
+  <script src="js/appear.js"></script>
+  <script src="js/ScrollMagic.min.js"></script>
+  <script src="js/rellax.min.js"></script>
+  <script src="js/owl.js"></script>
+  <script src="js/wow.js"></script>
+  <script src="js/script.js"></script>
 @endsection

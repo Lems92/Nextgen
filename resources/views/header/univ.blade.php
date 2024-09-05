@@ -48,7 +48,7 @@
                                     <li><a href="blog-list-v2.html">F.A.Q</a></li>
                                     <li><a href="blog-list-v3.html">Nous contacter</a></li>
                                 </ul>
-                              </li>
+                </li>
                 <!-- End header -->
 
                 <!-- Only for Mobile View -->
@@ -109,20 +109,17 @@
     <div class="user-sidebar">
       <div class="sidebar-inner">
           <ul class="navigation">
-              <li class="{{ request()->is('dashboard-entreprise') ? 'active' : '' }}">
-                  <a href="{{ route('entreprise.tableau-de-bord') }}"><i class="la la-home"></i>Tableau de bord</a>
+              <li class="{{ request()->is('dashboard-service') ? 'active' : '' }}">
+                  <a href="{{ route('univ-dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
               </li>
-              <li class="{{ request()->is('offre') ? 'active' : '' }}">
-                  <a href="{{ route('offre') }}"><i class="la la-paper-plane"></i>Publier une offre</a>
+              <li class="{{ request()->is('publier-event') ? 'active' : '' }}">
+                  <a href="{{ route('publier-event') }}"><i class="la la-paper-plane"></i>Publier un évenement</a>
               </li>
-              <li class="{{ request()->is('gerer-offre') ? 'active' : '' }}">
-                  <a href="{{ route('gerer-offre') }}"><i class="la la-briefcase"></i>Gérer mes offres</a>
+              <li class="{{ request()->is('gerer-event') ? 'active' : '' }}">
+                  <a href="{{ route('gerer-event') }}"><i class="la la-briefcase"></i>Gérer les évenemnts</a>
               </li>
-              <li class="{{ request()->is('gerer-candidat') ? 'active' : '' }}">
-                  <a href="{{ route('gerer-candidat') }}"><i class="la la-file-invoice"></i>Mes candidats</a>
-              </li>
-              <li class="{{ request()->is('change-password') ? 'active' : '' }}">
-                  <a href="{{ route('accueil') }}"><i class="la la-lock"></i>Mot de passe</a>
+              <li class="{{ request()->is('gestion-etudiants') ? 'active' : '' }}">
+                  <a href="{{ route('gestion-etudiants') }}"><i class="la la-lock"></i>Gerer les étudiants</a>
               </li>
               <li>
                   <a href="{{ route('accueil') }}"><i class="la la-sign-out"></i>Déconnecter</a>

@@ -374,6 +374,126 @@
                                 <input type="text" id="salaire-souhaite" name="salaire_souhaite" class="form-control" required>
                             </div>
                         </fieldset>
+
+                        <!-- Disponibilité de l’Étudiant Section -->
+<fieldset class="form-section">
+    <legend><h4>Disponibilité de l’Étudiant</h4></legend>
+    <div class="form-group">
+      <label for="duree_dispo">Durée de Disponibilité :</label>
+      <select class="form-control" id="duree_dispo" name="duree_dispo" placeholder="Veuillez choisir">
+        <option value="moins_1_mois">Moins de 1 mois</option>
+        <option value="1_3_mois">1 à 3 mois</option>
+        <option value="3_6_mois">3 à 6 mois</option>
+        <option value="6_12_mois">6 à 12 mois</option>
+        <option value="plus_12_mois">Plus de 12 mois</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="semestre">Semestre en Cours :</label>
+      <select class="form-control" id="semestre" name="semestre">
+        <option value="semestre_1">Semestre 1</option>
+        <option value="semestre_2">Semestre 2</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="vacances_ete">Vacances d'Été :</label>
+      <div class="input-group">
+        <input type="date" class="form-control" id="vacances_debut" name="vacances_debut" placeholder="Date début">
+        <input type="date" class="form-control" id="vacances_fin" name="vacances_fin" placeholder="Date fin">
+      </div>
+      <div class="form-group">
+        <label for="vacances_dispo">Date disponible pendant les vacances d'été</label>
+        <div class="input-group">
+          <input type="date" class="form-control" id="dispo_debut" name="dispo_debut" placeholder="Date début">
+          <input type="date" class="form-control" id="dispo_fin" name="dispo_fin" placeholder="Date fin">
+        </div>
+    </div>
+  </fieldset>
+  
+  <!-- Détails spécifiques (Inclusivité Entreprise) Section -->
+  <fieldset class="form-section">
+    <legend>Détails spécifiques (Inclusivité Entreprise)</legend>
+  
+    <div class="form-group">
+      <label for="accessibilite">Accessibilité :</label>
+      <p>Avez-vous besoin d’aménagements spécifiques pour participer à des événements ou des activités ?</p>
+      <select class="form-control" id="accessibilite" name="accessibilite">
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="amenagements">Si oui, veuillez préciser :</label>
+      <textarea class="form-control" id="amenagements" name="amenagements" rows="3" placeholder="Précisez les aménagements spécifiques"></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="origine_ethnique">Origine ethnique :</label>
+      <select class="form-select" id="origine_ethnique" name="origine_ethnique">
+        <option value="antaimoro">Antaimoro</option>
+        <option value="antandroy">Antandroy</option>
+        <option value="antanosy">Antanosy</option>
+        <option value="betsileo">Betsileo</option>
+        <option value="betsimisaraka">Betsimisaraka</option>
+        <option value="francais">Français</option>
+        <option value="mahafaly">Mahafaly</option>
+        <option value="makoa">Makoa</option>
+        <option value="masikoro">Masikoro</option>
+        <option value="merina">Merina</option>
+        <option value="sakalava">Sakalava</option>
+        <option value="sihanaka">Sihanaka</option>
+        <option value="tanala">Tanala</option>
+        <option value="tsimihety">Tsimihety</option>
+        <option value="tsonga">Tsonga</option>
+        <option value="zafimaniry">Zafimaniry</option>
+
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="statut_socio_economique">Statut socio-économique :</label>
+      <select class="form-select" id="statut_socio_economique" name="statut_socio_economique">
+        <option value="origine_modeste">Origine modeste</option>
+        <option value="classe_moyenne">Classe moyenne</option>
+        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="conditions_vie">Conditions de vie spécifiques :</label>
+      <select class="form-select" id="conditions_vie" name="conditions_vie">
+        <option value="null">null</option>
+        <option value="sans_domicile">Sans domicile fixe</option>
+        <option value="handicap">En situation de handicap</option>
+        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="religion_croyance">Religion ou croyance :</label>
+      <select class="form-select" id="religion_croyance" name="religion_croyance">
+        <option value="chretien">Chrétien</option>
+        <option value="musulman">Musulman</option>
+        <option value="bouddhiste">Bouddhiste</option>
+        <option value="hindou">Hindou</option>
+        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="orientation_sexuelle">Orientation sexuelle :</label>
+      <select class="form-select" id="orientation_sexuelle" name="orientation_sexuelle">
+        <option value="heterosexuel">Hétérosexuel</option>
+        <option value="homosexuel">Homosexuel</option>
+        <option value="bisexuel">Bisexuel</option>
+        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+      </select>
+    </div>
+  </fieldset>
+  
                         
 
                         <div class="text-center mt-4">
@@ -480,6 +600,9 @@
     }
     .chosen-container .chosen-drop, .chosen-container .chosen-results{
         color:#66022b;
+    }
+    .group-result{
+        color : #333;
     }
 </style>
 

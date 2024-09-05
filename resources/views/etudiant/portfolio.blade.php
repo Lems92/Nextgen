@@ -4,7 +4,7 @@
 
 @section('content')
 
-@include('header.admin')
+@include('header.etudiant')
     <!-- End User Sidebar -->
 
     <!-- Dashboard -->
