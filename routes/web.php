@@ -32,6 +32,8 @@ Route::get('/publier-event', function() {return view('universite.publier-eveneme
 Route::get('/postuler', function() {return view('etudiant.postuler');})->name('postuler');
 Route::get('/candidature', function() {return view('etudiant.candidatures');})->name('candidature');
 Route::get('/explorer-offre', function() {return view('etudiant.explorer-offres');})->name('explorer-offre');
+Route::get('/admin', function() {return view('admin.admin');})->name('admin');
+Route::get('/modiferProfil', function() {return view('etudiant.modifierProfil');})->name('modifierProfil');
 
 
 

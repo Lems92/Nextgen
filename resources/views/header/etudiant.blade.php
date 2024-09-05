@@ -114,6 +114,8 @@
           <a href="{{route('etudiant.dashboard')}}"> <i class="la la-home"></i>Tableau de bord</a></li>
           <li class="{{ request()->is('profil') ? 'active' : '' }}">
           <a href="{{route('profil')}}"> <i class="la la-user-tie"></i>Mon profil</a></li>
+          <li class="{{ request()->is('modifierProfil') ? 'active' : '' }}">
+            <a href="{{route('modifierProfil')}}"> <i class="la la-pen"></i>Modifier profil</a></li>
           <li class="{{ request()->is('candidature') ? 'active' : '' }}">
           <a href="{{route('candidature')}}"><i class="la la-briefcase"></i>Candidatures</a></li>
           <li class="#">

@@ -168,4 +168,15 @@
       </div>
     </div>
   </section>
+
+<style>
+.row, .col-lg-12, .ls-widget, .widget-content, .table-outer {
+  margin-right: 0;
+  padding-right: 0;
+}
+
+.default-table {
+  margin-right: 0;
+}
+</style>
 @endsection

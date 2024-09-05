@@ -1,7 +1,6 @@
 <!-- resources/views/components/popup.blade.php -->
 <div id="ad-popup" class="ad-popup">
     <div class="flex justify-between items-center">
-        <button type="button" id="close-popup" class="btn btn-danger remove-event">X</button>
         <div>
             <h2 class="text-lg font-bold">{{ $companyName }}</h2>
             <p class="text-sm">Domaine : {{ $domain }}</p>
@@ -12,9 +11,7 @@
 
 
 <style>
-/* resources/css/app.css */
-/* resources/css/app.css */
-/* resources/css/app.css */
+
 #ad-popup {
     display: none;
     position: fixed;
@@ -26,24 +23,14 @@
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 9999;
-    width: 80%; /* Ajustez la largeur selon vos besoins */
-    max-width: 500px; /* Limite la largeur maximale */
-    border: #66022b 1px solid; /* Arrondir les coins pour un look plus moderne */
-    text-align: center; /* Centrer le texte */
+    width: 80%; 
+    max-width: 500px; 
+    border: #66022b 1px solid; 
+    text-align: center;
 }
 
-.btn-danger {
-    position: absolute;
-    top: -10px; /* Distance du haut du popup */
-    right: -5px; /* Distance du bord droit du popup */
-    border-radius: 50px;
-    font-size: 20px;
-    cursor: pointer;
-}
 
 </style>
-
-<!-- resources/views/welcome.blade.php -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     const popup = document.getElementById('ad-popup');
@@ -75,3 +62,4 @@
     closeButton.addEventListener('click', hidePopup);
 });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
