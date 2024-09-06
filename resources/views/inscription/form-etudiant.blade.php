@@ -137,7 +137,7 @@
                             <legend><h4>Expérience Académique</h4></legend>
                             <div class="mb-3">
                                 <h6>Stage Académique</h6>
-                                <p>ex: Stage de recherche, Stage en laboratoire, Stage en entreprise...</p>
+                                <p>ex: Stage de recherche, Stage en laboratoire, Stage en entreprise...</p> 
                                 <div id="stage_academique_conteneur"></div>
                                 <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('stage_academique')">Ajouter</button>
                             </div>
@@ -151,28 +151,28 @@
 
                             <div class="mb-3">
                                 <h6>Thèse et Mémoire</h6>
-                                <p>ex: Thèse de doctorat, Mémoire de Master, Mémoire de Licence, Dissertation...</p>
+                                <p>ex: Thèse de doctorat, Mémoire de Master, Mémoire de Licence, Dissertation...</p> 
                                 <div id="these_memoire_conteneur"></div>
                                 <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('these_memoire')">Ajouter</button>
                             </div>
 
                             <div class="mb-3">
                                 <h6>Réalisations</h6>
-                                <p>ex: Publication dans une revue académique, Présentation à une conférence universitaire, Récompense ou distinction académique, Participation à un concours académique...</p>
+                                <p>ex: Publication dans une revue académique, Présentation à une conférence universitaire, Récompense ou distinction académique, Participation à un concours académique...</p> 
                                 <div id="realisations_conteneur"></div>
                                 <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('realisations')">Ajouter</button>
                             </div>
 
                             <div class="mb-3">
                                 <h6>Cours Spécialisés</h6>
-                                <p>ex: Cours de spécialisation, Séminaire, Atelier spécialisé</p>
+                                <p>ex: Cours de spécialisation, Séminaire, Atelier spécialisé</p> 
                                 <div id="cours_speciaux_conteneur"></div>
                                 <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('cours_speciaux')">Ajouter</button>
                             </div>
 
                             <div class="mb-3">
                                 <h6>Autres Expériences</h6>
-                                <p>ex: Participation à des Evenements académiques, recherche, encadrement, activités Parascolaires; programmes d'échange, Certificats et diplômes complémentaires...</p>
+                                <p>ex: Participation à des Evenements académiques, recherche, encadrement, activités Parascolaires; programmes d'échange, Certificats et diplômes complémentaires...</p> 
                                 <div id="autres_experiences_conteneur"></div>
                                 <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('autres_experiences')">Ajouter</button>
                             </div>
@@ -183,27 +183,106 @@
                             <legend><h4>Compétences</h4></legend>
                             <div class="mb-3">
                                 <h6>Compétences techniques</h6>
-                                <p>ex: Compétences en Informatiques (Bureautique, programmation, gestion de bases de données, systèmes d'information, cybersécurité...)</p>
-                                <div id="competences_techniques_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_techniques')">Ajouter</button>
+                                <select id="competences_techniques" class="chosen-select" multiple>
+                                    <option value="bureautique">Bureautique</option>
+                                    <option value="programmation">Programmation</option>
+                                    <option value="gestion_bases_donnees">Gestion de bases de données</option>
+                                    <option value="systemes_information">Systèmes d'information</option>
+                                    <option value="cybersecurite">Cybersécurité</option>
+                                    <option value="gestion_projets">Gestion de projets</option>
+                                    <option value="design_ui_ux">Design UI/UX</option>
+                                    <option value="virtualisation">Virtualisation</option>
+                                    <option value="data_science">Data Science</option>
+                                    <!-- Ajoutez d'autres options ici -->
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <h6>Compétences en Recherche et Analyse :</h6>
-                                <p>ex: Recherche documentaire, Analyse de donnée, Rédaction de rapports</p>
-                                <div id="competences_en_communication_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_en_recherche_et_analyse')">Ajouter</button>
+                                <select id="competences_en_recherche_et_analyse" class="chosen-select" multiple>
+                                    <option value="recherche_documentaire">Recherche documentaire</option>
+                                    <option value="analyse_donnee">Analyse de donnée</option>
+                                    <option value="redaction_rapports">Rédaction de rapports</option>
+                                    <option value="veille_technologique">Veille technologique</option>
+                                    <option value="methodologie_recherche">Méthodologie de recherche</option>
+                                    <option value="analyse_statistique">Analyse statistique</option>
+                                    <option value="synthese_rapports">Synthèse de rapports</option>
+                                    <option value="gestion_informations">Gestion de l'information</option>
+                                    <!-- Ajoutez d'autres options ici -->
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <h6>Compétences en Communication :</h6>
-                                <p>ex: Communication orale/ecrite, compétence en négociation</p>
-                                <div id="competences_en_communication_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_en_communication')">Ajouter</button>
+                                <select id="competences_en_communication" class="chosen-select" multiple>
+                                    <option value="communication_orale_ecrite">Communication orale/écrite</option>
+                                    <option value="negociation">Compétence en négociation</option>
+                                    <option value="presentation">Présentation</option>
+                                    <option value="ecoute_active">Écoute active</option>
+                                    <option value="gestion_conflits">Gestion des conflits</option>
+                                    <option value="communication_interculturelle">Communication interculturelle</option>
+                                    <option value="redaction">Rédaction</option>
+                                    <option value="relations_publiques">Relations publiques</option>
+                                    <!-- Ajoutez d'autres options ici -->
+                                </select>
+                                
                             </div>
                             <div class="mb-3">
-                                <h6>Autres compétences</h6>
-                                <p>ex: Compétences interpersonnelles, Résolutions des problèmes, adaptabilités, gestion du stress, leadership, Ethique et responsabilité, gestion financière, langues...</p>
-                                <div id="autres_competences_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('autres_competences')">Ajouter</button>
+                                <h4>Compétences Transversales :</h4>
+                                <div>
+                                    <h6>Compétences Interpersonnelles :</h6>
+                                    <select id="competences_interpersonnelles" class="chosen-select" multiple>
+                                        <option value="travail_en_equipe">Travail en équipe</option>
+                                        <option value="empathie">Empathie</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Résolution de Problèmes :</h6>
+                                    <select id="competences_resolution_problemes" class="chosen-select" multiple>
+                                        <option value="pensée_critique">Pensée critique</option>
+                                        <option value="creativite">Créativité</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Adaptabilité :</h6>
+                                    <select id="competences_adaptabilite" class="chosen-select" multiple>
+                                        <option value="flexibilite">Flexibilité</option>
+                                        <option value="apprentissage_continu">Apprentissage continu</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Gestion du Stress :</h6>
+                                    <select id="competences_gestion_stress" class="chosen-select" multiple>
+                                        <option value="gestion_stress">Gestion du stress</option>
+                                        <option value="equilibre_travail_vie">Équilibre travail-vie personnelle</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Leadership :</h6>
+                                    <select id="competences_leadership" class="chosen-select" multiple>
+                                        <option value="gestion_equipe">Gestion d’équipe</option>
+                                        <option value="prise_decision">Prise de décision</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Éthique et Responsabilité :</h6>
+                                    <select id="competences_ethique_responsabilite" class="chosen-select" multiple>
+                                        <option value="ethique_professionnelle">Éthique professionnelle</option>
+                                        <option value="responsabilite_sociale">Responsabilité sociale</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Gestion Financière :</h6>
+                                    <select id="competences_gestion_financiere" class="chosen-select" multiple>
+                                        <option value="gestion_budget">Gestion de budget</option>
+                                        <option value="analyse_financiere">Analyse financière</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Langues :</h6>
+                                    <select id="competences_langues" class="chosen-select" multiple>
+                                        <option value="langues_etrangeres">Langues étrangères</option>
+                                        <option value="competences_interculturelles">Compétences interculturelles</option>
+                                    </select>
+                                </div>
                             </div>
                         </fieldset>
 
@@ -212,7 +291,7 @@
                             <legend><h4>Expérience Professionnelle</h4></legend>
                             <div class="mb-3">
                                 <h6>Expérience Professionnelle :</h6>
-                                <p>ex: Stage en Entreprise, Emplois à temps partiel, Expérience de travail pertinente, projets professionnels, bénévolat, entrepreneuriat, formations professionnelles, responsabilités additionnelles, expérience internationale, publications et contributions...</p>
+                                <p>ex: Stage en Entreprise, Emplois à temps partiel, Expérience de travail pertinente, projets professionnels, bénévolat, entrepreneuriat, formations professionnelles, responsabilités additionnelles, expérience internationale, publications et contributions...</p> 
                                 <div id="experiences_professionnelles_conteneur"></div>
                                 <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('experiences_professionnelles')">Ajouter</button>
                             </div>
@@ -252,7 +331,7 @@
                         <!-- Préférences de Carrière -->
                         <fieldset class="form-section">
                             <legend><h4>Préférences de Carrière</h4></legend>
-
+                            
                             <!-- Secteur d'activité préféré -->
                             <div class="mb-3">
                                 <label for="secteur-activite" class="form-label">Secteur d'activité préféré :</label>
@@ -349,7 +428,7 @@
                                     </optgroup>
                                 </select>
                             </div>
-
+                            
                             <!-- Type d'emploi recherché -->
                             <div class="mb-3">
                                 <label for="type-emploi" class="form-label">Type d'emploi recherché :</label>
@@ -361,13 +440,13 @@
                                     <option value="Alternance">Alternance</option>
                                 </select>
                             </div>
-
+                            
                             <!-- Localisation géographique préférée -->
                             <div class="mb-3">
                                 <label for="localisation-preferree" class="form-label">Localisation géographique préférée :</label>
                                 <input type="text" id="localisation-preferree" name="localisation_preferree" class="form-control" required>
                             </div>
-
+                            
                             <!-- Salaire souhaité -->
                             <div class="mb-3">
                                 <label for="salaire-souhaite" class="form-label">Salaire souhaité :</label>
@@ -375,6 +454,126 @@
                             </div>
                         </fieldset>
 
+                        <!-- Disponibilité de l’Étudiant Section -->
+<fieldset class="form-section">
+    <legend><h4>Disponibilité de l’Étudiant</h4></legend>
+    <div class="form-group">
+      <label for="duree_dispo">Durée de Disponibilité :</label>
+      <select class="form-control" id="duree_dispo" name="duree_dispo" placeholder="Veuillez choisir">
+        <option value="moins_1_mois">Moins de 1 mois</option>
+        <option value="1_3_mois">1 à 3 mois</option>
+        <option value="3_6_mois">3 à 6 mois</option>
+        <option value="6_12_mois">6 à 12 mois</option>
+        <option value="plus_12_mois">Plus de 12 mois</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="semestre">Semestre en Cours :</label>
+      <select class="form-control" id="semestre" name="semestre">
+        <option value="semestre_1">Semestre 1</option>
+        <option value="semestre_2">Semestre 2</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="vacances_ete">Vacances d'Été :</label>
+      <div class="input-group">
+        <input type="date" class="form-control" id="vacances_debut" name="vacances_debut" placeholder="Date début">
+        <input type="date" class="form-control" id="vacances_fin" name="vacances_fin" placeholder="Date fin">
+      </div>
+      <div class="form-group">
+        <label for="vacances_dispo">Date disponible pendant les vacances d'été</label>
+        <div class="input-group">
+          <input type="date" class="form-control" id="dispo_debut" name="dispo_debut" placeholder="Date début">
+          <input type="date" class="form-control" id="dispo_fin" name="dispo_fin" placeholder="Date fin">
+        </div>
+    </div>
+  </fieldset>
+  
+  <!-- Détails spécifiques (Inclusivité Entreprise) Section -->
+  <fieldset class="form-section">
+    <legend>Détails spécifiques (Inclusivité Entreprise)</legend>
+  
+    <div class="form-group">
+      <label for="accessibilite">Accessibilité :</label>
+      <p>Avez-vous besoin d’aménagements spécifiques pour participer à des événements ou des activités ?</p>
+      <select class="form-control" id="accessibilite" name="accessibilite">
+        <option value="oui">Oui</option>
+        <option value="non">Non</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="amenagements">Si oui, veuillez préciser :</label>
+      <textarea class="form-control" id="amenagements" name="amenagements" rows="3" placeholder="Précisez les aménagements spécifiques"></textarea>
+    </div>
+  
+    <div class="form-group">
+      <label for="origine_ethnique">Origine ethnique :</label>
+      <select class="form-select" id="origine_ethnique" name="origine_ethnique">
+        <option value="antaimoro">Antaimoro</option>
+        <option value="antandroy">Antandroy</option>
+        <option value="antanosy">Antanosy</option>
+        <option value="betsileo">Betsileo</option>
+        <option value="betsimisaraka">Betsimisaraka</option>
+        <option value="francais">Français</option>
+        <option value="mahafaly">Mahafaly</option>
+        <option value="makoa">Makoa</option>
+        <option value="masikoro">Masikoro</option>
+        <option value="merina">Merina</option>
+        <option value="sakalava">Sakalava</option>
+        <option value="sihanaka">Sihanaka</option>
+        <option value="tanala">Tanala</option>
+        <option value="tsimihety">Tsimihety</option>
+        <option value="tsonga">Tsonga</option>
+        <option value="zafimaniry">Zafimaniry</option>
+
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="statut_socio_economique">Statut socio-économique :</label>
+      <select class="form-select" id="statut_socio_economique" name="statut_socio_economique">
+        <option value="origine_modeste">Origine modeste</option>
+        <option value="classe_moyenne">Classe moyenne</option>
+        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="conditions_vie">Conditions de vie spécifiques :</label>
+      <select class="form-select" id="conditions_vie" name="conditions_vie">
+        <option value="null">null</option>
+        <option value="sans_domicile">Sans domicile fixe</option>
+        <option value="handicap">En situation de handicap</option>
+        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="religion_croyance">Religion ou croyance :</label>
+      <select class="form-select" id="religion_croyance" name="religion_croyance">
+        <option value="chretien">Chrétien</option>
+        <option value="musulman">Musulman</option>
+        <option value="bouddhiste">Bouddhiste</option>
+        <option value="hindou">Hindou</option>
+        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+      </select>
+    </div>
+  
+    <div class="form-group">
+      <label for="orientation_sexuelle">Orientation sexuelle :</label>
+      <select class="form-select" id="orientation_sexuelle" name="orientation_sexuelle">
+        <option value="heterosexuel">Hétérosexuel</option>
+        <option value="homosexuel">Homosexuel</option>
+        <option value="bisexuel">Bisexuel</option>
+        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+      </select>
+    </div>
+  </fieldset>
+  
+                        
 
                         <div class="text-center mt-4">
                             <button type="submit" class="theme-btn btn-style-one">Soumettre</button>
@@ -481,6 +680,9 @@
     .chosen-container .chosen-drop, .chosen-container .chosen-results{
         color:#66022b;
     }
+    .group-result{
+        color : #333;
+    }
 </style>
 
 <!-- Lien vers Bootstrap JS et dépendances Popper.js -->
@@ -554,7 +756,7 @@
             function updateRegions() {
                 const selectedCountry = paysSelect.value;
                 const regionsList = regions[selectedCountry] || [];
-
+                
                 // Clear existing options
                 regionSelect.innerHTML = '';
 
