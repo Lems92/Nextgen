@@ -243,11 +243,8 @@
                               <li class="tab-btn rejected" data-tab="#rejected">Rejected(s): 4</li>
                             </ul>
                           </div>
-<<<<<<< HEAD
 
-=======
       
->>>>>>> master
                           <div class="tabs-content">
                             <!--Tab-->
                             <div class="tab active-tab" id="totals">
@@ -581,11 +578,8 @@
                                     </div>
                                   </div>
                                 </div>
-<<<<<<< HEAD
 
-=======
       
->>>>>>> master
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
