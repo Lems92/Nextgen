@@ -183,27 +183,106 @@
                             <legend><h4>Compétences</h4></legend>
                             <div class="mb-3">
                                 <h6>Compétences techniques</h6>
-                                <p>ex: Compétences en Informatiques (Bureautique, programmation, gestion de bases de données, systèmes d'information, cybersécurité...)</p> 
-                                <div id="competences_techniques_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_techniques')">Ajouter</button>
+                                <select id="competences_techniques" class="chosen-select" multiple>
+                                    <option value="bureautique">Bureautique</option>
+                                    <option value="programmation">Programmation</option>
+                                    <option value="gestion_bases_donnees">Gestion de bases de données</option>
+                                    <option value="systemes_information">Systèmes d'information</option>
+                                    <option value="cybersecurite">Cybersécurité</option>
+                                    <option value="gestion_projets">Gestion de projets</option>
+                                    <option value="design_ui_ux">Design UI/UX</option>
+                                    <option value="virtualisation">Virtualisation</option>
+                                    <option value="data_science">Data Science</option>
+                                    <!-- Ajoutez d'autres options ici -->
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <h6>Compétences en Recherche et Analyse :</h6>
-                                <p>ex: Recherche documentaire, Analyse de donnée, Rédaction de rapports</p> 
-                                <div id="competences_en_communication_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_en_recherche_et_analyse')">Ajouter</button>
+                                <select id="competences_en_recherche_et_analyse" class="chosen-select" multiple>
+                                    <option value="recherche_documentaire">Recherche documentaire</option>
+                                    <option value="analyse_donnee">Analyse de donnée</option>
+                                    <option value="redaction_rapports">Rédaction de rapports</option>
+                                    <option value="veille_technologique">Veille technologique</option>
+                                    <option value="methodologie_recherche">Méthodologie de recherche</option>
+                                    <option value="analyse_statistique">Analyse statistique</option>
+                                    <option value="synthese_rapports">Synthèse de rapports</option>
+                                    <option value="gestion_informations">Gestion de l'information</option>
+                                    <!-- Ajoutez d'autres options ici -->
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <h6>Compétences en Communication :</h6>
-                                <p>ex: Communication orale/ecrite, compétence en négociation</p> 
-                                <div id="competences_en_communication_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_en_communication')">Ajouter</button>
+                                <select id="competences_en_communication" class="chosen-select" multiple>
+                                    <option value="communication_orale_ecrite">Communication orale/écrite</option>
+                                    <option value="negociation">Compétence en négociation</option>
+                                    <option value="presentation">Présentation</option>
+                                    <option value="ecoute_active">Écoute active</option>
+                                    <option value="gestion_conflits">Gestion des conflits</option>
+                                    <option value="communication_interculturelle">Communication interculturelle</option>
+                                    <option value="redaction">Rédaction</option>
+                                    <option value="relations_publiques">Relations publiques</option>
+                                    <!-- Ajoutez d'autres options ici -->
+                                </select>
+                                
                             </div>
                             <div class="mb-3">
-                                <h6>Autres compétences</h6>
-                                <p>ex: Compétences interpersonnelles, Résolutions des problèmes, adaptabilités, gestion du stress, leadership, Ethique et responsabilité, gestion financière, langues...</p> 
-                                <div id="autres_competences_conteneur"></div>
-                                <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('autres_competences')">Ajouter</button>
+                                <h4>Compétences Transversales :</h4>
+                                <div>
+                                    <h6>Compétences Interpersonnelles :</h6>
+                                    <select id="competences_interpersonnelles" class="chosen-select" multiple>
+                                        <option value="travail_en_equipe">Travail en équipe</option>
+                                        <option value="empathie">Empathie</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Résolution de Problèmes :</h6>
+                                    <select id="competences_resolution_problemes" class="chosen-select" multiple>
+                                        <option value="pensée_critique">Pensée critique</option>
+                                        <option value="creativite">Créativité</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Adaptabilité :</h6>
+                                    <select id="competences_adaptabilite" class="chosen-select" multiple>
+                                        <option value="flexibilite">Flexibilité</option>
+                                        <option value="apprentissage_continu">Apprentissage continu</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Gestion du Stress :</h6>
+                                    <select id="competences_gestion_stress" class="chosen-select" multiple>
+                                        <option value="gestion_stress">Gestion du stress</option>
+                                        <option value="equilibre_travail_vie">Équilibre travail-vie personnelle</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Leadership :</h6>
+                                    <select id="competences_leadership" class="chosen-select" multiple>
+                                        <option value="gestion_equipe">Gestion d’équipe</option>
+                                        <option value="prise_decision">Prise de décision</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Éthique et Responsabilité :</h6>
+                                    <select id="competences_ethique_responsabilite" class="chosen-select" multiple>
+                                        <option value="ethique_professionnelle">Éthique professionnelle</option>
+                                        <option value="responsabilite_sociale">Responsabilité sociale</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Gestion Financière :</h6>
+                                    <select id="competences_gestion_financiere" class="chosen-select" multiple>
+                                        <option value="gestion_budget">Gestion de budget</option>
+                                        <option value="analyse_financiere">Analyse financière</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <h6>Compétences en Langues :</h6>
+                                    <select id="competences_langues" class="chosen-select" multiple>
+                                        <option value="langues_etrangeres">Langues étrangères</option>
+                                        <option value="competences_interculturelles">Compétences interculturelles</option>
+                                    </select>
+                                </div>
                             </div>
                         </fieldset>
 
