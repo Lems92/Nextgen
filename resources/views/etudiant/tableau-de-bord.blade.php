@@ -329,4 +329,8 @@
       },
     });
   </script>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> master

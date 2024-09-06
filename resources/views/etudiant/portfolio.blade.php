@@ -4,7 +4,11 @@
 
 @section('content')
 
+<<<<<<< HEAD
 @include('header.admin')
+=======
+@include('header.etudiant')
+>>>>>>> master
     <!-- End User Sidebar -->
 
     <!-- Dashboard -->
@@ -328,11 +332,14 @@
     </section>
     <!-- End Dashboard -->
 
+<<<<<<< HEAD
     <!-- Copyright -->
     <div class="copyright-text">
       <p>© 2021 Superio. All Right Reserved.</p>
     </div>
 
+=======
+>>>>>>> master
   </div><!-- End Page Wrapper -->
 
   <script>
@@ -413,4 +420,8 @@
       },
     });
   </script>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> master

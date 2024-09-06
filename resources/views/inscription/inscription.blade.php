@@ -16,7 +16,11 @@
           <form method="post" action="{{ route('inscription') }}">
             @csrf
             <input type="hidden" id="role" name="role" required>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> master
             <div class="form-group">
                 <div class="btn-box row">
                     <div class="col-sm-4">
@@ -30,12 +34,20 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> master
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="email" placeholder="Email" required>
             </div>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> master
             <div class="form-group">
                 <label>Mot de passe</label>
                 <input id="password-field" type="password" name="password" placeholder="Mot de passe" required>
@@ -45,12 +57,20 @@
               <label>Confirmer Mot de passe</label>
               <input id="password-field" type="password" name="password" placeholder="Mot de passe" required>
           </div>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> master
             <div class="form-group">
                 <button class="theme-btn btn-style-one" type="submit" name="Register">Suivant</button>
             </div>
           </form>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> master
           <div class="bottom-box">
               <div class="text">Vous avez déjà un compte ?<a href="{{route('connexion')}}">Se connecter</a></div>
           </div>

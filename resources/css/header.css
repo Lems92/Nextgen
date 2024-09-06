@@ -1,0 +1,38 @@
+/* Adjust the navbar links */
+.nav-outer .navigation > li > a,
+.nav-outer .navigation > li > span {
+    padding: 8px 12px; /* Reduce padding to make buttons smaller */
+    font-size: 14px; /* Adjust the font size */
+    line-height: 1.5; /* Adjust line height for better spacing */
+}
+
+/* Adjust the login/register buttons */
+.btn-box .theme-btn {
+    padding: 8px 16px; /* Reduce padding */
+    font-size: 14px; /* Adjust font size */
+    border-radius: 4px; /* Optional: Adjust border-radius */
+    margin-left: 10px; /* Adjust margin between buttons */
+}
+
+.sticky-header .theme-btn {
+    padding: 6px 12px; /* Further reduce padding for sticky header */
+}
+
+/* Optional: Adjust logo size */
+.logo-box img, .sticky-logo img {
+    height: 40px; /* Adjust logo size */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .nav-outer .navigation > li > a,
+    .nav-outer .navigation > li > span {
+        font-size: 12px; /* Smaller font on mobile */
+        padding: 6px 8px; /* Reduce padding on mobile */
+    }
+
+    .btn-box .theme-btn {
+        font-size: 12px; /* Smaller font on mobile */
+        padding: 6px 10px; /* Reduce padding on mobile */
+    }
+}

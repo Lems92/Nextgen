@@ -40,7 +40,11 @@
                             </div>
                         </a>
                     </div>
+<<<<<<< HEAD
                     <!-- OFFRE GOLD
+=======
+                    <!-- OFFRE GOLD 
+>>>>>>> master
                     <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <a href="offre.html" class="ui-item-link">
                             <div class="ui-item ui-green">
@@ -66,7 +70,11 @@
                 <h3>Manage Jobs</h3>
                 <div class="text">Ready to jump back in?</div>
               </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
               <div class="row">
                 <div class="col-lg-12">
                   <!-- Ls widget -->
@@ -74,7 +82,11 @@
                     <div class="tabs-box">
                       <div class="widget-title">
                         <h4>My Job Listings</h4>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                         <div class="chosen-outer">
                           <!--Tabs Box-->
                           <select class="chosen-select">
@@ -86,7 +98,11 @@
                           </select>
                         </div>
                       </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                       <div class="widget-content">
                         <div class="table-outer">
                           <table class="default-table manage-job-table">
@@ -99,7 +115,11 @@
                                 <th>Action</th>
                               </tr>
                             </thead>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                             <tbody>
                               <tr>
                                 <td>
@@ -180,8 +200,13 @@
                     </div>
                   </div>
                 </div>
+<<<<<<< HEAD
 
 
+=======
+      
+      
+>>>>>>> master
               </div>
             </div>
           </section>
@@ -191,7 +216,11 @@
                 <h3>All Aplicants</h3>
                 <div class="text">Ready to jump back in?</div>
               </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
               <div class="row">
                 <div class="col-lg-12">
                   <!-- Ls widget -->
@@ -200,7 +229,11 @@
                       <div class="widget-title">
                         <h4>Applicant</h4>
                       <div class="widget-content">
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                         <div class="tabs-box">
                           <div class="aplicants-upper-bar">
                             <h6>Senior Product Designer</h6>
@@ -210,7 +243,11 @@
                               <li class="tab-btn rejected" data-tab="#rejected">Rejected(s): 4</li>
                             </ul>
                           </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                           <div class="tabs-content">
                             <!--Tab-->
                             <div class="tab active-tab" id="totals">
@@ -242,7 +279,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -270,7 +311,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -298,7 +343,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -326,7 +375,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -354,7 +407,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -384,7 +441,11 @@
                                 </div>
                               </div>
                             </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                             <!--Tab-->
                             <div class="tab" id="approved">
                               <div class="row">
@@ -415,7 +476,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -443,10 +508,17 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
                               </div>
                             </div>
 
+=======
+      
+                              </div>
+                            </div>
+      
+>>>>>>> master
                             <!--Tab-->
                             <div class="tab" id="rejected">
                               <div class="row">
@@ -477,7 +549,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -505,7 +581,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -533,7 +613,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -585,11 +669,19 @@
       Chart.defaults.global.defaultFontFamily = "Sofia Pro";
       Chart.defaults.global.defaultFontColor = '#888';
       Chart.defaults.global.defaultFontSize = '14';
+<<<<<<< HEAD
 
       var ctx = document.getElementById('chart').getContext('2d');
 
       var chart = new Chart(ctx, {
 
+=======
+  
+      var ctx = document.getElementById('chart').getContext('2d');
+  
+      var chart = new Chart(ctx, {
+  
+>>>>>>> master
         type: 'line',
         // The data for our dataset
         data: {
@@ -609,6 +701,7 @@
             pointBorderWidth: "2",
           }]
         },
+<<<<<<< HEAD
 
         // Configuration options
         options: {
@@ -617,13 +710,27 @@
             padding: 10,
           },
 
+=======
+  
+        // Configuration options
+        options: {
+  
+          layout: {
+            padding: 10,
+          },
+  
+>>>>>>> master
           legend: {
             display: false
           },
           title: {
             display: false
           },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> master
           scales: {
             yAxes: [{
               scaleLabel: {
@@ -644,7 +751,11 @@
               },
             }],
           },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> master
           tooltips: {
             backgroundColor: '#333',
             titleFontSize: 13,
@@ -663,4 +774,8 @@
 </body>
 
 </html>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> master

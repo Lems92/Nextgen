@@ -19,6 +19,7 @@
 
             <nav class="nav main-menu">
               <ul class="navigation" id="navbar">
+<<<<<<< HEAD
                 <li>
                   <span>Accueil</span>
                 </li>
@@ -54,6 +55,38 @@
                     <li><a href="blog-list-v3.html">Nous contacter</a></li>
                   </ul>
                 </li>
+=======
+                <li><a href="{{route('accueil')}}"><span>Accueil</span></a></li>
+                            <li class="dropdown">
+                                <span>Étudiant</span>
+                                <ul class="dropdown">
+                                    <li><a href="{{route('explorer-offre')}}">Explorer les offres</a></li>
+                                    <li><a href="#">Explorer les évenements</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <span>Entreprise</span>
+                                <ul>
+                                    <li><a href="{{route('gerer-candidat')}}">Gerer les candidat</a></li>
+                                    <li><a href="{{route('offre')}}">Publier une offre</a></li>
+                                </ul>
+                            </li>
+                            <li class=" dropdown">
+                                <span>Service carrière</span>
+                                <ul class="dropdown">
+                                    <li><a href="{{route('publier-event')}}">Publier un évenement</a></li>
+                                    <li><a href="{{route('gestion-etudiants')}}">Gerer les étudiants</a></li>
+                                </ul>
+                            </li>
+                             <li class="dropdown">
+                                <span>NextGen</span>
+                                <ul>
+                                    <li><a href="blog-list-v1.html">A propos</a></li>
+                                    <li><a href="blog-list-v2.html">F.A.Q</a></li>
+                                    <li><a href="blog-list-v3.html">Nous contacter</a></li>
+                                </ul>
+                              </li>
+>>>>>>> master
                 <!-- End header -->
 
                 <!-- Only for Mobile View -->
@@ -81,7 +114,11 @@
           <div class="outer-box">
 
             <!-- Dashboard Option -->
+<<<<<<< HEAD
 
+=======
+           
+>>>>>>> master
           </div>
         </div>
       </div>
@@ -115,12 +152,26 @@
 
       <div class="sidebar-inner">
         <ul class="navigation">
+<<<<<<< HEAD
           <li class="active"><a href="{{route('etudiant.dashboard')}}"> <i class="la la-home"></i> Dashboard</a></li>
           <li><a href="{{route('profil')}}"> <i class="la la-user-tie"></i>My Profile</a></li>
           <li><a href="candidate-dashboard-applied-job.html"><i class="la la-briefcase"></i> Applied Jobs </a></li>
           <li><a href="dashboard-change-password.html"><i class="la la-lock"></i>Change Password</a></li>
           <li><a href="dashboard-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
           <li><a href="index.html"><i class="la la-sign-out"></i>Logout</a></li>
+=======
+          <li class="{{ request()->is('dashboard-etudiant') ? 'active' : '' }}">
+          <a href="{{route('etudiant.dashboard')}}"> <i class="la la-home"></i>Tableau de bord</a></li>
+          <li class="{{ request()->is('profil') ? 'active' : '' }}">
+          <a href="{{route('profil')}}"> <i class="la la-user-tie"></i>Mon profil</a></li>
+          <li class="{{ request()->is('modifierProfil') ? 'active' : '' }}">
+            <a href="{{route('modifierProfil')}}"> <i class="la la-pen"></i>Modifier profil</a></li>
+          <li class="{{ request()->is('candidature') ? 'active' : '' }}">
+          <a href="{{route('candidature')}}"><i class="la la-briefcase"></i>Candidatures</a></li>
+          <li class="#">
+          <a href="#"><i class="la la-lock"></i>Mot de passe</a></li>
+          <li><a href="index.html"><i class="la la-sign-out"></i>Déconnecter</a></li>
+>>>>>>> master
           <li><a href="dashboard-delete.html"><i class="la la-trash"></i>Delete Profile</a></li>
         </ul>
       </div>
@@ -134,6 +185,7 @@
       }
       .nav-outer .navigation > li > a,
       .nav-outer .navigation > li > span {
+<<<<<<< HEAD
           padding: 8px 12px;
           font-size: 14px;
           line-height: 1.5;
@@ -160,12 +212,41 @@
           opacity: 1;
       }
 
+=======
+          padding: 8px 12px; 
+          font-size: 14px;
+          line-height: 1.5; 
+      }
+      
+      .btn-box .theme-btn {
+          padding: 8px 16px; 
+          font-size: 14px; 
+          border-radius: 4px; 
+          margin-left: 10px; 
+      }
+      
+      .sticky-header .theme-btn {
+          padding: 6px 12px; 
+      }
+      
+      /* Optional: Adjust logo size */
+      .logo-box img, .sticky-logo img {
+          height: 40px; 
+      }
+      .navigation li.has-dropdown:hover .dropdown {
+          display: block; 
+          visibility: visible; 
+          opacity: 1; 
+      }
+      
+>>>>>>> master
       .navbar {
                   position: fixed;
                   top: 0;
                   width: 100%;
                   z-index: 1050;
               }
+<<<<<<< HEAD
 
       .main-menu .navigation{
         margin-left: 70px;
@@ -180,13 +261,51 @@
 
           .btn-box .theme-btn {
               font-size: 12px;
+=======
+      
+      .main-menu .navigation{
+        margin-left: 70px;
+      }
+      
+      .user-sidebar .navigation li a {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    line-height: 30px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #696969;
+    text-align: left;
+    border-radius: 8px;
+    transition: all 500ms ease;
+}
+      @media (max-width: 768px) {
+          .nav-outer .navigation > li > a,
+          .nav-outer .navigation > li > span {
+              font-size: 12px; 
+              padding: 6px 8px; 
+          }
+      
+          .btn-box .theme-btn {
+              font-size: 12px; 
+>>>>>>> master
               padding: 6px 10px;
               display: inline-block !important;
           }
           .page-wrapper {
+<<<<<<< HEAD
                   padding-top: 0px;
               }
       }
 
 
       </style>
+=======
+                  padding-top: 0px; 
+              }
+      }
+      
+      
+      </style>
+>>>>>>> master

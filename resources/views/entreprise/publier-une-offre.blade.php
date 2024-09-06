@@ -1,6 +1,10 @@
 @extends('app')
 
+<<<<<<< HEAD
 @section('title, Publier une offre')
+=======
+@section('title', 'Publier une offre')
+>>>>>>> master
 
 @section('content')
 
@@ -133,11 +137,19 @@
         background-color: #f9f9f9;
         border-radius: 8px;
     }
+<<<<<<< HEAD
 
     .form-group label {
         font-weight: bold;
     }
 
+=======
+    
+    .form-group label {
+        font-weight: bold;
+    }
+    
+>>>>>>> master
     .form-group select[multiple] {
         height: auto;
     }
@@ -146,4 +158,8 @@
         padding-top: 20px
     }
 </style>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> master

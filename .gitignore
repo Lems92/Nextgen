@@ -8,7 +8,10 @@
 .env
 .env.backup
 .env.production
+<<<<<<< HEAD
 .phpactor.json
+=======
+>>>>>>> master
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

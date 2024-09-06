@@ -47,4 +47,8 @@
       <!--End Login Form -->
     </div>
   </div>
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> master

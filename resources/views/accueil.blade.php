@@ -22,7 +22,11 @@
                                         <li>Connecte-toi avec des recruteurs : Rencontre des entreprises et des recruteurs qui cherchent des talents comme le tien.</li>
                                         <li>Fais le premier pas vers une carrière réussie. Inscris-toi dès maintenant et démarre ton aventure professionnelle avec confiance !</li>
                                 </ul>
+<<<<<<< HEAD
                                 <a href="{{route('register')}}" class="theme-btn btn-style-one">Inscris-toi maintenant</a>
+=======
+                                <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Inscris-toi maintenant</a>
+>>>>>>> master
                             </div>
                         </div>
                         <!-- Colonne d'image à droite -->
@@ -31,7 +35,11 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
 
+=======
+                
+>>>>>>> master
                 <!-- Slide Item 2 -->
                 <div class="container-fluid bg-image">
                     <div class="row h-100">
@@ -44,7 +52,11 @@
                                     <li>Trouvez des profils qui résonnent avec vos valeurs : Sélectionnez des candidats enthousiastes et engagés, alignés avec vos objectifs et votre culture d’entreprise.</li>
                                     <li>Faites grandir votre équipe avec des talents prometteurs.</li>
                                 </ul>
+<<<<<<< HEAD
                                 <a href="{{route('register')}}" class="theme-btn btn-style-one">Découvrez les talents</a>
+=======
+                                <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Découvrez les talents</a>
+>>>>>>> master
                             </div>
                         </div>
                         <!-- Colonne d'image à droite -->
@@ -55,7 +67,11 @@
                 </div>
             </div>
         </section>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> master
         <!-- End Banner Section-->
 
         <!--Clients Section-->
@@ -141,7 +157,11 @@
                                 <li>Des jeunes talents qualifiés</li>
                                 <li>La plateforme carrière officielle d'établissements d'enseignement supérieur</li>
                             </ul>
+<<<<<<< HEAD
                             <a href="{{route('register')}}" class="theme-btn btn-style-one">Rejoindre NextGen<i
+=======
+                            <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Rejoindre NextGen<i
+>>>>>>> master
                                     class="fal fa-long-arrow-left ms-3"></i></a>
                         </div>
                     </div>
@@ -208,7 +228,11 @@
                                 <h3>Entreprise</h3>
                                 <p>Connectez-vous avec les professionnels de demain et propulsez votre
                                     entreprise vers de nouveaux sommets avec NextGen.</p>
+<<<<<<< HEAD
                                 <a href="{{route('register')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
+=======
+                                <a href="{{route('inscription')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
+>>>>>>> master
                             </div>
                             <figure class="image"><img src="images/resource/employ.png" alt=""></figure>
                         </div>
@@ -221,7 +245,11 @@
                                 <h3>Service carrière</h3>
                                 <p>Préparez vos étudiants pour l'avenir en les connectant avec les meilleures
                                     opportunités de carrière grâce à NextGen.</p>
+<<<<<<< HEAD
                                 <a href="{{route('register')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
+=======
+                                <a href="{{route('inscription')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
+>>>>>>> master
                             </div>
                             <figure class="image"><img src="images/resource/candidate.png" alt=""></figure>
                         </div>
@@ -237,12 +265,21 @@
               <div class="sec-title text-center">
                 <h2>Témoignages</h2>
               </div>
+<<<<<<< HEAD
 
               <div class="carousel-outer wow fadeInUp">
 
                 <!-- Testimonial Carousel -->
                 <div class="testimonial-carousel owl-carousel owl-theme">
 
+=======
+      
+              <div class="carousel-outer wow fadeInUp">
+      
+                <!-- Testimonial Carousel -->
+                <div class="testimonial-carousel owl-carousel owl-theme">
+      
+>>>>>>> master
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -255,7 +292,11 @@
                       </div>
                     </div>
                   </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -268,7 +309,11 @@
                       </div>
                     </div>
                   </div>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> master
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -286,9 +331,15 @@
             </div>
           </section>
         <!-- End Testimonial Section -->
+<<<<<<< HEAD
 
         <!-- Features Section-->
 
+=======
+        
+        <!-- Features Section-->
+        
+>>>>>>> master
 
         <!-- Registeration Banners -->
         <!-- End Registeration Banners -->
@@ -323,7 +374,11 @@
                     display: none; /* Masquer l'image sur les petits écrans */
                 }
             }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> master
         </style>
 
         <script>
@@ -339,6 +394,12 @@
             nav: false // Hide navigation arrows
             });
         });
+<<<<<<< HEAD
 
         </script>
 @endsection
+=======
+    
+        </script>
+@endsection
+>>>>>>> master

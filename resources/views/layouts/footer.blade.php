@@ -24,7 +24,11 @@
                                                     <ul class="list">
                                                         <li><a href="#">Trouver un travail</a></li>
                                                         <li><a href="#">Explorer les catégories</a></li>
+<<<<<<< HEAD
                                                         <li><a href="#">Tableau de bord</a></li>
+=======
+                                                        <li><a href="#">Tableau de bord</a></li> 
+>>>>>>> master
                                                     </ul>
                                                 </div>
                                             </div>
@@ -97,4 +101,8 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+>>>>>>> master
