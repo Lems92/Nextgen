@@ -23,8 +23,8 @@
                             <li class="dropdown">
                                 <span>Étudiant</span>
                                 <ul class="dropdown">
-                                    <li><a href="{{route('explorer-offre')}}">Explorer les offres</a></li>
-                                    <li><a href="#">Explorer les évenements</a></li>
+                                    <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
+                                    <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -120,7 +120,7 @@
           <a href="{{route('candidature')}}"><i class="la la-briefcase"></i>Candidatures</a></li>
           <li class="#">
           <a href="#"><i class="la la-lock"></i>Mot de passe</a></li>
-          <li><a href="index.html"><i class="la la-sign-out"></i>Déconnecter</a></li>
+          <li><a href="{{route('accueil')}}"><i class="la la-sign-out"></i>Déconnecter</a></li>
           <li><a href="dashboard-delete.html"><i class="la la-trash"></i>Delete Profile</a></li>
         </ul>
       </div>

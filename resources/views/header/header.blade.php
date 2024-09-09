@@ -18,8 +18,8 @@
                             <li class="dropdown">
                                 <span>Étudiant</span>
                                 <ul class="dropdown">
-                                    <li><a href="{{route('explorer-offre')}}">Explorer les offres</a></li>
-                                    <li><a href="#">Explorer les évenements</a></li>
+                                    <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
+                                    <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

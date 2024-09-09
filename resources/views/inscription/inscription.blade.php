@@ -16,7 +16,6 @@
           <form method="post" action="{{ route('inscription') }}">
             @csrf
             <input type="hidden" id="role" name="role" required>
-        
             <div class="form-group">
                 <div class="btn-box row">
                     <div class="col-sm-4">
@@ -43,7 +42,7 @@
 
             <div class="form-group">
               <label>Confirmer Mot de passe</label>
-              <input id="password-field" type="password" name="password" placeholder="Mot de passe" required>
+              <input id="password-field-confirmation" type="password" name="password_confirmation" placeholder="Mot de passe" required>
           </div>
         
             <div class="form-group">

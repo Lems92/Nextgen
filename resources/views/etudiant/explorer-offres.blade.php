@@ -244,224 +244,37 @@
 
 
                     <!-- Job Block -->
+                    @foreach($offers as $offre)
                     <div class="job-block">
-                    <div class="inner-box">
-                        <div class="content">
-                        <span class="company-logo"><img src="images/resource/company-logo/1-1.png" alt=""></span>
-                        <h4><a href="#">Software Engineer (Android), Libraries</a></h4>
-                        <ul class="job-info">
-                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                        </ul>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                            <li class="privacy">Private</li>
-                            <li class="required">Urgent</li>
-                        </ul>
-                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
+                        <div class="inner-box">
+                            <div class="content">
+                                <span class="company-logo">
+                                    <img src="{{ asset('images/resource/company-logo/' . $offre->logo) }}" alt="">
+                                </span>
+                                <h4><a href="{{ route('offers.show', ['id' => $offre->id]) }}">{{ $offre->titre_poste }}</a></h4>
+                                <ul class="job-info">
+                                    <li><span class="icon flaticon-briefcase"></span> {{ $offre->type_contrat }}</li>
+                                    <li><span class="icon flaticon-map-locator"></span> {{ $offre->lieu_poste }}</li>
+                                    <li><span class="icon flaticon-clock-3"></span> Posté le {{ $offre->date_debut->format('d M Y') }}</li>
+                                    <li><span class="icon flaticon-money"></span> <!-- Salaire si disponible --></li>
+                                </ul>
+                                <ul class="job-other-info">
+                                    <li class="time">{{ $offre->duree_contrat }}</li>
+                                    <li class="privacy">Disponible</li>
+                                    <li class="required">Urgent</li>
+                                </ul>
+                                <form id="application-form-{{ $offre->id }}" action="{{ route('offers.apply', ['id' => $offre->id]) }}" method="POST">
+                                    @csrf
+                                    <button type="button" class="theme-btn btn-style-one" onclick="confirmApply({{ $offre->id }})">Postuler</button>
+                                </form>
+                                
+                                
+                            </div>
                         </div>
                     </div>
-                    </div>
+                @endforeach
 
-                    <!-- Job Block -->
-                    <div class="job-block">
-                    <div class="inner-box">
-                        <div class="content">
-                        <span class="company-logo"><img src="images/resource/company-logo/1-2.png" alt=""></span>
-                        <h4><a href="#">Recruiting Coordinator</a></h4>
-                        <ul class="job-info">
-                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                        </ul>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                            <li class="privacy">Private</li>
-                            <li class="required">Urgent</li>
-                        </ul>
-                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Job Block -->
-                    <div class="job-block">
-                    <div class="inner-box">
-                        <div class="content">
-                        <span class="company-logo"><img src="images/resource/company-logo/1-3.png" alt=""></span>
-                        <h4><a href="#">Product Manager, Studio</a></h4>
-                        <ul class="job-info">
-                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                        </ul>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                            <li class="privacy">Private</li>
-                            <li class="required">Urgent</li>
-                        </ul>
-                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Job Block -->
-                    <div class="job-block">
-                    <div class="inner-box">
-                        <div class="content">
-                        <span class="company-logo"><img src="images/resource/company-logo/1-4.png" alt=""></span>
-                        <h4><a href="#">Senior Product Designer</a></h4>
-                        <ul class="job-info">
-                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                        </ul>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                            <li class="privacy">Private</li>
-                            <li class="required">Urgent</li>
-                        </ul>
-                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Job Block -->
-                    <div class="job-block">
-                    <div class="inner-box">
-                        <div class="content">
-                        <span class="company-logo"><img src="images/resource/company-logo/1-5.png" alt=""></span>
-                        <h4><a href="#">Senior Full Stack Engineer, Creator Success</a></h4>
-                        <ul class="job-info">
-                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                        </ul>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                            <li class="privacy">Private</li>
-                            <li class="required">Urgent</li>
-                        </ul>
-                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Job Block -->
-                    <div class="job-block">
-                    <div class="inner-box">
-                        <div class="content">
-                        <span class="company-logo"><img src="images/resource/company-logo/1-6.png" alt=""></span>
-                        <h4><a href="#">Software Engineer (Android), Libraries</a></h4>
-                        <ul class="job-info">
-                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                        </ul>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                            <li class="privacy">Private</li>
-                            <li class="required">Urgent</li>
-                        </ul>
-                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Job Block -->
-                    <div class="job-block">
-                    <div class="inner-box">
-                        <div class="content">
-                        <span class="company-logo"><img src="images/resource/company-logo/1-7.png" alt=""></span>
-                        <h4><a href="#">Software Engineer (Android), Libraries</a></h4>
-                        <ul class="job-info">
-                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                        </ul>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                            <li class="privacy">Private</li>
-                            <li class="required">Urgent</li>
-                        </ul>
-                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Job Block -->
-                    <div class="job-block">
-                    <div class="inner-box">
-                        <div class="content">
-                        <span class="company-logo"><img src="images/resource/company-logo/1-8.png" alt=""></span>
-                        <h4><a href="#">Recruiting Coordinator</a></h4>
-                        <ul class="job-info">
-                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                        </ul>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                            <li class="privacy">Private</li>
-                            <li class="required">Urgent</li>
-                        </ul>
-                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Job Block -->
-                    <div class="job-block">
-                    <div class="inner-box">
-                        <div class="content">
-                        <span class="company-logo"><img src="images/resource/company-logo/1-9.png" alt=""></span>
-                        <h4><a href="#">Product Manager, Studio</a></h4>
-                        <ul class="job-info">
-                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                        </ul>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                            <li class="privacy">Private</li>
-                            <li class="required">Urgent</li>
-                        </ul>
-                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Job Block -->
-                    <div class="job-block">
-                    <div class="inner-box">
-                        <div class="content">
-                        <span class="company-logo"><img src="images/resource/company-logo/1-1.png" alt=""></span>
-                        <h4><a href="#">Senior Product Designer</a></h4>
-                        <ul class="job-info">
-                            <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                            <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                            <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                            <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                        </ul>
-                        <ul class="job-other-info">
-                            <li class="time">Full Time</li>
-                            <li class="privacy">Private</li>
-                            <li class="required">Urgent</li>
-                        </ul>
-                        <button class="bookmark-btn"><span class="flaticon-bookmark"></span></button>
-                        </div>
-                    </div>
-                    </div>
+                    
 
 
                     <!-- Listing Show More -->
@@ -493,6 +306,12 @@
   <script src="js/script.js"></script>
 
   <script>
+    function confirmApply(offreId) {
+    if (confirm("Êtes-vous sûr de vouloir postuler pour ce poste ?")) {
+        // Soumet le formulaire si l'utilisateur confirme
+        document.getElementById('application-form-' + offreId).submit();
+    }
+}
     Chart.defaults.global.defaultFontFamily = "Sofia Pro";
     Chart.defaults.global.defaultFontColor = '#888';
     Chart.defaults.global.defaultFontSize = '14';

@@ -24,17 +24,17 @@
             <div class="contact-form default-form">
                 <form method="post" action="#" id="email-form">
                     <div class="row">
-    
+
                         <!-- Informations Générales -->
                         <div class="col-lg-12 form-group">
                             <h3>Informations Générales</h3>
                         </div>
-    
+
                         <div class="col-lg-6 form-group">
                             <label>Nom de l’Entreprise</label>
                             <input type="text" name="company_name" placeholder="Nom de l’Entreprise" required>
                         </div>
-    
+
                         <div class="col-lg-6 form-group">
                             <label>Secteur d’Activité</label>
                             <select name="industry" class="chosen-select">
@@ -52,7 +52,7 @@
                                 <option value="commerce">Commerce</option>
                             </select>
                         </div>
-    
+
                         <div class="col-lg-12 form-group">
                             <label>Adresse de l’Entreprise</label>
                             <div class="address-fields">
@@ -78,47 +78,47 @@
                                 <input type="hidden" name="country" value="Madagascar">
                             </div>
                         </div>
-    
+
                         <div class="col-lg-6 form-group">
                             <label>Site Web</label>
                             <input type="text" name="website" placeholder="Site Web">
                         </div>
-    
+
                         <div class="col-lg-6 form-group">
                             <label>Date de Création</label>
                             <input type="date" name="establishment_date" placeholder="Date de Création">
                         </div>
-    
+
                         <!-- Contact Principal -->
                         <div class="col-lg-12 form-group">
                             <h3>Contact Principal</h3>
                         </div>
-    
+
                         <div class="col-lg-6 form-group">
                             <label>Nom du Contact</label>
                             <input type="text" name="contact_name" placeholder="Nom du Contact" required>
                         </div>
-    
+
                         <div class="col-lg-6 form-group">
                             <label>Fonction du Contact</label>
                             <input type="text" name="contact_position" placeholder="Fonction du Contact" required>
                         </div>
-    
+
                         <div class="col-lg-6 form-group">
                             <label>Adresse e-mail du Contact</label>
                             <input type="email" name="contact_email" placeholder="Adresse e-mail du Contact" required>
                         </div>
-    
+
                         <div class="col-lg-6 form-group">
                             <label>Numéro de Téléphone du Contact</label>
                             <input type="text" name="contact_phone" placeholder="Numéro de Téléphone du Contact" required>
                         </div>
-    
+
                         <!-- Informations sur les Opportunités -->
                         <div class="col-lg-12 form-group">
                             <h3>Informations sur les Opportunités</h3>
                         </div>
-    
+
                         <div class="col-lg-12 form-group">
                             <label>Types d'Opportunités Proposées</label>
                             <div class="checkbox-group">
@@ -130,7 +130,7 @@
                                 <label><input type="checkbox" name="opportunities[]" value="Mentorat"> Mentorat</label>
                             </div>
                         </div>
-    
+
                         <div class="col-lg-12 form-group">
                             <label>Domaines d'Activité des Opportunités</label>
                             <div class="checkbox-group">
@@ -141,12 +141,12 @@
                                 <!-- Ajouter d'autres domaines ici -->
                             </div>
                         </div>
-    
+
                         <!-- Responsabilités et Engagement -->
                         <div class="col-lg-12 form-group">
                             <h3>Responsabilités et Engagement</h3>
                         </div>
-    
+
                         <div class="col-lg-12 form-group">
                             <label>Engagement en matière d’Inclusion et Diversité</label>
                             <div class="checkbox-group">
@@ -155,7 +155,7 @@
                                 <label><input type="checkbox" name="inclusion_diversity[]" value="Accessibilité au Travail"> Accessibilité au Travail</label>
                             </div>
                         </div>
-    
+
                         <div class="col-lg-12 form-group">
                             <label>Soutien à la Formation et au Développement Professionnel</label>
                             <div class="checkbox-group">
@@ -164,9 +164,15 @@
                                 <label><input type="checkbox" name="training_support[]" value="Programmes de Certification"> Programmes de Certification</label>
                             </div>
                         </div>
+<<<<<<< HEAD
+
+                        <div class="text mb-4 mt-2">En remplissant ce formulaire, vous acceptez d'être contacté par NextGen à des fins d'informations et de marketing, conformément à notre <a href="#">politique de protection des données personnelles</a>.</div>
+
+=======
     
                         <div class="text mb-4 mt-2">En remplissant ce formulaire, vous acceptez d'être contacté par NextGen à des fins d'informations et de marketing, conformément à notre <a href="#">politique de protection des données personnelles</a>.</div>
                         
+>>>>>>> master
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group" style="display: flex; justify-content: center;">
                             <button class="theme-btn btn-style-one" type="button" id="next-btn">Suivant</button>
                         </div>
@@ -182,8 +188,13 @@
             <div class="sec-title text-center">
                 <h2>Les offres pour les entreprises</h2>
             </div>
+<<<<<<< HEAD
+
+
+=======
         
       
+>>>>>>> master
                 <!--Tabs Container-->
                 <div class="tabs-content">
                     <!--Tab / Active Tab-->
@@ -208,7 +219,11 @@
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD
+
+=======
                 
+>>>>>>> master
                                 <!-- Pricing Table - Gold -->
                                 <div class="pricing-table tagged col-lg-4 col-md-6 col-sm-12">
                                     <div class="inner-box">
@@ -228,7 +243,11 @@
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< HEAD
+
+=======
                 
+>>>>>>> master
                                 <!-- Pricing Table - Premium -->
                                 <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
                                     <div class="inner-box">
@@ -251,10 +270,17 @@
                         </div>
                     </div>
                 </div>
+<<<<<<< HEAD
+
+                <!-- Hidden input to store selected offer -->
+                <input type="hidden" id="selected-offer" name="selected_offer" value="">
+
+=======
                 
                 <!-- Hidden input to store selected offer -->
                 <input type="hidden" id="selected-offer" name="selected_offer" value="">
                 
+>>>>>>> master
             <!-- Back and Next buttons -->
             <div class="col-lg-12 col-md-12 col-sm-12 form-group" style="display: flex; justify-content: space-between;">
                 <button class="theme-btn btn-style-one" type="button" id="back-btn">Retour</button>
@@ -318,7 +344,11 @@
     }
     .theme-btn.btn-style-three.selected {
     border: #66022b solid 1px;
+<<<<<<< HEAD
+    background-color: #fff;
+=======
     background-color: #fff; 
+>>>>>>> master
     color: #66022b;/* Text color for selected button */
 }
 
@@ -344,7 +374,7 @@
     // Update active steps
     const step1Indicator = document.querySelector('.progress-step[data-step="1"]');
     const step2Indicator = document.querySelector('.progress-step[data-step="2"]');
-    
+
     if (step1Indicator && step2Indicator) {
         step1Indicator.classList.remove('active');
         step2Indicator.classList.add('active');
@@ -358,7 +388,7 @@ document.getElementById('back-btn').addEventListener('click', function() {
     // Hide Step 2 and show Step 1
     const step2 = document.querySelector('[data-step-content="2"]');
     const step1 = document.querySelector('[data-step-content="1"]');
-    
+
     if (step2 && step1) {
         step2.style.display = 'none';
         step1.style.display = 'block';
@@ -367,7 +397,7 @@ document.getElementById('back-btn').addEventListener('click', function() {
     // Update active steps
     const step1Indicator = document.querySelector('.progress-step[data-step="1"]');
     const step2Indicator = document.querySelector('.progress-step[data-step="2"]');
-    
+
     if (step1Indicator && step2Indicator) {
         step1Indicator.classList.add('active');
         step2Indicator.classList.remove('active');
