@@ -34,7 +34,7 @@ Route::get('/events/create', [EventController::class, 'create'])->name('events.c
 Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
 
 Route::middleware('auth')->group(function() {
-    Route::get('/offres/create', [OffreController::class, 'create'])->name('offres.create');
+
     route::get('/offre', [OffreController::class, 'create'])->name('offre');
     
 
@@ -82,7 +82,8 @@ Route::get('/publier-event', function() {return view('universite.publier-eveneme
 Route::get('/postuler', function() {return view('etudiant.postuler');})->name('postuler');
 Route::get('/candidature', function() {return view('etudiant.candidatures');})->name('candidature');
 
-Route::get('/admin', function() {return view('admin.admin');})->name('admin');
+Route::get('/adminEntreprise', function() {return view('admin.adminEntreprise');})->name('adminEntreprise');
+Route::get('/adminUniv', function() {return view('admin.adminUniv');})->name('adminUniv');
 Route::get('/modiferProfil', function() {return view('etudiant.modifierProfil');})->name('modifierProfil');
 Route::get('/explorer-event', function() {return view('etudiant.evenements');})->name('explorer-event');
 Route::get('/motdepasse', function() {return view('etudiant.motdepasse');})->name('motdepasse');

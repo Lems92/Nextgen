@@ -4,7 +4,7 @@
 
 @section('content')
 <!-- Header -->
-@include('header.header')
+@include('header.admin')
 
 <div class="admin-wrapper container">
 
@@ -14,11 +14,111 @@
             <div class="row justify-content-center">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
-                        <h2>Entreprises Soumises</h2>
+                        <h2  id="soumises">Entreprises Soumises</h2>
                     </div>
                 </div>
             </div>
 
+            <div class="admin-table table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nom de l'Entreprise</th>
+                            <th>Secteur d'Activité</th>
+                            <th>Ville</th>
+                            <th>Région</th>
+                            <th>Email de Contact</th>
+                            <th>Plan</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>NextA</td>
+                            <td>ESN</td>
+                            <td>Antananarivo</td>
+                            <td>Analamanga</td>
+                            <td>Nom</td>
+                            <td>Standard</td>
+                            <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="#" class="btn btn-warning" onclick="showDetails()">Détails/Modifer</a>
+                                    <form action="#" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('POST')
+                                        <button type="submit" class="btn btn-success">Approuver</button>
+                                    </form>
+                                    <form action="#" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?');">Rejeter</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+     <!-- Section: Approved and Non-Approved Companies -->
+     <section class="admin-section bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="text-center mb-5">
+                        <h2 id="approuve">Entreprises Approuvées</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Approved Companies Table -->
+            <div class="admin-table table-responsive">
+                <table class="table table-striped" >
+                    <thead>
+                        <tr>
+                            <th>Nom de l'Entreprise</th>
+                            <th>Secteur d'Activité</th>
+                            <th>Ville</th>
+                            <th>Région</th>
+                            <th>Contact Principal</th>
+                            <th>Email de Contact</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>nom</td>
+                            <td>secteurs</td>
+                            <td>Ville</td>
+                            <td>Region</td>
+                            <td>Nom Entreprise</td>
+                            <td>Email contact</td>
+                            <td>
+                                <div class="d-flex justify-content-center gap-2">
+                                    <a href="#" class="btn btn-warning">Détails/Modifier</a>
+                                    <form action="#" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?');">Supprimer</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-12">
+                    <div class="text-center mb-5" >
+                        <h2  id="nonapprouve">Entreprises Non Approuvées</h2>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Non-Approved Companies Table -->
             <div class="admin-table table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -34,15 +134,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>NextA</td>
-                            <td>ESN</td>
-                            <td>Antananarivo</td>
-                            <td>Analamanga</td>
                             <td>Nom</td>
-                            <td>Email</td>
+                            <td>Secteur</td>
+                            <td>Ville</td>
+                            <td>Région</td>
+                            <td>Nom Entreprise</td>
+                            <td>Email Contact</td>
                             <td>
                                 <div class="d-flex justify-content-center gap-2">
-                                    <a href="#" class="btn btn-warning" onclick="showDetails()">Détails/Modifer</a>
                                     <form action="#" method="POST" style="display:inline;">
                                         @csrf
                                         @method('POST')
@@ -51,7 +150,7 @@
                                     <form action="#" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?');">Rejeter</button>
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?');">Supprimer</button>
                                     </form>
                                 </div>
                             </td>
@@ -217,7 +316,7 @@
     <section class="admin-section bg-light">
         <div class="container">
             <div class="text-center mb-5">
-                <h2>Gestion des Offres</h2>
+                <h2 id="plan">Gestion des Plans</h2>
             </div>
 
             <div class="row">
@@ -334,6 +433,9 @@
 
     .admin-details a.btn {
         margin-top: 15px;
+    }
+    .col-lg-12{
+        padding-top: 50px;
     }
 </style>
 <script>
