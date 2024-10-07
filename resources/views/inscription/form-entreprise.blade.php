@@ -22,9 +22,9 @@
             </div>
 
             <div class="contact-form default-form">
-                <form method="post" action="#" id="email-form">
+                <form method="post" action="{{ route('entreprise.store') }}" id="email-form">
+                    @csrf
                     <div class="row">
-    
                         <!-- Informations Générales -->
                         <div class="col-lg-12 form-group">
                             <h3>Informations Générales</h3>
@@ -165,22 +165,11 @@
                             </div>
                         </div>
     
-                        <div class="text mb-4 mt-2">En remplissant ce formulaire, vous acceptez d'être contacté par NextGen à des fins d'informations et de marketing, conformément à notre <a href="#">politique de protection des données personnelles</a>.</div>
-                        
-                        <div class="col-lg-12 col-md-12 col-sm-12 form-group" style="display: flex; justify-content: center;">
-                            <button class="theme-btn btn-style-one" type="button" id="next-btn">Suivant</button>
-                        </div>
                     </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Step 2: Pricing Package -->
-    <section class="pricing-section" data-step-content="2" style="display:none;">
+                </div>
         <div class="auto-container">
             <div class="sec-title text-center">
-                <h2>Les offres pour les entreprises</h2>
+                <h2>Les plans pour les entreprises</h2>
             </div>
         
       
@@ -204,7 +193,7 @@
                                             </ul>
                                         </div>
                                         <div class="table-footer">
-                                            <a href="#" class="theme-btn btn-style-three" onclick="selectOffer(this, 'Standard')">Sélectionner</a>
+                                            <a href="#tabs-content" class="theme-btn btn-style-three" data-offer="standard" onclick="selectOffer(this)">Sélectionner</a>
                                         </div>
                                     </div>
                                 </div>
@@ -224,7 +213,7 @@
                                             </ul>
                                         </div>
                                         <div class="table-footer">
-                                            <a href="#" class="theme-btn btn-style-three" onclick="selectOffer(this, 'Gold')">Sélectionner</a>
+                                            <a href="#tabs-content" class="theme-btn btn-style-three" data-offer="gold" onclick="selectOffer(this)">Sélectionner</a>
                                         </div>
                                     </div>
                                 </div>
@@ -243,7 +232,7 @@
                                             </ul>
                                         </div>
                                         <div class="table-footer">
-                                            <a href="#" class="theme-btn btn-style-three" onclick="selectOffer(this, 'Premium')">Sélectionner</a>
+                                            <a href="#tabs-content" class="theme-btn btn-style-three" data-offer="premium" onclick="selectOffer(this)">Sélectionner</a>
                                         </div>
                                     </div>
                                 </div>
@@ -255,14 +244,37 @@
                 <!-- Hidden input to store selected offer -->
                 <input type="hidden" id="selected-offer" name="selected_offer" value="">
                 
-            <!-- Back and Next buttons -->
-            <div class="col-lg-12 col-md-12 col-sm-12 form-group" style="display: flex; justify-content: space-between;">
-                <button class="theme-btn btn-style-one" type="button" id="back-btn">Retour</button>
-                <button class="theme-btn btn-style-one" type="button" id="submit-btn">Valider</button>
-            </div>
-        </div>
+                <!-- Back and Next buttons -->
+                <div class="text mb-4 mt-2">En remplissant ce formulaire, vous acceptez d'être contacté par NextGen à des fins d'informations et de marketing, conformément à notre <a href="#">politique de protection des données personnelles</a>.</div>
+                
+                <div class="col-lg-12 col-md-12 col-sm-12 form-group" style="display: flex; justify-content: center;">
+                    <button class="theme-btn btn-style-one" type="submit" id="next-btn">Envoyer</button>
+                </div>
+                </div>
+                </form>
+                </div>
     </section>
+
+    <!-- Step 2: Pricing Package -->
 </div>
+
+
+<script>
+    function selectOffer(button) {
+        // Désélectionner tous les boutons
+        const buttons = document.querySelectorAll('.theme-btn.btn-style-three');
+        buttons.forEach(btn => {
+            btn.classList.remove('selected');
+        });
+
+        // Sélectionner le bouton cliqué
+        button.classList.add('selected');
+
+        // Mettre à jour le champ caché avec l'offre sélectionnée
+        const offer = button.getAttribute('data-offer');
+        document.getElementById('selected-offer').value = offer;
+    }
+</script>
 
 <style>
     .progress-container {
@@ -323,98 +335,4 @@
 }
 
 </style>
-
-<script>
-    document.getElementById('next-btn').addEventListener('click', function() {
-    // Save form data to localStorage
-    const formData = new FormData(document.getElementById('email-form'));
-    const data = {};
-    formData.forEach((value, key) => data[key] = value);
-    localStorage.setItem('formData', JSON.stringify(data));
-
-    // Hide Step 1 and show Step 2
-    const step1 = document.querySelector('[data-step-content="1"]');
-    const step2 = document.querySelector('[data-step-content="2"]');
-
-    if (step1 && step2) {
-        step1.style.display = 'none';
-        step2.style.display = 'block';
-    }
-
-    // Update active steps
-    const step1Indicator = document.querySelector('.progress-step[data-step="1"]');
-    const step2Indicator = document.querySelector('.progress-step[data-step="2"]');
-    
-    if (step1Indicator && step2Indicator) {
-        step1Indicator.classList.remove('active');
-        step2Indicator.classList.add('active');
-    }
-
-    // Scroll to the top of Step 2 (Pricing section)
-    step2.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
-
-document.getElementById('back-btn').addEventListener('click', function() {
-    // Hide Step 2 and show Step 1
-    const step2 = document.querySelector('[data-step-content="2"]');
-    const step1 = document.querySelector('[data-step-content="1"]');
-    
-    if (step2 && step1) {
-        step2.style.display = 'none';
-        step1.style.display = 'block';
-    }
-
-    // Update active steps
-    const step1Indicator = document.querySelector('.progress-step[data-step="1"]');
-    const step2Indicator = document.querySelector('.progress-step[data-step="2"]');
-    
-    if (step1Indicator && step2Indicator) {
-        step1Indicator.classList.add('active');
-        step2Indicator.classList.remove('active');
-    }
-});
-
-document.getElementById('submit-btn').addEventListener('click', function() {
-    // Retrieve form data from localStorage
-    const formData = JSON.parse(localStorage.getItem('formData'));
-
-    // You can now send this data to your server
-    // Example using fetch:
-    fetch('/your-server-endpoint', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-        // Optionally, clear localStorage
-        localStorage.removeItem('formData');
-        // Redirect or show a success message
-        window.location.href = '/thank-you'; // Redirect to a thank-you page
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-});
-function selectOffer(element, offer) {
-    // Remove 'selected' class from all buttons
-    const buttons = document.querySelectorAll('.theme-btn.btn-style-three');
-    buttons.forEach(btn => {
-        btn.classList.remove('selected');
-        btn.textContent = 'Sélectionner'; // Reset text to 'Sélectionner'
-    });
-
-    // Add 'selected' class to the clicked button
-    element.classList.add('selected');
-    element.textContent = 'Sélectionné'; // Change text to 'Sélectionné'
-
-    // Store the selected offer in a hidden input
-    document.getElementById('selected-offer').value = offer;
-}
-
-</script>
-
 @endsection

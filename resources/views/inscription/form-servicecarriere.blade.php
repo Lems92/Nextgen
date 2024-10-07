@@ -58,8 +58,19 @@
             </div>
         </div>
         <div class="contact-form default-form">
-            <form>
-                <!-- Informations Générales de l'Établissement -->
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+            <form method="POST" action="{{ route('universites.store') }}">
+                @csrf
                 <div class="form-group">
                     <label>Nom complet de l'établissement :</label>
                     <input type="text" class="form-control" name="nom_etablissement">
@@ -102,7 +113,7 @@
                 <!-- Domaines d'études proposés -->
                 <div class="form-group">
                     <label>Domaines d'études proposés :</label>
-                    <select class="chosen-select multiple" multiple>
+                    <select class="chosen-select multiple" name="domaines_etudes[]" multiple>
                         <optgroup label="Arts et Humanités">
                             <option>Histoire</option>
                             <option>Littérature</option>
@@ -216,7 +227,7 @@
                 <!-- Niveaux d'études proposés -->
                 <div class="form-group">
                     <label>Niveaux d'études proposés :</label>
-                    <select class="chosen-select multiple" multiple>
+                    <select class="chosen-select multiple" name="niveaux_etudes[]" multiple>
                         <option>Licence générale</option>
                         <option>Licence professionnelle</option>
                         <option>Licence en alternance</option>
@@ -237,101 +248,12 @@
                         <option>Double diplôme en partenariat avec d’autres institutions académiques</option>
                     </select>
                 </div>
-
-                <!-- Activités et Événements -->
-                <!-- Section Calendrier Événement -->
-                <div class="form-group">
-                    <div class="form-group d-flex justify-content-between align-items-center">
-                        <h4>Calendrier des Événements</h4>
-                    </div>
-                    <div class="event-section">
-                        <!-- X Button positioned to the right after "Calendrier des Événements" -->
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-danger remove-event">X</button>
-                        </div>
-
-
-                        <!-- Titre de l'événement -->
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="event-title">Titre de l'événement</label>
-                                <input type="text" id="event-title" name="event_title[]" class="form-control" placeholder="Titre de l'événement" required>
-                            </div>
-                        </div>
-
-                        <!-- Dates et Heure -->
-                        <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label for="start-date">Date de début</label>
-                                <input type="date" id="start-date" name="start_date[]" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="end-date">Date de fin</label>
-                                <input type="date" id="end-date" name="end_date[]" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="start-time">Heure de début</label>
-                                <input type="time" id="start-time" name="start_time[]" class="form-control" required>
-                            </div>
-                            <div class="col-md-6 form-group">
-                                <label for="end-time">Heure fin</label>
-                                <input type="time" id="end-time" name="end_time[]" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <!-- Description -->
-                        <div class="row">
-                            <div class="col-md-12 form-group">
-                                <label for="event-description">Description</label>
-                                <textarea id="event-description" name="event_description[]" class="form-control" rows="4" placeholder="Description de l'événement" required></textarea>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Ajouter un autre événement -->
-                    <div class="row">
-                        <div class="d-flex justify-content-center">
-                            <button type="button" class="theme-btn btn-style-four add-event">Ajouter un autre événement</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="d-flex justify-content-center">
-                            <button type="button" class="theme-btn btn-style-one">Envoyer</button>
-                        </div>
+                <div class="row">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="theme-btn btn-style-one">Envoyer</button>
                     </div>
                 </div>
+            </form>
 
 </section>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Event listener to remove the event section when "X" is clicked
-    document.addEventListener('click', function(event) {
-        if (event.target.classList.contains('remove-event')) {
-            const eventSection = event.target.closest('.event-section');
-            if (eventSection) {
-                eventSection.remove();
-            }
-        }
-    });
-
-    // Event listener to clone the event section when "Ajouter un autre événement" is clicked
-    const addEventButton = document.querySelector('.add-event');
-    const eventSection = document.querySelector('.event-section');
-
-    addEventButton.addEventListener('click', function() {
-        // Clone the event section
-        const newEventSection = eventSection.cloneNode(true);
-
-        // Reset the input values in the cloned section
-        newEventSection.querySelectorAll('input, textarea').forEach(function(input) {
-            input.value = '';
-        });
-
-        // Insert the new section before the "Ajouter un autre événement" button
-        addEventButton.closest('.row').insertAdjacentElement('beforebegin', newEventSection);
-    });
-});
-
-</script>
 @endsection

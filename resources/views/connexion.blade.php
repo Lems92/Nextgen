@@ -13,7 +13,8 @@
         <div class="form-inner">
           <h3>Se connecter à NextGen</h3>
           <!--Login Form-->
-          <form method="post" action="add-parcel.html">
+          <form method="post" action="{{ route('login.submit') }}">
+            @csrf
             <div class="form-group">
               <label>Email</label>
               <input type="text" name="email" placeholder="email" required>
@@ -33,6 +34,15 @@
                 <a href="#" class="pwd">Mot de passe oublié ?</a>
               </div>
             </div>
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
 
             <div class="form-group">
               <button class="theme-btn btn-style-one" type="submit" name="log-in">Se connecter</button>

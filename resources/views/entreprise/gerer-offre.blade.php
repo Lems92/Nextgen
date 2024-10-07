@@ -14,7 +14,6 @@
             <div class="text">Ready to jump back in?</div>
         </div>
 
-        <div class="row">
             <div class="col-lg-12">
                 <!-- Ls widget -->
                 <div class="ls-widget">
@@ -74,15 +73,11 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </section>
 
 
         <!-- Copyright -->
-        <div class="copyright-text">
-            <p>© 2021 Superio. All Right Reserved.</p>
-        </div>
 
     </div><!-- End Page Wrapper -->
 

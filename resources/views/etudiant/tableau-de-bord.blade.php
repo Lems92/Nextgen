@@ -48,7 +48,7 @@
           </div>
         </div>
 
-        <div class="row">
+
 
 
           <div class="col-lg-7">
@@ -239,15 +239,11 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </section>
     <!-- End Dashboard -->
 
     <!-- Copyright -->
-    <div class="copyright-text">
-      <p>© 2021 Superio. All Right Reserved.</p>
-    </div>
 
   </div><!-- End Page Wrapper -->
 

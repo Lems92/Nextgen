@@ -18,8 +18,8 @@
                         <h2>Formulaire d'Inscription Étudiant</h2>
                     </div>
 
-                    <form id="default-form">
-
+                    <form action="/etudiants" method="POST">
+                        @csrf
                         <fieldset class="form-section">
                             <legend><h4> Personnelles </h4></legend>
                             <div class="row">

@@ -23,8 +23,8 @@
                             <li class="dropdown">
                                 <span>Étudiant</span>
                                 <ul class="dropdown">
-                                    <li><a href="{{route('explorer-offre')}}">Explorer les offres</a></li>
-                                    <li><a href="#">Explorer les évenements</a></li>
+                                    <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
+                                    <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -90,7 +90,7 @@
 
           <div class="outer-box">
             <!-- Login/Register -->
-            <button id="toggle-user-sidebar"><img src="images/icons/icon-user-2.svg" alt="avatar" class="thumb"></button>
+            <button id="toggle-user-sidebar"><div class="la la-user-tie"></div></button>
             <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span class="flaticon-menu-1"></span></a>
           </div>
         </div>
