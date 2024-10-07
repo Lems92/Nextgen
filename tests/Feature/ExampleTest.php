@@ -1,12 +1,15 @@
 <?php
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 it('returns a successful response', function () {
     $response = $this->get('/');
 
     $response->assertStatus(200);
 });
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -24,4 +27,7 @@ class ExampleTest extends TestCase
         $response->assertStatus(200);
     }
 }
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)

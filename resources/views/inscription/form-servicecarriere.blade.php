@@ -1,6 +1,7 @@
 @extends('app')
 
 @section('content')
+<<<<<<< HEAD
 
 @include('header.header')
 <style>
@@ -334,4 +335,160 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+=======
+    @include('header.header')
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .group-result {
+            color: #66022b;
+        }
+
+        .remove-event {
+            border-radius: 50px;
+        }
+
+        h2 {
+            padding-top: 50px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group select[multiple] {
+            height: auto;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-between {
+            justify-content: space-between;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+
+        .contact-section .contact-form .theme-btn {
+            margin-top: 20px;
+            border: 1px solid;
+        }
+    </style>
+    <section class="contact-section bgc-home20" id="contact-section" data-step-content="1">
+        <div class="auto-container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="sec-title -type-2 text-center">
+                        <h2>Formulaire pour les services carrieres</h2>
+                        <div class="text">Avant de pouvoir activer votre compte sur notre plateforme, veuillez remplir le
+                            formulaire suivant pour que nous puissions entrer en contact avec vous.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form default-form">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                <form method="POST" action="{{ route('universites.store') }}">
+                    @csrf
+                    <div class="form-group">
+                        <label>Nom complet de l'établissement :</label>
+                        <input type="text" class="form-control" name="nom_etablissement">
+                    </div>
+                    <div class="form-group">
+                        <label>Adresse de l'établissement :</label>
+                        <input type="text" class="form-control" name="adresse">
+                    </div>
+                    <div class="form-group">
+                        <label>Ville :</label>
+                        <input type="text" class="form-control" name="ville">
+                    </div>
+                    <div class="form-group">
+                        <label>Code postal :</label>
+                        <input type="text" class="form-control" name="code_postal">
+                    </div>
+
+                    <label>Région</label>
+                    <select name="region_id" class="chosen-select">
+                        <option value="" disabled selected>Région</option>
+                        @foreach ($regions as $region)
+                            <option value={{ $region->id }}>{{ $region->nom_region }}</option>
+                        @endforeach
+
+                    </select>
+
+                    <div class="form-group">
+                        <label>Site Web :</label>
+                        <input type="text" class="form-control" name="site_web">
+                    </div>
+
+
+
+                    <!-- Personne de Contact -->
+                    <div class="form-group">
+                        <label>Nom:</label>
+                        <input type="text" class="form-control" name="nom">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prenom:</label>
+                        <input type="text" class="form-control" name="prenom">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fonction :</label>
+                        <input type="text" class="form-control" name="fonction">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Numéro de téléphone :</label>
+                        <input type="text" class="form-control" name="telephone">
+                    </div>
+
+                    <!-- Détails sur les Étudiants -->
+                    <div class="form-group">
+                        <label>Nombre d'étudiants inscrits :</label>
+                        <input type="text" class="form-control" name="nombre_etudiants">
+                    </div>
+
+                    <label for="domaines">Sélectionnez un domaine et ses niveaux d'études:</label>
+                    <select class="chosen-select multiple" name="domaines_niveaux[]" multiple>
+                        @foreach ($domaines as $domaine)
+                            <optgroup label="{{ $domaine->nom_domaine }}">
+                                @foreach ($niveauEtudes as $niveau)
+                                    <option value="{{ $domaine->id }}|{{ $niveau->id }}">
+                                        {{ $domaine->nom_domaine }} {{ $niveau->nom_niveau_etude }}
+                                    </option>
+                                @endforeach
+                            </optgroup>
+                        @endforeach
+                    </select>
+
+
+                    <div class="row">
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="theme-btn btn-style-one">Envoyer</button>
+                        </div>
+                    </div>
+                </form>
+
+    </section>
+>>>>>>> 40fc94a (Initial commit)
 @endsection

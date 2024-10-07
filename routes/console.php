@@ -4,10 +4,13 @@ use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote')->hourly();
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
 /*
 |--------------------------------------------------------------------------
 | Console Routes
@@ -22,4 +25,7 @@ Artisan::command('inspire', function () {
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)

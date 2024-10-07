@@ -27,13 +27,19 @@
             @yield('content')
         </main>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
         @include('pub.popup', [
         'companyName' => 'Nom de l\'Entreprise',
         'domain' => 'Technologie',
         'numberOfPosts' => 5
     ])
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     <!-- Pied de page (Footer) -->
         @include('layouts.footer')

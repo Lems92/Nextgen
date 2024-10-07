@@ -379,9 +379,12 @@
           </section>
 
         <!-- Copyright -->
+<<<<<<< HEAD
         <div class="copyright-text">
             <p>© 2021 Superio. All Right Reserved.</p>
         </div>
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     </div><!-- End Page Wrapper -->
 

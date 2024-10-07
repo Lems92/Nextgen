@@ -13,6 +13,7 @@
         <div class="form-inner">
           <h3>Creer votre compte NextGen</h3>
 
+<<<<<<< HEAD
           <form method="post" action="{{ route('inscription') }}">
             @csrf
             <input type="hidden" id="role" name="role" required>
@@ -39,15 +40,40 @@
 =======
         
 >>>>>>> master
+=======
+          <form method="post" action="{{ route('create-user') }}">
+            @csrf
+            <input type="hidden" id="type_compte" name="type_compte" required>
+            <div class="form-group">
+                <div class="btn-box row">
+                    <div class="col-sm-6">
+                        <a href="#" id="btn-entreprise" class="theme-btn btn-style-four" onclick="setRole('Université', this)"><i class="la la-briefcase"></i> Entreprise</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="#" id="btn-service-carriere" class="theme-btn btn-style-four" onclick="setRole('Service carrière', this)"><i class=""></i> Service carrière</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Nom</label>
+                <input type="text" name="name" placeholder="name" required>
+            </div>
+
+>>>>>>> 40fc94a (Initial commit)
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" name="email" placeholder="Email" required>
             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         
 >>>>>>> master
+=======
+
+>>>>>>> 40fc94a (Initial commit)
             <div class="form-group">
                 <label>Mot de passe</label>
                 <input id="password-field" type="password" name="password" placeholder="Mot de passe" required>
@@ -55,6 +81,7 @@
 
             <div class="form-group">
               <label>Confirmer Mot de passe</label>
+<<<<<<< HEAD
               <input id="password-field" type="password" name="password" placeholder="Mot de passe" required>
           </div>
 <<<<<<< HEAD
@@ -62,15 +89,24 @@
 =======
         
 >>>>>>> master
+=======
+              <input id="password-field-confirmation" type="password" name="password_confirmation" placeholder="Mot de passe" required>
+          </div>
+
+>>>>>>> 40fc94a (Initial commit)
             <div class="form-group">
                 <button class="theme-btn btn-style-one" type="submit" name="Register">Suivant</button>
             </div>
           </form>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         
 >>>>>>> master
+=======
+
+>>>>>>> 40fc94a (Initial commit)
           <div class="bottom-box">
               <div class="text">Vous avez déjà un compte ?<a href="{{route('connexion')}}">Se connecter</a></div>
           </div>
@@ -80,8 +116,13 @@
   </div>
 
 <script>
+<<<<<<< HEAD
     function setRole(role, element) {
         document.getElementById('role').value = role;
+=======
+    function setRole(type_compte, element) {
+        document.getElementById('type_compte').value = type_compte;
+>>>>>>> 40fc94a (Initial commit)
         var buttons = document.querySelectorAll('.theme-btn');
         buttons.forEach(function(btn) {
             btn.classList.remove('active');

@@ -1,11 +1,17 @@
 <?php
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 >>>>>>> master
+=======
+use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\ServiceProvider;
+
+>>>>>>> 40fc94a (Initial commit)
 return [
 
     /*
@@ -13,6 +19,7 @@ return [
     | Application Name
     |--------------------------------------------------------------------------
     |
+<<<<<<< HEAD
 <<<<<<< HEAD
     | This value is the name of your application, which will be used when the
     | framework needs to place the application's name in a notification or
@@ -22,6 +29,11 @@ return [
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
 >>>>>>> master
+=======
+    | This value is the name of your application. This value is used when the
+    | framework needs to place the application's name in a notification or
+    | any other location as required by the application or its packages.
+>>>>>>> 40fc94a (Initial commit)
     |
     */
 
@@ -61,26 +73,36 @@ return [
     | This URL is used by the console to properly generate URLs when using
     | the Artisan command line tool. You should set this to the root of
 <<<<<<< HEAD
+<<<<<<< HEAD
     | the application so that it's available within Artisan commands.
 =======
     | your application so that it is used when running Artisan tasks.
 >>>>>>> master
+=======
+    | your application so that it is used when running Artisan tasks.
+>>>>>>> 40fc94a (Initial commit)
     |
     */
 
     'url' => env('APP_URL', 'http://localhost'),
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     'asset_url' => env('ASSET_URL'),
 
 >>>>>>> master
+=======
+    'asset_url' => env('ASSET_URL'),
+
+>>>>>>> 40fc94a (Initial commit)
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |
     | Here you may specify the default timezone for your application, which
+<<<<<<< HEAD
 <<<<<<< HEAD
     | will be used by the PHP date and date-time functions. The timezone
     | is set to "UTC" by default as it is suitable for most use cases.
@@ -89,13 +111,18 @@ return [
 
     'timezone' => env('APP_TIMEZONE', 'UTC'),
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     | will be used by the PHP date and date-time functions. We have gone
     | ahead and set this to a sensible default for you out of the box.
     |
     */
 
     'timezone' => 'UTC',
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     /*
     |--------------------------------------------------------------------------
@@ -103,6 +130,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | The application locale determines the default locale that will be used
+<<<<<<< HEAD
 <<<<<<< HEAD
     | by Laravel's translation / localization methods. This option can be
     | set to any locale for which you plan to have translation strings.
@@ -115,6 +143,8 @@ return [
 
     'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     | by the translation service provider. You are free to set this value
     | to any of the locales which will be supported by the application.
     |
@@ -147,13 +177,17 @@ return [
     */
 
     'faker_locale' => 'en_US',
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     /*
     |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
     |
+<<<<<<< HEAD
 <<<<<<< HEAD
     | This key is utilized by Laravel's encryption services and should be set
     | to a random, 32 character string to ensure that all encrypted values
@@ -171,6 +205,8 @@ return [
         ),
     ],
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     | This key is used by the Illuminate encrypter service and should be set
     | to a random, 32 character string, otherwise these encrypted strings
     | will not be safe. Please do this before deploying an application!
@@ -180,7 +216,10 @@ return [
     'key' => env('APP_KEY'),
 
     'cipher' => 'AES-256-CBC',
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     /*
     |--------------------------------------------------------------------------
@@ -197,11 +236,14 @@ return [
 
     'maintenance' => [
 <<<<<<< HEAD
+<<<<<<< HEAD
         'driver' => env('APP_MAINTENANCE_DRIVER', 'file'),
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
         'driver' => 'file',
         // 'store' => 'redis',
     ],
@@ -247,5 +289,8 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 ];

@@ -48,7 +48,11 @@
           </div>
         </div>
 
+<<<<<<< HEAD
         <div class="row">
+=======
+
+>>>>>>> 40fc94a (Initial commit)
 
 
           <div class="col-lg-7">
@@ -239,15 +243,21 @@
               </div>
             </div>
           </div>
+<<<<<<< HEAD
         </div>
+=======
+>>>>>>> 40fc94a (Initial commit)
       </div>
     </section>
     <!-- End Dashboard -->
 
     <!-- Copyright -->
+<<<<<<< HEAD
     <div class="copyright-text">
       <p>© 2021 Superio. All Right Reserved.</p>
     </div>
+=======
+>>>>>>> 40fc94a (Initial commit)
 
   </div><!-- End Page Wrapper -->
 
@@ -330,7 +340,11 @@
     });
   </script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 @endsection
 =======
 @endsection
 >>>>>>> master
+=======
+@endsection
+>>>>>>> 40fc94a (Initial commit)

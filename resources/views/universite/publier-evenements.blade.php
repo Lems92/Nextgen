@@ -15,6 +15,7 @@
             </div>
         </div>
         <div class="contact-form default-form">
+<<<<<<< HEAD
             <form method="POST" action="#">
                 @csrf                <!-- Informations Générales de l'Établissement -->
                 <div class="form-group">
@@ -78,6 +79,56 @@
                         </div>
                     </div>
                 </div>
+=======
+            @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+            <form method="POST" action="{{ route('events.store') }}">
+                @csrf
+                <input type="hidden" name="universite_id">
+            
+                <!-- Autres champs du formulaire -->
+                <div class="form-group">
+                    <label for="event-title">Titre de l'événement</label>
+                    <input type="text" id="event-title" name="event_title" class="form-control" required>
+                </div>
+            
+                <!-- Champs pour les dates et heures -->
+                <div class="form-group">
+                    <label for="start-date">Date de début</label>
+                    <input type="date" id="start-date" name="start_date" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="end-date">Date de fin</label>
+                    <input type="date" id="end-date" name="end_date" class="form-control" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="start-time">Heure de début</label>
+                    <input type="time" id="start-time" name="start_time" class="form-control" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="end-time">Heure fin</label>
+                    <input type="time" id="end-time" name="end_time" class="form-control" required>
+                </div>
+            
+                <div class="form-group">
+                    <label for="event-description">Description</label>
+                    <textarea id="event-description" name="event_description" class="form-control" required></textarea>
+                </div>
+            
+                <button type="submit" class="btn btn-primary">Créer l'événement</button>
+            </form>
+            
+>>>>>>> 40fc94a (Initial commit)
                 
 </section>
 <script>

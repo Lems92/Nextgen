@@ -8,6 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
 <<<<<<< HEAD
+<<<<<<< HEAD
     | This option controls the default mailer that is used to send all email
     | messages unless another mailer is explicitly specified when sending
     | the message. All additional mailers can be configured within the
@@ -17,6 +18,8 @@ return [
 
     'default' => env('MAIL_MAILER', 'log'),
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     | This option controls the default mailer that is used to send any email
     | messages sent by your application. Alternative mailers may be setup
     | and used as needed; however, this mailer will be used by default.
@@ -24,7 +27,10 @@ return [
     */
 
     'default' => env('MAIL_MAILER', 'smtp'),
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     /*
     |--------------------------------------------------------------------------
@@ -36,6 +42,7 @@ return [
     | you and you are free to add your own as your application requires.
     |
 <<<<<<< HEAD
+<<<<<<< HEAD
     | Laravel supports a variety of mail "transport" drivers that can be used
     | when delivering an email. You may specify which one you're using for
     | your mailers below. You may also add additional mailers if needed.
@@ -44,17 +51,23 @@ return [
     |            "postmark", "resend", "log", "array",
     |            "failover", "roundrobin"
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     | Laravel supports a variety of mail "transport" drivers to be used while
     | sending an e-mail. You will specify which one you are using for your
     | mailers below. You are free to add additional mailers as required.
     |
     | Supported: "smtp", "sendmail", "mailgun", "ses", "ses-v2",
     |            "postmark", "log", "array", "failover", "roundrobin"
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
     |
     */
 
     'mailers' => [
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         'smtp' => [
@@ -63,21 +76,30 @@ return [
             'host' => env('MAIL_HOST', '127.0.0.1'),
             'port' => env('MAIL_PORT', 2525),
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
         'smtp' => [
             'transport' => 'smtp',
             'url' => env('MAIL_URL'),
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
             'port' => env('MAIL_PORT', 587),
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
 <<<<<<< HEAD
+<<<<<<< HEAD
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
 =======
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
 >>>>>>> master
+=======
+            'local_domain' => env('MAIL_EHLO_DOMAIN'),
+>>>>>>> 40fc94a (Initial commit)
         ],
 
         'ses' => [
@@ -87,25 +109,35 @@ return [
         'postmark' => [
             'transport' => 'postmark',
 <<<<<<< HEAD
+<<<<<<< HEAD
             // 'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
 =======
             // 'message_stream_id' => null,
 >>>>>>> master
+=======
+            // 'message_stream_id' => null,
+>>>>>>> 40fc94a (Initial commit)
             // 'client' => [
             //     'timeout' => 5,
             // ],
         ],
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         'resend' => [
             'transport' => 'resend',
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
         'mailgun' => [
             'transport' => 'mailgun',
             // 'client' => [
             //     'timeout' => 5,
             // ],
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
         ],
 
         'sendmail' => [
@@ -138,9 +170,12 @@ return [
             ],
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
     ],
 
     /*
@@ -148,6 +183,7 @@ return [
     | Global "From" Address
     |--------------------------------------------------------------------------
     |
+<<<<<<< HEAD
 <<<<<<< HEAD
     | You may wish for all emails sent by your application to be sent from
     | the same address. Here you may specify a name and address that is
@@ -157,6 +193,11 @@ return [
     | the same address. Here, you may specify a name and address that is
     | used globally for all e-mails that are sent by your application.
 >>>>>>> master
+=======
+    | You may wish for all e-mails sent by your application to be sent from
+    | the same address. Here, you may specify a name and address that is
+    | used globally for all e-mails that are sent by your application.
+>>>>>>> 40fc94a (Initial commit)
     |
     */
 
@@ -166,7 +207,10 @@ return [
     ],
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings
@@ -186,5 +230,8 @@ return [
         ],
     ],
 
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 ];

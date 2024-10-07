@@ -20,6 +20,7 @@
             <nav class="nav main-menu">
               <ul class="navigation" id="navbar">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <li>
                   <span>Accueil</span>
                 </li>
@@ -56,12 +57,19 @@
                   </ul>
                 </li>
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
                 <li><a href="{{route('accueil')}}"><span>Accueil</span></a></li>
                             <li class="dropdown">
                                 <span>Étudiant</span>
                                 <ul class="dropdown">
+<<<<<<< HEAD
                                     <li><a href="{{route('explorer-offre')}}">Explorer les offres</a></li>
                                     <li><a href="#">Explorer les évenements</a></li>
+=======
+                                    <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
+                                    <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
+>>>>>>> 40fc94a (Initial commit)
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -86,7 +94,10 @@
                                     <li><a href="blog-list-v3.html">Nous contacter</a></li>
                                 </ul>
                               </li>
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
                 <!-- End header -->
 
                 <!-- Only for Mobile View -->
@@ -115,10 +126,14 @@
 
             <!-- Dashboard Option -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
            
 >>>>>>> master
+=======
+           
+>>>>>>> 40fc94a (Initial commit)
           </div>
         </div>
       </div>
@@ -153,6 +168,7 @@
       <div class="sidebar-inner">
         <ul class="navigation">
 <<<<<<< HEAD
+<<<<<<< HEAD
           <li class="active"><a href="{{route('etudiant.dashboard')}}"> <i class="la la-home"></i> Dashboard</a></li>
           <li><a href="{{route('profil')}}"> <i class="la la-user-tie"></i>My Profile</a></li>
           <li><a href="candidate-dashboard-applied-job.html"><i class="la la-briefcase"></i> Applied Jobs </a></li>
@@ -160,6 +176,8 @@
           <li><a href="dashboard-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
           <li><a href="index.html"><i class="la la-sign-out"></i>Logout</a></li>
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
           <li class="{{ request()->is('dashboard-etudiant') ? 'active' : '' }}">
           <a href="{{route('etudiant.dashboard')}}"> <i class="la la-home"></i>Tableau de bord</a></li>
           <li class="{{ request()->is('profil') ? 'active' : '' }}">
@@ -170,8 +188,12 @@
           <a href="{{route('candidature')}}"><i class="la la-briefcase"></i>Candidatures</a></li>
           <li class="#">
           <a href="#"><i class="la la-lock"></i>Mot de passe</a></li>
+<<<<<<< HEAD
           <li><a href="index.html"><i class="la la-sign-out"></i>Déconnecter</a></li>
 >>>>>>> master
+=======
+          <li><a href="{{route('accueil')}}"><i class="la la-sign-out"></i>Déconnecter</a></li>
+>>>>>>> 40fc94a (Initial commit)
           <li><a href="dashboard-delete.html"><i class="la la-trash"></i>Delete Profile</a></li>
         </ul>
       </div>
@@ -185,6 +207,7 @@
       }
       .nav-outer .navigation > li > a,
       .nav-outer .navigation > li > span {
+<<<<<<< HEAD
 <<<<<<< HEAD
           padding: 8px 12px;
           font-size: 14px;
@@ -213,6 +236,8 @@
       }
 
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
           padding: 8px 12px; 
           font-size: 14px;
           line-height: 1.5; 
@@ -239,13 +264,17 @@
           opacity: 1; 
       }
       
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
       .navbar {
                   position: fixed;
                   top: 0;
                   width: 100%;
                   z-index: 1050;
               }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
       .main-menu .navigation{
@@ -262,6 +291,8 @@
           .btn-box .theme-btn {
               font-size: 12px;
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
       
       .main-menu .navigation{
         margin-left: 70px;
@@ -289,11 +320,15 @@
       
           .btn-box .theme-btn {
               font-size: 12px; 
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
               padding: 6px 10px;
               display: inline-block !important;
           }
           .page-wrapper {
+<<<<<<< HEAD
 <<<<<<< HEAD
                   padding-top: 0px;
               }
@@ -302,10 +337,16 @@
 
       </style>
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
                   padding-top: 0px; 
               }
       }
       
       
+<<<<<<< HEAD
       </style>
 >>>>>>> master
+=======
+      </style>
+>>>>>>> 40fc94a (Initial commit)

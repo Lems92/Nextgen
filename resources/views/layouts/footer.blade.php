@@ -25,10 +25,14 @@
                                                         <li><a href="#">Trouver un travail</a></li>
                                                         <li><a href="#">Explorer les catégories</a></li>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                                         <li><a href="#">Tableau de bord</a></li>
 =======
                                                         <li><a href="#">Tableau de bord</a></li> 
 >>>>>>> master
+=======
+                                                        <li><a href="#">Tableau de bord</a></li> 
+>>>>>>> 40fc94a (Initial commit)
                                                     </ul>
                                                 </div>
                                             </div>
@@ -102,7 +106,11 @@
         </div>
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 </div>
 =======
 </div>
 >>>>>>> master
+=======
+</div>
+>>>>>>> 40fc94a (Initial commit)

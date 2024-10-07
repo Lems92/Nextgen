@@ -13,6 +13,7 @@ return [
     |--------------------------------------------------------------------------
     |
 <<<<<<< HEAD
+<<<<<<< HEAD
     | This option defines the default log channel that is utilized to write
     | messages to your logs. The value provided here should match one of
     | the channels present in the list of "channels" configured below.
@@ -21,6 +22,11 @@ return [
     | messages to the logs. The name specified in this option should match
     | one of the channels defined in the "channels" configuration array.
 >>>>>>> master
+=======
+    | This option defines the default log channel that gets used when writing
+    | messages to the logs. The name specified in this option should match
+    | one of the channels defined in the "channels" configuration array.
+>>>>>>> 40fc94a (Initial commit)
     |
     */
 
@@ -40,10 +46,14 @@ return [
     'deprecations' => [
         'channel' => env('LOG_DEPRECATIONS_CHANNEL', 'null'),
 <<<<<<< HEAD
+<<<<<<< HEAD
         'trace' => env('LOG_DEPRECATIONS_TRACE', false),
 =======
         'trace' => false,
 >>>>>>> master
+=======
+        'trace' => false,
+>>>>>>> 40fc94a (Initial commit)
     ],
 
     /*
@@ -52,6 +62,7 @@ return [
     |--------------------------------------------------------------------------
     |
 <<<<<<< HEAD
+<<<<<<< HEAD
     | Here you may configure the log channels for your application. Laravel
     | utilizes the Monolog PHP logging library, which includes a variety
     | of powerful log handlers and formatters that you're free to use.
@@ -59,6 +70,8 @@ return [
     | Available drivers: "single", "daily", "slack", "syslog",
     |                    "errorlog", "monolog", "custom", "stack"
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     | Here you may configure the log channels for your application. Out of
     | the box, Laravel uses the Monolog PHP logging library. This gives
     | you a variety of powerful log handlers / formatters to utilize.
@@ -66,11 +79,15 @@ return [
     | Available Drivers: "single", "daily", "slack", "syslog",
     |                    "errorlog", "monolog",
     |                    "custom", "stack"
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
     |
     */
 
     'channels' => [
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         'stack' => [
@@ -81,6 +98,11 @@ return [
             'driver' => 'stack',
             'channels' => ['single'],
 >>>>>>> master
+=======
+        'stack' => [
+            'driver' => 'stack',
+            'channels' => ['single'],
+>>>>>>> 40fc94a (Initial commit)
             'ignore_exceptions' => false,
         ],
 
@@ -96,10 +118,14 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
 <<<<<<< HEAD
+<<<<<<< HEAD
             'days' => env('LOG_DAILY_DAYS', 14),
 =======
             'days' => 14,
 >>>>>>> master
+=======
+            'days' => 14,
+>>>>>>> 40fc94a (Initial commit)
             'replace_placeholders' => true,
         ],
 
@@ -107,12 +133,17 @@ return [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
 <<<<<<< HEAD
+<<<<<<< HEAD
             'username' => env('LOG_SLACK_USERNAME', 'Laravel Log'),
             'emoji' => env('LOG_SLACK_EMOJI', ':boom:'),
 =======
             'username' => 'Laravel Log',
             'emoji' => ':boom:',
 >>>>>>> master
+=======
+            'username' => 'Laravel Log',
+            'emoji' => ':boom:',
+>>>>>>> 40fc94a (Initial commit)
             'level' => env('LOG_LEVEL', 'critical'),
             'replace_placeholders' => true,
         ],
@@ -144,10 +175,14 @@ return [
             'driver' => 'syslog',
             'level' => env('LOG_LEVEL', 'debug'),
 <<<<<<< HEAD
+<<<<<<< HEAD
             'facility' => env('LOG_SYSLOG_FACILITY', LOG_USER),
 =======
             'facility' => LOG_USER,
 >>>>>>> master
+=======
+            'facility' => LOG_USER,
+>>>>>>> 40fc94a (Initial commit)
             'replace_placeholders' => true,
         ],
 
@@ -166,9 +201,12 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
     ],
 
 ];

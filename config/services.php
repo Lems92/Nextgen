@@ -15,7 +15,10 @@ return [
     */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     'mailgun' => [
         'domain' => env('MAILGUN_DOMAIN'),
         'secret' => env('MAILGUN_SECRET'),
@@ -23,7 +26,10 @@ return [
         'scheme' => 'https',
     ],
 
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
@@ -34,6 +40,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     'resend' => [
         'key' => env('RESEND_KEY'),
@@ -48,4 +55,6 @@ return [
 
 =======
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 ];

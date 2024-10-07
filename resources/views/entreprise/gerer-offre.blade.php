@@ -14,7 +14,10 @@
             <div class="text">Ready to jump back in?</div>
         </div>
 
+<<<<<<< HEAD
         <div class="row">
+=======
+>>>>>>> 40fc94a (Initial commit)
             <div class="col-lg-12">
                 <!-- Ls widget -->
                 <div class="ls-widget">
@@ -74,15 +77,21 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
         </div>
+=======
+>>>>>>> 40fc94a (Initial commit)
     </div>
 </section>
 
 
         <!-- Copyright -->
+<<<<<<< HEAD
         <div class="copyright-text">
             <p>© 2021 Superio. All Right Reserved.</p>
         </div>
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     </div><!-- End Page Wrapper -->
 

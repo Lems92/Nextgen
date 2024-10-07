@@ -5,10 +5,14 @@
 @section('content')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @include('header.admin')
 =======
 @include('header.etudiant')
 >>>>>>> master
+=======
+@include('header.etudiant')
+>>>>>>> 40fc94a (Initial commit)
     <!-- End User Sidebar -->
 
     <!-- Dashboard -->
@@ -333,6 +337,7 @@
     <!-- End Dashboard -->
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     <!-- Copyright -->
     <div class="copyright-text">
       <p>© 2021 Superio. All Right Reserved.</p>
@@ -340,6 +345,8 @@
 
 =======
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
   </div><!-- End Page Wrapper -->
 
   <script>
@@ -421,7 +428,11 @@
     });
   </script>
 <<<<<<< HEAD
+<<<<<<< HEAD
 @endsection
 =======
 @endsection
 >>>>>>> master
+=======
+@endsection
+>>>>>>> 40fc94a (Initial commit)

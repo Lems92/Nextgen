@@ -1,5 +1,6 @@
 <link href="{{ asset('css/header.css') }}" rel="stylesheet">
 <<<<<<< HEAD
+<<<<<<< HEAD
 <style>
 
 header{
@@ -70,6 +71,11 @@ header{
 <div class="page-wrapper">
     <div class="preloader"></div>      
 >>>>>>> master
+=======
+
+<div class="page-wrapper">
+    <div class="preloader"></div>      
+>>>>>>> 40fc94a (Initial commit)
     <header class="main-header header-style-four">
         <div class="container-fluid">
             <!-- Main box -->
@@ -79,6 +85,7 @@ header{
                     <div class="logo-box">
                         <div class="logo"><a href="{{route('accueil')}}"><img src="images/NextGen-logo.svg" alt="" title=""></a></div>
                     </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
 
                     <nav class="nav main-menu">
@@ -109,6 +116,8 @@ header{
                                 </ul>
                             </li>
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     
                     <nav class="nav main-menu">
                         <ul class="navigation" id="navbar">
@@ -116,8 +125,13 @@ header{
                             <li class="dropdown">
                                 <span>Étudiant</span>
                                 <ul class="dropdown">
+<<<<<<< HEAD
                                     <li><a href="{{route('explorer-offre')}}">Explorer les offres</a></li>
                                     <li><a href="#">Explorer les évenements</a></li>
+=======
+                                    <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
+                                    <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
+>>>>>>> 40fc94a (Initial commit)
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -142,33 +156,46 @@ header{
                                     <li><a href="blog-list-v3.html">Nous contacter</a></li>
                                 </ul>
                 </li>
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
                         </ul>
                         <div class="outer-box">
                             <!-- Login/Register -->
                             <div class="btn-box">
                                 <a href="{{route('connexion')}}" class="theme-btn btn-style-two">Se connecter</a>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <a href="{{route('register')}}" class="theme-btn btn-style-three">Créer un compte</a>
 =======
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-three">Créer un compte</a>
 >>>>>>> master
+=======
+                                <a href="{{route('inscription')}}" class="theme-btn btn-style-three">Créer un compte</a>
+>>>>>>> 40fc94a (Initial commit)
                             </div>
                         </div>
                     </nav>
                     <!-- Main Menu End-->
                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             </div>
         </div>
 
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     
             </div>
         </div>
     
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
         <!-- Sticky Header  -->
         <div class="sticky-header">
             <div class="auto-container">
@@ -181,18 +208,24 @@ header{
             </div>
         </div><!-- End Sticky Menu -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         <!-- Mobile Header -->
         <div class="mobile-header">
             <div class="logo"><a href="{{route('accueil')}}"><img src="images/NextGen-logo.svg" alt="" title=""></a></div>
 
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     
         <!-- Mobile Header -->
         <div class="mobile-header">
             <div class="logo"><a href="{{route('accueil')}}"><img src="images/NextGen-logo.svg" alt="" title=""></a></div>
     
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
             <!--Nav Box-->
             <div class="nav-outer clearfix">
                 <div class="outer-box">
@@ -205,11 +238,14 @@ header{
             </div>
         </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         <!-- Mobile Nav -->
         <div id="nav-mobile"></div>
     </header>
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     
         <!-- Mobile Nav -->
         <div id="nav-mobile"></div>
@@ -278,5 +314,9 @@ header{
         }
         
         
+<<<<<<< HEAD
         </style>
 >>>>>>> master
+=======
+        </style>
+>>>>>>> 40fc94a (Initial commit)

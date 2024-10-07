@@ -13,7 +13,10 @@
         <div class="text">Ready to jump back in?</div>
       </div>
 
+<<<<<<< HEAD
       <div class="row">
+=======
+>>>>>>> 40fc94a (Initial commit)
         <div class="col-lg-12">
           <!-- Ls widget -->
           <div class="ls-widget">
@@ -165,7 +168,10 @@
         </div>
 
 
+<<<<<<< HEAD
       </div>
+=======
+>>>>>>> 40fc94a (Initial commit)
     </div>
   </section>
 

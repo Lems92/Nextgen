@@ -1,10 +1,13 @@
 <?php
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 test('that true is true', function () {
     expect(true)->toBeTrue();
 });
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
@@ -19,4 +22,7 @@ class ExampleTest extends TestCase
         $this->assertTrue(true);
     }
 }
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)

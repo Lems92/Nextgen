@@ -9,9 +9,12 @@
 .env.backup
 .env.production
 <<<<<<< HEAD
+<<<<<<< HEAD
 .phpactor.json
 =======
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

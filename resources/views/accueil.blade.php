@@ -23,10 +23,14 @@
                                         <li>Fais le premier pas vers une carrière réussie. Inscris-toi dès maintenant et démarre ton aventure professionnelle avec confiance !</li>
                                 </ul>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <a href="{{route('register')}}" class="theme-btn btn-style-one">Inscris-toi maintenant</a>
 =======
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Inscris-toi maintenant</a>
 >>>>>>> master
+=======
+                                <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Inscris-toi maintenant</a>
+>>>>>>> 40fc94a (Initial commit)
                             </div>
                         </div>
                         <!-- Colonne d'image à droite -->
@@ -36,10 +40,14 @@
                     </div>
                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
                 
 >>>>>>> master
+=======
+                
+>>>>>>> 40fc94a (Initial commit)
                 <!-- Slide Item 2 -->
                 <div class="container-fluid bg-image">
                     <div class="row h-100">
@@ -53,10 +61,14 @@
                                     <li>Faites grandir votre équipe avec des talents prometteurs.</li>
                                 </ul>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <a href="{{route('register')}}" class="theme-btn btn-style-one">Découvrez les talents</a>
 =======
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Découvrez les talents</a>
 >>>>>>> master
+=======
+                                <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Découvrez les talents</a>
+>>>>>>> 40fc94a (Initial commit)
                             </div>
                         </div>
                         <!-- Colonne d'image à droite -->
@@ -68,10 +80,14 @@
             </div>
         </section>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         
 >>>>>>> master
+=======
+        
+>>>>>>> 40fc94a (Initial commit)
         <!-- End Banner Section-->
 
         <!--Clients Section-->
@@ -158,10 +174,14 @@
                                 <li>La plateforme carrière officielle d'établissements d'enseignement supérieur</li>
                             </ul>
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <a href="{{route('register')}}" class="theme-btn btn-style-one">Rejoindre NextGen<i
 =======
                             <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Rejoindre NextGen<i
 >>>>>>> master
+=======
+                            <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Rejoindre NextGen<i
+>>>>>>> 40fc94a (Initial commit)
                                     class="fal fa-long-arrow-left ms-3"></i></a>
                         </div>
                     </div>
@@ -229,10 +249,14 @@
                                 <p>Connectez-vous avec les professionnels de demain et propulsez votre
                                     entreprise vers de nouveaux sommets avec NextGen.</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <a href="{{route('register')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
 =======
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
 >>>>>>> master
+=======
+                                <a href="{{route('inscription')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
+>>>>>>> 40fc94a (Initial commit)
                             </div>
                             <figure class="image"><img src="images/resource/employ.png" alt=""></figure>
                         </div>
@@ -246,10 +270,14 @@
                                 <p>Préparez vos étudiants pour l'avenir en les connectant avec les meilleures
                                     opportunités de carrière grâce à NextGen.</p>
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <a href="{{route('register')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
 =======
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
 >>>>>>> master
+=======
+                                <a href="{{route('inscription')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
+>>>>>>> 40fc94a (Initial commit)
                             </div>
                             <figure class="image"><img src="images/resource/candidate.png" alt=""></figure>
                         </div>
@@ -266,6 +294,7 @@
                 <h2>Témoignages</h2>
               </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
               <div class="carousel-outer wow fadeInUp">
 
@@ -273,13 +302,18 @@
                 <div class="testimonial-carousel owl-carousel owl-theme">
 
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
       
               <div class="carousel-outer wow fadeInUp">
       
                 <!-- Testimonial Carousel -->
                 <div class="testimonial-carousel owl-carousel owl-theme">
       
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -293,10 +327,14 @@
                     </div>
                   </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -310,10 +348,14 @@
                     </div>
                   </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -332,6 +374,7 @@
           </section>
         <!-- End Testimonial Section -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         <!-- Features Section-->
 
@@ -340,6 +383,11 @@
         <!-- Features Section-->
         
 >>>>>>> master
+=======
+        
+        <!-- Features Section-->
+        
+>>>>>>> 40fc94a (Initial commit)
 
         <!-- Registeration Banners -->
         <!-- End Registeration Banners -->
@@ -375,10 +423,14 @@
                 }
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
     
 >>>>>>> master
+=======
+    
+>>>>>>> 40fc94a (Initial commit)
         </style>
 
         <script>
@@ -395,6 +447,7 @@
             });
         });
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         </script>
 @endsection
@@ -403,3 +456,8 @@
         </script>
 @endsection
 >>>>>>> master
+=======
+    
+        </script>
+@endsection
+>>>>>>> 40fc94a (Initial commit)

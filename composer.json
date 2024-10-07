@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
 <<<<<<< HEAD
+<<<<<<< HEAD
         "php": "^8.2",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
@@ -30,13 +31,29 @@
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
+=======
+        "php": "^8.1",
+        "backpack/theme-tabler": "^1.2",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^10.10",
+        "laravel/sanctum": "^3.3",
+        "laravel/tinker": "^2.8"
+    },
+    "require-dev": {
+        "backpack/generators": "^4.0",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/breeze": "^1.29",
+>>>>>>> 40fc94a (Initial commit)
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.1",
         "spatie/laravel-ignition": "^2.0"
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
     },
     "autoload": {
         "psr-4": {
@@ -63,6 +80,7 @@
         ],
         "post-create-project-cmd": [
 <<<<<<< HEAD
+<<<<<<< HEAD
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
@@ -70,6 +88,11 @@
             "@php artisan key:generate --ansi"
 >>>>>>> master
         ]
+=======
+            "@php artisan key:generate --ansi"
+        ],
+        "post-install-cmd": ["@php artisan storage:link --quiet"]
+>>>>>>> 40fc94a (Initial commit)
     },
     "extra": {
         "laravel": {

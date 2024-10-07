@@ -13,7 +13,12 @@
         <div class="form-inner">
           <h3>Se connecter à NextGen</h3>
           <!--Login Form-->
+<<<<<<< HEAD
           <form method="post" action="add-parcel.html">
+=======
+          <form method="post" action="{{ route('login.submit') }}">
+            @csrf
+>>>>>>> 40fc94a (Initial commit)
             <div class="form-group">
               <label>Email</label>
               <input type="text" name="email" placeholder="email" required>
@@ -33,6 +38,18 @@
                 <a href="#" class="pwd">Mot de passe oublié ?</a>
               </div>
             </div>
+<<<<<<< HEAD
+=======
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+>>>>>>> 40fc94a (Initial commit)
 
             <div class="form-group">
               <button class="theme-btn btn-style-one" type="submit" name="log-in">Se connecter</button>
@@ -48,7 +65,11 @@
     </div>
   </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 @endsection
 =======
 @endsection
 >>>>>>> master
+=======
+@endsection
+>>>>>>> 40fc94a (Initial commit)

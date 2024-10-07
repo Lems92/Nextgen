@@ -41,10 +41,14 @@
                         </a>
                     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                     <!-- OFFRE GOLD
 =======
                     <!-- OFFRE GOLD 
 >>>>>>> master
+=======
+                    <!-- OFFRE GOLD 
+>>>>>>> 40fc94a (Initial commit)
                     <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <a href="offre.html" class="ui-item-link">
                             <div class="ui-item ui-green">
@@ -71,11 +75,15 @@
                 <div class="text">Ready to jump back in?</div>
               </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
               <div class="row">
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                 <div class="col-lg-12">
                   <!-- Ls widget -->
                   <div class="ls-widget">
@@ -83,10 +91,14 @@
                       <div class="widget-title">
                         <h4>My Job Listings</h4>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                         <div class="chosen-outer">
                           <!--Tabs Box-->
                           <select class="chosen-select">
@@ -99,10 +111,14 @@
                         </div>
                       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                       <div class="widget-content">
                         <div class="table-outer">
                           <table class="default-table manage-job-table">
@@ -116,10 +132,14 @@
                               </tr>
                             </thead>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                             <tbody>
                               <tr>
                                 <td>
@@ -201,6 +221,7 @@
                   </div>
                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 =======
@@ -208,6 +229,10 @@
       
 >>>>>>> master
               </div>
+=======
+      
+      
+>>>>>>> 40fc94a (Initial commit)
             </div>
           </section>
         <section class="user-dashboard">
@@ -217,11 +242,15 @@
                 <div class="text">Ready to jump back in?</div>
               </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
               <div class="row">
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                 <div class="col-lg-12">
                   <!-- Ls widget -->
                   <div class="ls-widget">
@@ -230,10 +259,14 @@
                         <h4>Applicant</h4>
                       <div class="widget-content">
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                         <div class="tabs-box">
                           <div class="aplicants-upper-bar">
                             <h6>Senior Product Designer</h6>
@@ -243,7 +276,10 @@
                               <li class="tab-btn rejected" data-tab="#rejected">Rejected(s): 4</li>
                             </ul>
                           </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 40fc94a (Initial commit)
       
                           <div class="tabs-content">
                             <!--Tab-->
@@ -277,10 +313,14 @@
                                   </div>
                                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -309,10 +349,14 @@
                                   </div>
                                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -341,10 +385,14 @@
                                   </div>
                                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -373,10 +421,14 @@
                                   </div>
                                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -405,10 +457,14 @@
                                   </div>
                                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -439,10 +495,14 @@
                               </div>
                             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                             <!--Tab-->
                             <div class="tab" id="approved">
                               <div class="row">
@@ -474,10 +534,14 @@
                                   </div>
                                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -506,16 +570,22 @@
                                   </div>
                                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
                               </div>
                             </div>
 
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
       
                               </div>
                             </div>
       
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
                             <!--Tab-->
                             <div class="tab" id="rejected">
                               <div class="row">
@@ -547,10 +617,14 @@
                                   </div>
                                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -578,7 +652,10 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 40fc94a (Initial commit)
       
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
@@ -608,10 +685,14 @@
                                   </div>
                                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
       
 >>>>>>> master
+=======
+      
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -647,14 +728,20 @@
                     </div>
                   </div>
                 </div>
+<<<<<<< HEAD
               </div>
+=======
+>>>>>>> 40fc94a (Initial commit)
             </div>
           </section>
 
         <!-- Copyright -->
+<<<<<<< HEAD
         <div class="copyright-text">
             <p>© 2021 Superio. All Right Reserved.</p>
         </div>
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     </div><!-- End Page Wrapper -->
 
@@ -664,18 +751,24 @@
       Chart.defaults.global.defaultFontColor = '#888';
       Chart.defaults.global.defaultFontSize = '14';
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       var ctx = document.getElementById('chart').getContext('2d');
 
       var chart = new Chart(ctx, {
 
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
   
       var ctx = document.getElementById('chart').getContext('2d');
   
       var chart = new Chart(ctx, {
   
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
         type: 'line',
         // The data for our dataset
         data: {
@@ -696,6 +789,7 @@
           }]
         },
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         // Configuration options
         options: {
@@ -705,6 +799,8 @@
           },
 
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
   
         // Configuration options
         options: {
@@ -713,7 +809,10 @@
             padding: 10,
           },
   
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
           legend: {
             display: false
           },
@@ -721,10 +820,14 @@
             display: false
           },
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
   
 >>>>>>> master
+=======
+  
+>>>>>>> 40fc94a (Initial commit)
           scales: {
             yAxes: [{
               scaleLabel: {
@@ -746,10 +849,14 @@
             }],
           },
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
   
 >>>>>>> master
+=======
+  
+>>>>>>> 40fc94a (Initial commit)
           tooltips: {
             backgroundColor: '#333',
             titleFontSize: 13,
@@ -769,7 +876,11 @@
 
 </html>
 <<<<<<< HEAD
+<<<<<<< HEAD
 @endsection
 =======
 @endsection
 >>>>>>> master
+=======
+@endsection
+>>>>>>> 40fc94a (Initial commit)

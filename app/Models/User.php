@@ -7,17 +7,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     /**
      * The attributes that are mass assignable.
@@ -29,10 +35,15 @@ class User extends Authenticatable
         'email',
         'password',
 <<<<<<< HEAD
+<<<<<<< HEAD
         'type_compte',
         'etat_compte'
 =======
 >>>>>>> master
+=======
+        'type_compte',
+        'etat_compte',
+>>>>>>> 40fc94a (Initial commit)
     ];
 
     /**
@@ -47,6 +58,7 @@ class User extends Authenticatable
 
     /**
 <<<<<<< HEAD
+<<<<<<< HEAD
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
@@ -59,6 +71,8 @@ class User extends Authenticatable
         ];
     }
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
      * The attributes that should be cast.
      *
      * @var array<string, string>
@@ -67,5 +81,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 }

@@ -5,15 +5,27 @@
 @section('content')
 
 @include('header.univ')
+<<<<<<< HEAD
           
+=======
+
+>>>>>>> 40fc94a (Initial commit)
         <section class="user-dashboard">
             <div class="dashboard-outer">
               <div class="upper-title-box">
                 <h3>Tous les étudiants</h3>
                 <div class="text">Prêts ?</div>
               </div>
+<<<<<<< HEAD
       
               <div class="row">
+=======
+
+              <div class="row">
+                <div>
+                    <a href='#'>Ajouter</a>
+                </div>
+>>>>>>> 40fc94a (Initial commit)
                 <div class="col-lg-12">
                   <!-- Ls widget -->
                   <div class="ls-widget">
@@ -21,7 +33,11 @@
                       <div class="widget-title">
                         <h4>Etudiants</h4>
                       <div class="widget-content">
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 40fc94a (Initial commit)
                         <div class="tabs-box">
                           <div class="aplicants-upper-bar">
                             <h6>Etudiants</h6>
@@ -31,7 +47,11 @@
                               <li class="tab-btn rejected" data-tab="#rejected">Rejeté(s): 4</li>
                             </ul>
                           </div>
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 40fc94a (Initial commit)
                           <div class="tabs-content">
                             <!--Tab-->
                             <div class="tab active-tab" id="totals">
@@ -63,12 +83,21 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
       
                                 <!-- Candidate block three -->
                                 
                               </div>
                             </div>
       
+=======
+
+                                <!-- Candidate block three -->
+
+                              </div>
+                            </div>
+
+>>>>>>> 40fc94a (Initial commit)
                             <!--Tab-->
                             <div class="tab" id="approved">
                               <div class="row">
@@ -99,7 +128,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -127,10 +160,17 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
       
                               </div>
                             </div>
       
+=======
+
+                              </div>
+                            </div>
+
+>>>>>>> 40fc94a (Initial commit)
                             <!--Tab-->
                             <div class="tab" id="rejected">
                               <div class="row">
@@ -161,7 +201,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -189,7 +233,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -217,7 +265,11 @@
                                     </div>
                                   </div>
                                 </div>
+<<<<<<< HEAD
       
+=======
+
+>>>>>>> 40fc94a (Initial commit)
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -258,9 +310,12 @@
           </section>
 
         <!-- Copyright -->
+<<<<<<< HEAD
         <div class="copyright-text">
             <p>© 2021 Superio. All Right Reserved.</p>
         </div>
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     </div><!-- End Page Wrapper -->
 
@@ -269,11 +324,19 @@
       Chart.defaults.global.defaultFontFamily = "Sofia Pro";
       Chart.defaults.global.defaultFontColor = '#888';
       Chart.defaults.global.defaultFontSize = '14';
+<<<<<<< HEAD
   
       var ctx = document.getElementById('chart').getContext('2d');
   
       var chart = new Chart(ctx, {
   
+=======
+
+      var ctx = document.getElementById('chart').getContext('2d');
+
+      var chart = new Chart(ctx, {
+
+>>>>>>> 40fc94a (Initial commit)
         type: 'line',
         // The data for our dataset
         data: {
@@ -293,6 +356,7 @@
             pointBorderWidth: "2",
           }]
         },
+<<<<<<< HEAD
   
         // Configuration options
         options: {
@@ -301,13 +365,27 @@
             padding: 10,
           },
   
+=======
+
+        // Configuration options
+        options: {
+
+          layout: {
+            padding: 10,
+          },
+
+>>>>>>> 40fc94a (Initial commit)
           legend: {
             display: false
           },
           title: {
             display: false
           },
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 40fc94a (Initial commit)
           scales: {
             yAxes: [{
               scaleLabel: {
@@ -328,7 +406,11 @@
               },
             }],
           },
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 40fc94a (Initial commit)
           tooltips: {
             backgroundColor: '#333',
             titleFontSize: 13,

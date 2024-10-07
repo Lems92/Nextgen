@@ -4,6 +4,7 @@
 
 @section('content')
 
+<<<<<<< HEAD
 @include('header.header')
 
 <div class="page-wrapper">
@@ -747,6 +748,603 @@
                     { value: 'normandie', text: 'Normandie' },
                     { value: 'occitanie', text: 'Occitanie' },
                     { value: 'paca', text: 'Provence-Alpes-Côte d\'Azur' }
+=======
+    @include('header.header')
+
+    <div class="page-wrapper">
+        <div class="preloader"></div>
+
+        <!-- Formulaire d'Inscription Étudiant -->
+        <section class="contact-section bgc-home20">
+            <div class="auto-container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-md-10">
+                        <div class="sec-title -type-2 text-center">
+                            <h2>Formulaire d'Inscription Étudiant</h2>
+                        </div>
+
+                        <form action="/etudiants" method="POST">
+                            @csrf
+                            <fieldset class="form-section">
+                                <legend>
+                                    <h4> Personnelles </h4>
+                                </legend>
+                                <div class="row">
+                                    <div class="form-group col-lg-12 col-md-12 mt-4">
+                                        <label for="prenom" class="form-label">Prénom :</label>
+                                        <input type="text" id="prenom" name="prenom" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="nom" class="form-label">Nom :</label>
+                                        <input type="text" id="nom" name="nom" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label">Adresse e-mail :</label>
+                                        <input type="email" id="email" name="email" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="telephone" class="form-label">Numéro de téléphone :</label>
+                                        <input type="tel" id="telephone" name="telephone" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="date-naissance" class="form-label">Date de naissance :</label>
+                                        <input type="date" id="date-naissance" name="date_naissance" class="form-control"
+                                            required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="genre" class="form-label">Genre :</label>
+                                        <select id="genre" name="genre" class="form-select" required>
+                                            <option value="masculin">Masculin</option>
+                                            <option value="feminin">Féminin</option>
+                                            <option value="non-binaire">Non-binaire</option>
+                                            <option value="prefere-pas-dire">Préfère ne pas dire</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="adresse-postale" class="form-label">Adresse postale :</label>
+                                        <input type="text" id="adresse-postale" name="adresse_postale"
+                                            class="form-control" required>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="region" class="form-label">Région :</label>
+                                        <select id="region" name="region" class="form-select" required>
+                                            @foreach ($regions as $region )
+                                                <option value ={{$region->id}}>{{$region->nom_region}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="ville" class="form-label">Ville :</label>
+                                        <input type="text" id="ville" name="ville" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="code-postal" class="form-label">Code postal :</label>
+                                        <input type="text" id="code-postal" name="code_postal" class="form-control"
+                                            required>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            <!-- Éducation -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <h4>Éducation</h4>
+                                </legend>
+                                <div class="mb-3">
+                                    <label for="nom-ecole" class="form-label">Nom de l'école ou de l'université :</label>
+                                    <input type="text" id="nom-ecole" name="nom_ecole" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
+                                    <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
+                                        @foreach ($domaines as $domaine)
+                                            <option value={{ $domaine->id }}>{{ $domaine->nom_domaine }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="niveau-etudes" class="form-label">Niveau d'études :</label>
+                                    <select id="niveau-etudes" name="niveau_etudes" class="form-select" required>
+                                        @foreach ($niveauEtudes as $niveau_etude)
+                                            @foreach ($niveau_etude->niveaux as $niveau)
+                                                <option value={{ $niveau->id }}>{{ $niveau->nom_niveau_etude }}
+                                                </option>
+                                            @endforeach
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="etat-diplomes" class="form-label">Etat du diplôme :</label>
+                                    <select id="etat-diplomes" name="etat_diplomes" class="form-select" required>
+                                            <option value="Obtenue">Obtenue</option>
+                                            <option value="En cours">En cours</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="annee-diplome" class="form-label">Année d'obtention du diplôme ou année
+                                        d'inscription en cours :</label>
+                                    <input type="text" id="annee-diplome" name="annee_diplome" class="form-control"
+                                        required>
+                                </div>
+                            </fieldset>
+
+                            <!-- Expérience Académique -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <h4>Expérience</h4>
+                                </legend>
+                                <div class="mb-3">
+                                    <div id="stage_academique_conteneur"></div>
+                                    <button type="button" class="theme-btn btn-style-four"
+                                        onclick="ajouterChamp('stage_academique')">Ajouter</button>
+                                </div>
+                            </fieldset>
+
+                            <!-- Compétences -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <h4>Compétences</h4>
+                                </legend>
+                                <div class="mb-3">
+                                    <select id="competences[]" class="chosen-select" multiple>
+                                        @foreach ($competences as $competence)
+                                            @foreach ($competence->competences as $comp)
+                                                <option value={{$comp->id}}>{{$comp->nom_competence}}</option>
+                                            @endforeach
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                            </fieldset>
+
+
+                            <!-- Portfolio -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <h4>Portfolio</h4>
+                                </legend>
+                                <div class="mb-3">
+                                    <label for="portfolio" class="form-label">Liens vers des projets, articles, créations
+                                        artistiques :</label>
+                                    <textarea id="portfolio" name="portfolio" class="form-control" rows="4" required></textarea>
+                                </div>
+                            </fieldset>
+
+                            <!-- Centres d'Intérêt -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <h4>Centres d'Intérêt</h4>
+                                </legend>
+                                <div class="mb-3">
+                                    <label for="centres-interet" class="form-label">Hobbies et intérêts personnels
+                                        :</label>
+                                    <textarea id="centres-interet" name="centres_interet" class="form-control" rows="4" required></textarea>
+                                </div>
+                            </fieldset>
+
+                            <!-- Documents -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <h4>Documents</h4>
+                                </legend>
+                                <div class="mb-3">
+                                    <label for="diplome" class="form-label">Diplôme :</label>
+                                    <input type="file" id="diplome" name="diplome" class="form-control"
+                                        accept=".pdf,.doc,.docx" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="lettre-recommandation" class="form-label">Lettre de recommandation
+                                        :</label>
+                                    <input type="file" id="lettre-recommandation" name="lettre_recommandation"
+                                        class="form-control" accept=".pdf,.doc,.docx" required>
+                                </div>
+                            </fieldset>
+
+                            <!-- Préférences de Carrière -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <h4>Préférences de Carrière</h4>
+                                </legend>
+
+                                <!-- Secteur d'activité préféré -->
+                                <div class="mb-3">
+                                    <label for="secteur-activite" class="form-label">Secteur d'activité préféré :</label>
+                                    <select id="secteur-activite" name="secteur_activite[]"
+                                        class="chosen-select multiple" multiple required>
+                                        @foreach ($categories as $categorie)
+                                            <optgroup label={{ $categorie->nom_categorie }}>
+                                                @foreach ($categorie->domaines as $cate)
+                                                    <option value={{ $cate->id }}>{{ $cate->nom_domaine }}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Type d'emploi recherché -->
+                                <div class="mb-3">
+                                    <label for="type-emploi" class="form-label">Type d'emploi recherché :</label>
+                                    <select id="type-emploi" name="type_emploi[]" class="chosen-select multiples"
+                                        multiple required>
+                                        @foreach ($contrats as $contrat)
+                                            <option value={{ $contrat->id }}>{{ $contrat->nom_contrat }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Localisation géographique préférée -->
+                                <div class="mb-3">
+                                    <label for="localisation-preferree" class="form-label">Localisation géographique
+                                        préférée :</label>
+                                    <input type="text" id="localisation-preferree" name="localisation_preferree"
+                                        class="form-control" required>
+                                </div>
+
+                                <!-- Salaire souhaité -->
+                                <div class="mb-3">
+                                    <label for="salaire-souhaite" class="form-label">Salaire souhaité :</label>
+                                    <input type="text" id="salaire-souhaite" name="salaire_souhaite"
+                                        class="form-control" required>
+                                </div>
+                            </fieldset>
+
+                            <!-- Disponibilité de l’Étudiant Section -->
+                            <fieldset class="form-section">
+                                <legend>
+                                    <h4>Disponibilité de l’Étudiant</h4>
+                                </legend>
+                                <div class="form-group">
+                                    <label for="duree_dispo">Durée de Disponibilité :</label>
+                                    <select class="form-control" id="duree_dispo" name="duree_dispo"
+                                        placeholder="Veuillez choisir">
+                                        <option value="moins_1_mois">Moins de 1 mois</option>
+                                        <option value="1_3_mois">1 à 3 mois</option>
+                                        <option value="3_6_mois">3 à 6 mois</option>
+                                        <option value="6_12_mois">6 à 12 mois</option>
+                                        <option value="plus_12_mois">Plus de 12 mois</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="semestre">Semestre en Cours :</label>
+                                    <select class="form-control" id="semestre" name="semestre">
+                                        <option value="semestre_1">Semestre 1</option>
+                                        <option value="semestre_2">Semestre 2</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="vacances_ete">Vacances d'Été :</label>
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" id="vacances_debut"
+                                            name="vacances_debut" placeholder="Date début">
+                                        <input type="date" class="form-control" id="vacances_fin" name="vacances_fin"
+                                            placeholder="Date fin">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="vacances_dispo">Date disponible pendant les vacances d'été</label>
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" id="dispo_debut"
+                                                name="dispo_debut" placeholder="Date début">
+                                            <input type="date" class="form-control" id="dispo_fin" name="dispo_fin"
+                                                placeholder="Date fin">
+                                        </div>
+                                    </div>
+                            </fieldset>
+
+                            <!-- Détails spécifiques (Inclusivité Entreprise) Section -->
+                            <fieldset class="form-section">
+                                <legend>Détails spécifiques (Inclusivité Entreprise)</legend>
+
+                                <div class="form-group">
+                                    <label for="accessibilite">Accessibilité :</label>
+                                    <p>Avez-vous besoin d’aménagements spécifiques pour participer à des événements ou des
+                                        activités ?</p>
+                                    <select class="form-control" id="accessibilite" name="accessibilite">
+                                        <option value="oui">Oui</option>
+                                        <option value="non">Non</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="amenagements">Si oui, veuillez préciser :</label>
+                                    <textarea class="form-control" id="amenagements" name="amenagements" rows="3"
+                                        placeholder="Précisez les aménagements spécifiques"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="origine_ethnique">Origine ethnique :</label>
+                                    <select class="form-select" id="origine_ethnique" name="origine_ethnique">
+                                        <option value="antaimoro">Antaimoro</option>
+                                        <option value="antandroy">Antandroy</option>
+                                        <option value="antanosy">Antanosy</option>
+                                        <option value="betsileo">Betsileo</option>
+                                        <option value="betsimisaraka">Betsimisaraka</option>
+                                        <option value="francais">Français</option>
+                                        <option value="mahafaly">Mahafaly</option>
+                                        <option value="makoa">Makoa</option>
+                                        <option value="masikoro">Masikoro</option>
+                                        <option value="merina">Merina</option>
+                                        <option value="sakalava">Sakalava</option>
+                                        <option value="sihanaka">Sihanaka</option>
+                                        <option value="tanala">Tanala</option>
+                                        <option value="tsimihety">Tsimihety</option>
+                                        <option value="tsonga">Tsonga</option>
+                                        <option value="zafimaniry">Zafimaniry</option>
+
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="statut_socio_economique">Statut socio-économique :</label>
+                                    <select class="form-select" id="statut_socio_economique"
+                                        name="statut_socio_economique">
+                                        <option value="origine_modeste">Origine modeste</option>
+                                        <option value="classe_moyenne">Classe moyenne</option>
+                                        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="conditions_vie">Conditions de vie spécifiques :</label>
+                                    <select class="form-select" id="conditions_vie" name="conditions_vie">
+                                        <option value="null">null</option>
+                                        <option value="sans_domicile">Sans domicile fixe</option>
+                                        <option value="handicap">En situation de handicap</option>
+                                        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="religion_croyance">Religion ou croyance :</label>
+                                    <select class="form-select" id="religion_croyance" name="religion_croyance">
+                                        <option value="chretien">Chrétien</option>
+                                        <option value="musulman">Musulman</option>
+                                        <option value="bouddhiste">Bouddhiste</option>
+                                        <option value="hindou">Hindou</option>
+                                        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="orientation_sexuelle">Orientation sexuelle :</label>
+                                    <select class="form-select" id="orientation_sexuelle" name="orientation_sexuelle">
+                                        <option value="heterosexuel">Hétérosexuel</option>
+                                        <option value="homosexuel">Homosexuel</option>
+                                        <option value="bisexuel">Bisexuel</option>
+                                        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    </select>
+                                </div>
+                            </fieldset>
+
+
+
+                            <div class="text-center mt-4">
+                                <button type="submit" class="theme-btn btn-style-one">Soumettre</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <style>
+        .sec-title {
+            margin-top: 50px;
+        }
+
+        .contact-section {
+            padding: 40px 0;
+        }
+
+        /* Style pour les titres de sections */
+        .sec-title h2 {
+            margin-bottom: 30px;
+            font-size: 28px;
+            color: #333;
+        }
+
+        /* Style pour les fieldsets */
+        .form-section {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background: #f9f9f9;
+        }
+
+        .form-section legend {
+            font-size: 20px;
+            color: #66022b;
+            border-bottom: 2px solid #66022b;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Style pour les labels et les champs de formulaire */
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #333;
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #66022b;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
+        }
+
+        /* Style pour les sections d'ajout de champs dynamiques */
+        .mb-3 {
+            margin-bottom: 20px;
+        }
+
+        .champ-academique {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-style-four {
+            padding: 10px 20px;
+            border: 1px solid;
+        }
+
+        /* Style pour les champs de texte multilignes */
+        textarea.form-control {
+            resize: vertical;
+        }
+
+        .d-flex {
+            padding-bottom: 5px;
+        }
+
+        .chosen-container .chosen-drop,
+        .chosen-container .chosen-results {
+            color: #66022b;
+        }
+
+        .group-result {
+            color: #333;
+        }
+    </style>
+
+    <!-- Lien vers Bootstrap JS et dépendances Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        function ajouterChamp(secteur) {
+            const conteneur = document.getElementById(`${secteur}_conteneur`);
+            if (!conteneur) {
+                console.error(`Le conteneur pour ${secteur} n'existe pas.`);
+                return;
+            }
+
+            const div = document.createElement('div');
+            div.classList.add('champ-academique');
+            div.innerHTML = `
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-danger btn-sm" onclick="supprimerChamp(this)">X</button>
+            </div>
+
+            <div class="mb-3">
+                <label for="type" class="form-label">Type :</label>
+                <select id="type" name="${secteur}_type[]" class="form-select" required>
+                    @foreach ($experiences as $experience)
+                        @foreach ($experience->experiences as $exp)
+                            <option value={{ $exp->id }}>{{ $exp->nom_experience }}
+                            </option>
+                        @endforeach
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <input type="text" name="${secteur}_details[]" class="form-control" placeholder="Titre" required>
+            </div>
+        `;
+
+            conteneur.appendChild(div);
+        }
+
+        function supprimerChamp(button) {
+            const div = button.closest('.champ-academique');
+            if (div) {
+                div.remove();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const regions = {
+                madagascar: [{
+                        value: 'analamanga',
+                        text: 'Analamanga'
+                    },
+                    {
+                        value: 'atsinanana',
+                        text: 'Atsinanana'
+                    },
+                    {
+                        value: 'boeny',
+                        text: 'Boeny'
+                    },
+                    {
+                        value: 'ihorombe',
+                        text: 'Ihorombe'
+                    },
+                    {
+                        value: 'menabe',
+                        text: 'Menabe'
+                    },
+                    {
+                        value: 'sava',
+                        text: 'Sava'
+                    },
+                    {
+                        value: 'vakinankaratra',
+                        text: 'Vakinankaratra'
+                    }
+                ],
+                france: [{
+                        value: 'auvergne-rhone-alpes',
+                        text: 'Auvergne-Rhône-Alpes'
+                    },
+                    {
+                        value: 'bretagne',
+                        text: 'Bretagne'
+                    },
+                    {
+                        value: 'centre-val-de-loire',
+                        text: 'Centre-Val de Loire'
+                    },
+                    {
+                        value: 'corse',
+                        text: 'Corse'
+                    },
+                    {
+                        value: 'ile-de-france',
+                        text: 'Île-de-France'
+                    },
+                    {
+                        value: 'normandie',
+                        text: 'Normandie'
+                    },
+                    {
+                        value: 'occitanie',
+                        text: 'Occitanie'
+                    },
+                    {
+                        value: 'paca',
+                        text: 'Provence-Alpes-Côte d\'Azur'
+                    }
+>>>>>>> 40fc94a (Initial commit)
                 ]
             };
 
@@ -756,7 +1354,11 @@
             function updateRegions() {
                 const selectedCountry = paysSelect.value;
                 const regionsList = regions[selectedCountry] || [];
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> 40fc94a (Initial commit)
                 // Clear existing options
                 regionSelect.innerHTML = '';
 
@@ -775,6 +1377,10 @@
             // Add event listener to update regions when the country changes
             paysSelect.addEventListener('change', updateRegions);
         });
+<<<<<<< HEAD
 </script>
+=======
+    </script>
+>>>>>>> 40fc94a (Initial commit)
 
 @endsection

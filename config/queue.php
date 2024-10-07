@@ -8,6 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
 <<<<<<< HEAD
+<<<<<<< HEAD
     | Laravel's queue supports a variety of backends via a single, unified
     | API, giving you convenient access to each backend using identical
     | syntax for each. The default queue connection is defined below.
@@ -16,6 +17,8 @@ return [
 
     'default' => env('QUEUE_CONNECTION', 'database'),
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
     | Laravel's queue API supports an assortment of back-ends via a single
     | API, giving you convenient access to each back-end using the same
     | syntax for every one. Here you may define a default connection.
@@ -23,13 +26,17 @@ return [
     */
 
     'default' => env('QUEUE_CONNECTION', 'sync'),
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
 
     /*
     |--------------------------------------------------------------------------
     | Queue Connections
     |--------------------------------------------------------------------------
     |
+<<<<<<< HEAD
 <<<<<<< HEAD
     | Here you may configure the connection options for every queue backend
     | used by your application. An example configuration is provided for
@@ -39,6 +46,11 @@ return [
     | is used by your application. A default configuration has been added
     | for each back-end shipped with Laravel. You are free to add more.
 >>>>>>> master
+=======
+    | Here you may configure the connection information for each server that
+    | is used by your application. A default configuration has been added
+    | for each back-end shipped with Laravel. You are free to add more.
+>>>>>>> 40fc94a (Initial commit)
     |
     | Drivers: "sync", "database", "beanstalkd", "sqs", "redis", "null"
     |
@@ -53,6 +65,7 @@ return [
         'database' => [
             'driver' => 'database',
 <<<<<<< HEAD
+<<<<<<< HEAD
             'connection' => env('DB_QUEUE_CONNECTION'),
             'table' => env('DB_QUEUE_TABLE', 'jobs'),
             'queue' => env('DB_QUEUE', 'default'),
@@ -62,11 +75,17 @@ return [
             'queue' => 'default',
             'retry_after' => 90,
 >>>>>>> master
+=======
+            'table' => 'jobs',
+            'queue' => 'default',
+            'retry_after' => 90,
+>>>>>>> 40fc94a (Initial commit)
             'after_commit' => false,
         ],
 
         'beanstalkd' => [
             'driver' => 'beanstalkd',
+<<<<<<< HEAD
 <<<<<<< HEAD
             'host' => env('BEANSTALKD_QUEUE_HOST', 'localhost'),
             'queue' => env('BEANSTALKD_QUEUE', 'default'),
@@ -76,6 +95,11 @@ return [
             'queue' => 'default',
             'retry_after' => 90,
 >>>>>>> master
+=======
+            'host' => 'localhost',
+            'queue' => 'default',
+            'retry_after' => 90,
+>>>>>>> 40fc94a (Initial commit)
             'block_for' => 0,
             'after_commit' => false,
         ],
@@ -94,6 +118,7 @@ return [
         'redis' => [
             'driver' => 'redis',
 <<<<<<< HEAD
+<<<<<<< HEAD
             'connection' => env('REDIS_QUEUE_CONNECTION', 'default'),
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => (int) env('REDIS_QUEUE_RETRY_AFTER', 90),
@@ -102,6 +127,11 @@ return [
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 90,
 >>>>>>> master
+=======
+            'connection' => 'default',
+            'queue' => env('REDIS_QUEUE', 'default'),
+            'retry_after' => 90,
+>>>>>>> 40fc94a (Initial commit)
             'block_for' => null,
             'after_commit' => false,
         ],
@@ -121,10 +151,14 @@ return [
 
     'batching' => [
 <<<<<<< HEAD
+<<<<<<< HEAD
         'database' => env('DB_CONNECTION', 'sqlite'),
 =======
         'database' => env('DB_CONNECTION', 'mysql'),
 >>>>>>> master
+=======
+        'database' => env('DB_CONNECTION', 'mysql'),
+>>>>>>> 40fc94a (Initial commit)
         'table' => 'job_batches',
     ],
 
@@ -135,6 +169,7 @@ return [
     |
     | These options configure the behavior of failed queue job logging so you
 <<<<<<< HEAD
+<<<<<<< HEAD
     | can control how and where failed jobs are stored. Laravel ships with
     | support for storing failed jobs in a simple file or in a database.
     |
@@ -143,16 +178,24 @@ return [
     | can control which database and table are used to store the jobs that
     | have failed. You may change them to any database / table you wish.
 >>>>>>> master
+=======
+    | can control which database and table are used to store the jobs that
+    | have failed. You may change them to any database / table you wish.
+>>>>>>> 40fc94a (Initial commit)
     |
     */
 
     'failed' => [
         'driver' => env('QUEUE_FAILED_DRIVER', 'database-uuids'),
 <<<<<<< HEAD
+<<<<<<< HEAD
         'database' => env('DB_CONNECTION', 'sqlite'),
 =======
         'database' => env('DB_CONNECTION', 'mysql'),
 >>>>>>> master
+=======
+        'database' => env('DB_CONNECTION', 'mysql'),
+>>>>>>> 40fc94a (Initial commit)
         'table' => 'failed_jobs',
     ],
 

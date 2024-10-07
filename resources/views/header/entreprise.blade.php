@@ -20,6 +20,7 @@
             <nav class="nav main-menu">
               <ul class="navigation" id="navbar">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <li>
                   <span>Accueil</span>
                 </li>
@@ -56,12 +57,19 @@
                   </ul>
                 </li>
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
                 <li><a href="{{route('accueil')}}"><span>Accueil</span></a></li>
                             <li class="dropdown">
                                 <span>Étudiant</span>
                                 <ul class="dropdown">
+<<<<<<< HEAD
                                     <li><a href="{{route('explorer-offre')}}">Explorer les offres</a></li>
                                     <li><a href="#">Explorer les évenements</a></li>
+=======
+                                    <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
+                                    <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
+>>>>>>> 40fc94a (Initial commit)
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -86,7 +94,10 @@
                                     <li><a href="blog-list-v3.html">Nous contacter</a></li>
                                 </ul>
                               </li>
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
                 <!-- End header -->
 
                 <!-- Only for Mobile View -->
@@ -115,10 +126,14 @@
 
             <!-- Dashboard Option -->
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
            
 >>>>>>> master
+=======
+           
+>>>>>>> 40fc94a (Initial commit)
           </div>
         </div>
       </div>
@@ -132,7 +147,11 @@
 
           <div class="outer-box">
             <!-- Login/Register -->
+<<<<<<< HEAD
             <button id="toggle-user-sidebar"><img src="images/icons/icon-user-2.svg" alt="avatar" class="thumb"></button>
+=======
+            <button id="toggle-user-sidebar"><div class="la la-user-tie"></div></button>
+>>>>>>> 40fc94a (Initial commit)
             <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span class="flaticon-menu-1"></span></a>
           </div>
         </div>
@@ -150,6 +169,7 @@
     <!-- User Sidebar -->
     <div class="user-sidebar">
 <<<<<<< HEAD
+<<<<<<< HEAD
 
       <div class="sidebar-inner">
         <ul class="navigation">
@@ -164,6 +184,8 @@
       </div>
     </div>
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
       <div class="sidebar-inner">
           <ul class="navigation">
               <li class="{{ request()->is('dashboard-entreprise') ? 'active' : '' }}">
@@ -188,7 +210,10 @@
       </div>
   </div>
   
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
     <!-- End User Sidebar -->
 
     <style>
@@ -198,6 +223,7 @@
       }
       .nav-outer .navigation > li > a,
       .nav-outer .navigation > li > span {
+<<<<<<< HEAD
 <<<<<<< HEAD
           padding: 8px 12px;
           font-size: 14px;
@@ -226,6 +252,8 @@
       }
 
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
           padding: 8px 12px; 
           font-size: 14px;
           line-height: 1.5; 
@@ -252,13 +280,17 @@
           opacity: 1; 
       }
       
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
       .navbar {
                   position: fixed;
                   top: 0;
                   width: 100%;
                   z-index: 1050;
               }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
       .main-menu .navigation{
@@ -275,6 +307,8 @@
           .btn-box .theme-btn {
               font-size: 12px;
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
               .user-sidebar .navigation li a {
     position: relative;
     display: flex;
@@ -301,11 +335,15 @@
       
           .btn-box .theme-btn {
               font-size: 12px; 
+<<<<<<< HEAD
 >>>>>>> master
+=======
+>>>>>>> 40fc94a (Initial commit)
               padding: 6px 10px;
               display: inline-block !important;
           }
           .page-wrapper {
+<<<<<<< HEAD
 <<<<<<< HEAD
                   padding-top: 0px;
               }
@@ -314,10 +352,16 @@
 
       </style>
 =======
+=======
+>>>>>>> 40fc94a (Initial commit)
                   padding-top: 0px; 
               }
       }
       
       
+<<<<<<< HEAD
       </style>
 >>>>>>> master
+=======
+      </style>
+>>>>>>> 40fc94a (Initial commit)
