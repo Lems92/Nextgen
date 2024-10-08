@@ -8,6 +8,7 @@ use App\Models\Universite;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
@@ -18,8 +19,12 @@ use Mockery\Exception;
 class RegistrationController extends Controller
 {
 
-    public function register_get(): View
+    public function register_get(): View | RedirectResponse
     {
+        if(Auth::check()) {
+            $user = Auth::user();
+            return redirect()->route($this->redirect_if_authenticated($user));
+        }
         return view('inscription.inscription');
     }
 
@@ -48,6 +53,10 @@ class RegistrationController extends Controller
     {
         if (!Session::get('register_data')) {
             return redirect()->route('inscription');
+        }
+        if(Auth::check()) {
+            $user = Auth::user();
+            return redirect()->route($this->redirect_if_authenticated($user));
         }
 
         return view('inscription.form-etudiant');
@@ -151,6 +160,11 @@ class RegistrationController extends Controller
             return redirect()->route('inscription');
         }
 
+        if(Auth::check()) {
+            $user = Auth::user();
+            return redirect()->route($this->redirect_if_authenticated($user));
+        }
+
         return view('inscription.form-entreprise');
     }
 
@@ -215,6 +229,11 @@ class RegistrationController extends Controller
             return redirect()->route('inscription');
         }
 
+        if(Auth::check()) {
+            $user = Auth::user();
+            return redirect()->route($this->redirect_if_authenticated($user));
+        }
+
         return view('inscription.form-service-carriere');
     }
 
@@ -261,6 +280,22 @@ class RegistrationController extends Controller
         Session::forget('register_data');
 
         return redirect()->route('connexion')->with('success', 'Les informations de l’établissement ont été enregistrées avec succès.');
+    }
+
+    private function redirect_if_authenticated($user): string
+    {
+        $route = 'accueil';
+
+        if ($user->hasRole('etudiant')) {
+            $route = 'etudiant.dashboard';
+        } elseif ($user->hasRole('entreprise')) {
+            $route = 'entreprise.dashboard';
+        } elseif ($user->hasRole('service-carriere')) {
+            $route = 'service_carriere.dashboard';
+        } elseif ($user->hasRole('admin')) {
+            $route = 'admin.dashboard';
+        }
+        return $route;
     }
 
 }
