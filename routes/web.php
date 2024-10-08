@@ -1,16 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\EtudiantController;
-use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\EventController;
-
-use App\Http\Controllers\UniversiteController;
 
 
 route::get('/offres', [OffreController::class, 'index'])->name('offers.index');
@@ -22,10 +17,6 @@ Route::get('/explorer-offre', function() {return view('etudiant.explorer-offres'
 Route::get('/events/create', [EventController::class, 'create'])->middleware('auth')->name('events.create');
 Route::post('/events', [EventController::class, 'store'])->middleware('auth')->name('events.store');
 Route::get('/events', [EventController::class, 'index'])->name('events.index');
-
-
-Route::get('/services-carriere', [UniversiteController::class, 'create'])->name('universites.create');
-Route::post('/services-carriere', [UniversiteController::class, 'store'])->name('universites.store');
 
 // Afficher le formulaire
 Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
@@ -43,11 +34,6 @@ Route::middleware('auth')->group(function() {
 
 Route::post('/connexion', [LoginController::class, 'login'])->name('login.submit');
 
-Route::post('/enregistrer-entreprise', [EntrepriseController::class, 'store'])->name('entreprise.store');
-Route::get('/entreprise-succes', function () {
-    return view('entreprise.succes');
-})->name('entreprise.success');
-
 Route::get('/', function () {return view('accueil');})->name('accueil');
 Route::get('/test', function () {return view('test');});
 Route::get('/about', function () {return view('about');})->name('about');
@@ -64,9 +50,9 @@ Route::post('/inscription-entreprise', [RegistrationController::class, 'register
 Route::get('/inscription-service-carriere', [RegistrationController::class, 'register_service_carriere_get'])->name('inscription.service-carriere.get');
 Route::post('/inscription-service-carriere', [RegistrationController::class, 'register_service_carriere_post'])->name('inscription.service-carriere.post');
 // Tableau de bord
-Route::get('/dashboard-entreprise', function () {return view('entreprise.tableau-de-bord');})->name('entreprise.tableau-de-bord');
+Route::get('/dashboard-entreprise', function () {return view('entreprise.tableau-de-bord');})->name('entreprise.dashboard');
 Route::get('/dashboard-etudiant', function() {return view('etudiant.tableau-de-bord');})->name('etudiant.dashboard');
-Route::get('/dashboard-service', function() {return view('universite.tableau-de-bord');})->name('univ-dashboard');
+Route::get('/dashboard-service', function() {return view('universite.tableau-de-bord');})->name('service_carriere.dashboard');
 route::get('/offre', [OffreController::class, 'create'])->name('offre');
 Route::get('/profil', function () {return view('etudiant.portfolio');})->name('profil');
 Route::get('/gerer-offre', function () {return view('entreprise.gerer-offre');})->name('gerer-offre');
@@ -81,11 +67,3 @@ Route::get('/admin', function() {return view('admin.admin');})->name('admin');
 Route::get('/modiferProfil', function() {return view('etudiant.modifierProfil');})->name('modifierProfil');
 Route::get('/explorer-event', function() {return view('etudiant.evenements');})->name('explorer-event');
 Route::get('/motdepasse', function() {return view('etudiant.motdepasse');})->name('motdepasse');
-
-/*Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});*/
-
-//require __DIR__.'/auth.php';

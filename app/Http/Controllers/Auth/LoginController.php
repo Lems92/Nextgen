@@ -12,23 +12,23 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        // Validation des données de connexion
-        $credentials = $request->only('email', 'password');
-        
-        if (Auth::attempt($credentials)) {
-            // Récupère l'utilisateur connecté
+        if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
+            $request->session()->regenerate();
+
             $user = Auth::user();
-            // Redirige en fonction du rôle
-            switch ($user->role) {
-                case 'etudiant':
-                    return redirect()->route('etudiant.dashboard');
-                case 'entreprise':
-                    return redirect()->route('entreprise.tableau-de-bord');
-                case 'service-carriere':
-                    return redirect()->route('univ-dashboard');
-                default:
-                    return redirect()->route('connexion');
+
+            // Définir une redirection par défaut
+            $route = '/';
+
+            if ($user->hasRole('etudiant')) {
+                $route = 'etudiant.dashboard';
+            } elseif ($user->hasRole('entreprise')) {
+                $route = 'entreprise.dashboard';
+            } elseif ($user->hasRole('service-carriere')) {
+                $route = 'service_carriere.dashboard';
             }
+
+            return redirect()->route($route);
         }
 
         // Identifiants invalides

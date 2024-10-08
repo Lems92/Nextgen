@@ -1,7 +1,7 @@
 @extends('app')
 
 
-@section('title', 'NextGen - Inscription')
+@section('title', 'NextGen - Connexion')
 
 @section('content')
 @include('header.header')

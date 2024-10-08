@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom_etablissement');
             $table->string('adresse_etablissement');
-            $table->string('site_web');
+            $table->string('site_web')->nullable();
             $table->string('nom_contact');
             $table->string('fonction_contact');
             $table->string('adresse_email_contact');

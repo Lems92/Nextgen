@@ -78,24 +78,24 @@
 
                 <div class="form-group">
                     <label for="nom_etablissement">Nom complet de l'établissement :</label>
-                    <input type="text" id="nom_etablissement" value="{{old('nom_etablissement')}}" class="form-control" name="nom_etablissement">
+                    <input type="text" id="nom_etablissement" value="{{old('nom_etablissement')}}" class="form-control" name="nom_etablissement" required>
                     <x-input-error :messages="$errors->get('nom_etablissement')" class="mt-2" />
                 </div>
                 <div class="form-group">
                     <label for="adresse_etablissement">Adresse de l'établissement :</label>
-                    <input type="text" id="adresse_etablissement" value="{{old('adresse_etablissement')}}" class="form-control" name="adresse_etablissement">
+                    <input type="text" id="adresse_etablissement" value="{{old('adresse_etablissement')}}" class="form-control" name="adresse_etablissement" required>
                     <x-input-error :messages="$errors->get('adresse_etablissement')" class="mt-2" />
                 </div>
                 <div class="form-group">
                     <label for="site_web">Site Web :</label>
-                    <input type="text" id="site_web" value="{{old('site_web')}}" class="form-control" name="site_web">
+                    <input type="url" id="site_web" value="{{old('site_web')}}" class="form-control" name="site_web">
                     <x-input-error :messages="$errors->get('site_web')" class="mt-2" />
                 </div>
 
                 <!-- Détails sur les Étudiants -->
                 <div class="form-group">
                     <label for="nombre_etudiants">Nombre d'étudiants inscrits :</label>
-                    <select class="form-control" id="nombre_etudiants" name="nombre_etudiants">
+                    <select class="form-control" id="nombre_etudiants" name="nombre_etudiants" required>
                         <option value="Moins de 100">Moins de 100</option>
                         <option value="100 à 499">100 à 499</option>
                         <option value="500 à 999">500 à 999</option>
@@ -253,22 +253,22 @@
 
                 <div class="form-group">
                     <label for="nom_contact">Nom :</label>
-                    <input type="text" id="nom_contact" value="{{old('nom_etablissement')}}" class="form-control" name="nom_contact">
+                    <input type="text" id="nom_contact" value="{{old('nom_etablissement')}}" class="form-control" name="nom_contact" required>
                     <x-input-error :messages="$errors->get('nom_etablissement')" class="mt-2" />
                 </div>
                 <div class="form-group">
                     <label for="fonction_contact">Fonction :</label>
-                    <input type="text" id="fonction_contact" value="{{old('fonction_contact')}}" class="form-control" name="fonction_contact">
+                    <input type="text" id="fonction_contact" value="{{old('fonction_contact')}}" class="form-control" name="fonction_contact" required>
                     <x-input-error :messages="$errors->get('fonction_contact')" class="mt-2" />
                 </div>
                 <div class="form-group">
                     <label for="adresse_email_contact">Adresse e-mail :</label>
-                    <input type="email" id="adresse_email_contact" value="{{old('adresse_email_contact')}}" class="form-control" name="adresse_email_contact">
+                    <input type="email" id="adresse_email_contact" value="{{old('adresse_email_contact')}}" class="form-control" name="adresse_email_contact" required>
                     <x-input-error :messages="$errors->get('adresse_email_contact')" class="mt-2" />
                 </div>
                 <div class="form-group">
                     <label for="numero_telephone_contact">Numéro de téléphone :</label>
-                    <input type="text" id="numero_telephone_contact" value="{{old('numero_telephone_contact')}}" class="form-control" name="numero_telephone_contact">
+                    <input type="tel" id="numero_telephone_contact" value="{{old('numero_telephone_contact')}}" class="form-control" name="numero_telephone_contact" required>
                     <x-input-error :messages="$errors->get('numero_telephone_contact')" class="mt-2" />
                 </div>
 

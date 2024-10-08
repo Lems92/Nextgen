@@ -260,7 +260,7 @@ class RegistrationController extends Controller
         // Nettoyer les données de la session
         Session::forget('register_data');
 
-        return redirect()->route('connexion');
+        return redirect()->route('connexion')->with('success', 'Les informations de l’établissement ont été enregistrées avec succès.');
     }
 
 }
