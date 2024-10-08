@@ -19,5 +19,10 @@ class User extends Authenticatable
     public function userable() {
         return $this->morphTo();
     }
+
+    protected $casts = [
+        'userable_type' => 'string',
+        'userable_id' => 'integer',
+    ];
 }
 

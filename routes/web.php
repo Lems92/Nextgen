@@ -35,7 +35,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // administration
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
-    Route::get('/admin', function() {return view('admin.admin');})->name('admin');
+    Route::get('/admin', function() {return view('admin.admin');})->name('admin.dashboard');
 });
 
 // etudiant

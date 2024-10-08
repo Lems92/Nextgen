@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
@@ -35,5 +36,21 @@ class RolesAndPermissionsSeeder extends Seeder
         Role::create(['name' => 'service-carriere'])->givePermissionTo([
             'login'
         ]);
+
+        //admin
+        Role::create(['name' => 'admin'])->givePermissionTo([
+            'login'
+        ]);
+
+
+        // create admin
+        $admin = User::create([
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin123'),
+            'userable_type' => null,
+            'userable_id' => null,
+        ]);
+
+        $admin->assignRole("admin");
     }
 }
