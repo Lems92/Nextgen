@@ -76,7 +76,7 @@
           <div class="outer-box">
 
             <!-- Dashboard Option -->
-           
+
           </div>
         </div>
       </div>
@@ -120,8 +120,8 @@
           <a href="{{route('candidature')}}"><i class="la la-briefcase"></i>Candidatures</a></li>
           <li class="#">
           <a href="#"><i class="la la-lock"></i>Mot de passe</a></li>
-          <li><a href="{{route('accueil')}}"><i class="la la-sign-out"></i>Déconnecter</a></li>
-          <li><a href="dashboard-delete.html"><i class="la la-trash"></i>Delete Profile</a></li>
+          <li><a href="{{route('deconnexion')}}"><i class="la la-sign-out"></i>Déconnecter</a></li>
+          <li><a href="#"><i class="la la-trash"></i>Delete Profile</a></li>
         </ul>
       </div>
     </div>
@@ -134,43 +134,43 @@
       }
       .nav-outer .navigation > li > a,
       .nav-outer .navigation > li > span {
-          padding: 8px 12px; 
+          padding: 8px 12px;
           font-size: 14px;
-          line-height: 1.5; 
+          line-height: 1.5;
       }
-      
+
       .btn-box .theme-btn {
-          padding: 8px 16px; 
-          font-size: 14px; 
-          border-radius: 4px; 
-          margin-left: 10px; 
+          padding: 8px 16px;
+          font-size: 14px;
+          border-radius: 4px;
+          margin-left: 10px;
       }
-      
+
       .sticky-header .theme-btn {
-          padding: 6px 12px; 
+          padding: 6px 12px;
       }
-      
+
       /* Optional: Adjust logo size */
       .logo-box img, .sticky-logo img {
-          height: 40px; 
+          height: 40px;
       }
       .navigation li.has-dropdown:hover .dropdown {
-          display: block; 
-          visibility: visible; 
-          opacity: 1; 
+          display: block;
+          visibility: visible;
+          opacity: 1;
       }
-      
+
       .navbar {
                   position: fixed;
                   top: 0;
                   width: 100%;
                   z-index: 1050;
               }
-      
+
       .main-menu .navigation{
         margin-left: 70px;
       }
-      
+
       .user-sidebar .navigation li a {
     position: relative;
     display: flex;
@@ -187,19 +187,19 @@
       @media (max-width: 768px) {
           .nav-outer .navigation > li > a,
           .nav-outer .navigation > li > span {
-              font-size: 12px; 
-              padding: 6px 8px; 
+              font-size: 12px;
+              padding: 6px 8px;
           }
-      
+
           .btn-box .theme-btn {
-              font-size: 12px; 
+              font-size: 12px;
               padding: 6px 10px;
               display: inline-block !important;
           }
           .page-wrapper {
-                  padding-top: 0px; 
+                  padding-top: 0px;
               }
       }
-      
-      
+
+
       </style>

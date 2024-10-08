@@ -125,7 +125,7 @@
                   <a href="{{ route('accueil') }}"><i class="la la-lock"></i>Mot de passe</a>
               </li>
               <li>
-                  <a href="{{ route('accueil') }}"><i class="la la-sign-out"></i>Déconnecter</a>
+                  <a href="{{ route('deconnexion') }}"><i class="la la-sign-out"></i>Déconnecter</a>
               </li>
           </ul>
       </div>
