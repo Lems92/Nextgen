@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\EtudiantController;
@@ -55,18 +56,16 @@ Route::get('/test', function () {return view('test');});
 Route::get('/about', function () {return view('about');})->name('about');
 Route::get('/faq', function () {return view('faq');})->name('faq');
 Route::get('/connexion', function () {return view('connexion');})->name('connexion');
-//Inscription
-Route::get('/inscription', function() {
-    return view('inscription.inscription');
-})->name('inscription');
 
-Route::post('/inscription', [RegistrationController::class, 'register'])->name('inscription');
-Route::post('/inscription-etudiant', [RegistrationController::class, 'register'])->name('inscription-etu');
-Route::get('/inscription-etudiant', function () {return view('inscription.form-etudiant');})->name('inscription-etu');
-Route::post('/inscription-entreprise', [RegistrationController::class, 'register'])->name('form-entreprise');
-Route::get('/inscription-entreprise', function () {return view('inscription.form-entreprise');})->name('form-entreprise');
-Route::get('/inscription-service-carriere', function () {return view('inscription.form-servicecarriere');})->name('service.carriere');
-Route::post('/inscription-service-carriere', [RegistrationController::class, 'register'])->name('service.carriere');
+//Inscription
+Route::get('/inscription', [RegistrationController::class, 'register_get'])->name('inscription');
+Route::post('/inscription', [RegistrationController::class, 'register_post'])->name('inscription.post');
+Route::get('/inscription-etudiant', [RegistrationController::class, 'register_etudiant_get'])->name('inscription.etudiant.get');
+Route::post('/inscription-etudiant', [RegistrationController::class, 'register_etudiant_post'])->name('inscription.etudiant.post');
+Route::get('/inscription-entreprise', [RegistrationController::class, 'register_entreprise_get'])->name('inscription.entreprise.get');
+Route::post('/inscription-entreprise', [RegistrationController::class, 'register_entreprise_post'])->name('inscription.entreprise.post');
+Route::get('/inscription-service-carriere', [RegistrationController::class, 'register_service_carriere_get'])->name('inscription.service-carriere.get');
+Route::post('/inscription-service-carriere', [RegistrationController::class, 'register_service_carriere_post'])->name('inscription.service-carriere.post');
 // Tableau de bord
 Route::get('/dashboard-entreprise', function () {return view('entreprise.tableau-de-bord');})->name('entreprise.tableau-de-bord');
 Route::get('/dashboard-etudiant', function() {return view('etudiant.tableau-de-bord');})->name('etudiant.dashboard');
@@ -86,5 +85,10 @@ Route::get('/modiferProfil', function() {return view('etudiant.modifierProfil');
 Route::get('/explorer-event', function() {return view('etudiant.evenements');})->name('explorer-event');
 Route::get('/motdepasse', function() {return view('etudiant.motdepasse');})->name('motdepasse');
 
+/*Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});*/
 
-
+//require __DIR__.'/auth.php';

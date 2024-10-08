@@ -20,7 +20,7 @@
         <div class="form-inner">
           <h3>Creer votre compte NextGen</h3>
 
-          <form method="post" action="{{ route('inscription') }}">
+          <form method="post" action="{{ route('inscription.post') }}">
             @csrf
 
               <x-text-input id="role" class="block mt-1 w-full" type="hidden" name="role"

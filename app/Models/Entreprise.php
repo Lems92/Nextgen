@@ -14,7 +14,6 @@ class Entreprise extends Model
 
     protected $fillable = [
         'id',
-        'user_id',
         'nom_entreprise',
         'secteur_activite',
         'adresse',
@@ -33,12 +32,14 @@ class Entreprise extends Model
         'fields',
         'inclusion_diversity',
         'training_support',
-        'selected_offer',   
+        'selected_offer',
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id');
+
+
+    public function user() {
+        return $this->morphOne(User::class, 'userable');
     }
+
     public function offres()
     {
         return $this->hasMany(Offre::class, 'entreprise_id');

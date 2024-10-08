@@ -18,7 +18,7 @@ return new class extends Migration
             //$table->string('adresse_email')->unique();
             $table->string('numero_telephone');
             $table->date('date_naissance');
-            $table->enum('genre', ['Homme', 'Femme', 'Autre']);
+            $table->enum('genre', ['masculin', 'feminin', 'non-binaire', 'prefere-pas-dire']);
             $table->text('adresse_postale');
             $table->string('pays');
             $table->string('region');
@@ -82,38 +82,29 @@ return new class extends Migration
             $table->text('centres_interet')->nullable();
             $table->string('document_diplome')->nullable();
             $table->string('document_recommandation')->nullable();
-            $table->enum('secteur_activite_preferer', [
-                "Technologie de l\'Information",
-                'Santé',
-                'Finance et Comptabilité',
-                'Ingénierie',
-                'Commerce et Marketing',
-                'Éducation et Formation',
-                'Arts et Création',
-                'Sciences et Recherche',
-                'Tourisme et Hôtellerie',
-                'Droit et Juridique',
-                'Agriculture et Environnement',
-                'Énergie et Ressources Naturelles',
-                'Transport et Logistique',
-                'Développement et Humanitaire',
-                'Télécommunications'
-            ])->nullable();
-            $table->enum('type_emploi_recherche', ['CDI', 'Stage', 'Contrat à durée déterminée', 'Freelance', 'Alternance'])->nullable();
+            $table->json('secteur_activite_preferer')->nullable();
+            $table->json('type_emploi_recherche')->nullable();
             $table->text('localisation_geographique_preferee')->nullable();
             $table->string('salaire_souhaite')->nullable();
-            $table->enum('duree_disponibilite', ['Moins de 1 mois', '1 à 3 mois', '3 à 6 mois', '6 à 12 mois', 'Plus de 12 mois'])->nullable();
-            $table->enum('semestre_cours', ['Semestre 1', 'Semestre 2'])->nullable();
+            $table->enum('duree_disponibilite', [
+                'Moins de 1 mois',
+                '1 à 3 mois',
+                '3 à 6 mois',
+                '6 à 12 mois',
+                'Plus de 12 mois'
+            ])->nullable();
+            $table->enum('semestre_cours', ['semestre_1', 'semestre_2'])->nullable();
             $table->date('vacances_ete_debut')->nullable();
             $table->date('vacances_ete_fin')->nullable();
-            $table->text('dates_disponibles_vacances_ete')->nullable();
+            $table->text('dates_disponibles_vacances_ete_debut')->nullable();
+            $table->text('dates_disponibles_vacances_ete_fin')->nullable();
             $table->boolean('accessibilite')->nullable();
             $table->text('details_accessibilite')->nullable();
             $table->string('origine_ethnique')->nullable();
-            $table->enum('statut_socio_economique', ['Origine modeste', 'Classe moyenne', 'Préfère ne pas dire'])->nullable();
-            $table->enum('conditions_vie_specifiques', ['Sans domicile fixe', 'En situation de handicap', 'Préfère ne pas dire'])->nullable();
-            $table->enum('religion_belief', ['Chrétien', 'Musulman', 'Bouddhiste', 'Hindou', 'Préfère ne pas dire'])->nullable();
-            $table->enum('orientation_sexuelle', ['Hétérosexuel', 'Homosexuel', 'Bisexuel', 'Préfère ne pas dire'])->nullable();
+            $table->enum('statut_socio_economique', ['origine_modeste', 'classe_moyenne', 'prefere_pas_dire'])->nullable();
+            $table->enum('conditions_vie_specifiques', ['sans_domicile_fixe', 'handicap', 'prefere_pas_dire'])->nullable();
+            $table->enum('religion_belief', ['chretien', 'musulman', 'bouddhiste', 'hindou', 'prefere_pas_dire'])->nullable();
+            $table->enum('orientation_sexuelle', ['hétérosexuel', 'homosexuel', 'bisexuel', 'prefere_pas_dire'])->nullable();
             $table->timestamps();
         });
     }
