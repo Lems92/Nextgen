@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entreprise;
 use App\Models\Etudiant;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -160,7 +161,50 @@ class RegistrationController extends Controller
             return redirect()->route('inscription');
         }
 
-        return redirect()->route('home');
+        $validatedData = $request->validate([
+            'nom_entreprise' => 'required|string',
+            'secteur_activite' => 'required|string',
+            'adresse' => 'required|string',
+            'complement_adresse' => 'required|string',
+            'code_postal' => 'required|string',
+            'ville' => 'required|string',
+            'region' => 'required|string',
+            'pays' => 'required|string',
+            'site_web' => 'required|string|nullable',
+            'date_creation' => 'required|string',
+            'nom_contact' => 'required|string',
+            'fonction_contact' => 'required|string',
+            'email_contact' => 'required|string',
+            'telephone_contact' => 'required|string',
+            'opportunities' => 'required|array',
+            'domaines_activites' => 'required|array',
+            'inclusion_diversity' => 'nullable|array',
+            'training_support' => 'nullable|array',
+            'selected_offer' => 'required|string',
+        ]);
+
+        try {
+            // enregistrement via un transaction
+            DB::transaction(function () use ($registerData, $validatedData) {
+                $entreprise = Entreprise::create($validatedData);
+
+                $user = User::create([
+                    'email' => $registerData['email'],
+                    'password' => bcrypt($registerData['password']),
+                    'userable_id' => $entreprise->id,
+                    'userable_type' => get_class($entreprise),
+                ]);
+
+                $user->assignRole('entreprise');
+            });
+        } catch (\Exception $exception) {
+            throw new Exception($exception->getMessage());
+        }
+
+        // Nettoyer les données de la session
+        Session::forget('register_data');
+
+        return redirect()->route('connexion');
     }
 
     //inscription service carriere

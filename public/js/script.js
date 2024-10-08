@@ -1,3 +1,7 @@
+function headerStyle() {
+    //TODO
+}
+
 (function ($) {
 
 	"use strict";
@@ -165,7 +169,7 @@
 		});
 	}
 
-	//Banner Carousel 
+	//Banner Carousel
 	if ($('.banner-carousel').length) {
 		$('.banner-carousel').owlCarousel({
 			animateOut: 'fadeOut',
@@ -671,7 +675,7 @@
 		$radio.closest('label').addClass('selected');
 	});
 
-	// Input Upload 
+	// Input Upload
 	var uploadButton = {
 		$button: $('.uploadButton-input'),
 		$nameField: $('.uploadButton-file-name')

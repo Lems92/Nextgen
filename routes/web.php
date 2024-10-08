@@ -37,7 +37,6 @@ Route::middleware('auth')->group(function() {
     Route::get('/offres/create', [OffreController::class, 'create'])->name('offres.create');
     route::get('/offre', [OffreController::class, 'create'])->name('offre');
 
-
     // Route pour publier l'offre
     Route::post('/offres', [OffreController::class, 'store'])->name('offres.store');
 });
@@ -48,8 +47,6 @@ Route::post('/enregistrer-entreprise', [EntrepriseController::class, 'store'])->
 Route::get('/entreprise-succes', function () {
     return view('entreprise.succes');
 })->name('entreprise.success');
-
-Route::post('/etudiants', [EtudiantController::class, 'store']);
 
 Route::get('/', function () {return view('accueil');})->name('accueil');
 Route::get('/test', function () {return view('test');});

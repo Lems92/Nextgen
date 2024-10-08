@@ -29,10 +29,17 @@ class Entreprise extends Model
         'email_contact',
         'telephone_contact',
         'opportunities',
-        'fields',
+        'domaines_activites',
         'inclusion_diversity',
         'training_support',
         'selected_offer',
+    ];
+
+    protected $casts = [
+        'opportunities' => 'array',
+        'domaines_activites' => 'array',
+        'inclusion_diversity' => 'array',
+        'training_support' => 'array',
     ];
 
 
