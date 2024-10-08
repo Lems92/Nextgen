@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\InscriptionController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\OffreController;
@@ -36,7 +35,7 @@ Route::post('/events/store', [EventController::class, 'store'])->name('events.st
 Route::middleware('auth')->group(function() {
     Route::get('/offres/create', [OffreController::class, 'create'])->name('offres.create');
     route::get('/offre', [OffreController::class, 'create'])->name('offre');
-    
+
 
     // Route pour publier l'offre
     Route::post('/offres', [OffreController::class, 'store'])->name('offres.store');
@@ -56,7 +55,7 @@ Route::get('/test', function () {return view('test');});
 Route::get('/about', function () {return view('about');})->name('about');
 Route::get('/faq', function () {return view('faq');})->name('faq');
 Route::get('/connexion', function () {return view('connexion');})->name('connexion');
-//Inscription 
+//Inscription
 Route::get('/inscription', function() {
     return view('inscription.inscription');
 })->name('inscription');

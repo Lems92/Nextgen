@@ -23,19 +23,18 @@ class RegistrationController extends Controller
             'role' => $validatedData['role'], // Ajoutez cette colonne à votre table users
         ]);
 
+        // on assigne un rôle à l'utilisateur
+        $user->assignRole($validatedData['role']);
+
         // Authentifier l'utilisateur
         Auth::login($user);
 
         // Rediriger vers la page appropriée en fonction du rôle
-        switch ($user->role) {
-            case 'etudiant':
-                return redirect()->route('inscription-etu');
-            case 'entreprise':
-                return redirect()->route('form-entreprise');
-            case 'service-carriere':
-                return redirect()->route('service.carriere');
-            default:
-                return redirect()->route('home');
-        }
+        return match ($user->role) {
+            'etudiant' => redirect()->route('inscription-etu'),
+            'entreprise' => redirect()->route('form-entreprise'),
+            'service-carriere' => redirect()->route('service.carriere'),
+            default => redirect()->route('home'),
+        };
     }
 }
