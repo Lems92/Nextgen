@@ -14,12 +14,13 @@ class Universite extends Model
         'nom_etablissement',
         'adresse_etablissement',
         'site_web',
-        'nom_fonction',
-        'email',
-        'telephone',
+        'nom_contact',
+        'fonction_contact',
+        'adresse_email_contact',
+        'numero_telephone_contact',
         'nombre_etudiants',
-        'domaines_etudes',
-        'niveaux_etudes',
+        'domaines_etudes_proposes',
+        'niveaux_etudes_proposes',
     ];
 
     public function user(): MorphOne
@@ -28,7 +29,7 @@ class Universite extends Model
     }
 
     protected $casts = [
-        'domaines_etudes' => 'array',
-        'niveaux_etudes' => 'array',
+        'domaines_etudes_proposes' => 'array',
+        'niveaux_etudes_proposes' => 'array',
     ];
 }

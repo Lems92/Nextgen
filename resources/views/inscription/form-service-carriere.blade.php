@@ -69,51 +69,46 @@
                 {{ session('error') }}
             </div>
         @endif
-            <form method="POST" action="{{ route('universites.store') }}">
+            <form method="POST" action="{{ route('inscription.service-carriere.post') }}">
                 @csrf
-                <div class="form-group">
-                    <label>Nom complet de l'établissement :</label>
-                    <input type="text" class="form-control" name="nom_etablissement">
-                </div>
-                <div class="form-group">
-                    <label>Adresse de l'établissement :</label>
-                    <input type="text" class="form-control" name="adresse_etablissement">
-                </div>
-                <div class="form-group">
-                    <label>Site Web :</label>
-                    <input type="text" class="form-control" name="site_web">
+
+                <div class="col-lg-12 form-group">
+                    <h3>Informations Générales</h3>
                 </div>
 
-                <!-- Personne de Contact -->
                 <div class="form-group">
-                    <label>Nom et fonction :</label>
-                    <input type="text" class="form-control" name="nom_fonction">
+                    <label for="nom_etablissement">Nom complet de l'établissement :</label>
+                    <input type="text" id="nom_etablissement" value="{{old('nom_etablissement')}}" class="form-control" name="nom_etablissement">
+                    <x-input-error :messages="$errors->get('nom_etablissement')" class="mt-2" />
                 </div>
                 <div class="form-group">
-                    <label>Adresse e-mail :</label>
-                    <input type="email" class="form-control" name="email">
+                    <label for="adresse_etablissement">Adresse de l'établissement :</label>
+                    <input type="text" id="adresse_etablissement" value="{{old('adresse_etablissement')}}" class="form-control" name="adresse_etablissement">
+                    <x-input-error :messages="$errors->get('adresse_etablissement')" class="mt-2" />
                 </div>
                 <div class="form-group">
-                    <label>Numéro de téléphone :</label>
-                    <input type="text" class="form-control" name="telephone">
+                    <label for="site_web">Site Web :</label>
+                    <input type="text" id="site_web" value="{{old('site_web')}}" class="form-control" name="site_web">
+                    <x-input-error :messages="$errors->get('site_web')" class="mt-2" />
                 </div>
 
                 <!-- Détails sur les Étudiants -->
                 <div class="form-group">
-                    <label>Nombre d'étudiants inscrits :</label>
-                    <select class="form-control" name="nombre_etudiants">
-                        <option>Moins de 100</option>
-                        <option>100 à 499</option>
-                        <option>500 à 999</option>
-                        <option>1 000 à 4 999</option>
-                        <option>5 000 à 9 999</option>
+                    <label for="nombre_etudiants">Nombre d'étudiants inscrits :</label>
+                    <select class="form-control" id="nombre_etudiants" name="nombre_etudiants">
+                        <option value="Moins de 100">Moins de 100</option>
+                        <option value="100 à 499">100 à 499</option>
+                        <option value="500 à 999">500 à 999</option>
+                        <option value="1 000 à 4 999">1 000 à 4 999</option>
+                        <option value="5 000 à 9 999">5 000 à 9 999</option>
                     </select>
+                    <x-input-error :messages="$errors->get('nombre_etudiants')" class="mt-2" />
                 </div>
 
                 <!-- Domaines d'études proposés -->
                 <div class="form-group">
-                    <label>Domaines d'études proposés :</label>
-                    <select class="chosen-select multiple" name="domaines_etudes[]" multiple>
+                    <label for="domaines_etudes_proposes">Domaines d'études proposés :</label>
+                    <select class="chosen-select multiple" id="domaines_etudes_proposes" name="domaines_etudes_proposes[]" multiple>
                         <optgroup label="Arts et Humanités">
                             <option>Histoire</option>
                             <option>Littérature</option>
@@ -222,12 +217,13 @@
                             <option>Études de sécurité</option>
                         </optgroup>
                     </select>
+                    <x-input-error :messages="$errors->get('domaines_etudes_proposes')" class="mt-2" />
                 </div>
 
                 <!-- Niveaux d'études proposés -->
                 <div class="form-group">
-                    <label>Niveaux d'études proposés :</label>
-                    <select class="chosen-select multiple" name="niveaux_etudes[]" multiple>
+                    <label for="niveaux_etudes_proposes">Niveaux d'études proposés :</label>
+                    <select class="chosen-select multiple" id="niveaux_etudes_proposes" name="niveaux_etudes_proposes[]" multiple>
                         <option>Licence générale</option>
                         <option>Licence professionnelle</option>
                         <option>Licence en alternance</option>
@@ -247,13 +243,42 @@
                         <option>Diplômes de formation continue</option>
                         <option>Double diplôme en partenariat avec d’autres institutions académiques</option>
                     </select>
+                    <x-input-error :messages="$errors->get('niveaux_etudes_proposes')" class="mt-2" />
                 </div>
+
+                <!-- Personne de Contact -->
+                <div class="col-lg-12 mt-5 form-group">
+                    <h3>Personne de contact</h3>
+                </div>
+
+                <div class="form-group">
+                    <label for="nom_contact">Nom :</label>
+                    <input type="text" id="nom_contact" value="{{old('nom_etablissement')}}" class="form-control" name="nom_contact">
+                    <x-input-error :messages="$errors->get('nom_etablissement')" class="mt-2" />
+                </div>
+                <div class="form-group">
+                    <label for="fonction_contact">Fonction :</label>
+                    <input type="text" id="fonction_contact" value="{{old('fonction_contact')}}" class="form-control" name="fonction_contact">
+                    <x-input-error :messages="$errors->get('fonction_contact')" class="mt-2" />
+                </div>
+                <div class="form-group">
+                    <label for="adresse_email_contact">Adresse e-mail :</label>
+                    <input type="email" id="adresse_email_contact" value="{{old('adresse_email_contact')}}" class="form-control" name="adresse_email_contact">
+                    <x-input-error :messages="$errors->get('adresse_email_contact')" class="mt-2" />
+                </div>
+                <div class="form-group">
+                    <label for="numero_telephone_contact">Numéro de téléphone :</label>
+                    <input type="text" id="numero_telephone_contact" value="{{old('numero_telephone_contact')}}" class="form-control" name="numero_telephone_contact">
+                    <x-input-error :messages="$errors->get('numero_telephone_contact')" class="mt-2" />
+                </div>
+
                 <div class="row">
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="theme-btn btn-style-one">Envoyer</button>
                     </div>
                 </div>
             </form>
-
+        </div>
+    </div>
 </section>
 @endsection

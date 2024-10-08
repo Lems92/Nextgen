@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Entreprise;
 use App\Models\Etudiant;
+use App\Models\Universite;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -214,7 +215,7 @@ class RegistrationController extends Controller
             return redirect()->route('inscription');
         }
 
-        return view('inscription.form-servicecarriere');
+        return view('inscription.form-service-carriere');
     }
 
     public function register_service_carriere_post(Request $request): RedirectResponse
@@ -225,7 +226,41 @@ class RegistrationController extends Controller
             return redirect()->route('inscription');
         }
 
-        return redirect()->route('home');
+        $validatedData = $request->validate([
+            'nom_etablissement' => 'required|string',
+            'adresse_etablissement' => 'required|string',
+            'site_web' => 'nullable|string',
+            'nom_contact' => 'required|string',
+            'fonction_contact' => 'required|string',
+            'adresse_email_contact' => 'required|string',
+            'numero_telephone_contact' => 'required|string',
+            'nombre_etudiants' => 'required|string',
+            'domaines_etudes_proposes' => 'required|array',
+            'niveaux_etudes_proposes' => 'required|array',
+        ]);
+
+        try {
+            // enregistrement via un transaction
+            DB::transaction(function () use ($registerData, $validatedData) {
+                $universite = Universite::create($validatedData);
+
+                $user = User::create([
+                    'email' => $registerData['email'],
+                    'password' => bcrypt($registerData['password']),
+                    'userable_id' => $universite->id,
+                    'userable_type' => get_class($universite),
+                ]);
+
+                $user->assignRole('service-carriere');
+            });
+        } catch (\Exception $exception) {
+            throw new Exception($exception->getMessage());
+        }
+
+        // Nettoyer les données de la session
+        Session::forget('register_data');
+
+        return redirect()->route('connexion');
     }
 
 }
