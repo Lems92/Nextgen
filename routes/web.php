@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\VerifyEmailController;
@@ -11,15 +12,15 @@ use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\EventController;
 
+Route::get('/', [HomeController::class, 'home'])->name('accueil');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
+
 Route::middleware(['guest'])->group(function () {
-    Route::get('/', [HomeController::class, 'home'])->name('accueil');
-    Route::get('/about', [HomeController::class, 'about'])->name('about');
-    Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
 
     // Authentification
     Route::get('/connexion', [LoginController::class, 'connexion'])->name('connexion');
     Route::post('/connexion', [LoginController::class, 'login'])->name('login.submit');
-
     //Inscription
     Route::get('/inscription', [RegistrationController::class, 'register_get'])->name('inscription');
     Route::post('/inscription', [RegistrationController::class, 'register_post'])->name('inscription.post');
@@ -39,12 +40,13 @@ Route::middleware(['auth'])->group(function () {
 
 //commun
 Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/attente', function () {return view('waiting');})->name('waiting_page');
     Route::get('/modiferProfil', function() {return view('etudiant.modifierProfil');})->name('modifierProfil');
 });
 
 // administration
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
-    Route::get('/admin', function() {return view('admin.admin');})->name('admin.dashboard');
+    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
 
 // etudiant

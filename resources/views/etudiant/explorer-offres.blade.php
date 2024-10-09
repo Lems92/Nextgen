@@ -1,10 +1,10 @@
-@extends('app')
+@extends('dashboard-layout')
 
 @section('title', 'Dashboard')
 
 @section('content')
 
-@include('header.etudiant')
+@include('header.dashboard-header')
 
         <section class="ls-section">
             <div class="auto-container">
@@ -267,14 +267,14 @@
                                     @csrf
                                     <button type="button" class="theme-btn btn-style-one" onclick="confirmApply({{ $offre->id }})">Postuler</button>
                                 </form>
-                                
-                                
+
+
                             </div>
                         </div>
                     </div>
                 @endforeach
 
-                    
+
 
 
                     <!-- Listing Show More -->

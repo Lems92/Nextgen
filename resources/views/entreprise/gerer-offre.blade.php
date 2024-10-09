@@ -1,10 +1,10 @@
-@extends('app')
+@extends('dashboard-layout')
 
 @section('title', 'NextGen - Inscription')
 
 @section('content')
 
-@include('header.entreprise')
+@include('header.dashboard-header')
 
 
 <section class="user-dashboard">
@@ -86,11 +86,11 @@
       Chart.defaults.global.defaultFontFamily = "Sofia Pro";
       Chart.defaults.global.defaultFontColor = '#888';
       Chart.defaults.global.defaultFontSize = '14';
-  
+
       var ctx = document.getElementById('chart').getContext('2d');
-  
+
       var chart = new Chart(ctx, {
-  
+
         type: 'line',
         // The data for our dataset
         data: {
@@ -110,21 +110,21 @@
             pointBorderWidth: "2",
           }]
         },
-  
+
         // Configuration options
         options: {
-  
+
           layout: {
             padding: 10,
           },
-  
+
           legend: {
             display: false
           },
           title: {
             display: false
           },
-  
+
           scales: {
             yAxes: [{
               scaleLabel: {
@@ -145,7 +145,7 @@
               },
             }],
           },
-  
+
           tooltips: {
             backgroundColor: '#333',
             titleFontSize: 13,
@@ -208,7 +208,7 @@
     margin-bottom: 0;
 }
 
-.default-table th, 
+.default-table th,
 .default-table td {
     padding: 10px;
     text-align: left;

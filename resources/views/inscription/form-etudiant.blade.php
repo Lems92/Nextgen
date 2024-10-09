@@ -620,7 +620,7 @@
                                     <label for="conditions_vie_specifiques">Conditions de vie spécifiques :</label>
                                     <select class="form-select" id="conditions_vie_specifiques" name="conditions_vie_specifiques">
                                         <option value="prefere_pas_dire">Préfère ne pas dire</option>
-                                        <option value="sans_domicile">Sans domicile fixe</option>
+                                        <option value="sans_domicile_fixe">Sans domicile fixe</option>
                                         <option value="handicap">En situation de handicap</option>
                                     </select>
                                 </div>

@@ -1,10 +1,10 @@
-@extends('app')
+@extends('dashboard-layout')
 
 @section('title', 'NextGen - Inscription')
 
 @section('content')
 
-@include('header.entreprise')
+@include('header.dashboard-header')
 
         <!-- Dashboard -->
         <section class="user-dashboard">
@@ -40,7 +40,7 @@
                             </div>
                         </a>
                     </div>
-                    <!-- OFFRE GOLD 
+                    <!-- OFFRE GOLD
                     <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <a href="offre.html" class="ui-item-link">
                             <div class="ui-item ui-green">
@@ -66,14 +66,14 @@
                 <h3>Manage Jobs</h3>
                 <div class="text">Ready to jump back in?</div>
               </div>
-      
+
                 <div class="col-lg-12">
                   <!-- Ls widget -->
                   <div class="ls-widget">
                     <div class="tabs-box">
                       <div class="widget-title">
                         <h4>My Job Listings</h4>
-      
+
                         <div class="chosen-outer">
                           <!--Tabs Box-->
                           <select class="chosen-select">
@@ -85,7 +85,7 @@
                           </select>
                         </div>
                       </div>
-      
+
                       <div class="widget-content">
                         <div class="table-outer">
                           <table class="default-table manage-job-table">
@@ -98,7 +98,7 @@
                                 <th>Action</th>
                               </tr>
                             </thead>
-      
+
                             <tbody>
                               <tr>
                                 <td>
@@ -179,8 +179,8 @@
                     </div>
                   </div>
                 </div>
-      
-      
+
+
             </div>
           </section>
         <section class="user-dashboard">
@@ -189,7 +189,7 @@
                 <h3>All Aplicants</h3>
                 <div class="text">Ready to jump back in?</div>
               </div>
-      
+
                 <div class="col-lg-12">
                   <!-- Ls widget -->
                   <div class="ls-widget">
@@ -197,7 +197,7 @@
                       <div class="widget-title">
                         <h4>Applicant</h4>
                       <div class="widget-content">
-      
+
                         <div class="tabs-box">
                           <div class="aplicants-upper-bar">
                             <h6>Senior Product Designer</h6>
@@ -207,7 +207,7 @@
                               <li class="tab-btn rejected" data-tab="#rejected">Rejected(s): 4</li>
                             </ul>
                           </div>
-      
+
                           <div class="tabs-content">
                             <!--Tab-->
                             <div class="tab active-tab" id="totals">
@@ -239,7 +239,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -267,7 +267,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -295,7 +295,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -323,7 +323,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -351,7 +351,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -381,7 +381,7 @@
                                 </div>
                               </div>
                             </div>
-      
+
                             <!--Tab-->
                             <div class="tab" id="approved">
                               <div class="row">
@@ -412,7 +412,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -440,10 +440,10 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                               </div>
                             </div>
-      
+
                             <!--Tab-->
                             <div class="tab" id="rejected">
                               <div class="row">
@@ -474,7 +474,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -502,7 +502,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -530,7 +530,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -578,11 +578,11 @@
       Chart.defaults.global.defaultFontFamily = "Sofia Pro";
       Chart.defaults.global.defaultFontColor = '#888';
       Chart.defaults.global.defaultFontSize = '14';
-  
+
       var ctx = document.getElementById('chart').getContext('2d');
-  
+
       var chart = new Chart(ctx, {
-  
+
         type: 'line',
         // The data for our dataset
         data: {
@@ -602,21 +602,21 @@
             pointBorderWidth: "2",
           }]
         },
-  
+
         // Configuration options
         options: {
-  
+
           layout: {
             padding: 10,
           },
-  
+
           legend: {
             display: false
           },
           title: {
             display: false
           },
-  
+
           scales: {
             yAxes: [{
               scaleLabel: {
@@ -637,7 +637,7 @@
               },
             }],
           },
-  
+
           tooltips: {
             backgroundColor: '#333',
             titleFontSize: 13,

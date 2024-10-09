@@ -1,8 +1,8 @@
-@extends('app')
+@extends('dashboard-layout')
 
 @section('content')
 
-@include('header.univ')
+@include('header.dashboard-header')
 
 <section class="contact-section bgc-home20" id="contact-section" data-step-content="1">
     <div class="auto-container">
@@ -27,43 +27,43 @@
             <form method="POST" action="{{ route('events.store') }}">
                 @csrf
                 <input type="hidden" name="universite_id">
-            
+
                 <!-- Autres champs du formulaire -->
                 <div class="form-group">
                     <label for="event-title">Titre de l'événement</label>
                     <input type="text" id="event-title" name="event_title" class="form-control" required>
                 </div>
-            
+
                 <!-- Champs pour les dates et heures -->
                 <div class="form-group">
                     <label for="start-date">Date de début</label>
                     <input type="date" id="start-date" name="start_date" class="form-control" required>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="end-date">Date de fin</label>
                     <input type="date" id="end-date" name="end_date" class="form-control" required>
                 </div>
-            
+
                 <div class="form-group">
                     <label for="start-time">Heure de début</label>
                     <input type="time" id="start-time" name="start_time" class="form-control" required>
                 </div>
-            
+
                 <div class="form-group">
                     <label for="end-time">Heure fin</label>
                     <input type="time" id="end-time" name="end_time" class="form-control" required>
                 </div>
-            
+
                 <div class="form-group">
                     <label for="event-description">Description</label>
                     <textarea id="event-description" name="event_description" class="form-control" required></textarea>
                 </div>
-            
+
                 <button type="submit" class="btn btn-primary">Créer l'événement</button>
             </form>
-            
-                
+
+
 </section>
 <script>
 document.addEventListener('DOMContentLoaded', function() {

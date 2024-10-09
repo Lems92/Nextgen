@@ -1,10 +1,10 @@
-@extends('app')
+@extends('dashboard-layout')
 
 @section('title', 'Publier une offre')
 
 @section('content')
 
-@include('header.entreprise')
+@include('header.dashboard-header')
 
 <div class="page-wrapper">
     <div class="preloader"></div>
@@ -157,11 +157,11 @@
         background-color: #f9f9f9;
         border-radius: 8px;
     }
-    
+
     .form-group label {
         font-weight: bold;
     }
-    
+
     .form-group select[multiple] {
         height: auto;
     }

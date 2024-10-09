@@ -133,7 +133,7 @@ class RegistrationController extends Controller
         $is_univ_partenaire = Universite::where('nom_etablissement', 'LIKE', "%%")->count();
 
         if($is_univ_partenaire === 0) {
-            $validateData['is_active'] = true;
+            $validateData['is_accepted_by_admin'] = true;
         }
 
         //dd($validateData);

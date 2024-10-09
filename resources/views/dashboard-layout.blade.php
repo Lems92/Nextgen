@@ -26,14 +26,6 @@
         <main>
             @yield('content')
         </main>
-        @include('pub.popup', [
-            'companyName' => 'Nom de l\'Entreprise',
-            'domain' => 'Technologie',
-            'numberOfPosts' => 5
-        ])
-
-    <!-- Pied de page (Footer) -->
-        @include('layouts.footer')
     </div>
 
     <!-- Scripts JavaScript -->

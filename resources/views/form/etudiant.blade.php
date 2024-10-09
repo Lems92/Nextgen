@@ -1,10 +1,10 @@
-@extends('app')
+@extends('dashboard-layout')
 
 @section('title', 'Dashboard')
 
 @section('content')
 
-@include('header.etudiant')
+@include('header.dashboard-header')
 <section class="user-dashboard">
   <div class="dashboard-outer">
     <div class="upper-title-box">

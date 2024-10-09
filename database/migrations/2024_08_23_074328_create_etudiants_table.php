@@ -24,28 +24,7 @@ return new class extends Migration
             $table->string('ville');
             $table->string('code_postal');
             $table->string('nom_ecole_universite');
-            $table->enum('domaine_etudes', [
-                'Sciences',
-                'Ingénierie',
-                'Arts',
-                'Commerce',
-                'Médecine',
-                'Droit',
-                'Économie',
-                'Architecture',
-                'Sciences sociales',
-                'Sciences de la vie',
-                "Sciences de l\'environnement",
-                'Éducation',
-                'Tourisme et hôtellerie',
-                'Agriculture et environnement rural',
-                "Technologies de l\'information",
-                'Communication',
-                'Langues et cultures',
-                'Sciences politiques',
-                'Gestion',
-                'Sciences de la santé'
-            ]);
+            $table->string('domaine_etudes');
             $table->enum('niveau_etudes', ['Licence', 'Master', 'Doctorat']);
             $table->string('annee_obtention_diplome');
             $table->string('titre_stage_academique')->nullable();

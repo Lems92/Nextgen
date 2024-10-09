@@ -1,10 +1,10 @@
-@extends('app')
+@extends('dashboard-layout')
 
 @section('title', 'Dashboard')
 
 @section('content')
 
-@include('header.etudiant')
+@include('header.dashboard-header')
 
 <section class="contact-section bgc-home20">
   <div class="auto-container">
@@ -141,7 +141,7 @@
                       <legend><h4>Expérience Académique</h4></legend>
                       <div class="mb-3">
                           <h6>Stage Académique</h6>
-                          <p>ex: Stage de recherche, Stage en laboratoire, Stage en entreprise...</p> 
+                          <p>ex: Stage de recherche, Stage en laboratoire, Stage en entreprise...</p>
                           <div id="stage_academique_conteneur"></div>
                           <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('stage_academique')">Ajouter</button>
                       </div>
@@ -155,28 +155,28 @@
 
                       <div class="mb-3">
                           <h6>Thèse et Mémoire</h6>
-                          <p>ex: Thèse de doctorat, Mémoire de Master, Mémoire de Licence, Dissertation...</p> 
+                          <p>ex: Thèse de doctorat, Mémoire de Master, Mémoire de Licence, Dissertation...</p>
                           <div id="these_memoire_conteneur"></div>
                           <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('these_memoire')">Ajouter</button>
                       </div>
 
                       <div class="mb-3">
                           <h6>Réalisations</h6>
-                          <p>ex: Publication dans une revue académique, Présentation à une conférence universitaire, Récompense ou distinction académique, Participation à un concours académique...</p> 
+                          <p>ex: Publication dans une revue académique, Présentation à une conférence universitaire, Récompense ou distinction académique, Participation à un concours académique...</p>
                           <div id="realisations_conteneur"></div>
                           <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('realisations')">Ajouter</button>
                       </div>
 
                       <div class="mb-3">
                           <h6>Cours Spécialisés</h6>
-                          <p>ex: Cours de spécialisation, Séminaire, Atelier spécialisé</p> 
+                          <p>ex: Cours de spécialisation, Séminaire, Atelier spécialisé</p>
                           <div id="cours_speciaux_conteneur"></div>
                           <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('cours_speciaux')">Ajouter</button>
                       </div>
 
                       <div class="mb-3">
                           <h6>Autres Expériences</h6>
-                          <p>ex: Participation à des Evenements académiques, recherche, encadrement, activités Parascolaires; programmes d'échange, Certificats et diplômes complémentaires...</p> 
+                          <p>ex: Participation à des Evenements académiques, recherche, encadrement, activités Parascolaires; programmes d'échange, Certificats et diplômes complémentaires...</p>
                           <div id="autres_experiences_conteneur"></div>
                           <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('autres_experiences')">Ajouter</button>
                       </div>
@@ -187,25 +187,25 @@
                       <legend><h4>Compétences</h4></legend>
                       <div class="mb-3">
                           <h6>Compétences techniques</h6>
-                          <p>ex: Compétences en Informatiques (Bureautique, programmation, gestion de bases de données, systèmes d'information, cybersécurité...)</p> 
+                          <p>ex: Compétences en Informatiques (Bureautique, programmation, gestion de bases de données, systèmes d'information, cybersécurité...)</p>
                           <div id="competences_techniques_conteneur"></div>
                           <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_techniques')">Ajouter</button>
                       </div>
                       <div class="mb-3">
                           <h6>Compétences en Recherche et Analyse :</h6>
-                          <p>ex: Recherche documentaire, Analyse de donnée, Rédaction de rapports</p> 
+                          <p>ex: Recherche documentaire, Analyse de donnée, Rédaction de rapports</p>
                           <div id="competences_en_communication_conteneur"></div>
                           <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_en_recherche_et_analyse')">Ajouter</button>
                       </div>
                       <div class="mb-3">
                           <h6>Compétences en Communication :</h6>
-                          <p>ex: Communication orale/ecrite, compétence en négociation</p> 
+                          <p>ex: Communication orale/ecrite, compétence en négociation</p>
                           <div id="competences_en_communication_conteneur"></div>
                           <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('competences_en_communication')">Ajouter</button>
                       </div>
                       <div class="mb-3">
                           <h6>Autres compétences</h6>
-                          <p>ex: Compétences interpersonnelles, Résolutions des problèmes, adaptabilités, gestion du stress, leadership, Ethique et responsabilité, gestion financière, langues...</p> 
+                          <p>ex: Compétences interpersonnelles, Résolutions des problèmes, adaptabilités, gestion du stress, leadership, Ethique et responsabilité, gestion financière, langues...</p>
                           <div id="autres_competences_conteneur"></div>
                           <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('autres_competences')">Ajouter</button>
                       </div>
@@ -216,7 +216,7 @@
                       <legend><h4>Expérience Professionnelle</h4></legend>
                       <div class="mb-3">
                           <h6>Expérience Professionnelle :</h6>
-                          <p>ex: Stage en Entreprise, Emplois à temps partiel, Expérience de travail pertinente, projets professionnels, bénévolat, entrepreneuriat, formations professionnelles, responsabilités additionnelles, expérience internationale, publications et contributions...</p> 
+                          <p>ex: Stage en Entreprise, Emplois à temps partiel, Expérience de travail pertinente, projets professionnels, bénévolat, entrepreneuriat, formations professionnelles, responsabilités additionnelles, expérience internationale, publications et contributions...</p>
                           <div id="experiences_professionnelles_conteneur"></div>
                           <button type="button" class="theme-btn btn-style-four" onclick="ajouterChamp('experiences_professionnelles')">Ajouter</button>
                       </div>
@@ -256,7 +256,7 @@
                   <!-- Préférences de Carrière -->
                   <fieldset class="form-section">
                       <legend><h4>Préférences de Carrière</h4></legend>
-                      
+
                       <!-- Secteur d'activité préféré -->
                       <div class="mb-3">
                           <label for="secteur-activite" class="form-label">Secteur d'activité préféré :</label>
@@ -353,7 +353,7 @@
                               </optgroup>
                           </select>
                       </div>
-                      
+
                       <!-- Type d'emploi recherché -->
                       <div class="mb-3">
                           <label for="type-emploi" class="form-label">Type d'emploi recherché :</label>
@@ -365,13 +365,13 @@
                               <option value="Alternance">Alternance</option>
                           </select>
                       </div>
-                      
+
                       <!-- Localisation géographique préférée -->
                       <div class="mb-3">
                           <label for="localisation-preferree" class="form-label">Localisation géographique préférée :</label>
                           <input type="text" id="localisation-preferree" name="localisation_preferree" class="form-control" required>
                       </div>
-                      
+
                       <!-- Salaire souhaité -->
                       <div class="mb-3">
                           <label for="salaire-souhaite" class="form-label">Salaire souhaité :</label>
@@ -498,7 +498,7 @@
 </div>
 </fieldset>
 
-                  
+
 
                   <div class="text-center mt-4">
                       <button type="submit" class="theme-btn btn-style-one">Soumettre</button>
@@ -511,7 +511,7 @@
   </section>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-  
+
   <script>
       function ajouterChamp(secteur) {
           const conteneur = document.getElementById(`${secteur}_conteneur`);
@@ -519,7 +519,7 @@
               console.error(`Le conteneur pour ${secteur} n'existe pas.`);
               return;
           }
-  
+
           const div = document.createElement('div');
           div.classList.add('champ-academique');
           div.innerHTML = `
@@ -539,17 +539,17 @@
                   <textarea name="${secteur}_description[]" class="form-control" placeholder="Description" rows="4" required></textarea>
               </div>
           `;
-  
+
           conteneur.appendChild(div);
       }
-  
+
       function supprimerChamp(button) {
           const div = button.closest('.champ-academique');
           if (div) {
               div.remove();
           }
       }
-  
+
       document.addEventListener('DOMContentLoaded', function () {
               const regions = {
                   madagascar: [
@@ -572,17 +572,17 @@
                       { value: 'paca', text: 'Provence-Alpes-Côte d\'Azur' }
                   ]
               };
-  
+
               const paysSelect = document.getElementById('pays');
               const regionSelect = document.getElementById('region');
-  
+
               function updateRegions() {
                   const selectedCountry = paysSelect.value;
                   const regionsList = regions[selectedCountry] || [];
-                  
+
                   // Clear existing options
                   regionSelect.innerHTML = '';
-  
+
                   // Populate new options
                   regionsList.forEach(region => {
                       const option = document.createElement('option');
@@ -591,10 +591,10 @@
                       regionSelect.appendChild(option);
                   });
               }
-  
+
               // Initial population of regions
               updateRegions();
-  
+
               // Add event listener to update regions when the country changes
               paysSelect.addEventListener('change', updateRegions);
           });

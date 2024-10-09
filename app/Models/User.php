@@ -18,6 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail, Sluggable
         'password',
         'userable_type',
         'userable_id',
+        'is_accepted_by_admin',
         'slug',
     ];
 

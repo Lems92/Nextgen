@@ -50,7 +50,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'userable_type' => null,
             'userable_id' => null,
             'email_verified_at' => now(),
-            'is_active' => true,
+            'is_accepted_by_admin' => true,
         ]);
 
         $admin->assignRole("admin");

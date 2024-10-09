@@ -1,10 +1,10 @@
-@extends('app')
+@extends('dashboard-layout')
 
 @section('title', 'NextGen - Inscription')
 
 @section('content')
 
-@include('header.univ')
+@include('header.dashboard-header')
 
         <!-- Dashboard -->
         <section class="user-dashboard">
@@ -40,7 +40,7 @@
                             </div>
                         </a>
                     </div>
-                    <!-- OFFRE GOLD 
+                    <!-- OFFRE GOLD
                     <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
                         <a href="offre.html" class="ui-item-link">
                             <div class="ui-item ui-green">
@@ -66,7 +66,7 @@
                 <h3>Gerer les évenements</h3>
                 <div class="text">Prêt pour organiser des évenements ?</div>
               </div>
-          
+
               <div class="row">
                 <div class="col-lg-12">
                   <!-- Ls widget -->
@@ -74,7 +74,7 @@
                     <div class="tabs-box">
                       <div class="widget-title">
                         <h4>Mes Evenements</h4>
-          
+
                         <div class="chosen-outer">
                           <!--Tabs Box-->
                           <select class="chosen-select">
@@ -86,7 +86,7 @@
                           </select>
                         </div>
                       </div>
-          
+
                       <div class="widget-content">
                         <div class="table-outer">
                           <table class="default-table manage-event-table">
@@ -99,7 +99,7 @@
                                 <th>Action</th>
                               </tr>
                             </thead>
-          
+
                             <tbody>
                               <tr>
                                 <td><h6>Annual Tech Conference</h6></td>
@@ -126,14 +126,14 @@
               </div>
             </div>
           </section>
-          
+
         <section class="user-dashboard">
             <div class="dashboard-outer">
               <div class="upper-title-box">
                 <h3>Tous les étudiants</h3>
                 <div class="text">Prêts ?</div>
               </div>
-      
+
               <div class="row">
                 <div class="col-lg-12">
                   <!-- Ls widget -->
@@ -142,7 +142,7 @@
                       <div class="widget-title">
                         <h4>Etudiants</h4>
                       <div class="widget-content">
-      
+
                         <div class="tabs-box">
                           <div class="aplicants-upper-bar">
                             <h6>Etudiants</h6>
@@ -152,7 +152,7 @@
                               <li class="tab-btn rejected" data-tab="#rejected">Rejeté(s): 4</li>
                             </ul>
                           </div>
-      
+
                           <div class="tabs-content">
                             <!--Tab-->
                             <div class="tab active-tab" id="totals">
@@ -184,12 +184,12 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
-                                
+
                               </div>
                             </div>
-      
+
                             <!--Tab-->
                             <div class="tab" id="approved">
                               <div class="row">
@@ -220,7 +220,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -248,10 +248,10 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                               </div>
                             </div>
-      
+
                             <!--Tab-->
                             <div class="tab" id="rejected">
                               <div class="row">
@@ -282,7 +282,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -310,7 +310,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -338,7 +338,7 @@
                                     </div>
                                   </div>
                                 </div>
-      
+
                                 <!-- Candidate block three -->
                                 <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                                   <div class="inner-box">
@@ -387,11 +387,11 @@
       Chart.defaults.global.defaultFontFamily = "Sofia Pro";
       Chart.defaults.global.defaultFontColor = '#888';
       Chart.defaults.global.defaultFontSize = '14';
-  
+
       var ctx = document.getElementById('chart').getContext('2d');
-  
+
       var chart = new Chart(ctx, {
-  
+
         type: 'line',
         // The data for our dataset
         data: {
@@ -411,21 +411,21 @@
             pointBorderWidth: "2",
           }]
         },
-  
+
         // Configuration options
         options: {
-  
+
           layout: {
             padding: 10,
           },
-  
+
           legend: {
             display: false
           },
           title: {
             display: false
           },
-  
+
           scales: {
             yAxes: [{
               scaleLabel: {
@@ -446,7 +446,7 @@
               },
             }],
           },
-  
+
           tooltips: {
             backgroundColor: '#333',
             titleFontSize: 13,

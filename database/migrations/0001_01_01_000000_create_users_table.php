@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_active')->default(false);
+            $table->boolean('is_accepted_by_admin')->default(false);
             $table->string('userable_type')->nullable();
             $table->unsignedBigInteger('userable_id')->nullable();
             $table->string('slug', 255)->unique();

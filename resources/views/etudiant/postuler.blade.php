@@ -1,8 +1,8 @@
-@extends('app')
+@extends('dashboard-layout')
 
 @section('content')
 
-@include('header.etudiant')
+@include('header.dashboard-header')
 
 <section class="job-detail-section">
     <div class="job-detail-outer">

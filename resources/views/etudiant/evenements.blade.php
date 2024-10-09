@@ -1,11 +1,11 @@
 
-@extends('app')
+@extends('dashboard-layout')
 
 @section('title', 'Dashboard')
 
 @section('content')
 
-@include('header.etudiant')
+@include('header.dashboard-header')
 
 <section class="ls-section">
     <div class="auto-container">
@@ -79,8 +79,8 @@
     </div>
 </section>
 
-  
-  
+
+
 
   <script src="js/jquery.js"></script>
   <script src="js/popper.min.js"></script>
