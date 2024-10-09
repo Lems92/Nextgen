@@ -73,7 +73,7 @@
                 @csrf
 
                 <div class="col-lg-12 form-group">
-                    <h3>Informations Générales</h3>
+                    <h2>Informations Générales</h2>
                 </div>
 
                 <div class="form-group">
@@ -248,7 +248,7 @@
 
                 <!-- Personne de Contact -->
                 <div class="col-lg-12 mt-5 form-group">
-                    <h3>Personne de contact</h3>
+                    <h2>Personne de contact</h2>
                 </div>
 
                 <div class="form-group">

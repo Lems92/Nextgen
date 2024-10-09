@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <label>Adresse de l’Entreprise</label>
+                                <label><h3>Adresse de l’Entreprise</h3></label>
                                 <div class="address-fields">
                                     <label for="adresse">Numéro et Rue</label>
                                     <input type="text" id="adresse" name="adresse" value="{{old('adresse')}}" placeholder="Numéro et Rue" required>
@@ -215,7 +215,7 @@
                                         Certification</label>
                                 </div>
                             </div>
-
+                        </div>
                         </div>
                         <div class="auto-container">
                             <div class="sec-title text-center">
@@ -251,7 +251,7 @@
                                             </div>
 
                                             <!-- Pricing Table - Gold -->
-                                            <div class="pricing-table tagged col-lg-4 col-md-6 col-sm-12">
+                                            <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
                                                 <div class="inner-box">
                                                     <span class="tag">Recommendé</span>
                                                     <div class="title">Gold</div>

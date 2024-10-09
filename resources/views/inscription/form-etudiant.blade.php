@@ -508,13 +508,6 @@
                                     <input type="text" id="localisation_geographique_preferee" name="localisation_geographique_preferee"
                                            class="form-control" required>
                                 </div>
-
-                                <!-- Salaire souhaité -->
-                                <div class="mb-3">
-                                    <label for="salaire-souhaite" class="form-label">Salaire souhaité :</label>
-                                    <input type="number" id="salaire-souhaite" name="salaire_souhaite"
-                                           class="form-control" required>
-                                </div>
                             </fieldset>
 
                             <!-- Disponibilité de l’Étudiant Section -->
