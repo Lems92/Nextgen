@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Offre extends Model
 {
@@ -31,7 +32,7 @@ class Offre extends Model
         'langues_requises' => 'array',
     ];
 
-    public function entreprise()
+    public function entreprise(): BelongsTo
     {
         return $this->belongsTo(Entreprise::class, 'entreprise_id');
     }

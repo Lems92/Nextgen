@@ -23,25 +23,10 @@
                 </div>
                 @endif
 
-                @if(session('error'))
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-                @endif
-
-                @if(session('last_query'))
-                <div class="alert alert-info">
-                    <strong>Dernière requête SQL exécutée :</strong>
-                    <pre>{{ session('last_query')['query'] }}</pre>
-                    <strong>Paramètres :</strong>
-                    <pre>{{ json_encode(session('last_query')['bindings'], JSON_PRETTY_PRINT) }}</pre>
-                </div>
-                @endif
 
                 <form action="{{ route('offres.store') }}" method="POST" class="default-form">
                     @csrf
                     <div class="row">
-                        <input type="hidden" name="entreprise_id" value="{{ $entrepriseId }}">
                         <div class="form-group col-lg-12 col-md-12 mt-4">
                             <label>Titre du poste</label>
                             <input type="text" name="titre_poste" placeholder="Saisissez le titre du poste proposé" required>
