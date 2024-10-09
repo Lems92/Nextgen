@@ -6,6 +6,7 @@ use App\Models\Entreprise;
 use App\Models\Etudiant;
 use App\Models\Universite;
 use App\Models\User;
+use App\Utils\Redirection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,7 @@ class RegistrationController extends Controller
     {
         if(Auth::check()) {
             $user = Auth::user();
-            return redirect()->route($this->redirect_if_authenticated($user));
+            return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
         return view('inscription.inscription');
     }
@@ -56,7 +57,7 @@ class RegistrationController extends Controller
         }
         if(Auth::check()) {
             $user = Auth::user();
-            return redirect()->route($this->redirect_if_authenticated($user));
+            return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
 
         return view('inscription.form-etudiant');
@@ -132,7 +133,7 @@ class RegistrationController extends Controller
         $is_univ_partenaire = Universite::where('nom_etablissement', 'LIKE', "%%")->count();
 
         if($is_univ_partenaire === 0) {
-            $validateData['is_verified'] = true;
+            $validateData['is_active'] = true;
         }
 
         //dd($validateData);
@@ -150,6 +151,10 @@ class RegistrationController extends Controller
                 ]);
 
                 $user->assignRole('etudiant');
+
+                //envoyer email de verification
+                $user->sendEmailVerificationNotification();
+
             });
         } catch (\Exception $exception) {
             throw new Exception($exception->getMessage());
@@ -170,7 +175,7 @@ class RegistrationController extends Controller
 
         if(Auth::check()) {
             $user = Auth::user();
-            return redirect()->route($this->redirect_if_authenticated($user));
+            return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
 
         return view('inscription.form-entreprise');
@@ -219,6 +224,9 @@ class RegistrationController extends Controller
                 ]);
 
                 $user->assignRole('entreprise');
+
+                //envoyer email de verification
+                $user->sendEmailVerificationNotification();
             });
         } catch (\Exception $exception) {
             throw new Exception($exception->getMessage());
@@ -239,7 +247,7 @@ class RegistrationController extends Controller
 
         if(Auth::check()) {
             $user = Auth::user();
-            return redirect()->route($this->redirect_if_authenticated($user));
+            return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
 
         return view('inscription.form-service-carriere');
@@ -279,6 +287,9 @@ class RegistrationController extends Controller
                 ]);
 
                 $user->assignRole('service-carriere');
+
+                //envoyer email de verification
+                $user->sendEmailVerificationNotification();
             });
         } catch (\Exception $exception) {
             throw new Exception($exception->getMessage());
@@ -289,21 +300,4 @@ class RegistrationController extends Controller
 
         return redirect()->route('connexion')->with('success', 'Les informations de l’établissement ont été enregistrées avec succès.');
     }
-
-    private function redirect_if_authenticated($user): string
-    {
-        $route = 'accueil';
-
-        if ($user->hasRole('etudiant')) {
-            $route = 'etudiant.dashboard';
-        } elseif ($user->hasRole('entreprise')) {
-            $route = 'entreprise.dashboard';
-        } elseif ($user->hasRole('service-carriere')) {
-            $route = 'service_carriere.dashboard';
-        } elseif ($user->hasRole('admin')) {
-            $route = 'admin.dashboard';
-        }
-        return $route;
-    }
-
 }

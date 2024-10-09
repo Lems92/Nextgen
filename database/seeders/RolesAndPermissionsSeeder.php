@@ -49,6 +49,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'password' => bcrypt('admin123'),
             'userable_type' => null,
             'userable_id' => null,
+            'email_verified_at' => now(),
+            'is_active' => true,
         ]);
 
         $admin->assignRole("admin");

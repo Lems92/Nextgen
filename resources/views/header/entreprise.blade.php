@@ -125,7 +125,12 @@
                   <a href="{{ route('accueil') }}"><i class="la la-lock"></i>Mot de passe</a>
               </li>
               <li>
-                  <a href="{{ route('deconnexion') }}"><i class="la la-sign-out"></i>Déconnecter</a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+                  <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                      <i class="la la-sign-out"></i>Déconnecter
+                  </a>
               </li>
           </ul>
       </div>
