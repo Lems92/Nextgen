@@ -5,12 +5,14 @@
 
 namespace App\Models;
 
+use App\Interface\Sluggable;
+use App\Trait\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Entreprise extends Model
+class Entreprise extends Model implements Sluggable
 {
-    use HasFactory;
+    use HasFactory, HasSlug;
 
     protected $fillable = [
         'id',
@@ -33,6 +35,7 @@ class Entreprise extends Model
         'inclusion_diversity',
         'training_support',
         'selected_offer',
+        'slug'
     ];
 
     protected $casts = [
@@ -50,6 +53,16 @@ class Entreprise extends Model
     public function offres()
     {
         return $this->hasMany(Offre::class, 'entreprise_id');
+    }
+
+    public function __toString()
+    {
+        return $this->nom_entreprise;
+    }
+
+    public function slugAttribute(): string
+    {
+        return 'nom_entreprise';
     }
 }
 

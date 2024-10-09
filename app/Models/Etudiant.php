@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Interface\Sluggable;
+use App\Trait\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
-class Etudiant extends Model
+class Etudiant extends Model implements Sluggable
 {
-    use HasFactory;
+    use HasFactory, HasSlug;
 
     protected $table = 'etudiants';
 
@@ -77,7 +79,8 @@ class Etudiant extends Model
         'statut_socio_economique',
         'conditions_vie_specifiques',
         'religion_belief',
-        'orientation_sexuelle'
+        'orientation_sexuelle',
+        'slug'
     ];
 
     public function user(): MorphOne
@@ -93,4 +96,14 @@ class Etudiant extends Model
         'secteur_activite_preferer' => 'array',
         'type_emploi_recherche' => 'array',
     ];
+
+    public function __toString()
+    {
+        return $this->prenom;
+    }
+
+    public function slugAttribute(): string
+    {
+        return 'prenom';
+    }
 }

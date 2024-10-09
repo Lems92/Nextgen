@@ -127,6 +127,14 @@ class RegistrationController extends Controller
             ]);
         }
 
+        // Si l'université n'est pas dans la base de données
+        // TODO à verifier
+        $is_univ_partenaire = Universite::where('nom_etablissement', 'LIKE', "%%")->count();
+
+        if($is_univ_partenaire === 0) {
+            $validateData['is_verified'] = true;
+        }
+
         //dd($validateData);
 
         try {

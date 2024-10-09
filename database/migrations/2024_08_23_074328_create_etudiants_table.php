@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('prenom');
             $table->string('nom');
-            //$table->string('adresse_email')->unique();
             $table->string('numero_telephone');
             $table->date('date_naissance');
             $table->enum('genre', ['masculin', 'feminin', 'non-binaire', 'prefere-pas-dire']);
@@ -105,6 +104,7 @@ return new class extends Migration
             $table->enum('conditions_vie_specifiques', ['sans_domicile_fixe', 'handicap', 'prefere_pas_dire'])->nullable();
             $table->enum('religion_belief', ['chretien', 'musulman', 'bouddhiste', 'hindou', 'prefere_pas_dire'])->nullable();
             $table->enum('orientation_sexuelle', ['hétérosexuel', 'homosexuel', 'bisexuel', 'prefere_pas_dire'])->nullable();
+            $table->string('slug', 255)->unique();
             $table->timestamps();
         });
     }
