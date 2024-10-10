@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EntrepriseRegistrationConfirmationMail;
+use App\Mail\UniversiteRegistrationConfirmationMail;
 use App\Models\Entreprise;
 use App\Models\Universite;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class AdminController extends Controller
@@ -51,10 +54,25 @@ class AdminController extends Controller
     public function activate_account(Request $request): RedirectResponse
     {
         $id = $request->get('id');
+        $type = $request->get('type');
         $user = User::findOrFail((int) $id);
+        $user->load('userable');
         $user->update([
             'is_accepted_by_admin' => true,
         ]);
+        // send email notification
+        if($type=='entreprise') {
+            Mail::to($user['email'])->send(new EntrepriseRegistrationConfirmationMail([
+                'prenom' => $user->userable->nom_contact,
+                'nom_entreprise' => $user->userable->nom_entreprise
+            ]));
+        } else if($type=='universite') {
+            Mail::to($user['email'])->send(new UniversiteRegistrationConfirmationMail([
+                'prenom' => $user->userable->nom_contact,
+                'nom_etablissement' => $user->userable->nom_etablissement
+            ]));
+        }
+
         return redirect()->intended($request->get('route'));
     }
 

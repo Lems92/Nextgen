@@ -37,6 +37,7 @@
                                     <form method="POST" action="{{route('admin.activate_account')}}"
                                           id="activate_account_form">
                                         @csrf
+                                        <input type="hidden" name="type" value="universite">
                                         <input type="hidden" name="route" value="{{route('admin.show_universite', ['universite' => $universite->slug])}}">
                                         <input type="hidden" name="id" value="{{$universite->user->id}}">
                                     </form>

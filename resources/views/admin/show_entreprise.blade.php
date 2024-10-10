@@ -37,6 +37,7 @@
                                     <form method="POST" action="{{route('admin.activate_account')}}"
                                           id="activate_account_form">
                                         @csrf
+                                        <input type="hidden" name="type" value="entreprise">
                                         <input type="hidden" name="route" value="{{route('admin.show_entreprise', ['entreprise' => $entreprise->slug])}}">
                                         <input type="hidden" name="id" value="{{$entreprise->user->id}}">
                                     </form>
