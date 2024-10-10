@@ -162,8 +162,8 @@
                         <li class="{{ request()->is('offre') ? 'active' : '' }}">
                             <a href="{{ route('offre') }}"><i class="la la-paper-plane"></i>Publier une offre</a>
                         </li>
-                        <li class="{{ request()->is('gerer-offre') ? 'active' : '' }}">
-                            <a href="{{ route('gerer-offre') }}"><i class="la la-briefcase"></i>Gérer mes offres</a>
+                        <li class="{{ is_active('entreprises/offres') ? 'active' : '' }}">
+                            <a href="{{ route('entreprise.offres') }}"><i class="la la-briefcase"></i>Gérer mes offres</a>
                         </li>
                         <li class="{{ request()->is('gerer-candidat') ? 'active' : '' }}">
                             <a href="{{ route('gerer-candidat') }}"><i class="la la-file-invoice"></i>Mes candidats</a>

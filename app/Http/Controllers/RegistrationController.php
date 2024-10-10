@@ -137,15 +137,16 @@ class RegistrationController extends Controller
 
         // Si l'université n'est pas dans la base de données
         // TODO à verifier
-        $is_univ_partenaire = Universite::where('nom_etablissement', 'LIKE', "%%")->count();
+        $is_univ_partenaire = Universite::where('nom_etablissement', 'LIKE', "%".$validateData['nom_ecole_universite']."%")->count();
 
+        $status_compte = false;
         if($is_univ_partenaire === 0) {
-            $validateData['is_accepted_by_admin'] = true;
+            $status_compte = true;
         }
 
         try {
             // enregistrement via un transaction
-            DB::transaction(function () use ($registerData, $validateData) {
+            DB::transaction(function () use ($status_compte, $registerData, $validateData) {
                 $etudiant = Etudiant::create($validateData);
 
                 $user = User::create([
@@ -153,6 +154,7 @@ class RegistrationController extends Controller
                     'password' => bcrypt($registerData['password']),
                     'userable_id' => $etudiant->id,
                     'userable_type' => get_class($etudiant),
+                    'is_accepted_by_admin' => $status_compte
                 ]);
 
                 $user->assignRole('etudiant');

@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('type_contrat');
             $table->string('duree_contrat');
             $table->string('lieu_poste');
-            $table->string('date_debut');
+            $table->date('date_debut');
             $table->text('description_poste');
             $table->json('competences_techniques');
             $table->json('competences_transversales');
             $table->json('langues_requises');
             $table->text('avantages');
-            $table->string('date_limite_candidature');
+            $table->date('date_limite_candidature');
             $table->foreignId('entreprise_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

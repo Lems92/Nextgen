@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WaitingController;
 use Illuminate\Support\Facades\Route;
@@ -47,19 +48,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 // administration
-Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/entreprises', [AdminController::class, 'list_entreprises'])->name('admin.list_entreprises');
-    Route::get('/admin/entreprises/{entreprise:slug}', [AdminController::class, 'show_entreprise'])->name('admin.show_entreprise');
-    Route::get('/admin/universites', [AdminController::class, 'list_universites'])->name('admin.list_universites');
-    Route::get('/admin/universites/{universite:slug}', [AdminController::class, 'show_universite'])->name('admin.show_universite');
-    Route::post('/admin/activate-account', [AdminController::class, 'activate_account'])->name('admin.activate_account');
-    Route::get('/admin/parametrages', [AdminController::class, 'parametrages'])->name('admin.parametrages');
+Route::middleware(['auth', 'verified', 'role:admin'])
+    ->prefix('admin')
+    ->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/entreprises', [AdminController::class, 'list_entreprises'])->name('admin.list_entreprises');
+    Route::get('/entreprises/{entreprise:slug}', [AdminController::class, 'show_entreprise'])->name('admin.show_entreprise');
+    Route::get('/universites', [AdminController::class, 'list_universites'])->name('admin.list_universites');
+    Route::get('/universites/{universite:slug}', [AdminController::class, 'show_universite'])->name('admin.show_universite');
+    Route::post('/activate-account', [AdminController::class, 'activate_account'])->name('admin.activate_account');
+    Route::get('/parametrages', [AdminController::class, 'parametrages'])->name('admin.parametrages');
 });
 
 // etudiant
-Route::middleware(['auth', 'verified', 'role:etudiant', 'user_state'])->group(function () {
-    Route::get('/dashboard-etudiant', function() {return view('etudiant.tableau-de-bord');})->name('etudiant.dashboard');
+Route::middleware(['auth', 'verified', 'role:etudiant'])->prefix('etudiants')->group(function () {
+    Route::get('/dashboard', function() {return view('etudiant.tableau-de-bord');})->name('etudiant.dashboard');
     Route::get('/explorer-event', function() {return view('etudiant.evenements');})->name('explorer-event');
     Route::get('/motdepasse', function() {return view('etudiant.motdepasse');})->name('motdepasse');
     Route::get('/postuler', function() {return view('etudiant.postuler');})->name('postuler');
@@ -75,21 +78,25 @@ Route::middleware(['auth', 'verified', 'role:etudiant', 'user_state'])->group(fu
 });
 
 // entreprise
-Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])->group(function () {
-    Route::get('/dashboard-entreprise', function () {return view('entreprise.tableau-de-bord');})->name('entreprise.dashboard');
+Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
+    ->prefix('entreprises')
+    ->group(function () {
+    Route::get('/dashboard', [EntrepriseController::class, 'dashboard'])->name('entreprise.dashboard');
 
-    Route::get('/offres/create', [OffreController::class, 'create'])->name('offres.create');
+    Route::get('/offres/publier', [OffreController::class, 'create'])->name('offres.create');
     route::get('/offre', [OffreController::class, 'create'])->name('offre');
 
     // Route pour publier l'offre
-    Route::post('/offres', [OffreController::class, 'store'])->name('offres.store');
-    Route::get('/gerer-offre', function () {return view('entreprise.gerer-offre');})->name('gerer-offre');
+    Route::post('/offres/publier', [OffreController::class, 'store'])->name('offres.store');
+    Route::get('/offres', [EntrepriseController::class, 'offres'])->name('entreprise.offres');
     Route::get('/gerer-candidat', function () {return view('entreprise.gerer-candidat');})->name('gerer-candidat');
 });
 
 // service-carriere
-Route::middleware(['auth', 'verified', 'role:service-carriere', 'user_state'])->group(function () {
-    Route::get('/dashboard-service', function() {return view('universite.tableau-de-bord');})->name('service_carriere.dashboard');
+Route::middleware(['auth', 'verified', 'role:service-carriere', 'user_state'])
+    ->prefix('service-carriere')
+    ->group(function () {
+    Route::get('/dashboard', function() {return view('universite.tableau-de-bord');})->name('service_carriere.dashboard');
     Route::get('/gerer-event', function () {return view('universite.gerer-event');})->name('gerer-event');
     Route::get('/gestion-etudiants', function () {return view('universite.gestion-etudiants');})->name('gestion-etudiants');
     Route::get('/publier-event', function() {return view('universite.publier-evenements');})->name('publier-event');

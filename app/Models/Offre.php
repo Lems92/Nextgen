@@ -30,6 +30,8 @@ class Offre extends Model
         'competences_techniques' => 'array',
         'competences_transversales' => 'array',
         'langues_requises' => 'array',
+        'date_limite_candidature' => 'date',
+        'date_debut' => 'date',
     ];
 
     public function entreprise(): BelongsTo

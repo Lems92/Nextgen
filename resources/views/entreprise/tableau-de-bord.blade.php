@@ -6,11 +6,17 @@
 
 @include('header.dashboard-header')
 
+@php
+    use Illuminate\Support\Facades\Auth;
+    $user = Auth::user();
+    $user->load('userable');
+@endphp
+
         <!-- Dashboard -->
         <section class="user-dashboard">
             <div class="dashboard-outer">
                 <div class="upper-title-box">
-                    <h3>Howdy, Invision!</h3>
+                    <h3>Howdy, {{$user->userable->nom_entreprise}}!</h3>
                     <div class="text">Ready to jump back in?</div>
                 </div>
                 <div class="row">
