@@ -18,7 +18,11 @@ class UserStateMiddleware
         $user = $request->user();
 
         if(!$user->is_accepted_by_admin) {
-            return redirect()->route('waiting_page');
+            return redirect()->route('attente_verification_admin');
+        }
+
+        if(!$user->email_verified_at) {
+            return redirect()->route('attente_verification_email');
         }
 
         return $next($request);

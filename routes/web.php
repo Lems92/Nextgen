@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WaitingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\OffreController;
@@ -35,22 +36,28 @@ Route::middleware(['guest'])->group(function () {
 
 //auth not verified
 Route::middleware(['auth'])->group(function () {
+    Route::get('/attente-verification-email', [WaitingController::class, 'waiting_email'])->name('attente_verification_email');
     Route::post('/deconnexion', [LoginController::class, 'logout'])->name('logout');
 });
 
 //commun
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/attente', function () {return view('waiting');})->name('waiting_page');
+    Route::get('/attente-verification-admin', [WaitingController::class, 'waiting_admin'])->name('attente_verification_admin');
     Route::get('/modiferProfil', function() {return view('etudiant.modifierProfil');})->name('modifierProfil');
 });
 
 // administration
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
-    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/entreprises', [AdminController::class, 'list_entreprises'])->name('admin.list_entreprises');
+    Route::get('/admin/entreprises/{entreprise:slug}', [AdminController::class, 'show_entreprise'])->name('admin.show_entreprise');
+    Route::get('/admin/universites', [AdminController::class, 'list_universites'])->name('admin.list_universites');
+    Route::get('/admin/universites/{universite:slug}', [AdminController::class, 'show_universite'])->name('admin.show_universite');
+    Route::post('/admin/activate-account', [AdminController::class, 'activate_account'])->name('admin.activate_account');
 });
 
 // etudiant
-Route::middleware(['auth', 'verified', 'role:etudiant'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:etudiant', 'user_state'])->group(function () {
     Route::get('/dashboard-etudiant', function() {return view('etudiant.tableau-de-bord');})->name('etudiant.dashboard');
     Route::get('/explorer-event', function() {return view('etudiant.evenements');})->name('explorer-event');
     Route::get('/motdepasse', function() {return view('etudiant.motdepasse');})->name('motdepasse');
@@ -67,7 +74,7 @@ Route::middleware(['auth', 'verified', 'role:etudiant'])->group(function () {
 });
 
 // entreprise
-Route::middleware(['auth', 'verified', 'role:entreprise'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])->group(function () {
     Route::get('/dashboard-entreprise', function () {return view('entreprise.tableau-de-bord');})->name('entreprise.dashboard');
 
     Route::get('/offres/create', [OffreController::class, 'create'])->name('offres.create');
@@ -80,7 +87,7 @@ Route::middleware(['auth', 'verified', 'role:entreprise'])->group(function () {
 });
 
 // service-carriere
-Route::middleware(['auth', 'verified', 'role:service-carriere'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:service-carriere', 'user_state'])->group(function () {
     Route::get('/dashboard-service', function() {return view('universite.tableau-de-bord');})->name('service_carriere.dashboard');
     Route::get('/gerer-event', function () {return view('universite.gerer-event');})->name('gerer-event');
     Route::get('/gestion-etudiants', function () {return view('universite.gestion-etudiants');})->name('gestion-etudiants');

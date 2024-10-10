@@ -1,6 +1,6 @@
 @extends('dashboard-layout')
 
-@section('title', 'NextGen - Accueil')
+@section('title', 'NextGen Admin - Tableau de bord')
 
 @section('content')
     <!-- Header -->

@@ -5,37 +5,39 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Models\User;
 use App\Utils\Redirection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class LoginController extends Controller
 {
 
-    public function connexion(): View | RedirectResponse
+    public function connexion(): View|RedirectResponse
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $user = Auth::user();
             return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
         return view('connexion');
     }
 
-    public function login(Request $request)
+    /**
+     * @throws ValidationException
+     */
+    public function login(LoginRequest $request): RedirectResponse
     {
-        if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
-            $request->session()->regenerate();
+        $request->authenticate();
 
-            $user = Auth::user();
+        $request->session()->regenerate();
 
-            return redirect()->route(Redirection::redirect_if_authenticated($user));
-        }
+        $user = Auth::user();
 
-        // Identifiants invalides
-        return redirect()->route('connexion')->withErrors(['email' => 'Identifiants invalides']);
+        return redirect()->intended(route(Redirection::redirect_if_authenticated($user), absolute: false));
     }
 
     public function logout(Request $request): RedirectResponse

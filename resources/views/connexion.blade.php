@@ -12,17 +12,26 @@
       <div class="login-form default-form">
         <div class="form-inner">
           <h3>Se connecter à NextGen</h3>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
           <!--Login Form-->
           <form method="post" action="{{ route('login.submit') }}">
             @csrf
             <div class="form-group">
-              <label>Email</label>
-              <input type="text" name="email" placeholder="email" required>
+              <label for="email">Email</label>
+              <input id="email" type="text" value="{{old('email')}}" name="email" placeholder="email" autocomplete autofocus required>
             </div>
 
             <div class="form-group">
-              <label>Mot de passe</label>
-              <input id="password-field" type="password" name="password" value="" placeholder="Mot de passe">
+              <label for="password">Mot de passe</label>
+              <input id="password" type="password" name="password" value="" placeholder="Mot de passe">
             </div>
 
             <div class="form-group">
@@ -34,15 +43,6 @@
                 <a href="#" class="pwd">Mot de passe oublié ?</a>
               </div>
             </div>
-            @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
 
             <div class="form-group">
               <button class="theme-btn btn-style-one" type="submit" name="log-in">Se connecter</button>

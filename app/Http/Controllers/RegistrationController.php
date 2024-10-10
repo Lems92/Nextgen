@@ -136,8 +136,6 @@ class RegistrationController extends Controller
             $validateData['is_accepted_by_admin'] = true;
         }
 
-        //dd($validateData);
-
         try {
             // enregistrement via un transaction
             DB::transaction(function () use ($registerData, $validateData) {
@@ -155,6 +153,8 @@ class RegistrationController extends Controller
                 //envoyer email de verification
                 $user->sendEmailVerificationNotification();
 
+                Auth::login($user);
+
             });
         } catch (\Exception $exception) {
             throw new Exception($exception->getMessage());
@@ -163,7 +163,7 @@ class RegistrationController extends Controller
         // Nettoyer les données de la session
         Session::forget('register_data');
 
-        return redirect()->route('connexion');
+        return redirect()->route('attente_verification_email');
     }
 
     //inscription entreprise
@@ -227,6 +227,9 @@ class RegistrationController extends Controller
 
                 //envoyer email de verification
                 $user->sendEmailVerificationNotification();
+
+                Auth::login($user);
+
             });
         } catch (\Exception $exception) {
             throw new Exception($exception->getMessage());
@@ -235,7 +238,7 @@ class RegistrationController extends Controller
         // Nettoyer les données de la session
         Session::forget('register_data');
 
-        return redirect()->route('connexion');
+        return redirect()->route('attente_verification_email');
     }
 
     //inscription service carriere
@@ -290,6 +293,8 @@ class RegistrationController extends Controller
 
                 //envoyer email de verification
                 $user->sendEmailVerificationNotification();
+
+                Auth::login($user);
             });
         } catch (\Exception $exception) {
             throw new Exception($exception->getMessage());
@@ -298,6 +303,6 @@ class RegistrationController extends Controller
         // Nettoyer les données de la session
         Session::forget('register_data');
 
-        return redirect()->route('connexion')->with('success', 'Les informations de l’établissement ont été enregistrées avec succès.');
+        return redirect()->route('attente_verification_email');
     }
 }

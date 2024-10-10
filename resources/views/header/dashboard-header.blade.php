@@ -1,6 +1,12 @@
 @php
-use Illuminate\Support\Facades\Auth;
-$user = Auth::user();
+    use Illuminate\Support\Facades\Auth;
+    use Illuminate\Support\Facades\Route;
+    $user = Auth::user();
+
+    function is_active ($url_pattern): bool {
+        return request()->is("$url_pattern*");
+    }
+
 @endphp
 
 <div class="page-wrapper dashboard">
@@ -19,39 +25,40 @@ $user = Auth::user();
                 <!--Nav Outer -->
                 <div class="nav-outer">
                     <div class="logo-box">
-                        <div class="logo"><a href="{{route ('accueil')}}"><img src="images/NextGen-logo.svg" alt=""
-                                                                               title=""></a></div>
+                        <div class="logo"><a href="{{route ('accueil')}}"><img
+                                    src="{{asset('images/NextGen-logo.svg')}}" alt=""
+                                    title=""></a></div>
                     </div>
 
                     <nav class="nav main-menu">
                         <ul class="navigation" id="navbar">
                             <li><a href="{{route('accueil')}}"><span>Accueil</span></a></li>
                             @if($user->hasRole('etudiant'))
-                            <li class="dropdown">
-                                <span>Étudiant</span>
-                                <ul class="dropdown">
-                                    <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
-                                    <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
-                                </ul>
-                            </li>
+                                <li class="dropdown">
+                                    <span>Étudiant</span>
+                                    <ul class="dropdown">
+                                        <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
+                                        <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
+                                    </ul>
+                                </li>
                             @endif
                             @if($user->hasRole('entreprise'))
-                            <li class="dropdown">
-                                <span>Entreprise</span>
-                                <ul>
-                                    <li><a href="{{route('gerer-candidat')}}">Gerer les candidat</a></li>
-                                    <li><a href="{{route('offre')}}">Publier une offre</a></li>
-                                </ul>
-                            </li>
+                                <li class="dropdown">
+                                    <span>Entreprise</span>
+                                    <ul>
+                                        <li><a href="{{route('gerer-candidat')}}">Gerer les candidat</a></li>
+                                        <li><a href="{{route('offre')}}">Publier une offre</a></li>
+                                    </ul>
+                                </li>
                             @endif
                             @if($user->hasRole('service-carriere'))
-                            <li class=" dropdown">
-                                <span>Service carrière</span>
-                                <ul class="dropdown">
-                                    <li><a href="{{route('publier-event')}}">Publier un évenement</a></li>
-                                    <li><a href="{{route('gestion-etudiants')}}">Gerer les étudiants</a></li>
-                                </ul>
-                            </li>
+                                <li class=" dropdown">
+                                    <span>Service carrière</span>
+                                    <ul class="dropdown">
+                                        <li><a href="{{route('publier-event')}}">Publier un évenement</a></li>
+                                        <li><a href="{{route('gestion-etudiants')}}">Gerer les étudiants</a></li>
+                                    </ul>
+                                </li>
                             @endif
                             <li class="dropdown">
                                 <span>NextGen</span>
@@ -95,14 +102,16 @@ $user = Auth::user();
 
         <!-- Mobile Header -->
         <div class="mobile-header">
-            <div class="logo"><a href="{{route('accueil')}}"><img src="images/logo.svg" alt="" title=""></a></div>
+            <div class="logo"><a href="{{route('accueil')}}"><img src="{{asset('images/logo.svg')}}" alt=""
+                                                                  title=""></a></div>
 
             <!--Nav Box-->
             <div class="nav-outer clearfix">
 
                 <div class="outer-box">
                     <!-- Login/Register -->
-                    <button id="toggle-user-sidebar"><img src="images/icons/icon-user-2.svg" alt="avatar" class="thumb">
+                    <button id="toggle-user-sidebar"><img src="{{asset('images/icons/icon-user-2.svg')}}" alt="avatar"
+                                                          class="thumb">
                     </button>
                     <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span
                             class="flaticon-menu-1"></span></a>
@@ -125,68 +134,73 @@ $user = Auth::user();
         <div class="sidebar-inner">
             <ul class="navigation">
 
-                <!-- Etudiant -->
-                @if($user->hasRole('etudiant'))
-                <li class="{{ request()->is('dashboard-etudiant') ? 'active' : '' }}">
-                    <a href="{{route('etudiant.dashboard')}}"> <i class="la la-home"></i>Tableau de bord</a>
-                </li>
-                <li class="{{ request()->is('profil') ? 'active' : '' }}">
-                    <a href="{{route('profil')}}"> <i class="la la-user-tie"></i>Mon profil</a>
-                </li>
-                <li class="{{ request()->is('modifierProfil') ? 'active' : '' }}">
-                    <a href="{{route('modifierProfil')}}"> <i class="la la-pen"></i>Modifier profil</a>
-                </li>
-                <li class="{{ request()->is('candidature') ? 'active' : '' }}">
-                    <a href="{{route('candidature')}}"><i class="la la-briefcase"></i>Candidatures</a>
-                </li>
-                <li class="#">
-                    <a href="#"><i class="la la-lock"></i>Mot de passe</a>
-                </li>
+                @if($user->is_accepted_by_admin && $user->email_verified_at)
 
-                <!--- Entreprise -->
-                @elseif($user->hasRole('entreprise'))
-                <li class="{{ request()->is('dashboard-entreprise') ? 'active' : '' }}">
-                    <a href="{{ route('entreprise.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
-                </li>
-                <li class="{{ request()->is('offre') ? 'active' : '' }}">
-                    <a href="{{ route('offre') }}"><i class="la la-paper-plane"></i>Publier une offre</a>
-                </li>
-                <li class="{{ request()->is('gerer-offre') ? 'active' : '' }}">
-                    <a href="{{ route('gerer-offre') }}"><i class="la la-briefcase"></i>Gérer mes offres</a>
-                </li>
-                <li class="{{ request()->is('gerer-candidat') ? 'active' : '' }}">
-                    <a href="{{ route('gerer-candidat') }}"><i class="la la-file-invoice"></i>Mes candidats</a>
-                </li>
-                <li class="{{ request()->is('change-password') ? 'active' : '' }}">
-                    <a href="{{ route('accueil') }}"><i class="la la-lock"></i>Mot de passe</a>
-                </li>
+                    <!-- Etudiant -->
+                    @if($user->hasRole('etudiant'))
+                        <li class="{{ request()->is('dashboard-etudiant') ? 'active' : '' }}">
+                            <a href="{{route('etudiant.dashboard')}}"> <i class="la la-home"></i>Tableau de bord</a>
+                        </li>
+                        <li class="{{ request()->is('profil') ? 'active' : '' }}">
+                            <a href="{{route('profil')}}"> <i class="la la-user-tie"></i>Mon profil</a>
+                        </li>
+                        <li class="{{ request()->is('modifierProfil') ? 'active' : '' }}">
+                            <a href="{{route('modifierProfil')}}"> <i class="la la-pen"></i>Modifier profil</a>
+                        </li>
+                        <li class="{{ request()->is('candidature') ? 'active' : '' }}">
+                            <a href="{{route('candidature')}}"><i class="la la-briefcase"></i>Candidatures</a>
+                        </li>
+                        <li class="#">
+                            <a href="#"><i class="la la-lock"></i>Mot de passe</a>
+                        </li>
 
-                <!--- Université -->
-                @elseif($user->hasRole('service-carriere'))
-                <li class="{{ request()->is('dashboard-service') ? 'active' : '' }}">
-                    <a href="{{ route('service_carriere.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
-                </li>
-                <li class="{{ request()->is('publier-event') ? 'active' : '' }}">
-                    <a href="{{ route('publier-event') }}"><i class="la la-paper-plane"></i>Publier un évenement</a>
-                </li>
-                <li class="{{ request()->is('gerer-event') ? 'active' : '' }}">
-                    <a href="{{ route('gerer-event') }}"><i class="la la-briefcase"></i>Gérer les évenemnts</a>
-                </li>
-                <li class="{{ request()->is('gestion-etudiants') ? 'active' : '' }}">
-                    <a href="{{ route('gestion-etudiants') }}"><i class="la la-lock"></i>Gerer les étudiants</a>
-                </li>
+                        <!--- Entreprise -->
+                    @elseif($user->hasRole('entreprise'))
+                        <li class="{{ request()->is('dashboard-entreprise') ? 'active' : '' }}">
+                            <a href="{{ route('entreprise.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
+                        </li>
+                        <li class="{{ request()->is('offre') ? 'active' : '' }}">
+                            <a href="{{ route('offre') }}"><i class="la la-paper-plane"></i>Publier une offre</a>
+                        </li>
+                        <li class="{{ request()->is('gerer-offre') ? 'active' : '' }}">
+                            <a href="{{ route('gerer-offre') }}"><i class="la la-briefcase"></i>Gérer mes offres</a>
+                        </li>
+                        <li class="{{ request()->is('gerer-candidat') ? 'active' : '' }}">
+                            <a href="{{ route('gerer-candidat') }}"><i class="la la-file-invoice"></i>Mes candidats</a>
+                        </li>
+                        <li class="{{ request()->is('change-password') ? 'active' : '' }}">
+                            <a href="{{ route('accueil') }}"><i class="la la-lock"></i>Mot de passe</a>
+                        </li>
 
-                <!-- Admin --->
-                @elseif($user->hasRole('admin'))
-                    <li class="{{ request()->is('dashboard-entreprise') ? 'active' : '' }}">
-                        <a href="{{ route('entreprise.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
-                    </li>
-                    <li class="{{ request()->is('gestion-etudiants') ? 'active' : '' }}">
-                        <a href="{{ route('gestion-etudiants') }}"><i class="la la-list"></i>Entreprises</a>
-                    </li>
-                    <li class="{{ request()->is('gestion-etudiants') ? 'active' : '' }}">
-                        <a href="{{ route('gestion-etudiants') }}"><i class="la la-list"></i>Universités</a>
-                    </li>
+                        <!--- Université -->
+                    @elseif($user->hasRole('service-carriere'))
+                        <li class="{{ request()->is('dashboard-service') ? 'active' : '' }}">
+                            <a href="{{ route('service_carriere.dashboard') }}"><i class="la la-home"></i>Tableau de
+                                bord</a>
+                        </li>
+                        <li class="{{ request()->is('publier-event') ? 'active' : '' }}">
+                            <a href="{{ route('publier-event') }}"><i class="la la-paper-plane"></i>Publier un évenement</a>
+                        </li>
+                        <li class="{{ request()->is('gerer-event') ? 'active' : '' }}">
+                            <a href="{{ route('gerer-event') }}"><i class="la la-briefcase"></i>Gérer les évenemnts</a>
+                        </li>
+                        <li class="{{ request()->is('gestion-etudiants') ? 'active' : '' }}">
+                            <a href="{{ route('gestion-etudiants') }}"><i class="la la-lock"></i>Gerer les étudiants</a>
+                        </li>
+
+                        <!-- Admin --->
+                    @elseif($user->hasRole('admin'))
+                        <li class="{{ is_active('admin/dashboard') ? 'active' : '' }}">
+                            <a href="{{ route('admin.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
+                        </li>
+                        <li class="{{ is_active('admin/entreprises') ? 'active' : '' }}">
+                            <a href="{{ route('admin.list_entreprises') }}"><i class="las la-briefcase"></i>Entreprises</a>
+                        </li>
+                        <li class="{{ is_active('admin/universites') ? 'active' : '' }}">
+                            <a href="{{ route('admin.list_universites') }}"><i class="las la-university"></i>Universités</a>
+                        </li>
+                    @endif
+
                 @endif
 
                 <!-- Commun -->

@@ -9,6 +9,7 @@ use App\Interface\Sluggable;
 use App\Trait\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Entreprise extends Model implements Sluggable
 {
@@ -46,7 +47,8 @@ class Entreprise extends Model implements Sluggable
     ];
 
 
-    public function user() {
+    public function user(): MorphOne
+    {
         return $this->morphOne(User::class, 'userable');
     }
 
