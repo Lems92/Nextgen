@@ -54,6 +54,7 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/admin/universites', [AdminController::class, 'list_universites'])->name('admin.list_universites');
     Route::get('/admin/universites/{universite:slug}', [AdminController::class, 'show_universite'])->name('admin.show_universite');
     Route::post('/admin/activate-account', [AdminController::class, 'activate_account'])->name('admin.activate_account');
+    Route::get('/admin/parametrages', [AdminController::class, 'parametrages'])->name('admin.parametrages');
 });
 
 // etudiant

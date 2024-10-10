@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Session;
@@ -60,7 +61,13 @@ class RegistrationController extends Controller
             return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
 
-        return view('inscription.form-etudiant');
+        $mada_regions = File::json(base_path("/resources/data/region_mada.json"));
+        $france_regions = File::json(base_path("/resources/data/region_france.json"));
+
+        return view('inscription.form-etudiant', [
+            'mada_regions' => $mada_regions,
+            'france_regions' => $france_regions
+        ]);
     }
 
     public function register_etudiant_post(Request $request): RedirectResponse
@@ -178,7 +185,11 @@ class RegistrationController extends Controller
             return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
 
-        return view('inscription.form-entreprise');
+        $mada_regions = File::json(base_path("/resources/data/region_mada.json"));
+
+        return view('inscription.form-entreprise', [
+            'mada_regions' => $mada_regions
+        ]);
     }
 
     public function register_entreprise_post(Request $request): RedirectResponse

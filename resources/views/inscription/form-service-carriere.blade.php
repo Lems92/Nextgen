@@ -268,7 +268,7 @@
                 </div>
                 <div class="form-group">
                     <label for="numero_telephone_contact">Numéro de téléphone :</label>
-                    <input type="tel" id="numero_telephone_contact" value="{{old('numero_telephone_contact')}}" class="form-control" name="numero_telephone_contact" required>
+                    <input type="text" id="numero_telephone_contact" value="{{old('numero_telephone_contact')}}" class="form-control" name="numero_telephone_contact" required>
                     <x-input-error :messages="$errors->get('numero_telephone_contact')" class="mt-2" />
                 </div>
 

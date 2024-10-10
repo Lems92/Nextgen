@@ -68,13 +68,10 @@
                                     <div class="col-md-6">
                                         <label for="region" class="form-label">Région :</label>
                                         <select id="region" name="region" class="form-select" required>
-                                            <option value="analamanga">Analamanga</option>
-                                            <option value="atsinanana">Atsinanana</option>
-                                            <option value="boeny">Boeny</option>
-                                            <option value="ihorombe">Ihorombe</option>
-                                            <option value="menabe">Menabe</option>
-                                            <option value="sava">Sava</option>
-                                            <option value="vakinankaratra">Vakinankaratra</option>
+                                            @foreach($mada_regions as $region)
+                                                {{$region}}
+                                                <option value="{{$region}}">{{$region}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-6">
@@ -803,26 +800,17 @@
         }
 
         document.addEventListener('DOMContentLoaded', function () {
+            let mada_regions = [];
+            @foreach($mada_regions as $region)
+                mada_regions.push(@json($region));
+            @endforeach
+            let france_regions = [];
+            @foreach($france_regions as $region)
+                france_regions.push(@json($region));
+            @endforeach
             const regions = {
-                madagascar: [
-                    {value: 'analamanga', text: 'Analamanga'},
-                    {value: 'atsinanana', text: 'Atsinanana'},
-                    {value: 'boeny', text: 'Boeny'},
-                    {value: 'ihorombe', text: 'Ihorombe'},
-                    {value: 'menabe', text: 'Menabe'},
-                    {value: 'sava', text: 'Sava'},
-                    {value: 'vakinankaratra', text: 'Vakinankaratra'}
-                ],
-                france: [
-                    {value: 'auvergne-rhone-alpes', text: 'Auvergne-Rhône-Alpes'},
-                    {value: 'bretagne', text: 'Bretagne'},
-                    {value: 'centre-val-de-loire', text: 'Centre-Val de Loire'},
-                    {value: 'corse', text: 'Corse'},
-                    {value: 'ile-de-france', text: 'Île-de-France'},
-                    {value: 'normandie', text: 'Normandie'},
-                    {value: 'occitanie', text: 'Occitanie'},
-                    {value: 'paca', text: 'Provence-Alpes-Côte d\'Azur'}
-                ]
+                madagascar: mada_regions,
+                france: france_regions
             };
 
             const paysSelect = document.getElementById('pays');
@@ -836,10 +824,10 @@
                 regionSelect.innerHTML = '';
 
                 // Populate new options
-                regionsList.forEach(region => {
+                regionsList.forEach((region) => {
                     const option = document.createElement('option');
-                    option.value = region.value;
-                    option.textContent = region.text;
+                    option.value = region;
+                    option.textContent = region;
                     regionSelect.appendChild(option);
                 });
             }

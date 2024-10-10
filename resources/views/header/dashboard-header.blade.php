@@ -193,6 +193,9 @@
                         <li class="{{ is_active('admin/dashboard') ? 'active' : '' }}">
                             <a href="{{ route('admin.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
                         </li>
+                        <li class="{{ is_active('admin/parametrages') ? 'active' : '' }}">
+                            <a href="{{ route('admin.parametrages') }}"><i class="las la-cog"></i>Parametrages</a>
+                        </li>
                         <li class="{{ is_active('admin/entreprises') ? 'active' : '' }}">
                             <a href="{{ route('admin.list_entreprises') }}"><i class="las la-briefcase"></i>Entreprises</a>
                         </li>

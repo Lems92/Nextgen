@@ -57,4 +57,9 @@ class AdminController extends Controller
         ]);
         return redirect()->intended($request->get('route'));
     }
+
+    public function parametrages(): View
+    {
+        return view('admin.parametrages');
+    }
 }

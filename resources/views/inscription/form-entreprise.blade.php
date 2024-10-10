@@ -81,13 +81,10 @@
                                     <label for="region">Région</label>
                                     <select id="region" name="region" class="chosen-select">
                                         <option value="" disabled selected>Région</option>
-                                        <option value="Analamanga">Analamanga</option>
-                                        <option value="Atsinanana">Atsinanana</option>
-                                        <option value="Boeny">Boeny</option>
-                                        <option value="Ihorombe">Ihorombe</option>
-                                        <option value="Menabe">Menabe</option>
-                                        <option value="Sava">Sava</option>
-                                        <option value="Vakinankaratra">Vakinankaratra</option>
+                                        @foreach($mada_regions as $region)
+                                            {{$region}}
+                                            <option value="{{$region}}">{{$region}}</option>
+                                        @endforeach
                                     </select>
                                     <x-input-error :messages="$errors->get('region')" class="mt-2" />
 
