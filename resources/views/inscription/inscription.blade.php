@@ -12,13 +12,13 @@
             }
             .login-form h3{
                 margin-bottom: 5px;
-
+                margin-left: -5px;
             }
             h4{
                 color: #F73700;
+                margin-left: -5px;
             }
             p{
-                margin-left: 5px;
                 margin-bottom: 5px;
             }
         </style>

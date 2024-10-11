@@ -76,13 +76,6 @@
       
                         <div class="chosen-outer">
                           <!--Tabs Box-->
-                          <select class="chosen-select">
-                            <option>Last 6 Months</option>
-                            <option>Last 12 Months</option>
-                            <option>Last 16 Months</option>
-                            <option>Last 24 Months</option>
-                            <option>Last 5 year</option>
-                          </select>
                         </div>
                       </div>
       
@@ -91,9 +84,8 @@
                           <table class="default-table manage-job-table">
                             <thead>
                               <tr>
-                                <th>Title</th>
-                                <th>Applications</th>
-                                <th>Created & Expired</th>
+                                <th>Titre</th>
+                                <th>Candidats</th>
                                 <th>Status</th>
                                 <th>Action</th>
                               </tr>
@@ -106,14 +98,13 @@
                                   <span class="info"><i class="icon flaticon-map-locator"></i> London, UK</span>
                                 </td>
                                 <td class="applied"><a href="#">3+ Applied</a></td>
-                                <td>October 27, 2017 <br>April 25, 2011</td>
                                 <td class="status">Active</td>
                                 <td>
                                   <div class="option-box">
                                     <ul class="option-list">
-                                      <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
-                                      <li><button data-text="Reject Aplication"><span class="la la-pencil"></span></button></li>
-                                      <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                      <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
+                                      <li><button data-text="Modifier"><span class="la la-pencil"></span></button></li>
+                                      <li><button data-text="Supprimer"><span class="la la-trash"></span></button></li>
                                     </ul>
                                   </div>
                                 </td>
@@ -124,14 +115,13 @@
                                   <span class="info"><i class="icon flaticon-map-locator"></i> London, UK</span>
                                 </td>
                                 <td class="applied"><a href="#">3+ Applied</a></td>
-                                <td>October 27, 2017 <br>April 25, 2011</td>
                                 <td class="status">Active</td>
                                 <td>
                                   <div class="option-box">
                                     <ul class="option-list">
-                                      <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
-                                      <li><button data-text="Reject Aplication"><span class="la la-pencil"></span></button></li>
-                                      <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                      <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
+                                      <li><button data-text="Modifier"><span class="la la-pencil"></span></button></li>
+                                      <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                     </ul>
                                   </div>
                                 </td>
@@ -142,14 +132,13 @@
                                   <span class="info"><i class="icon flaticon-map-locator"></i> London, UK</span>
                                 </td>
                                 <td class="applied"><a href="#">3+ Applied</a></td>
-                                <td>October 27, 2017 <br>April 25, 2011</td>
                                 <td class="status">Active</td>
                                 <td>
                                   <div class="option-box">
                                     <ul class="option-list">
-                                      <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
-                                      <li><button data-text="Reject Aplication"><span class="la la-pencil"></span></button></li>
-                                      <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                      <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
+                                      <li><button data-text="Modifier"><span class="la la-pencil"></span></button></li>
+                                      <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                     </ul>
                                   </div>
                                 </td>
@@ -160,14 +149,13 @@
                                   <span class="info"><i class="icon flaticon-map-locator"></i> London, UK</span>
                                 </td>
                                 <td class="applied"><a href="#">3+ Applied</a></td>
-                                <td>October 27, 2017 <br>April 25, 2011</td>
                                 <td class="status">Active</td>
                                 <td>
                                   <div class="option-box">
                                     <ul class="option-list">
-                                      <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
-                                      <li><button data-text="Reject Aplication"><span class="la la-pencil"></span></button></li>
-                                      <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                      <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
+                                      <li><button data-text="Modifier"><span class="la la-pencil"></span></button></li>
+                                      <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                     </ul>
                                   </div>
                                 </td>
@@ -186,8 +174,7 @@
         <section class="user-dashboard">
             <div class="dashboard-outer">
               <div class="upper-title-box">
-                <h3>All Aplicants</h3>
-                <div class="text">Ready to jump back in?</div>
+                <h3>Candidats</h3>
               </div>
       
                 <div class="col-lg-12">
@@ -195,7 +182,7 @@
                   <div class="ls-widget">
                     <div class="tabs-box">
                       <div class="widget-title">
-                        <h4>Applicant</h4>
+                        <h4>Candidats</h4>
                       <div class="widget-content">
       
                         <div class="tabs-box">
@@ -203,8 +190,8 @@
                             <h6>Senior Product Designer</h6>
                             <ul class="aplicantion-status tab-buttons clearfix">
                               <li class="tab-btn active-btn totals" data-tab="#totals">Total(s): 6</li>
-                              <li class="tab-btn approved" data-tab="#approved">Approved: 2</li>
-                              <li class="tab-btn rejected" data-tab="#rejected">Rejected(s): 4</li>
+                              <li class="tab-btn approved" data-tab="#approved">Apprové(s): 2</li>
+                              <li class="tab-btn rejected" data-tab="#rejected">Rejeté(s): 4</li>
                             </ul>
                           </div>
       
@@ -231,10 +218,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -259,10 +246,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -287,10 +274,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -315,10 +302,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -343,10 +330,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -371,10 +358,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -404,10 +391,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -432,10 +419,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -466,10 +453,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -494,10 +481,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -522,10 +509,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>
@@ -550,10 +537,10 @@
                                     </div>
                                     <div class="option-box">
                                       <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
+                                        <li><button data-text="Voir les candidats"><span class="la la-eye"></span></button></li>
                                         <li><button data-text="Approve Aplication"><span class="la la-check"></span></button></li>
                                         <li><button data-text="Reject Aplication"><span class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                        <li><button data-text="Suprrimer"><span class="la la-trash"></span></button></li>
                                       </ul>
                                     </div>
                                   </div>

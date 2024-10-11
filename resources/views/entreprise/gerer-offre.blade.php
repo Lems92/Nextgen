@@ -58,9 +58,8 @@
                                             <td>
                                                 <div class="option-box">
                                                     <ul class="option-list">
-                                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
-                                                        <li><button data-text="Reject Aplication"><span class="la la-pencil"></span></button></li>
-                                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                                                        <li><button data-text="Modifier"><span class="la la-pencil"></span></button></li>
+                                                        <li><button data-text="Supprimer"><span class="la la-trash"></span></button></li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -78,7 +77,6 @@
 
 
         <!-- Copyright -->
-
     </div><!-- End Page Wrapper -->
 
 
