@@ -2,14 +2,16 @@
 
 namespace App\Models;
 
+use App\Interface\Sluggable;
+use App\Trait\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Offre extends Model
+class Offre extends Model implements Sluggable
 {
-    use HasFactory;
+    use HasFactory, HasSlug;
 
     protected $fillable = [
         'titre_poste',
@@ -24,6 +26,7 @@ class Offre extends Model
         'avantages',
         'date_limite_candidature',
         'entreprise_id',
+        'slug'
     ];
 
     protected $casts = [
@@ -32,6 +35,12 @@ class Offre extends Model
         'langues_requises' => 'array',
         'date_limite_candidature' => 'date',
         'date_debut' => 'date',
+    ];
+
+    protected $appends = [
+        'competences_transversales_formated',
+        'competences_transversales_formated',
+        'langues_requises_formated',
     ];
 
     public function entreprise(): BelongsTo
@@ -48,5 +57,40 @@ class Offre extends Model
     public function getDateDebutAttribute($value)
     {
         return Carbon::parse($value);
+    }
+
+    public function slugAttribute(): string
+    {
+        return 'titre_poste';
+    }
+
+    public function getCompetencesTransversalesFormatedAttribute()
+    {
+        $new_array = [];
+        foreach ($this->competences_transversales as $sigle) {
+            $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
+            $new_array[] = $param->libelle;
+        }
+        return $new_array;
+    }
+
+    public function getCompetencesTechniquesFormatedAttribute()
+    {
+        $new_array = [];
+        foreach ($this->competences_techniques as $sigle) {
+            $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
+            $new_array[] = $param->libelle;
+        }
+        return $new_array;
+    }
+
+    public function getLanguesRequisesFormatedAttribute()
+    {
+        $new_array = [];
+        foreach ($this->langues_requises as $sigle) {
+            $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
+            $new_array[] = $param->libelle;
+        }
+        return $new_array;
     }
 }

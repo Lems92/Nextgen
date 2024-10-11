@@ -104,12 +104,13 @@ Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
     ->group(function () {
         Route::get('/dashboard', [EntrepriseController::class, 'dashboard'])->name('entreprise.dashboard');
 
-        Route::get('/offres/publier', [OffreController::class, 'create'])->name('entreprise.offres.create');
-        route::get('/offre', [OffreController::class, 'create'])->name('offre');
-
-        // Route pour publier l'offre
-        Route::post('/offres/publier', [OffreController::class, 'store'])->name('entreprise.offres.store');
+        //offre
+        Route::get('/offres/publier', [EntrepriseController::class, 'publier_offre'])->name('entreprise.offres.create');
+        Route::post('/offres/publier', [EntrepriseController::class, 'validate_publier_offre'])->name('entreprise.offres.store');
         Route::get('/offres', [EntrepriseController::class, 'offres'])->name('entreprise.offres');
+        Route::get('/offres/{offre:slug}', [EntrepriseController::class, 'show_offre'])->name('entreprise.offres.show');
+
+        //candidature
         Route::get('/gerer-candidat', function () {
             return view('entreprise.gerer-candidat');
         })->name('gerer-candidat');

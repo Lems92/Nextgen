@@ -14,43 +14,34 @@ class ParametrageSeeder extends Seeder
      */
     public function run(): void
     {
-        $type_contrat = Table::create(['name' => 'type_contrat']);
-        $duree_contrat = Table::create(['name' => 'duree_contrat']);
-        $lieu_poste = Table::create(['name' => 'lieu_poste']);
+        $all = [
+            'type_contrat' => ['Stage', 'CDI', 'CDD', 'Alternance', 'Freelance/Indépendant', 'Intérim', 'Apprentissage'],
+            'duree_contrat' => ['Moins de 1 mois', '1 à 3 mois', '3 à 6 mois', 'Plus de 6 mois'],
+            'lieu_poste' => ['Antananarivo', 'Toamasina', 'Antsirabe', 'Fianrantsoa', 'Mahajanga'],
+            'competence_technique' => ['Bureautique', 'Programmation', 'Gestion de Bases de Données', 'Systèmes d\'Information', 'Cybersécurité'],
+            'competence_transversale' => [
+                'Communication écrite et orale',
+                'Esprit d\'équipe et collaboration',
+                'Capacité d\'analyse et résolution de problèmes',
+                'Leadership et gestion du temps',
+                'Adaptabilité et gestion du changement',
+            ],
+            'competence_linguistique' => ['Anglais', 'Français', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Arabe', 'Mandarin'],
+        ];
 
-        // on associe seulement le nom de table au parametrage
-        // type de contrat
-        $type_contrats = ['Stage', 'CDI', 'CDD', 'Alternance', 'Freelance/Indépendant', 'Intérim', 'Apprentissage'];
-        foreach ($type_contrats as $contrat) {
-            Parametrage::create([
-                'table' => $type_contrat->name,
-                'sigle' => $this->generate_sigle($contrat),
-                'libelle' => $contrat,
-                'description' => '',
-            ]);
-        }
-
-        //duree contrat
-        $duree_contrats = ['Moins de 1 mois', '1 à 3 mois', '3 à 6 mois', 'Plus de 6 mois'];
-        foreach ($duree_contrats as $duree) {
-            Parametrage::create([
-                'table' => $duree_contrat->name,
-                'sigle' => $this->generate_sigle($duree),
-                'libelle' => $duree,
-                'description' => '',
-            ]);
-        }
-
-        $lieu_postes = ['Antananarivo', 'Toamasina', 'Antsirabe', 'Fianrantsoa', 'Mahajanga'];
-        foreach ($lieu_postes as $lieu) {
-            Parametrage::create([
-                'table' => $lieu_poste->name,
-                'sigle' => $this->generate_sigle($lieu),
-                'libelle' => $lieu,
-                'description' => '',
-            ]);
+        foreach ($all as $nom_table => $values) {
+            Table::create(['name' => $nom_table]);
+            foreach ($values as $elem) {
+                Parametrage::create([
+                    'table' => $nom_table,
+                    'sigle' => $this->generate_sigle($elem),
+                    'libelle' => $elem,
+                    'description' => '',
+                ]);
+            }
         }
     }
+
     protected function generate_sigle($string): string
     {
         $string = strtolower($string);

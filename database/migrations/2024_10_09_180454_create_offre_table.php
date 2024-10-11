@@ -24,6 +24,7 @@ return new class extends Migration
             $table->json('langues_requises');
             $table->text('avantages');
             $table->date('date_limite_candidature');
+            $table->string('slug', 255)->unique();
             $table->foreignId('entreprise_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

@@ -22,6 +22,11 @@
             </div>
 
             <div class="col-lg-12">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
                 <!-- Ls widget -->
                 <div class="ls-widget">
                     <div class="tabs-box">
@@ -69,8 +74,8 @@
                                                 <div class="option-box">
                                                     <ul class="option-list">
                                                         <li>
-                                                            <button data-text="View Aplication"><span
-                                                                    class="la la-eye"></span></button>
+                                                            <a href="{{route('entreprise.offres.show', ['offre' => $offre->slug])}}" data-text="View Aplication"><span
+                                                                    class="la la-eye"></span></a>
                                                         </li>
                                                         <li>
                                                             <button data-text="Reject Aplication"><span

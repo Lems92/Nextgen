@@ -96,7 +96,7 @@
                             </tbody>
                         </table>
                         <div class="mt-3">
-                            {{ $parametrages->links() }}
+                            {{ $parametrages->onEachSide(5)->links() }}
                         </div>
                     </div>
                 </div>

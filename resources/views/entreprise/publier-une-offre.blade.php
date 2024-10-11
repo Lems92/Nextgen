@@ -17,12 +17,6 @@
             </div>
 
             <div class="form-container">
-                @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-                @endif
-
 
                 <form action="{{ route('entreprise.offres.store') }}" method="POST" class="default-form">
                     @csrf
@@ -36,13 +30,9 @@
                         <div class="form-group col-lg-6 col-md-12">
                             <label for="type_contrat">Type de contrat</label>
                             <select id="type_contrat" name="type_contrat" class="chosen-select" required>
-                                <option {{ old('type_contrat') == 'Stage' ? 'selected' : '' }}>Stage</option>
-                                <option {{ old('type_contrat') == 'CDI' ? 'selected' : '' }}>CDI</option>
-                                <option {{ old('type_contrat') == 'CDD' ? 'selected' : '' }}>CDD</option>
-                                <option {{ old('type_contrat') == 'Alternance' ? 'selected' : '' }}>Alternance</option>
-                                <option {{ old('type_contrat') == 'Freelance / Indépendant' ? 'selected' : '' }}>Freelance / Indépendant</option>
-                                <option {{ old('type_contrat') == 'Intérim' ? 'selected' : '' }}>Intérim</option>
-                                <option {{ old('type_contrat') == 'Apprentissage' ? 'selected' : '' }}>Apprentissage</option>
+                                @foreach($type_contrats as $contrat)
+                                    <option value="{{$contrat->sigle}}" {{ old('type_contrat') == $contrat->sigle ? 'selected' : '' }}>{{$contrat->libelle}}</option>
+                                @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('type_contrat')" class="mt-2" />
                         </div>
@@ -50,10 +40,9 @@
                         <div class="form-group col-lg-6 col-md-12">
                             <label for="duree_contrat">Durée du contrat</label>
                             <select id="duree_contrat" name="duree_contrat" class="chosen-select" required>
-                                <option {{ old('duree_contrat') == 'Moins de 1 mois' ? 'selected' : '' }}>Moins de 1 mois</option>
-                                <option {{ old('duree_contrat') == '1 à 3 mois' ? 'selected' : '' }}>1 à 3 mois</option>
-                                <option {{ old('duree_contrat') == '3 à 6 mois' ? 'selected' : '' }}>3 à 6 mois</option>
-                                <option {{ old('duree_contrat') == 'Plus de 6 mois' ? 'selected' : '' }}>Plus de 6 mois</option>
+                                @foreach($duree_contrats as $duree)
+                                    <option value="{{$duree->sigle}}" {{ old('duree_contrat') == $duree->sigle ? 'selected' : '' }}>{{$duree->libelle}}</option>
+                                @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('duree_contrat')" class="mt-2" />
                         </div>
@@ -61,12 +50,9 @@
                         <div class="form-group col-lg-6 col-md-12">
                             <label for="lieu_poste">Lieu du poste</label>
                             <select id="lieu_poste" name="lieu_poste" class="chosen-select" required>
-                                <option {{ old('lieu_poste') == 'Antananarivo' ? 'selected' : '' }}>Antananarivo</option>
-                                <option {{ old('lieu_poste') == 'Toamasina' ? 'selected' : '' }}>Toamasina</option>
-                                <option {{ old('lieu_poste') == 'Mahajanga' ? 'selected' : '' }}>Mahajanga</option>
-                                <option {{ old('lieu_poste') == 'Fianarantsoa' ? 'selected' : '' }}>Fianarantsoa</option>
-                                <option {{ old('lieu_poste') == 'Antsirabe' ? 'selected' : '' }}>Antsirabe</option>
-                                <option {{ old('lieu_poste') == 'Nosy Be' ? 'selected' : '' }}>Nosy Be</option>
+                                @foreach($lieu_postes as $lieu)
+                                    <option value="{{$lieu->sigle}}" {{ old('duree_contrat') == $lieu->sigle ? 'selected' : '' }}>{{$lieu->libelle}}</option>
+                                @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('lieu_poste')" class="mt-2" />
                         </div>
@@ -86,11 +72,9 @@
                         <div class="form-group col-lg-12 col-md-12">
                             <label for="comptetences_techniques">Compétences techniques requises</label>
                             <select id="comptetences_techniques" name="competences_techniques[]" class="chosen-select multiple" multiple required>
-                                <option>Bureautique</option>
-                                <option>Programmation</option>
-                                <option>Gestion de Bases de Données</option>
-                                <option>Systèmes d'Information</option>
-                                <option>Cybersécurité</option>
+                                @foreach($competences_techniques as $competence_technique)
+                                    <option value="{{$competence_technique->sigle}}" {{ old('duree_contrat') == $competence_technique->sigle ? 'selected' : '' }}>{{$competence_technique->libelle}}</option>
+                                @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('competences_techniques')" class="mt-2" />
                         </div>
@@ -98,11 +82,9 @@
                         <div class="form-group col-lg-12 col-md-12">
                             <label for="competences_transversales">Compétences transversales recherchées</label>
                             <select id="competences_transversales" name="competences_transversales[]" class="chosen-select multiple" multiple required>
-                                <option>Communication écrite et orale</option>
-                                <option>Esprit d'équipe et collaboration</option>
-                                <option>Capacité d'analyse et résolution de problèmes</option>
-                                <option>Leadership et gestion du temps</option>
-                                <option>Adaptabilité et gestion du changement</option>
+                                @foreach($competences_transversales as $competence_transversale)
+                                    <option value="{{$competence_transversale->sigle}}" {{ old('duree_contrat') == $competence_transversale->sigle ? 'selected' : '' }}>{{$competence_transversale->libelle}}</option>
+                                @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('competences_transversales')" class="mt-2" />
                         </div>
@@ -110,14 +92,9 @@
                         <div class="form-group col-lg-12 col-md-12">
                             <label for="langues_requises">Langues Requises</label>
                             <select id="langues_requises" name="langues_requises[]" class="chosen-select multiple" multiple required>
-                                <option>Anglais</option>
-                                <option>Français</option>
-                                <option>Espagnol</option>
-                                <option>Allemand</option>
-                                <option>Italien</option>
-                                <option>Portugais</option>
-                                <option>Arabe</option>
-                                <option>Mandarin</option>
+                                @foreach($langues as $langue)
+                                    <option value="{{$langue->sigle}}" {{ old('duree_contrat') == $langue->sigle ? 'selected' : '' }}>{{$langue->libelle}}</option>
+                                @endforeach
                             </select>
                             <x-input-error :messages="$errors->get('langues_requises')" class="mt-2" />
                         </div>
