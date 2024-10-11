@@ -31,10 +31,6 @@
                                         <label for="nom" class="form-label">Nom :</label>
                                         <input type="text" id="nom" name="nom" class="form-control" required>
                                     </div>
-                                    <!--<div class="col-md-6">
-                                        <label for="email" class="form-label">Adresse e-mail :</label>
-                                        <input type="email" id="email" name="email" class="form-control" required>
-                                    </div>-->
                                     <div class="col-md-6">
                                         <label for="numero_telephone" class="form-label">Numéro de téléphone :</label>
                                         <input type="tel" id="numero_telephone" name="numero_telephone" class="form-control" required>
@@ -48,10 +44,9 @@
                                     <div class="col-md-6">
                                         <label for="genre" class="form-label">Genre :</label>
                                         <select id="genre" name="genre" class="form-select" required>
-                                            <option value="masculin">Masculin</option>
-                                            <option value="feminin">Féminin</option>
-                                            <option value="non-binaire">Non-binaire</option>
-                                            <option value="prefere-pas-dire">Préfère ne pas dire</option>
+                                            @foreach($genres as $genre)
+                                                <option value="{{$genre->sigle}}" {{ old('genre') == $genre->sigle ? 'selected' : '' }}>{{$genre->libelle}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-md-12">
@@ -98,27 +93,9 @@
                                 <div class="mb-3">
                                     <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
                                     <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
-                                        <option value="sciences">Sciences</option>
-                                        <option value="ingenierie">Ingénierie</option>
-                                        <option value="arts">Arts</option>
-                                        <option value="commerce">Commerce</option>
-                                        <option value="medecine">Médecine</option>
-                                        <option value="droit">Droit</option>
-                                        <option value="economie">Économie</option>
-                                        <option value="architecture">Architecture</option>
-                                        <option value="sciences-sociales">Sciences sociales</option>
-                                        <option value="sciences-vie">Sciences de la vie</option>
-                                        <option value="sciences-environnement">Sciences de l'environnement</option>
-                                        <option value="education">Éducation</option>
-                                        <option value="tourisme-hotel">Tourisme et hôtellerie</option>
-                                        <option value="agriculture-environnement">Agriculture et environnement rural
-                                        </option>
-                                        <option value="technologies-information">Technologies de l'information</option>
-                                        <option value="communication">Communication</option>
-                                        <option value="langues-cultures">Langues et cultures</option>
-                                        <option value="sciences-politiques">Sciences politiques</option>
-                                        <option value="gestion">Gestion</option>
-                                        <option value="sciences-sante">Sciences de la santé</option>
+                                        @foreach($domaine_etudes as $de)
+                                            <option value="{{$de->sigle}}" {{ old('domaine_etudes') == $de->sigle ? 'selected' : '' }}>{{$de->libelle}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="mb-3">

@@ -96,11 +96,9 @@
                 <div class="form-group">
                     <label for="nombre_etudiants">Nombre d'étudiants inscrits :</label>
                     <select class="form-control" id="nombre_etudiants" name="nombre_etudiants" required>
-                        <option value="Moins de 100">Moins de 100</option>
-                        <option value="100 à 499">100 à 499</option>
-                        <option value="500 à 999">500 à 999</option>
-                        <option value="1 000 à 4 999">1 000 à 4 999</option>
-                        <option value="5 000 à 9 999">5 000 à 9 999</option>
+                        @foreach($nombre_etudiants as $nombre)
+                            <option value="{{$nombre->sigle}}" {{ old('type_contrat') == $nombre->sigle ? 'selected' : '' }}>{{$nombre->libelle}}</option>
+                        @endforeach
                     </select>
                     <x-input-error :messages="$errors->get('nombre_etudiants')" class="mt-2" />
                 </div>
@@ -224,24 +222,9 @@
                 <div class="form-group">
                     <label for="niveaux_etudes_proposes">Niveaux d'études proposés :</label>
                     <select class="chosen-select multiple" id="niveaux_etudes_proposes" name="niveaux_etudes_proposes[]" multiple>
-                        <option>Licence générale</option>
-                        <option>Licence professionnelle</option>
-                        <option>Licence en alternance</option>
-                        <option>Master 1</option>
-                        <option>Master 2</option>
-                        <option>Master Recherche</option>
-                        <option>Master Professionnel</option>
-                        <option>Doctorat</option>
-                        <option>Thèse de Doctorat</option>
-                        <option>Post-doctorat</option>
-                        <option>Certificat de Compétences Professionnelles</option>
-                        <option>Diplôme Universitaire</option>
-                        <option>Diplôme d'Études Supérieures Spécialisées</option>
-                        <option>Diplôme d'Études Supérieures</option>
-                        <option>Formations courtes spécialisées</option>
-                        <option>Certificats de spécialisation</option>
-                        <option>Diplômes de formation continue</option>
-                        <option>Double diplôme en partenariat avec d’autres institutions académiques</option>
+                        @foreach($niveaux_etudes_proposes as $niveau_etude)
+                            <option value="{{$niveau_etude->sigle}}" {{ old('type_contrat') == $niveau_etude->sigle ? 'selected' : '' }}>{{$niveau_etude->libelle}}</option>
+                        @endforeach
                     </select>
                     <x-input-error :messages="$errors->get('niveaux_etudes_proposes')" class="mt-2" />
                 </div>

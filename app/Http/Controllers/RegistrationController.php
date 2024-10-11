@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Entreprise;
 use App\Models\Etudiant;
+use App\Models\Parametrage;
 use App\Models\Universite;
 use App\Models\User;
 use App\Utils\Redirection;
@@ -63,11 +64,15 @@ class RegistrationController extends Controller
 
         $mada_regions = File::json(base_path("/resources/data/region_mada.json"));
         $france_regions = File::json(base_path("/resources/data/region_france.json"));
+        $genres = Parametrage::where('table', 'LIKE', 'genre')->get();
+        $domaine_etudes = Parametrage::where('table', 'LIKE', 'domaine_etude')->get();
 
-        return view('inscription.form-etudiant', [
-            'mada_regions' => $mada_regions,
-            'france_regions' => $france_regions
-        ]);
+        return view('inscription.form-etudiant', compact([
+            'mada_regions',
+            'france_regions',
+            'genres',
+            'domaine_etudes'
+        ]));
     }
 
     public function register_etudiant_post(Request $request): RedirectResponse
@@ -266,7 +271,13 @@ class RegistrationController extends Controller
             return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
 
-        return view('inscription.form-service-carriere');
+        $nombre_etudiants = Parametrage::where('table', 'LIKE', 'nombre_etudiant')->get();
+        $niveaux_etudes_proposes = Parametrage::where('table', 'LIKE', 'niveaux_etudes_proposes')->get();
+
+        return view('inscription.form-service-carriere', compact([
+            'nombre_etudiants',
+            'niveaux_etudes_proposes',
+        ]));
     }
 
     public function register_service_carriere_post(Request $request): RedirectResponse

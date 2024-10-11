@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Parametrage;
 use App\Models\Table;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ParametrageSeeder extends Seeder
@@ -27,6 +26,50 @@ class ParametrageSeeder extends Seeder
                 'Adaptabilité et gestion du changement',
             ],
             'competence_linguistique' => ['Anglais', 'Français', 'Espagnol', 'Allemand', 'Italien', 'Portugais', 'Arabe', 'Mandarin'],
+            'nombre_etudiant' => ['Moins de 100', '100 à 499', '500 à 999', '1 000 à 4 999', '5 000 à 9 999', 'Plus de 10 000'],
+            'niveaux_etudes_proposes' => [
+                'Licence générale',
+                'Licence professionnelle',
+                'Licence en alternance',
+                'Master 1',
+                'Master 2',
+                'Master Recherche',
+                'Master Professionnel',
+                'Doctorat',
+                'Thèse de Doctorat',
+                'Post-doctorat',
+                'Certificat de Compétences Professionnelles',
+                'Diplôme Universitaire',
+                'Diplôme d\'Études Supérieures Spécialisées',
+                'Diplôme d\'Études Supérieures',
+                'Formations courtes spécialisées',
+                'Certificats de spécialisation',
+                'Diplômes de formation continue',
+                'Double diplôme en partenariat avec d\’autres institutions académiques',
+            ],
+            'genre' => ['Masculin', 'Féminin', 'Non binaire', 'Préfère ne pas dire'],
+            'domaine_etude' => [
+                'Sciences',
+                'Ingénierie',
+                'Arts',
+                'Commerce',
+                'Médecine',
+                'Droit',
+                'Économie',
+                'Architecture',
+                'Sciences sociales',
+                'Sciences de la vie',
+                'Sciences de l\'environnement',
+                'Éducation',
+                'Tourisme et hôtellerie',
+                'Agriculture et environnement rural',
+                'Technologies de l\'information',
+                'Communication',
+                'Langues et cultures',
+                'Sciences politiques',
+                'Gestion',
+                'Sciences de la santé',
+            ]
         ];
 
         foreach ($all as $nom_table => $values) {
@@ -45,6 +88,6 @@ class ParametrageSeeder extends Seeder
     protected function generate_sigle($string): string
     {
         $string = strtolower($string);
-        return preg_replace('/[^a-z0-9]/', '', $string);
+        return str_replace(' ', '_', $string);
     }
 }
