@@ -150,26 +150,17 @@
                         <li class="{{ request()->is('candidature') ? 'active' : '' }}">
                             <a href="{{route('candidature')}}"><i class="la la-briefcase"></i>Candidatures</a>
                         </li>
-                        <li class="#">
-                            <a href="#"><i class="la la-lock"></i>Mot de passe</a>
-                        </li>
 
                         <!--- Entreprise -->
                     @elseif($user->hasRole('entreprise'))
                         <li class="{{ request()->is('dashboard-entreprise') ? 'active' : '' }}">
                             <a href="{{ route('entreprise.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
                         </li>
-                        <li class="{{ request()->is('offre') ? 'active' : '' }}">
-                            <a href="{{ route('offre') }}"><i class="la la-paper-plane"></i>Publier une offre</a>
-                        </li>
                         <li class="{{ is_active('entreprises/offres') ? 'active' : '' }}">
                             <a href="{{ route('entreprise.offres') }}"><i class="la la-briefcase"></i>Gérer mes offres</a>
                         </li>
                         <li class="{{ request()->is('gerer-candidat') ? 'active' : '' }}">
                             <a href="{{ route('gerer-candidat') }}"><i class="la la-file-invoice"></i>Mes candidats</a>
-                        </li>
-                        <li class="{{ request()->is('change-password') ? 'active' : '' }}">
-                            <a href="{{ route('accueil') }}"><i class="la la-lock"></i>Mot de passe</a>
                         </li>
 
                         <!--- Université -->

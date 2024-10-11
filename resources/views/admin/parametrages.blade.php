@@ -15,286 +15,138 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-12">
                             <div class="text-center mb-5">
-                                <h2>Entreprises Soumises</h2>
+                                <h2>Parametrages divers</h2>
                             </div>
                         </div>
                     </div>
 
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <div class="admin-table table-responsive">
+                        <div class="mb-3 d-flex justify-content-end">
+                            <a href="{{route('admin.parametrages.create')}}" class="btn btn-primary"><i class="la la-plus"></i> Ajouter nouveau</a>
+                        </div>
+                        <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
+                            <div>
+                                <form id="searchForm" method="GET" action="{{ url()->current() }}">
+                                    <input type="search" id="libelle" class="form-control" name="libelle" placeholder="Rechercher par libellé"
+                                           value="{{ $search_data['libelle'] }}" onkeypress="handleKeyPress(event)">
+                                    <!--<button type="submit" class="btn btn-secondary">Rechercher</button>-->
+                                </form>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <label for="table">Table:</label>
+                                <select id="table" class="form-control" onchange="handleTableChange()">
+                                    <option value="tout" {{$search_data['table'] == 'tout' ? 'selected' : '' }}>Tout</option>
+                                    @foreach($tables as $table)
+                                        <option value="{{$table->name}}" {{$search_data['table'] == $table->name ? 'selected' : '' }}>{{$table->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="d-flex align-items-center gap-3">
+                                <label for="per_page">Afficher:</label>
+                                <select id="per_page" class="form-control" onchange="handlePerPageChange()">
+                                    <option value="5" {{$search_data['per_page'] == '5' ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{$search_data['per_page'] == '10' ? 'selected' : '' }}>10
+                                    </option>
+                                    <option value="20" {{$search_data['per_page'] == '20' ? 'selected' : '' }}>20
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Nom de l'Entreprise</th>
-                                <th>Secteur d'Activité</th>
-                                <th>Ville</th>
-                                <th>Région</th>
-                                <th>Contact Principal</th>
-                                <th>Email de Contact</th>
+                                <th>Nom table</th>
+                                <th>Sigle</th>
+                                <th>Libellé</th>
+                                <th>Description</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>NextA</td>
-                                <td>ESN</td>
-                                <td>Antananarivo</td>
-                                <td>Analamanga</td>
-                                <td>Nom</td>
-                                <td>Email</td>
-                                <td>
-                                    <div class="d-flex justify-content-center gap-2">
-                                        <a href="#" class="btn btn-warning" onclick="showDetails()">Détails/Modifer</a>
-                                        <form action="#" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('POST')
-                                            <button type="submit" class="btn btn-success">Approuver</button>
-                                        </form>
-                                        <form action="#" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette entreprise ?');">
-                                                Rejeter
+                            @forelse($parametrages as $parametrage)
+                                <tr>
+                                    <td>{{$parametrage->table}}</td>
+                                    <td>{{$parametrage->sigle}}</td>
+                                    <td>{{$parametrage->libelle}}</td>
+                                    <td>{{$parametrage->description}}</td>
+                                    <td>
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <a href="{{route('admin.parametrages.update', ['id' => $parametrage->id])}}" class="btn btn-warning">Modifier</a>
+                                            <form method="POST" id="{{'delete_form_' . $parametrage->id}}" action="{{route('admin.parametrages.delete')}}">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$parametrage->id}}">
+                                            </form>
+                                            <button type="submit" class="btn btn-danger" onclick="deleteParametrage('delete_form_{{$parametrage->id}}')">
+                                                Supprimer
                                             </button>
-                                        </form>
-                                    </div>
-                                </td>
-                            </tr>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5">Aucun enregistrement trouvé!</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Section: Detailed Company Information -->
-            <section id="details-entreprise" class="p-4 border rounded shadow-sm" style="display:none;">
-                <h2 class="text-center mb-4">Détails de l'Entreprise</h2>
-
-                <!-- Informations Générales -->
-                <form>
-                    <h4>Informations Générales</h4>
-
-                    <div class="mb-3">
-                        <label for="companyName" class="form-label">Nom de l’Entreprise :</label>
-                        <input type="text" class="form-control" id="companyName" placeholder="Nom de l'entreprise">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="sector" class="form-label">Secteur d'Activité :</label>
-                        <select id="sector" class="form-select">
-                            <option selected>Choisissez...</option>
-                            <option>Informatique</option>
-                            <option>Ingénierie</option>
-                            <option>Commerce et Gestion</option>
-                            <!-- Ajoutez d'autres secteurs ici -->
-                        </select>
-                    </div>
-
-                    <h4>Adresse de l'Entreprise</h4>
-
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Adresse Complète :</label>
-                        <input type="text" class="form-control" id="address" placeholder="Numéro et Rue">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="address2" class="form-label">Complément d'Adresse (si nécessaire) :</label>
-                        <input type="text" class="form-control" id="address2"
-                               placeholder="Bâtiment, Appartement, Suite">
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label for="postalCode" class="form-label">Code Postal :</label>
-                            <input type="text" class="form-control" id="postalCode">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="city" class="form-label">Ville :</label>
-                            <input type="text" class="form-control" id="city">
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label for="region" class="form-label">Région/Province :</label>
-                            <input type="text" class="form-control" id="region">
+                        <div class="mt-3">
+                            {{ $parametrages->links() }}
                         </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="country" class="form-label">Pays :</label>
-                        <input type="text" class="form-control" id="country">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="website" class="form-label">Site Web :</label>
-                        <input type="url" class="form-control" id="website" placeholder="https://">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="creationDate" class="form-label">Date de Création :</label>
-                        <input type="date" class="form-control" id="creationDate">
-                    </div>
-
-                    <!-- Contact Principal -->
-                    <h4>Contact Principal</h4>
-
-                    <div class="mb-3">
-                        <label for="contactName" class="form-label">Nom du Contact :</label>
-                        <input type="text" class="form-control" id="contactName" placeholder="Nom du contact">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="contactPosition" class="form-label">Fonction du Contact :</label>
-                        <input type="text" class="form-control" id="contactPosition" placeholder="Fonction">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="contactEmail" class="form-label">Adresse e-mail du Contact :</label>
-                        <input type="email" class="form-control" id="contactEmail" placeholder="email@exemple.com">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="contactPhone" class="form-label">Numéro de Téléphone du Contact :</label>
-                        <input type="tel" class="form-control" id="contactPhone" placeholder="Numéro de téléphone">
-                    </div>
-
-                    <!-- Informations sur les Opportunités -->
-                    <h4>Informations sur les Opportunités</h4>
-
-                    <div class="mb-3">
-                        <label class="form-label">Types d'Opportunités Proposées :</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="stage" id="stage">
-                            <label class="form-check-label" for="stage">Stages</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="fulltime" id="fulltime">
-                            <label class="form-check-label" for="fulltime">Emplois à Temps Plein</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="parttime" id="parttime">
-                            <label class="form-check-label" for="parttime">Emplois à Temps Partiel</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="alternance" id="alternance">
-                            <label class="form-check-label" for="alternance">Alternance</label>
-                        </div>
-                    </div>
-
-                    <!-- Domaines d'Activité des Opportunités -->
-                    <h4>Domaines d'Activité des Opportunités :</h4>
-
-                    <h5>Technologie de l'Information :</h5>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="dev" id="dev">
-                        <label class="form-check-label" for="dev">Développement de Logiciels</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="security" id="security">
-                        <label class="form-check-label" for="security">Sécurité Informatique</label>
-                    </div>
-
-                    <!-- Ajoutez d'autres domaines ici -->
-
-                    <!-- Responsabilités et Engagement -->
-                    <h4>Responsabilités et Engagement</h4>
-
-                    <div class="mb-3">
-                        <label class="form-label">Engagement en matière d’Inclusion et Diversité :</label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="equality" id="equality">
-                            <label class="form-check-label" for="equality">Politiques d’Égalité des Chances</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="underrepresented"
-                                   id="underrepresented">
-                            <label class="form-check-label" for="underrepresented">Programmes pour Groupes
-                                Sous-représentés</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="accessibility" id="accessibility">
-                            <label class="form-check-label" for="accessibility">Accessibilité au Travail</label>
-                        </div>
-                    </div>
-
-                    <!-- Soumettre le formulaire -->
-                    <button type="submit" class="btn btn-warning">Modifier</button>
-                </form>
-            </section>
-
-            <!-- Section: Pricing Management -->
-            <section class="admin-section bg-light">
-                <div class="container">
-                    <div class="text-center mb-5">
-                        <h2>Gestion des Offres</h2>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                            <div class="pricing-plan">
-                                <div class="plan-header">
-                                    <h4>Plan Standard</h4>
-                                    <p>Prix: 5 Ar / mois</p>
-                                </div>
-                                <div class="plan-features">
-                                    <ul>
-                                        <li>10 annonces de job</li>
-                                        <li>3 offres vedettes</li>
-                                        <li>Annonce affichée pendant 30 jours</li>
-                                        <li>Support Premium</li>
-                                    </ul>
-                                </div>
-                                <div class="plan-footer">
-                                    <a href="#" class="btn btn-warning" onclick="offre()">Modifier</a>
-                                    <form action="#" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette offre ?');">
-                                            Supprimer
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="admin-section bg-light" id="offre" style="display: none;">
-                <div class="container">
-                    <div class="text-center mb-5">
-                        <h2>Gestion des Offres</h2>
-                    </div>
-                    <form>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-12">
-                                <div class="pricing-plan">
-                                    <div class="plan-header">
-                                        <h4>Plan Standard</h4>
-                                        <p>prix: <input type="text" class="form-control" placeholder="5030000">Ar/mois
-                                        </p>
-                                    </div>
-                                    <div class="plan-features">
-                                        <ul>
-                                            <input type="text" class="form-control" placeholder="1 reseau">
-                                            <input type="text" class="form-control" placeholder="2 tableau">
-                                            <input type="text" class="form-control" placeholder="6 fe">
-                                            <input type="text" class="form-control" placeholder="9 accees">
-                                        </ul>
-                                    </div>
-                                    <div class="plan-footer">
-                                        <a href="#" class="btn btn-warning">Modifier</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </section>
 
         </div>
     </section>
 
+    <script>
+
+        function handlePerPageChange() {
+            let value = document.getElementById('per_page').value;
+            let currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('per_page', value);
+            window.location.href = currentUrl.toString();
+        }
+
+        function handleTableChange() {
+            let value = document.getElementById('table').value;
+            let currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('table', value);
+            currentUrl.searchParams.delete('page');
+            window.location.href = currentUrl.toString();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Empêche l'action par défaut (soumission du formulaire)
+                document.getElementById('searchForm').submit(); // Soumet le formulaire manuellement
+            }
+        }
+
+        function deleteParametrage(id) {
+            Swal.fire({
+                title: "Voulez vous vraiment supprimer cet élément?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#ff2443",
+                cancelButtonColor: "#3d3d3d",
+                confirmButtonText: "Oui, supprimer"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(id).submit();
+                }
+            });
+        }
+
+    </script>
+
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         .admin-wrapper {
             padding: 20px 0;
@@ -344,18 +196,4 @@
             margin-top: 15px;
         }
     </style>
-    <script>
-        function showDetails() {
-            var detailsSection = document.getElementById('details-entreprise');
-            if (detailsSection.style.display === 'none' || detailsSection.style.display === '') {
-                detailsSection.style.display = 'block';
-            } else {
-                detailsSection.style.display = 'none';
-            }
-        }
-
-        function offre() {
-            document.getElementById('offre').style.display = 'block';
-        }
-    </script>
 @endsection

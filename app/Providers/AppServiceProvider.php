@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -28,5 +29,7 @@ class AppServiceProvider extends ServiceProvider
                 ->action('Vérifier l\'adresse e-mail', $url)
                 ->line('Si vous n\'avez pas créé de compte, aucune autre action n\'est requise.');
         });
+
+        Paginator::useBootstrapFive();
     }
 }

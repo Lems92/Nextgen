@@ -42,6 +42,7 @@
                                     <div class="col-md-6">
                                         <label for="date-naissance" class="form-label">Date de naissance :</label>
                                         <input type="date" id="date-naissance" name="date_naissance"
+                                               value="{{old('date_naissance')}}"
                                                class="form-control" required>
                                     </div>
                                     <div class="col-md-6">

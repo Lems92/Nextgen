@@ -44,72 +44,103 @@ Route::middleware(['auth'])->group(function () {
 //commun
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/attente-verification-admin', [WaitingController::class, 'waiting_admin'])->name('attente_verification_admin');
-    Route::get('/modiferProfil', function() {return view('etudiant.modifierProfil');})->name('modifierProfil');
+    Route::get('/modiferProfil', function () {
+        return view('etudiant.modifierProfil');
+    })->name('modifierProfil');
 });
 
 // administration
 Route::middleware(['auth', 'verified', 'role:admin'])
     ->prefix('admin')
     ->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/entreprises', [AdminController::class, 'list_entreprises'])->name('admin.list_entreprises');
-    Route::get('/entreprises/{entreprise:slug}', [AdminController::class, 'show_entreprise'])->name('admin.show_entreprise');
-    Route::get('/universites', [AdminController::class, 'list_universites'])->name('admin.list_universites');
-    Route::get('/universites/{universite:slug}', [AdminController::class, 'show_universite'])->name('admin.show_universite');
-    Route::post('/activate-account', [AdminController::class, 'activate_account'])->name('admin.activate_account');
-    Route::get('/parametrages', [AdminController::class, 'parametrages'])->name('admin.parametrages');
-});
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/entreprises', [AdminController::class, 'list_entreprises'])->name('admin.list_entreprises');
+        Route::get('/entreprises/{entreprise:slug}', [AdminController::class, 'show_entreprise'])->name('admin.show_entreprise');
+        Route::get('/universites', [AdminController::class, 'list_universites'])->name('admin.list_universites');
+        Route::get('/universites/{universite:slug}', [AdminController::class, 'show_universite'])->name('admin.show_universite');
+        Route::post('/activate-account', [AdminController::class, 'activate_account'])->name('admin.activate_account');
+        Route::get('/parametrages', [AdminController::class, 'parametrages'])->name('admin.parametrages');
+        Route::get('/parametrages/create', [AdminController::class, 'create_parametrage'])->name('admin.parametrages.create');
+        Route::post('/parametrages/create', [AdminController::class, 'store_parametrage'])->name('admin.parametrages.store');
+        Route::post('/parametrages/delete', [AdminController::class, 'delete_parametrage'])->name('admin.parametrages.delete');
+        Route::get('/parametrages/{id}/update', [AdminController::class, 'update_parametrage'])->name('admin.parametrages.update');
+        Route::post('/parametrages/{id}/update', [AdminController::class, 'validate_update_parametrage'])->name('admin.parametrages.validate_update');
+    });
 
 // etudiant
 Route::middleware(['auth', 'verified', 'role:etudiant'])->prefix('etudiants')->group(function () {
-    Route::get('/dashboard', function() {return view('etudiant.tableau-de-bord');})->name('etudiant.dashboard');
-    Route::get('/explorer-event', function() {return view('etudiant.evenements');})->name('explorer-event');
-    Route::get('/motdepasse', function() {return view('etudiant.motdepasse');})->name('motdepasse');
-    Route::get('/postuler', function() {return view('etudiant.postuler');})->name('postuler');
-    Route::get('/candidature', function() {return view('etudiant.candidatures');})->name('candidature');
+    Route::get('/dashboard', function () {
+        return view('etudiant.tableau-de-bord');
+    })->name('etudiant.dashboard');
+    Route::get('/explorer-event', function () {
+        return view('etudiant.evenements');
+    })->name('explorer-event');
+    Route::get('/motdepasse', function () {
+        return view('etudiant.motdepasse');
+    })->name('motdepasse');
+    Route::get('/postuler', function () {
+        return view('etudiant.postuler');
+    })->name('postuler');
+    Route::get('/candidature', function () {
+        return view('etudiant.candidatures');
+    })->name('candidature');
 
     route::get('/offres', [OffreController::class, 'index'])->name('offers.index');
     Route::get('/offres/{id}', [OffreController::class, 'show'])->name('offers.show');
     route::post('/offres/{id}/postuler', [OffreController::class, 'apply'])->name('offers.apply');
-    Route::get('/explorer-offre', function() {return view('etudiant.explorer-offres');})->name('explorer-offre');
+    Route::get('/explorer-offre', function () {
+        return view('etudiant.explorer-offres');
+    })->name('explorer-offre');
 
     Route::get('/offre', [OffreController::class, 'create'])->name('offre');
-    Route::get('/profil', function () {return view('etudiant.portfolio');})->name('profil');
+    Route::get('/profil', function () {
+        return view('etudiant.portfolio');
+    })->name('profil');
 });
 
 // entreprise
 Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
     ->prefix('entreprises')
     ->group(function () {
-    Route::get('/dashboard', [EntrepriseController::class, 'dashboard'])->name('entreprise.dashboard');
+        Route::get('/dashboard', [EntrepriseController::class, 'dashboard'])->name('entreprise.dashboard');
 
-    Route::get('/offres/publier', [OffreController::class, 'create'])->name('offres.create');
-    route::get('/offre', [OffreController::class, 'create'])->name('offre');
+        Route::get('/offres/publier', [OffreController::class, 'create'])->name('entreprise.offres.create');
+        route::get('/offre', [OffreController::class, 'create'])->name('offre');
 
-    // Route pour publier l'offre
-    Route::post('/offres/publier', [OffreController::class, 'store'])->name('offres.store');
-    Route::get('/offres', [EntrepriseController::class, 'offres'])->name('entreprise.offres');
-    Route::get('/gerer-candidat', function () {return view('entreprise.gerer-candidat');})->name('gerer-candidat');
-});
+        // Route pour publier l'offre
+        Route::post('/offres/publier', [OffreController::class, 'store'])->name('entreprise.offres.store');
+        Route::get('/offres', [EntrepriseController::class, 'offres'])->name('entreprise.offres');
+        Route::get('/gerer-candidat', function () {
+            return view('entreprise.gerer-candidat');
+        })->name('gerer-candidat');
+    });
 
 // service-carriere
 Route::middleware(['auth', 'verified', 'role:service-carriere', 'user_state'])
     ->prefix('service-carriere')
     ->group(function () {
-    Route::get('/dashboard', function() {return view('universite.tableau-de-bord');})->name('service_carriere.dashboard');
-    Route::get('/gerer-event', function () {return view('universite.gerer-event');})->name('gerer-event');
-    Route::get('/gestion-etudiants', function () {return view('universite.gestion-etudiants');})->name('gestion-etudiants');
-    Route::get('/publier-event', function() {return view('universite.publier-evenements');})->name('publier-event');
-    Route::get('/events/create', [EventController::class, 'create'])->middleware('auth')->name('events.create');
-    Route::post('/events', [EventController::class, 'store'])->middleware('auth')->name('events.store');
-    Route::get('/events', [EventController::class, 'index'])->name('events.index');
+        Route::get('/dashboard', function () {
+            return view('universite.tableau-de-bord');
+        })->name('service_carriere.dashboard');
+        Route::get('/gerer-event', function () {
+            return view('universite.gerer-event');
+        })->name('gerer-event');
+        Route::get('/gestion-etudiants', function () {
+            return view('universite.gestion-etudiants');
+        })->name('gestion-etudiants');
+        Route::get('/publier-event', function () {
+            return view('universite.publier-evenements');
+        })->name('publier-event');
+        Route::get('/events/create', [EventController::class, 'create'])->middleware('auth')->name('events.create');
+        Route::post('/events', [EventController::class, 'store'])->middleware('auth')->name('events.store');
+        Route::get('/events', [EventController::class, 'index'])->name('events.index');
 
 // Afficher le formulaire
-    Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
+        Route::get('/events/create', [EventController::class, 'create'])->name('events.create');
 
 // Soumettre le formulaire
-    Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
-});
+        Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
+    });
 
 
 //email verification

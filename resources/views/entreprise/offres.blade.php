@@ -10,8 +10,15 @@
     <section class="user-dashboard">
         <div class="dashboard-outer">
             <div class="upper-title-box">
-                <h3>Manage Jobs</h3>
-                <div class="text">Ready to jump back in?</div>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3>Liste d publiés offres</h3>
+                        <div class="text">Gérer vos offres?</div>
+                    </div>
+                    <div>
+                        <a href="{{route('entreprise.offres.create')}}" class="btn btn-primary"><i class="la la-plus"></i> Publier annonce</a>
+                    </div>
+                </div>
             </div>
 
             <div class="col-lg-12">
