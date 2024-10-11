@@ -74,15 +74,18 @@
                                                 <div class="option-box">
                                                     <ul class="option-list">
                                                         <li>
-                                                            <a href="{{route('entreprise.offres.show', ['offre' => $offre->slug])}}" data-text="View Aplication"><span
+                                                            <a href="{{route('entreprise.offres.show', ['offre' => $offre->slug])}}" data-text="Voir l'offre"><span
                                                                     class="la la-eye"></span></a>
                                                         </li>
                                                         <li>
-                                                            <button data-text="Reject Aplication"><span
-                                                                    class="la la-pencil"></span></button>
+                                                            <a href="{{route('entreprise.offres.edit', ['offre' => $offre->slug])}}" data-text="Modifier l'offre"><span
+                                                                    class="la la-pencil"></span></a>
                                                         </li>
                                                         <li>
-                                                            <button data-text="Delete Aplication"><span
+                                                            <form method="post" id="delete_offre_form{{$offre->id}}" action="{{route('entreprise.offres.delete', ['offre' => $offre->slug])}}">
+                                                                @csrf
+                                                            </form>
+                                                            <button onclick="deleteOffre('delete_offre_form{{$offre->id}}')" data-text="Supprimer l'offre"><span
                                                                     class="la la-trash"></span></button>
                                                         </li>
                                                     </ul>
@@ -111,82 +114,20 @@
 
 
     <script>
-        Chart.defaults.global.defaultFontFamily = "Sofia Pro";
-        Chart.defaults.global.defaultFontColor = '#888';
-        Chart.defaults.global.defaultFontSize = '14';
-
-        var ctx = document.getElementById('chart').getContext('2d');
-
-        var chart = new Chart(ctx, {
-
-            type: 'line',
-            // The data for our dataset
-            data: {
-                labels: ["January", "February", "March", "April", "May", "June"],
-                // Information about the dataset
-                datasets: [{
-                    label: "Views",
-                    backgroundColor: 'transparent',
-                    borderColor: '#1967D2',
-                    borderWidth: "1",
-                    data: [196, 132, 215, 362, 210, 252],
-                    pointRadius: 3,
-                    pointHoverRadius: 3,
-                    pointHitRadius: 10,
-                    pointBackgroundColor: "#1967D2",
-                    pointHoverBackgroundColor: "#1967D2",
-                    pointBorderWidth: "2",
-                }]
-            },
-
-            // Configuration options
-            options: {
-
-                layout: {
-                    padding: 10,
-                },
-
-                legend: {
-                    display: false
-                },
-                title: {
-                    display: false
-                },
-
-                scales: {
-                    yAxes: [{
-                        scaleLabel: {
-                            display: false
-                        },
-                        gridLines: {
-                            borderDash: [6, 10],
-                            color: "#d8d8d8",
-                            lineWidth: 1,
-                        },
-                    }],
-                    xAxes: [{
-                        scaleLabel: {
-                            display: false
-                        },
-                        gridLines: {
-                            display: false
-                        },
-                    }],
-                },
-
-                tooltips: {
-                    backgroundColor: '#333',
-                    titleFontSize: 13,
-                    titleFontColor: '#fff',
-                    bodyFontColor: '#fff',
-                    bodyFontSize: 13,
-                    displayColors: false,
-                    xPadding: 10,
-                    yPadding: 10,
-                    intersect: false
+        function deleteOffre(form_id) {
+            Swal.fire({
+                title: "Voulez vous vraiment supprimer cet élément?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#ff2443",
+                cancelButtonColor: "#3d3d3d",
+                confirmButtonText: "Oui, supprimer"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(form_id).submit();
                 }
-            },
-        });
+            });
+        }
     </script>
     <style>
         /* Ensure the entire section fills the screen */
@@ -246,8 +187,4 @@
         }
 
     </style>
-
-    </body>
-
-    </html>
 @endsection

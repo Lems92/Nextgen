@@ -72,4 +72,48 @@ class EntrepriseController extends Controller
     {
         return view('entreprise.show-offres', compact('offre'));
     }
+
+    public function edit_offre(Request $request, Offre $offre): View
+    {
+        $type_contrats = Parametrage::where('table', 'LIKE', 'type_contrat')->get();
+        $duree_contrats = Parametrage::where('table', 'LIKE', 'duree_contrat')->get();
+        $lieu_postes = Parametrage::where('table', 'LIKE', 'lieu_poste')->get();
+        $competences_techniques = Parametrage::where('table', 'LIKE', 'competence_technique')->get();
+        $competences_transversales = Parametrage::where('table', 'LIKE', 'competence_transversale')->get();
+        $langues = Parametrage::where('table', 'LIKE', 'competence_linguistique')->get();
+
+        return view('entreprise.publier-une-offre', compact([
+            'type_contrats', 'duree_contrats', 'lieu_postes',
+            'competences_techniques', 'competences_transversales', 'langues', 'offre'
+        ]));
+    }
+
+    public function update_offre(Request $request, Offre $offre): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'titre_poste' => 'required|string|max:255',
+            'type_contrat' => 'required|string',
+            'duree_contrat' => 'required|string',
+            'lieu_poste' => 'required|string',
+            'date_debut' => 'required|date',
+            'description_poste' => 'required|string',
+            'competences_techniques' => 'required|array',
+            'competences_transversales' => 'required|array',
+            'langues_requises' => 'required|array',
+            'avantages' => 'nullable|string',
+            'date_limite_candidature' => 'required|date',
+        ]);
+
+        $offre->update($validatedData);
+
+        return redirect()->route('entreprise.offres')
+            ->with('success', 'Offre modifiée avec succès');
+    }
+
+    public function delete_offre(Request $request, Offre $offre): RedirectResponse
+    {
+        $offre->delete();
+        return redirect()->route('entreprise.offres')
+            ->with('success', 'Offre supprimée avec succès');
+    }
 }

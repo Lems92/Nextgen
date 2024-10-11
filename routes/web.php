@@ -109,7 +109,9 @@ Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
         Route::post('/offres/publier', [EntrepriseController::class, 'validate_publier_offre'])->name('entreprise.offres.store');
         Route::get('/offres', [EntrepriseController::class, 'offres'])->name('entreprise.offres');
         Route::get('/offres/{offre:slug}', [EntrepriseController::class, 'show_offre'])->name('entreprise.offres.show');
-
+        Route::get('/offres/{offre:slug}/modifier', [EntrepriseController::class, 'edit_offre'])->name('entreprise.offres.edit');
+        Route::post('/offres/{offre:slug}/modifier', [EntrepriseController::class, 'update_offre'])->name('entreprise.offres.update');
+        Route::post('/offres/{offre:slug}/supprimer', [EntrepriseController::class, 'delete_offre'])->name('entreprise.offres.delete');
         //candidature
         Route::get('/gerer-candidat', function () {
             return view('entreprise.gerer-candidat');

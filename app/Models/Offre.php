@@ -48,16 +48,11 @@ class Offre extends Model implements Sluggable
         return $this->belongsTo(Entreprise::class, 'entreprise_id');
     }
 
-    /**
-     * Convert the date_debut attribute to a Carbon instance.
-     *
-     * @param  string  $value
-     * @return \Carbon\Carbon
-     */
-    public function getDateDebutAttribute($value)
+
+    /*public function getDateDebutAttribute($value)
     {
         return Carbon::parse($value);
-    }
+    }*/
 
     public function slugAttribute(): string
     {

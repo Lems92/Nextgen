@@ -29,8 +29,11 @@
                             <div>
                                 <span class="badge bg-success">Active</span>
                             </div>
-                            <button class="btn btn-warning">Modifier</button>
-                            <button class="btn btn-danger">Supprimer</button>
+                            <a href="{{route('entreprise.offres.edit', ['offre' => $offre->slug])}}" class="btn btn-warning">Modifier</a>
+                            <form method="post" id="delete_offre_form" action="{{route('entreprise.offres.delete', ['offre' => $offre->slug])}}">
+                                @csrf
+                            </form>
+                            <button class="btn btn-danger" onclick="deleteOffre('delete_offre_form')">Supprimer</button>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -120,5 +123,22 @@
     <!-- Copyright -->
 
     </div><!-- End Page Wrapper -->
+
+    <script>
+        function deleteOffre(form_id) {
+            Swal.fire({
+                title: "Voulez vous vraiment supprimer cet élément?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#ff2443",
+                cancelButtonColor: "#3d3d3d",
+                confirmButtonText: "Oui, supprimer"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(form_id).submit();
+                }
+            });
+        }
+    </script>
 
 @endsection
