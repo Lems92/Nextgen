@@ -24,11 +24,27 @@ class AdminController extends Controller
         return view('admin.admin-dashboard');
     }
 
-    public function list_entreprises(): View
+    public function list_entreprises(Request $request): View
     {
-        $entreprises = Entreprise::with('user')->get();
+        $search_data = [];
+
+        $per_page = $request->get('per_page') ?? 5;
+        $search_data['per_page'] = $per_page;
+        $search_data['keywords'] = $request->get('keywords') ?? '';
+
+        $entreprises = Entreprise::with('user')
+            ->when($request->get('keywords'), function ($query) use ($request) {
+                $query->where('nom_entreprise', 'like', '%' . $request->get('keywords') . '%')
+                    ->orWhere('adresse', 'like', '%' . $request->get('keywords') . '%');
+            })
+            ->paginate($per_page)
+            ->withQueryString();;
+
+        $entreprises->withPath('/admin/entreprises');
+
         return view('admin.list_entreprises', [
-            'entreprises' => $entreprises
+            'entreprises' => $entreprises,
+            'search_data' => $search_data,
         ]);
     }
 
@@ -40,11 +56,27 @@ class AdminController extends Controller
         ]);
     }
 
-    public function list_universites(): View
+    public function list_universites(Request $request): View
     {
-        $universites = Universite::with('user')->get();
+        $search_data = [];
+
+        $per_page = $request->get('per_page') ?? 5;
+        $search_data['per_page'] = $per_page;
+        $search_data['keywords'] = $request->get('keywords') ?? '';
+
+        $universites = Universite::with('user')
+            ->when($request->get('keywords'), function ($query) use ($request) {
+                $query->where('nom_etablissement', 'like', '%' . $request->get('keywords') . '%')
+                    ->orWhere('adresse_etablissement', 'like', '%' . $request->get('keywords') . '%');
+            })
+            ->paginate($per_page)
+            ->withQueryString();;
+
+        $universites->withPath('/admin/universites');
+
         return view('admin.list_universites', [
-            'universites' => $universites
+            'universites' => $universites,
+            'search_data' => $search_data,
         ]);
     }
 
