@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\EntrepriseRegistrationConfirmationMail;
 use App\Mail\UniversiteRegistrationConfirmationMail;
+use App\Models\Etudiant;
 use App\Models\ListWithCategory;
 use App\Models\ListCategorie;
 use App\Models\Entreprise;
@@ -78,6 +79,39 @@ class AdminController extends Controller
         }
 
         return redirect()->intended($request->get('route'));
+    }
+
+    public function list_etudiants(Request $request): View
+    {
+        $search_data = [];
+
+        $per_page = $request->get('per_page') ?? 5;
+        $search_data['per_page'] = $per_page;
+        $search_data['keywords'] = $request->get('keywords') ?? '';
+
+        $etudiants = Etudiant::with('user')
+            ->when($request->get('keywords'), function ($query) use ($request) {
+                $query->where('prenom', 'like', '%' . $request->get('keywords') . '%')
+                    ->orWhere('nom', 'like', '%' . $request->get('keywords') . '%')
+                    ->orWhere('adresse_postale', 'like', '%' . $request->get('keywords') . '%');
+            })
+            ->paginate($per_page)
+            ->withQueryString();;
+
+        $etudiants->withPath('/admin/etudiants');
+
+        return view('admin.list_etudiants', [
+            'etudiants' => $etudiants,
+            'search_data' => $search_data,
+        ]);
+    }
+
+    public function show_etudiant(Request $request, Etudiant $etudiant): View
+    {
+        $etudiant->load(['user']);
+        return view('admin.show_etudiant', [
+            'etudiant' => $etudiant,
+        ]);
     }
 
     public function parametrages(Request $request): View

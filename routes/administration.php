@@ -12,6 +12,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])
         Route::get('/universites', [AdminController::class, 'list_universites'])->name('admin.list_universites');
         Route::get('/universites/{universite:slug}', [AdminController::class, 'show_universite'])->name('admin.show_universite');
         Route::post('/activate-account', [AdminController::class, 'activate_account'])->name('admin.activate_account');
+        Route::get('/etudiants', [AdminController::class, 'list_etudiants'])->name('admin.list_etudiants');
+        Route::get('/etudiants/{etudiant:slug}', [AdminController::class, 'show_etudiant'])->name('admin.show_etudiant');
+        //parametrages
         Route::get('/parametrages', [AdminController::class, 'parametrages'])->name('admin.parametrages');
         Route::get('/parametrages/create', [AdminController::class, 'create_parametrage'])->name('admin.parametrages.create');
         Route::post('/parametrages/create', [AdminController::class, 'store_parametrage'])->name('admin.parametrages.store');
