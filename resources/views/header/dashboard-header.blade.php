@@ -184,14 +184,17 @@
                         <li class="{{ is_active('admin/dashboard') ? 'active' : '' }}">
                             <a href="{{ route('admin.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
                         </li>
-                        <li class="{{ is_active('admin/parametrages') ? 'active' : '' }}">
-                            <a href="{{ route('admin.parametrages') }}"><i class="las la-cog"></i>Parametrages</a>
-                        </li>
                         <li class="{{ is_active('admin/entreprises') ? 'active' : '' }}">
                             <a href="{{ route('admin.list_entreprises') }}"><i class="las la-briefcase"></i>Entreprises</a>
                         </li>
                         <li class="{{ is_active('admin/universites') ? 'active' : '' }}">
                             <a href="{{ route('admin.list_universites') }}"><i class="las la-university"></i>Universités</a>
+                        </li>
+                        <li class="{{ is_active('admin/parametrages') ? 'active' : '' }}">
+                            <a href="{{ route('admin.parametrages') }}"><i class="las la-cog"></i>Parametrages</a>
+                        </li>
+                        <li class="{{ is_active('admin/domaines_etudes') ? 'active' : '' }}">
+                            <a href="{{ route('admin.domaines_etudes') }}"><i class="las la-list"></i>Domaines d'etudes</a>
                         </li>
                     @endif
 

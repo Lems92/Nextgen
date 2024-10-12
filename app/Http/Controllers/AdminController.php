@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\EntrepriseRegistrationConfirmationMail;
 use App\Mail\UniversiteRegistrationConfirmationMail;
+use App\Models\DomaineEtude;
+use App\Models\DomaineEtudeCategorie;
 use App\Models\Entreprise;
 use App\Models\Parametrage;
 use App\Models\Table;
@@ -88,7 +90,7 @@ class AdminController extends Controller
         $search_data['libelle'] = $request->get('libelle') ?? '';
 
         $parametrages = Parametrage::when($request->get('table') && $request->get('table') !== 'tout', function ($query) use ($request) {
-            $query->where('table', 'like', '%' . $request->get('table') . '%');
+            $query->where('table', 'like', $request->get('table'));
         })
             ->when($request->get('libelle'), function ($query) use ($request) {
                 $query->where('libelle', 'like', '%' . $request->get('libelle') . '%');
@@ -159,5 +161,84 @@ class AdminController extends Controller
         $parametrage->update($validatedData);
 
         return redirect()->intended(route('admin.parametrages'))->with('success', 'Parametre modifié avec succès!');
+    }
+
+    public function domaines_etudes(Request $request): View
+    {
+        $search_data = [];
+
+        $per_page = $request->get('per_page') ?? 5;
+        $search_data['per_page'] = $per_page;
+        $search_data['categorie'] = $request->get('categorie') ?? 'tout';
+        $search_data['name'] = $request->get('name') ?? '';
+        $domaines_etudes = DomaineEtude::with('domaine_etude_categorie')
+        ->when($request->get('categorie') && $request->get('categorie') !== 'tout', function ($query) use ($request) {
+            $query->where('domaine_etude_categorie_id', '=', (int) $request->get('categorie'));
+        })
+            ->when($request->get('name'), function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->get('name') . '%');
+            })
+            ->paginate($per_page)
+            ->withQueryString();
+
+        $domaines_etudes->withPath('/admin/domaines_etudes');
+
+        $domaine_etude_categories = DomaineEtudeCategorie::all();
+
+        return view('admin.domaines-etudes', [
+            'domaines_etudes' => $domaines_etudes,
+            'domaine_etude_categories' => $domaine_etude_categories,
+            'search_data' => $search_data,
+        ]);
+    }
+
+    public function create_domaine_etude(): View
+    {
+        $categories = DomaineEtudeCategorie::all();
+        return view('admin.create-domaine-etude', [
+            'categories' => $categories,
+        ]);
+    }
+
+    public function store_domaine_etude(Request $request): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'domaine_etude_categorie_id' => 'required',
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+        ]);
+
+        DomaineEtude::create($validatedData);
+
+        return redirect()->intended(route('admin.domaines_etudes'))->with('success', 'Domaine d\'etude ajouté avec succès!');
+    }
+
+    public function delete_domaine_etude(Request $request)
+    {
+        $id = $request->get('id');
+        $de = DomaineEtude::findOrFail($id);
+        $de->delete();
+        return redirect()->intended(route('admin.domaines_etudes'))->with('success', 'Domaine d\'étude supprimé avec succès!');
+    }
+
+    public function update_domaine_etude(Request $request, DomaineEtude $domaineEtude)
+    {
+        $categories = DomaineEtudeCategorie::all();
+        return view('admin.create-domaine-etude', [
+            'domaine_etude' => $domaineEtude,
+            'categories' => $categories
+        ]);
+    }
+
+    public function validate_update_domaine_etude(Request $request, DomaineEtude $domaineEtude)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+        ]);
+
+        $domaineEtude->update($validatedData);
+
+        return redirect()->intended(route('admin.domaines_etudes'))->with('success', 'Domaine d\'étude modifié avec succès!');
     }
 }

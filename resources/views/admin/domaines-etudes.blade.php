@@ -15,7 +15,7 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-12">
                             <div class="text-center mb-5">
-                                <h2>Parametrages divers</h2>
+                                <h2>Domaines études</h2>
                             </div>
                         </div>
                     </div>
@@ -28,22 +28,22 @@
 
                     <div class="admin-table table-responsive mb-5">
                         <div class="mb-3 d-flex justify-content-end">
-                            <a href="{{route('admin.parametrages.create')}}" class="btn btn-primary"><i class="la la-plus"></i> Ajouter nouveau</a>
+                            <a href="{{route('admin.domaines_etudes.create')}}" class="btn btn-primary"><i class="la la-plus"></i> Ajouter nouveau</a>
                         </div>
                         <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
                             <div>
                                 <form id="searchForm" method="GET" action="{{ url()->current() }}">
-                                    <input type="search" id="libelle" class="form-control" name="libelle" placeholder="Rechercher par libellé"
-                                           value="{{ $search_data['libelle'] }}" onkeypress="handleKeyPress(event)">
+                                    <input type="search" id="name" class="form-control" name="name" placeholder="Rechercher par nom"
+                                           value="{{ $search_data['name'] }}" onkeypress="handleKeyPress(event)">
                                     <!--<button type="submit" class="btn btn-secondary">Rechercher</button>-->
                                 </form>
                             </div>
                             <div class="d-flex align-items-center gap-3">
-                                <label for="table">Table:</label>
-                                <select id="table" class="form-control" onchange="handleTableChange()">
-                                    <option value="tout" {{$search_data['table'] == 'tout' ? 'selected' : '' }}>Tout</option>
-                                    @foreach($tables as $table)
-                                        <option value="{{$table->name}}" {{$search_data['table'] == $table->name ? 'selected' : '' }}>{{$table->name}}</option>
+                                <label for="categorie">Categorie:</label>
+                                <select id="categorie" class="form-control" onchange="handleCategorieChange()">
+                                    <option value="tout" {{$search_data['categorie'] == 'tout' ? 'selected' : '' }}>Tout</option>
+                                    @foreach($domaine_etude_categories as $cat)
+                                        <option value="{{$cat->id}}" {{$search_data['categorie'] == $cat->id ? 'selected' : '' }}>{{$cat->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -61,28 +61,26 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th>Nom table</th>
-                                <th>Sigle</th>
-                                <th>Libellé</th>
+                                <th>Nom</th>
                                 <th>Description</th>
+                                <th>Categorie</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($parametrages as $parametrage)
+                            @forelse($domaines_etudes as $de)
                                 <tr>
-                                    <td>{{$parametrage->table}}</td>
-                                    <td>{{$parametrage->sigle}}</td>
-                                    <td>{{$parametrage->libelle}}</td>
-                                    <td>{{$parametrage->description}}</td>
+                                    <td>{{$de->name}}</td>
+                                    <td>{{$de->description}}</td>
+                                    <td>{{$de->domaine_etude_categorie->name}}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="{{route('admin.parametrages.update', ['id' => $parametrage->id])}}" class="btn btn-warning">Modifier</a>
-                                            <form method="POST" id="{{'delete_form_' . $parametrage->id}}" action="{{route('admin.parametrages.delete')}}">
+                                            <a href="{{route('admin.domaines_etudes.update', ['domaine_etude' => $de->slug])}}" class="btn btn-warning">Modifier</a>
+                                            <form method="POST" id="{{'delete_form_' . $de->id}}" action="{{route('admin.domaines_etudes.delete')}}">
                                                 @csrf
-                                                <input type="hidden" name="id" value="{{$parametrage->id}}">
+                                                <input type="hidden" name="id" value="{{$de->id}}">
                                             </form>
-                                            <button type="submit" class="btn btn-danger" onclick="deleteParametrage('delete_form_{{$parametrage->id}}')">
+                                            <button type="submit" class="btn btn-danger" onclick="deleteDomaineEtude('delete_form_{{$de->id}}')">
                                                 Supprimer
                                             </button>
                                         </div>
@@ -90,13 +88,13 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5">Aucun enregistrement trouvé!</td>
+                                    <td colspan="4">Aucun enregistrement trouvé!</td>
                                 </tr>
                             @endforelse
                             </tbody>
                         </table>
                         <div class="mt-3">
-                            {{ $parametrages->onEachSide(2)->links('pagination::bootstrap-5') }}
+                            {{ $domaines_etudes->onEachSide(2)->links('pagination::bootstrap-5') }}
                         </div>
                     </div>
                 </div>
@@ -110,15 +108,15 @@
         function handlePerPageChange() {
             let value = document.getElementById('per_page').value;
             let currentUrl = new URL(window.location.href);
-            currentUrl.searchParams.delete('page');
             currentUrl.searchParams.set('per_page', value);
+            currentUrl.searchParams.delete('page');
             window.location.href = currentUrl.toString();
         }
 
-        function handleTableChange() {
-            let value = document.getElementById('table').value;
+        function handleCategorieChange() {
+            let value = document.getElementById('categorie').value;
             let currentUrl = new URL(window.location.href);
-            currentUrl.searchParams.set('table', value);
+            currentUrl.searchParams.set('categorie', value);
             currentUrl.searchParams.delete('page');
             window.location.href = currentUrl.toString();
         }
@@ -130,7 +128,7 @@
             }
         }
 
-        function deleteParametrage(id) {
+        function deleteDomaineEtude(id) {
             Swal.fire({
                 title: "Voulez vous vraiment supprimer cet élément?",
                 icon: "warning",

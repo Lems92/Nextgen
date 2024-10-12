@@ -18,6 +18,13 @@
                             <h2>Formulaire d'Inscription Étudiant</h2>
                         </div>
 
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Veuillez corriger les erreurs ci-dessous et remplir convenablement le
+                                    formulaire.</strong>
+                            </div>
+                        @endif
+
                         <form action="{{route('inscription.etudiant.post')}}" enctype="multipart/form-data"
                               method="POST">
                             @csrf

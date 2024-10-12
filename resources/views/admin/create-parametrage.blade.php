@@ -1,6 +1,6 @@
 @extends('dashboard-layout')
 
-@section('title', $parametrage ? 'Modifier ' . $parametrage->libelle : 'Ajouter parametrage')
+@section('title', isset($parametrage) ? 'Modifier ' . $parametrage->libelle : 'Ajouter parametrage')
 
 @section('content')
 
@@ -12,17 +12,17 @@
         <section class="contact-section bgc-home20">
             <div class="auto-container">
                 <div class="upper-title-box">
-                    <h3>@if($parametrage) Modifier @else Ajouter @endif parametrage</h3>
+                    <h3>@if(isset($parametrage)) Modifier @else Ajouter @endif parametrage</h3>
                 </div>
 
                 <div class="form-container">
 
-                    <form action="{{ $parametrage ? route('admin.parametrages.validate_update', ['id' => $parametrage->id]) : route('admin.parametrages.store') }}" method="POST" class="default-form">
+                    <form action="{{ isset($parametrage) ? route('admin.parametrages.validate_update', ['id' => $parametrage->id]) : route('admin.parametrages.store') }}" method="POST" class="default-form">
                         @csrf
                         <div class="row">
                             <div class="form-group col-lg-6 col-md-12">
                                 <label for="table">Table :</label>
-                                @if($parametrage)
+                                @if(isset($parametrage))
                                     <select id="table" name="table" class="chosen-select" disabled>
                                         @foreach($tables as $table)
                                             <option value="{{$table->name}}" {{ $parametrage->table == $table->name ? 'selected' : '' }}>{{$table->name}}</option>
@@ -40,23 +40,23 @@
 
                             <div class="form-group col-lg-12 col-md-12 mt-2">
                                 <label for="sigle">Sigle</label>
-                                <input type="text" id="sigle" name="sigle" value="{{$parametrage ? $parametrage->sigle : old('sigle')}}" placeholder="Sigle" required>
+                                <input type="text" id="sigle" name="sigle" value="{{isset($parametrage) ? $parametrage->sigle : old('sigle')}}" placeholder="Sigle" required>
                                 <x-input-error :messages="$errors->get('sigle')" class="mt-2" />
                             </div>
                             <div class="form-group col-lg-12 col-md-12 mt-2">
                                 <label for="libelle">Libellé</label>
-                                <input type="text" id="libelle" name="libelle" value="{{$parametrage ? $parametrage->libelle : old('libelle')}}" placeholder="Libellé" required>
+                                <input type="text" id="libelle" name="libelle" value="{{isset($parametrage) ? $parametrage->libelle : old('libelle')}}" placeholder="Libellé" required>
                                 <x-input-error :messages="$errors->get('libelle')" class="mt-2" />
                             </div>
 
                             <div class="form-group col-lg-12 col-md-12 mt-2">
                                 <label for="description">Description</label>
-                                <textarea type="text" id="description" name="description" placeholder="Description" >{{$parametrage ? $parametrage->description : old('description')}}</textarea>
+                                <textarea type="text" id="description" name="description" placeholder="Description" >{{isset($parametrage) ? $parametrage->description : old('description')}}</textarea>
                                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
                             </div>
 
                             <div class="form-group col-lg-12 col-md-12 text-right">
-                                <button class="theme-btn btn-style-one" type="submit">@if($parametrage) Valider la modification @else Valider l'ajout @endif</button>
+                                <button class="theme-btn btn-style-one" type="submit">@if(isset($parametrage)) Valider la modification @else Valider l'ajout @endif</button>
                             </div>
                         </div>
                     </form>
