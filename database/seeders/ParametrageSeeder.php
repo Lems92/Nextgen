@@ -80,6 +80,17 @@ class ParametrageSeeder extends Seeder
             'conditions_vie_specifiques' => ['Préfère ne pas dire', 'Sans domicile fixe', 'En situation de handicap'],
             'religion' => ['Chrétien', 'Musulman', 'Boudhiste', 'Hindou', 'Préfère ne pas dire'],
             'orientation_sexuelle' => ['Hétérosexuel', 'Homosexuel', 'Bisexuel', 'Préfère ne pas dire'],
+            'opportunites_proposes' => ['Stage', 'Emplois à Temps Plein', 'Emplois à Temps Partiel', 'Alternance', 'Projets de Recherche', 'Mentorat'],
+            'engagement_inclusivite_diversite' => [
+                'Politiques d’Égalité des Chances',
+                'Programmes pour Groupes Sous-représentés',
+                'Accessibilité au Travail',
+            ],
+            'soutien_formation' => [
+                'Formations Internes',
+                'Opportunités de Développement Professionnel',
+                'Programmes de Certification',
+            ]
         ];
 
         foreach ($all as $nom_table => $values) {

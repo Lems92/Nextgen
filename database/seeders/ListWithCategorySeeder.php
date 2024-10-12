@@ -225,7 +225,7 @@ class ListWithCategorySeeder extends Seeder
                     'name' => $name
                 ]);
                 foreach ($category as $sous_cat) {
-                    $cat->domaines_etudes()->create([
+                    $cat->list_with_categories()->create([
                         'name' => $sous_cat,
                         'description' => ''
                     ]);

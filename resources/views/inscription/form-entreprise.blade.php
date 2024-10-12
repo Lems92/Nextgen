@@ -24,6 +24,12 @@
                 </div>
 
                 <div class="contact-form default-form">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <strong>Veuillez corriger les erreurs ci-dessous et remplir convenablement le
+                                formulaire.</strong>
+                        </div>
+                    @endif
                     <form method="post" action="{{ route('inscription.entreprise.post') }}">
                         @csrf
                         <div class="row">
@@ -42,18 +48,9 @@
                             <div class="col-lg-6 form-group">
                                 <label for="secteur_activite">Secteur d’Activité</label>
                                 <select id="secteur_activite" name="secteur_activite" class="chosen-select">
-                                    <option value="technologie">Technologie de l'information</option>
-                                    <option value="ingenierie">Ingénierie</option>
-                                    <option value="sante">Santé</option>
-                                    <option value="finance">Finance</option>
-                                    <option value="marketing">Marketing et Communication</option>
-                                    <option value="education">Éducation</option>
-                                    <option value="tourisme">Tourisme et Hôtellerie</option>
-                                    <option value="industrie">Industrie</option>
-                                    <option value="environnement">Environnement</option>
-                                    <option value="arts">Arts et Création</option>
-                                    <option value="services">Services aux entreprises</option>
-                                    <option value="commerce">Commerce</option>
+                                    @foreach($secteur_activites_categories as $categorie)
+                                        <option value="{{$categorie->name}}" {{ old('secteur_activite') == $categorie->name ? 'selected' : '' }}>{{$categorie->name}}</option>
+                                    @endforeach
                                 </select>
                                 <x-input-error :messages="$errors->get('secteur_activite')" class="mt-2" />
                             </div>
@@ -148,34 +145,33 @@
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <label>Types d'Opportunités Proposées</label>
-                                <div class="checkbox-group">
-                                    <label><input type="checkbox" name="opportunities[]" value="Stages"> Stages</label>
-                                    <label><input type="checkbox" name="opportunities[]" value="Emplois à Temps Plein">
-                                        Emplois à Temps Plein</label>
-                                    <label><input type="checkbox" name="opportunities[]"
-                                                  value="Emplois à Temps Partiel"> Emplois à Temps Partiel</label>
-                                    <label><input type="checkbox" name="opportunities[]" value="Alternance"> Alternance</label>
-                                    <label><input type="checkbox" name="opportunities[]" value="Projets de Recherche">
-                                        Projets de Recherche</label>
-                                    <label><input type="checkbox" name="opportunities[]" value="Mentorat">
-                                        Mentorat</label>
+                                <h5 class="mb-2">Types d'Opportunités Proposées</h5>
+                                <div class="checkbox-group d-flex flex-wrap justify-content-start gap-2">
+                                    @foreach($opportunites_proposes as $opportunite)
+                                        <label>
+                                            <input type="checkbox" name="opportunities[]"
+                                                      value="{{$opportunite->sigle}}"
+                                                {{ in_array($opportunite->sigle, old('opportunities') ?? []) ? 'checked' : '' }}
+                                            > {{$opportunite->libelle}}
+                                        </label>
+                                    @endforeach
                                 </div>
                                 <x-input-error :messages="$errors->get('opportunities')" class="mt-2" />
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <label>Domaines d'Activité des Opportunités</label>
-                                <div class="checkbox-group">
-                                    <label><input type="checkbox" name="domaines_activites[]" value="Développement de Logiciels">
-                                        Développement de Logiciels</label>
-                                    <label><input type="checkbox" name="domaines_activites[]" value="Sécurité Informatique">
-                                        Sécurité Informatique</label>
-                                    <label><input type="checkbox" name="domaines_activites[]" value="Réseaux et Télécommunications">
-                                        Réseaux et Télécommunications</label>
-                                    <label><input type="checkbox" name="domaines_activites[]" value="Intelligence Artificielle">
-                                        Intelligence Artificielle</label>
-                                    <!-- Ajouter d'autres domaines ici -->
+                                <h5 class="mb-2">Domaines d'Activité des Opportunités</h5>
+                                <div class="checkbox-group d-flex flex-wrap justify-content-start gap-2">
+                                    @foreach($domaines_etudes_categories as $categorie)
+                                        @foreach($categorie->list_with_categories as $sous_cat)
+                                            <label>
+                                                <input type="checkbox" name="domaines_activites[]"
+                                                       value="{{$sous_cat->name}}"
+                                                    {{ in_array($sous_cat->name, old('domaines_activites') ?? []) ? 'checked' : '' }}
+                                                > {{$sous_cat->name}}
+                                            </label>
+                                        @endforeach
+                                    @endforeach
                                 </div>
                                 <x-input-error :messages="$errors->get('domaines_activites')" class="mt-2" />
                             </div>
@@ -186,35 +182,35 @@
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <label>Engagement en matière d’Inclusion et Diversité</label>
+                                <h5 class="mb-2">Engagement en matière d’Inclusion et Diversité</h5>
                                 <div class="checkbox-group">
-                                    <label><input type="checkbox" name="inclusion_diversity[]"
-                                                  value="Politiques d’Égalité des Chances"> Politiques d’Égalité des
-                                        Chances</label>
-                                    <label><input type="checkbox" name="inclusion_diversity[]"
-                                                  value="Programmes pour Groupes Sous-représentés"> Programmes pour
-                                        Groupes Sous-représentés</label>
-                                    <label><input type="checkbox" name="inclusion_diversity[]"
-                                                  value="Accessibilité au Travail"> Accessibilité au Travail</label>
+                                    @foreach($engagement_inclusivite_diversites as $engagement)
+                                        <label>
+                                            <input type="checkbox" name="inclusion_diversity[]"
+                                                   value="{{$engagement->sigle}}"
+                                                {{ in_array($engagement->sigle, old('inclusion_diversity') ?? []) ? 'checked' : '' }}
+                                            > {{$engagement->libelle}}
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <label>Soutien à la Formation et au Développement Professionnel</label>
+                                <h5 class="mb-2">Soutien à la Formation et au Développement Professionnel</h5>
                                 <div class="checkbox-group">
-                                    <label><input type="checkbox" name="training_support[]" value="Formations Internes">
-                                        Formations Internes</label>
-                                    <label><input type="checkbox" name="training_support[]"
-                                                  value="Opportunités de Développement Professionnel"> Opportunités de
-                                        Développement Professionnel</label>
-                                    <label><input type="checkbox" name="training_support[]"
-                                                  value="Programmes de Certification"> Programmes de
-                                        Certification</label>
+                                    @foreach($soutien_formations as $soutien)
+                                        <label>
+                                            <input type="checkbox" name="training_support[]"
+                                                   value="{{$soutien->sigle}}"
+                                                {{ in_array($soutien->sigle, old('training_support') ?? []) ? 'checked' : '' }}
+                                            > {{$soutien->libelle}}
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
 
                         </div>
-                        <div class="auto-container">
+                        <div class="auto-container mt-5">
                             <div class="sec-title text-center">
                                 <h2>Les plans pour les entreprises</h2>
                             </div>

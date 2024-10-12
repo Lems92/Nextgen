@@ -119,11 +119,11 @@
                                 name="domaines_etudes_proposes[]" multiple>
                             @foreach($domaines_etudes_categories as $categorie)
                                 <optgroup label="{{$categorie->name}}">
-                                    @foreach($categorie->domaines_etudes as $de)
-                                        <option value="{{$de->name}}"
-                                                title="{{$de->description}}"
-                                                {{ in_array($de->name, old('domaines_etudes_proposes') ?? []) ? 'selected' : '' }}
-                                        >{{$de->name}}</option>
+                                    @foreach($categorie->list_with_categories as $sous_cat)
+                                        <option value="{{$sous_cat->name}}"
+                                                title="{{$sous_cat->description}}"
+                                                {{ in_array($sous_cat->name, old('domaines_etudes_proposes') ?? []) ? 'selected' : '' }}
+                                        >{{$sous_cat->name}}</option>
                                     @endforeach
                                 </optgroup>
                             @endforeach

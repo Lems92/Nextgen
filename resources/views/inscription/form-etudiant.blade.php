@@ -130,11 +130,11 @@
                                     <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
                                         @foreach($domaines_etudes_categories as $categorie)
                                             <optgroup label="{{$categorie->name}}">
-                                                @foreach($categorie->domaines_etudes as $de)
-                                                    <option value="{{$de->name}}"
-                                                            title="{{$de->description}}"
-                                                        {{ old('domaine_etudes') == $de->name ? 'selected' : '' }}
-                                                    >{{$de->name}}</option>
+                                                @foreach($categorie->list_with_categories as $sous_cat)
+                                                    <option value="{{$sous_cat->name}}"
+                                                            title="{{$sous_cat->description}}"
+                                                        {{ old('domaine_etudes') == $sous_cat->name ? 'selected' : '' }}
+                                                    >{{$sous_cat->name}}</option>
                                                 @endforeach
                                             </optgroup>
                                         @endforeach
@@ -463,114 +463,16 @@
                                         :</label>
                                     <select id="secteur-activite" name="secteur_activite_preferer[]"
                                             class="chosen-select multiple" multiple>
-                                        <optgroup label="Technologie de l'Information">
-                                            <option value="Développement logiciel">Développement logiciel</option>
-                                            <option value="Cybersécurité">Cybersécurité</option>
-                                            <option value="Intelligence artificielle">Intelligence artificielle</option>
-                                            <option value="Gestion de systèmes informatiques">Gestion de systèmes
-                                                informatiques
-                                            </option>
-                                        </optgroup>
-                                        <optgroup label="Santé">
-                                            <option value="Médecine">Médecine</option>
-                                            <option value="Soins infirmiers">Soins infirmiers</option>
-                                            <option value="Pharmacie">Pharmacie</option>
-                                            <option value="Médecine vétérinaire">Médecine vétérinaire</option>
-                                        </optgroup>
-                                        <optgroup label="Finance et Comptabilité">
-                                            <option value="Banque et assurance">Banque et assurance</option>
-                                            <option value="Gestion de portefeuille">Gestion de portefeuille</option>
-                                            <option value="Comptabilité">Comptabilité</option>
-                                            <option value="Analyse financière">Analyse financière</option>
-                                        </optgroup>
-                                        <optgroup label="Ingénierie">
-                                            <option value="Génie civil">Génie civil</option>
-                                            <option value="Génie mécanique">Génie mécanique</option>
-                                            <option value="Génie électrique">Génie électrique</option>
-                                            <option value="Génie chimique">Génie chimique</option>
-                                        </optgroup>
-                                        <optgroup label="Commerce et Marketing">
-                                            <option value="Vente et distribution">Vente et distribution</option>
-                                            <option value="Marketing digital">Marketing digital</option>
-                                            <option value="Gestion de marque">Gestion de marque</option>
-                                            <option value="Analyse de marché">Analyse de marché</option>
-                                        </optgroup>
-                                        <optgroup label="Éducation et Formation">
-                                            <option value="Enseignement">Enseignement</option>
-                                            <option value="Formation professionnelle">Formation professionnelle</option>
-                                            <option value="Pédagogie">Pédagogie</option>
-                                            <option value="Gestion éducative">Gestion éducative</option>
-                                        </optgroup>
-                                        <optgroup label="Arts et Création">
-                                            <option value="Design graphique">Design graphique</option>
-                                            <option value="Arts visuels">Arts visuels</option>
-                                            <option value="Musique et spectacle">Musique et spectacle</option>
-                                            <option value="Design d'intérieur">Design d'intérieur</option>
-                                        </optgroup>
-                                        <optgroup label="Sciences et Recherche">
-                                            <option value="Biologie">Biologie</option>
-                                            <option value="Physique">Physique</option>
-                                            <option value="Chimie">Chimie</option>
-                                            <option value="Recherche scientifique">Recherche scientifique</option>
-                                        </optgroup>
-                                        <optgroup label="Tourisme et Hôtellerie">
-                                            <option value="Gestion hôtelière">Gestion hôtelière</option>
-                                            <option value="Planification de voyages">Planification de voyages</option>
-                                            <option value="Gestion d'événements">Gestion d'événements</option>
-                                            <option value="Tourisme durable">Tourisme durable</option>
-                                        </optgroup>
-                                        <optgroup label="Droit et Juridique">
-                                            <option value="Droit pénal">Droit pénal</option>
-                                            <option value="Droit civil">Droit civil</option>
-                                            <option value="Droit international">Droit international</option>
-                                            <option value="Droit commercial">Droit commercial</option>
-                                        </optgroup>
-                                        <optgroup label="Agriculture et Environnement">
-                                            <option value="Gestion agricole">Gestion agricole</option>
-                                            <option value="Sciences de l'environnement">Sciences de l'environnement
-                                            </option>
-                                            <option value="Agriculture durable">Agriculture durable</option>
-                                            <option value="Conservation de la biodiversité">Conservation de la
-                                                biodiversité
-                                            </option>
-                                        </optgroup>
-                                        <optgroup label="Énergie et Ressources Naturelles">
-                                            <option value="Énergies renouvelables">Énergies renouvelables</option>
-                                            <option value="Gestion des ressources">Gestion des ressources</option>
-                                            <option value="Ingénierie énergétique">Ingénierie énergétique</option>
-                                            <option value="Exploration minière">Exploration minière</option>
-                                        </optgroup>
-                                        <optgroup label="Transport et Logistique">
-                                            <option value="Gestion de la chaîne d'approvisionnement">Gestion de la
-                                                chaîne d'approvisionnement
-                                            </option>
-                                            <option value="Logistique et distribution">Logistique et distribution
-                                            </option>
-                                            <option value="Transport international">Transport international</option>
-                                            <option value="Gestion des infrastructures de transport">Gestion des
-                                                infrastructures de transport
-                                            </option>
-                                        </optgroup>
-                                        <optgroup label="Développement et Humanitaire">
-                                            <option value="Aide au développement">Aide au développement</option>
-                                            <option value="ONG et organisations humanitaires">ONG et organisations
-                                                humanitaires
-                                            </option>
-                                            <option value="Gestion des projets de développement">Gestion des projets de
-                                                développement
-                                            </option>
-                                            <option value="Travail social">Travail social</option>
-                                        </optgroup>
-                                        <optgroup label="Télécommunications">
-                                            <option value="Réseaux de communication">Réseaux de communication</option>
-                                            <option value="Gestion des infrastructures télécom">Gestion des
-                                                infrastructures télécom
-                                            </option>
-                                            <option value="Services Internet">Services Internet</option>
-                                            <option value="Développement de technologies de communication">Développement
-                                                de technologies de communication
-                                            </option>
-                                        </optgroup>
+                                        @foreach($secteur_activites_categories as $categorie)
+                                            <optgroup label="{{$categorie->name}}">
+                                                @foreach($categorie->list_with_categories as $sous_cat)
+                                                    <option value="{{$sous_cat->name}}"
+                                                            title="{{$sous_cat->description}}"
+                                                        {{ old('secteur_activite_preferer') == $sous_cat->name ? 'selected' : '' }}
+                                                    >{{$sous_cat->name}}</option>
+                                                @endforeach
+                                            </optgroup>
+                                        @endforeach
                                     </select>
                                     <x-input-error :messages="$errors->get('secteur_activite_preferer')" class="mt-2"/>
                                 </div>

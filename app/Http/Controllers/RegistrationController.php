@@ -88,7 +88,13 @@ class RegistrationController extends Controller
         $conditions_vie_specifiques = Parametrage::where('table', 'LIKE', 'conditions_vie_specifiques')->get();
         $religions = Parametrage::where('table', 'LIKE', 'religion')->get();
         $orientation_sexuelles = Parametrage::where('table', 'LIKE', 'orientation_sexuelle')->get();
-        $domaines_etudes_categories = ListCategorie::with('domaines_etudes')->get();
+        //categories
+        $domaines_etudes_categories = ListCategorie::with('list_with_categories')
+            ->where('table', 'LIKE', 'domaines_etudes')
+            ->get();
+        $secteur_activites_categories = ListCategorie::with('list_with_categories')
+            ->where('table', 'LIKE', 'secteur_activites')
+            ->get();
 
         return view('inscription.form-etudiant', compact([
             'mada_regions',
@@ -115,6 +121,7 @@ class RegistrationController extends Controller
             'religions',
             'orientation_sexuelles',
             'domaines_etudes_categories',
+            'secteur_activites_categories',
         ]));
     }
 
@@ -252,10 +259,25 @@ class RegistrationController extends Controller
         }
 
         $mada_regions = File::json(base_path("/resources/data/region_mada.json"));
+        $secteur_activites_categories = ListCategorie::with('list_with_categories')
+            ->where('table', 'LIKE', 'secteur_activites')
+            ->get();
+        $opportunites_proposes = Parametrage::where('table', 'LIKE', 'opportunites_proposes')->get();
+        $domaines_etudes_categories = ListCategorie::with('list_with_categories')
+            ->where('table', 'LIKE', 'domaines_etudes')
+            ->get();
+        $engagement_inclusivite_diversites = Parametrage::where('table', 'LIKE', 'engagement_inclusivite_diversite')->get();
+        $soutien_formations = Parametrage::where('table', 'LIKE', 'soutien_formation')->get();
 
-        return view('inscription.form-entreprise', [
-            'mada_regions' => $mada_regions
-        ]);
+
+        return view('inscription.form-entreprise', compact([
+            'mada_regions',
+            'secteur_activites_categories',
+            'opportunites_proposes',
+            'domaines_etudes_categories',
+            'engagement_inclusivite_diversites',
+            'soutien_formations'
+        ]));
     }
 
     public function register_entreprise_post(Request $request): RedirectResponse
@@ -333,7 +355,9 @@ class RegistrationController extends Controller
         $nombre_etudiants = Parametrage::where('table', 'LIKE', 'nombre_etudiant')->get();
         $niveaux_etudes_proposes = Parametrage::where('table', 'LIKE', 'niveaux_etudes_proposes')->get();
 
-        $domaines_etudes_categories = ListCategorie::with('domaines_etudes')->get();
+        $domaines_etudes_categories = ListCategorie::with('list_with_categories')
+            ->where('table', 'LIKE', 'domaines_etudes')
+            ->get();
 
         return view('inscription.form-service-carriere', compact([
             'nombre_etudiants',
