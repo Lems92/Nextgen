@@ -64,14 +64,54 @@ class RegistrationController extends Controller
 
         $mada_regions = File::json(base_path("/resources/data/region_mada.json"));
         $france_regions = File::json(base_path("/resources/data/region_france.json"));
+        $ethnies = File::json(base_path("/resources/data/foko.json"));
+
         $genres = Parametrage::where('table', 'LIKE', 'genre')->get();
         $domaine_etudes = Parametrage::where('table', 'LIKE', 'domaine_etude')->get();
+        $niveau_etudes = Parametrage::where('table', 'LIKE', 'niveau_etude')->get();
+        $competences_techniques = Parametrage::where('table', 'LIKE', 'competence_technique')->get();
+        $competences_en_recherche_et_analyse = Parametrage::where('table', 'LIKE', 'competences_en_recherche_et_analyse')->get();
+        $competences_en_communication = Parametrage::where('table', 'LIKE', 'competences_en_communication')->get();
+        $competences_interpersonnelles = Parametrage::where('table', 'LIKE', 'competences_interpersonnelles')->get();
+        $competences_resolution_problemes = Parametrage::where('table', 'LIKE', 'competences_resolution_problemes')->get();
+        $competences_adaptabilite = Parametrage::where('table', 'LIKE', 'competences_adaptabilite')->get();
+        $competences_gestion_stress = Parametrage::where('table', 'LIKE', 'competences_gestion_stress')->get();
+        $competences_leadership = Parametrage::where('table', 'LIKE', 'competences_leadership')->get();
+        $competences_ethique_responsabilite = Parametrage::where('table', 'LIKE', 'competences_ethique_responsabilite')->get();
+        $competences_gestion_financiere = Parametrage::where('table', 'LIKE', 'competences_gestion_financiere')->get();
+        $competences_langues = Parametrage::where('table', 'LIKE', 'competence_linguistique')->get();
+        $type_contrats = Parametrage::where('table', 'LIKE', 'type_contrat')->get();
+        $duree_contrats = Parametrage::where('table', 'LIKE', 'duree_contrat')->get();
+        $statut_socio_economiques = Parametrage::where('table', 'LIKE', 'statut_socio_economique')->get();
+        $conditions_vie_specifiques = Parametrage::where('table', 'LIKE', 'conditions_vie_specifiques')->get();
+        $religions = Parametrage::where('table', 'LIKE', 'religion')->get();
+        $orientation_sexuelles = Parametrage::where('table', 'LIKE', 'orientation_sexuelle')->get();
+
 
         return view('inscription.form-etudiant', compact([
             'mada_regions',
             'france_regions',
             'genres',
-            'domaine_etudes'
+            'domaine_etudes',
+            'niveau_etudes',
+            'competences_techniques',
+            'competences_en_recherche_et_analyse',
+            'competences_en_communication',
+            'competences_interpersonnelles',
+            'competences_resolution_problemes',
+            'competences_adaptabilite',
+            'competences_gestion_stress',
+            'competences_leadership',
+            'competences_ethique_responsabilite',
+            'competences_gestion_financiere',
+            'competences_langues',
+            'type_contrats',
+            'duree_contrats',
+            'ethnies',
+            'statut_socio_economiques',
+            'conditions_vie_specifiques',
+            'religions',
+            'orientation_sexuelles',
         ]));
     }
 
@@ -98,6 +138,22 @@ class RegistrationController extends Controller
             'domaine_etudes' => 'required|string',
             'niveau_etudes' => 'required|string',
             'annee_obtention_diplome' => 'required|integer',
+            //TODO experiences
+
+            // competences
+            'competences_techniques' => 'required|array',
+            'competences_en_recherche_et_analyse' => 'required|array',
+            'competences_en_communication' => 'required|array',
+            'competences_interpersonnelles' => 'required|array',
+            'competences_resolution_problemes' => 'required|array',
+            'competences_adaptabilite' => 'required|array',
+            'competences_gestion_stress' => 'required|array',
+            'competences_leadership' => 'required|array',
+            'competences_ethique_responsabilite' => 'required|array',
+            'competences_gestion_financiere' => 'required|array',
+            'competences_langues' => 'required|array',
+
+            // Autres
             'portfolio' => 'nullable|string',
             'centres_interet' => 'required|string',
             'document_diplome' => 'required',
@@ -105,7 +161,7 @@ class RegistrationController extends Controller
             'secteur_activite_preferer' => 'required|array',
             'type_emploi_recherche' => 'required|array',
             'localisation_geographique_preferee' => 'required|string',
-            'salaire_souhaite' => 'required',
+            //'salaire_souhaite' => 'required',
             'duree_disponibilite' => 'required',
             'semestre_cours' => 'required',
             'vacances_ete_debut' => 'required',
@@ -114,11 +170,11 @@ class RegistrationController extends Controller
             'dates_disponibles_vacances_ete_fin' => 'required',
             'accessibilite' => 'required',
             'details_accessibilite' => 'nullable|string',
-            'origine_ethnique' => 'required',
-            'statut_socio_economique' => 'required',
-            'conditions_vie_specifiques' => 'required',
-            'religion_belief' => 'required',
-            'orientation_sexuelle' => 'required',
+            'origine_ethnique' => 'required|string',
+            'statut_socio_economique' => 'required|string',
+            'conditions_vie_specifiques' => 'required|string',
+            'religion_belief' => 'required|string',
+            'orientation_sexuelle' => 'required|string',
         ]);
 
         //dd($validateData);

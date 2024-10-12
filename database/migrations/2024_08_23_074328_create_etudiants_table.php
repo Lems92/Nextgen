@@ -17,17 +17,17 @@ return new class extends Migration
             $table->string('nom');
             $table->string('numero_telephone');
             $table->date('date_naissance');
-            $table->enum('genre', ['masculin', 'feminin', 'non-binaire', 'prefere-pas-dire']);
-            $table->text('adresse_postale');
+            $table->string('genre');
+            $table->string('adresse_postale');
             $table->string('pays');
             $table->string('region');
             $table->string('ville');
             $table->string('code_postal');
             $table->string('nom_ecole_universite');
             $table->string('domaine_etudes');
-            $table->enum('niveau_etudes', ['Licence', 'Master', 'Doctorat']);
+            $table->string('niveau_etudes');
             $table->string('annee_obtention_diplome');
-            $table->string('titre_stage_academique')->nullable();
+            /*$table->string('titre_stage_academique')->nullable();
             $table->string('annee_stage_academique')->nullable();
             $table->string('duree_stage_academique')->nullable();
             $table->text('description_stage_academique')->nullable();
@@ -50,39 +50,42 @@ return new class extends Migration
             $table->string('titre_autres_experiences')->nullable();
             $table->string('annee_autres_experiences')->nullable();
             $table->string('duree_autres_experiences')->nullable();
-            $table->text('description_autres_experiences')->nullable();
-            $table->text('competences_techniques')->nullable();
-            $table->text('competences_recherche_analyse')->nullable();
-            $table->text('competences_communication')->nullable();
-            $table->text('competences_transversales')->nullable();
+            $table->text('description_autres_experiences')->nullable();*/
+            $table->json('competences_techniques')->nullable();
+            $table->json('competences_en_recherche_et_analyse')->nullable();
+            $table->json('competences_en_communication')->nullable();
+            $table->json('competences_interpersonnelles')->nullable();
+            $table->json('competences_resolution_problemes')->nullable();
+            $table->json('competences_adaptabilite')->nullable();
+            $table->json('competences_gestion_stress')->nullable();
+            $table->json('competences_leadership')->nullable();
+            $table->json('competences_ethique_responsabilite')->nullable();
+            $table->json('competences_gestion_financiere')->nullable();
+            $table->json('competences_langues')->nullable();
+
+            //autres
             $table->text('experience_professionnelle')->nullable();
             $table->text('portfolio')->nullable();
             $table->text('centres_interet')->nullable();
-            $table->string('document_diplome')->nullable();
-            $table->string('document_recommandation')->nullable();
+            $table->string('document_diplome');
+            $table->string('document_recommandation');
             $table->json('secteur_activite_preferer')->nullable();
             $table->json('type_emploi_recherche')->nullable();
-            $table->text('localisation_geographique_preferee')->nullable();
-            $table->string('salaire_souhaite')->nullable();
-            $table->enum('duree_disponibilite', [
-                'Moins de 1 mois',
-                '1 à 3 mois',
-                '3 à 6 mois',
-                '6 à 12 mois',
-                'Plus de 12 mois'
-            ])->nullable();
-            $table->enum('semestre_cours', ['semestre_1', 'semestre_2'])->nullable();
-            $table->date('vacances_ete_debut')->nullable();
-            $table->date('vacances_ete_fin')->nullable();
-            $table->text('dates_disponibles_vacances_ete_debut')->nullable();
-            $table->text('dates_disponibles_vacances_ete_fin')->nullable();
-            $table->boolean('accessibilite')->nullable();
+            $table->string('localisation_geographique_preferee');
+            //$table->string('salaire_souhaite')->nullable();
+            $table->string('duree_disponibilite');
+            $table->string('semestre_cours');
+            $table->date('vacances_ete_debut');
+            $table->date('vacances_ete_fin');
+            $table->date('dates_disponibles_vacances_ete_debut');
+            $table->date('dates_disponibles_vacances_ete_fin');
+            $table->boolean('accessibilite')->default(false);
             $table->text('details_accessibilite')->nullable();
-            $table->string('origine_ethnique')->nullable();
-            $table->enum('statut_socio_economique', ['origine_modeste', 'classe_moyenne', 'prefere_pas_dire'])->nullable();
-            $table->enum('conditions_vie_specifiques', ['sans_domicile_fixe', 'handicap', 'prefere_pas_dire'])->nullable();
-            $table->enum('religion_belief', ['chretien', 'musulman', 'bouddhiste', 'hindou', 'prefere_pas_dire'])->nullable();
-            $table->enum('orientation_sexuelle', ['hétérosexuel', 'homosexuel', 'bisexuel', 'prefere_pas_dire'])->nullable();
+            $table->string('origine_ethnique');
+            $table->string('statut_socio_economique');
+            $table->string('conditions_vie_specifiques');
+            $table->string('religion_belief');
+            $table->string('orientation_sexuelle');
             $table->string('slug', 255)->unique();
             $table->timestamps();
         });

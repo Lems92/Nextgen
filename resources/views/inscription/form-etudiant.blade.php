@@ -18,66 +18,85 @@
                             <h2>Formulaire d'Inscription Étudiant</h2>
                         </div>
 
-                        <form action="{{route('inscription.etudiant.post')}}" enctype="multipart/form-data" method="POST">
+                        <form action="{{route('inscription.etudiant.post')}}" enctype="multipart/form-data"
+                              method="POST">
                             @csrf
                             <fieldset class="form-section">
                                 <legend><h4> Personnelles </h4></legend>
                                 <div class="row">
                                     <div class="form-group col-lg-12 col-md-12 mt-4">
                                         <label for="prenom" class="form-label">Prénom :</label>
-                                        <input type="text" id="prenom" name="prenom" class="form-control" required>
+                                        <input type="text" id="prenom" name="prenom" value="{{old('prenom')}}" class="form-control" required>
+                                        <x-input-error :messages="$errors->get('prenom')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="nom" class="form-label">Nom :</label>
-                                        <input type="text" id="nom" name="nom" class="form-control" required>
+                                        <input type="text" id="nom" name="nom" value="{{old('nom')}}" class="form-control" required>
+                                        <x-input-error :messages="$errors->get('nom')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="numero_telephone" class="form-label">Numéro de téléphone :</label>
-                                        <input type="tel" id="numero_telephone" name="numero_telephone" class="form-control" required>
+                                        <input type="tel" id="numero_telephone" value="{{old('numero_telephone')}}" name="numero_telephone"
+                                               class="form-control" required>
+                                        <x-input-error :messages="$errors->get('numero_telephone')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="date-naissance" class="form-label">Date de naissance :</label>
                                         <input type="date" id="date-naissance" name="date_naissance"
                                                value="{{old('date_naissance')}}"
                                                class="form-control" required>
+                                        <x-input-error :messages="$errors->get('date_naissance')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="genre" class="form-label">Genre :</label>
                                         <select id="genre" name="genre" class="form-select" required>
                                             @foreach($genres as $genre)
-                                                <option value="{{$genre->sigle}}" {{ old('genre') == $genre->sigle ? 'selected' : '' }}>{{$genre->libelle}}</option>
+                                                <option
+                                                    value="{{$genre->sigle}}" {{ old('genre') == $genre->sigle ? 'selected' : '' }}>{{$genre->libelle}}</option>
                                             @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('genre')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-12">
                                         <label for="adresse-postale" class="form-label">Adresse postale :</label>
-                                        <input type="text" id="adresse-postale" name="adresse_postale"
+                                        <input type="text" id="adresse-postale" value="{{old('adresse_postale')}}" name="adresse_postale"
                                                class="form-control" required>
+                                        <x-input-error :messages="$errors->get('adresse_postale')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="pays" class="form-label">Pays :</label>
                                         <select id="pays" name="pays" class="form-select" required>
-                                            <option value="madagascar">Madagascar</option>
-                                            <option value="france">France</option>
+                                            <option
+                                                value="madagascar" {{ old('pays') == 'madagascar' ? 'selected' : '' }}>
+                                                Madagascar
+                                            </option>
+                                            <option value="france" {{ old('pays') == 'france' ? 'selected' : '' }}>
+                                                France
+                                            </option>
                                         </select>
+                                        <x-input-error :messages="$errors->get('pays')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="region" class="form-label">Région :</label>
                                         <select id="region" name="region" class="form-select" required>
                                             @foreach($mada_regions as $region)
                                                 {{$region}}
-                                                <option value="{{$region}}">{{$region}}</option>
+                                                <option
+                                                    value="{{$region}}" {{ old('region') == $region ? 'selected' : '' }}>{{$region}}</option>
                                             @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('region')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="ville" class="form-label">Ville :</label>
-                                        <input type="text" id="ville" name="ville" class="form-control" required>
+                                        <input type="text" id="ville" name="ville" value="{{old('ville')}}" class="form-control" required>
+                                        <x-input-error :messages="$errors->get('ville')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="code-postal" class="form-label">Code postal :</label>
-                                        <input type="text" id="code-postal" name="code_postal" class="form-control"
+                                        <input type="text" id="code-postal" value="{{old('code_postal')}}" name="code_postal" class="form-control"
                                                required>
+                                        <x-input-error :messages="$errors->get('code_postal')" class="mt-2"/>
                                     </div>
                                 </div>
                             </fieldset>
@@ -88,29 +107,37 @@
                                 <div class="mb-3">
                                     <label for="nom-ecole" class="form-label">Nom de l'école ou de l'université
                                         :</label>
-                                    <input type="text" id="nom-ecole" name="nom_ecole_universite" class="form-control" required>
+                                    <input type="text" id="nom-ecole" name="nom_ecole_universite" value="{{old('nom_ecole_universite')}}" class="form-control"
+                                           required>
+                                    <x-input-error :messages="$errors->get('nom_ecole_universite')" class="mt-2"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
                                     <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
                                         @foreach($domaine_etudes as $de)
-                                            <option value="{{$de->sigle}}" {{ old('domaine_etudes') == $de->sigle ? 'selected' : '' }}>{{$de->libelle}}</option>
+                                            <option
+                                                value="{{$de->sigle}}" {{ old('domaine_etudes') == $de->sigle ? 'selected' : '' }}>{{$de->libelle}}</option>
                                         @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('domaine_etudes')" class="mt-2"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="niveau-etudes" class="form-label">Niveau d'études :</label>
                                     <select id="niveau-etudes" name="niveau_etudes" class="form-select" required>
-                                        <option value="licence">Licence</option>
-                                        <option value="master">Master</option>
-                                        <option value="doctorat">Doctorat</option>
+                                        @foreach($niveau_etudes as $niveau)
+                                            <option
+                                                value="{{$niveau->sigle}}" {{ old('niveau_etudes') == $niveau->sigle ? 'selected' : '' }}>{{$niveau->libelle}}</option>
+                                        @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('niveau_etudes')" class="mt-2"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="annee-diplome" class="form-label">Année d'obtention du diplôme ou année
                                         d'inscription en cours :</label>
-                                    <input type="number" id="annee-diplome" name="annee_obtention_diplome" class="form-control"
+                                    <input type="number" id="annee-diplome" value="{{old('annee_obtention_diplome')}}" name="annee_obtention_diplome"
+                                           class="form-control"
                                            required>
+                                    <x-input-error :messages="$errors->get('annee_obtention_diplome')" class="mt-2"/>
                                 </div>
                             </fieldset>
 
@@ -181,109 +208,168 @@
                             <fieldset class="form-section">
                                 <legend><h4>Compétences</h4></legend>
                                 <div class="mb-3">
-                                    <h6>Compétences techniques</h6>
-                                    <select id="competences_techniques" class="chosen-select" multiple>
-                                        <option value="bureautique">Bureautique</option>
-                                        <option value="programmation">Programmation</option>
-                                        <option value="gestion_bases_donnees">Gestion de bases de données</option>
-                                        <option value="systemes_information">Systèmes d'information</option>
-                                        <option value="cybersecurite">Cybersécurité</option>
-                                        <option value="gestion_projets">Gestion de projets</option>
-                                        <option value="design_ui_ux">Design UI/UX</option>
-                                        <option value="virtualisation">Virtualisation</option>
-                                        <option value="data_science">Data Science</option>
-                                        <!-- Ajoutez d'autres options ici -->
+                                    <label class="h6" for="competences_techniques">Compétences techniques</label>
+                                    <select id="competences_techniques" name="competences_techniques[]"
+                                            class="chosen-select" multiple>
+                                        @foreach($competences_techniques as $comp)
+                                            <option value="{{$comp->sigle}}"
+                                                {{ in_array($comp->sigle, old('competences_techniques') ?? []) ? 'selected' : '' }}>
+                                                {{$comp->libelle}}
+                                            </option>
+                                        @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('competences_techniques')" class="mt-2"/>
                                 </div>
                                 <div class="mb-3">
-                                    <h6>Compétences en Recherche et Analyse :</h6>
-                                    <select id="competences_en_recherche_et_analyse" class="chosen-select" multiple>
-                                        <option value="recherche_documentaire">Recherche documentaire</option>
-                                        <option value="analyse_donnee">Analyse de donnée</option>
-                                        <option value="redaction_rapports">Rédaction de rapports</option>
-                                        <option value="veille_technologique">Veille technologique</option>
-                                        <option value="methodologie_recherche">Méthodologie de recherche</option>
-                                        <option value="analyse_statistique">Analyse statistique</option>
-                                        <option value="synthese_rapports">Synthèse de rapports</option>
-                                        <option value="gestion_informations">Gestion de l'information</option>
-                                        <!-- Ajoutez d'autres options ici -->
+                                    <label for="competences_en_recherche_et_analyse" class="h6">Compétences en Recherche
+                                        et Analyse :</label>
+                                    <select id="competences_en_recherche_et_analyse"
+                                            name="competences_en_recherche_et_analyse[]" class="chosen-select" multiple>
+                                        @foreach($competences_en_recherche_et_analyse as $comp)
+                                            <option value="{{$comp->sigle}}"
+                                                {{ in_array($comp->sigle, old('competences_en_recherche_et_analyse') ?? []) ? 'selected' : '' }}>
+                                                {{$comp->libelle}}
+                                            </option>
+                                        @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('competences_en_recherche_et_analyse')"
+                                                   class="mt-2"/>
                                 </div>
                                 <div class="mb-3">
-                                    <h6>Compétences en Communication :</h6>
-                                    <select id="competences_en_communication" class="chosen-select" multiple>
-                                        <option value="communication_orale_ecrite">Communication orale/écrite</option>
-                                        <option value="negociation">Compétence en négociation</option>
-                                        <option value="presentation">Présentation</option>
-                                        <option value="ecoute_active">Écoute active</option>
-                                        <option value="gestion_conflits">Gestion des conflits</option>
-                                        <option value="communication_interculturelle">Communication interculturelle
-                                        </option>
-                                        <option value="redaction">Rédaction</option>
-                                        <option value="relations_publiques">Relations publiques</option>
-                                        <!-- Ajoutez d'autres options ici -->
+                                    <label for="competences_en_communication" class="h6">Compétences en Communication
+                                        :</label>
+                                    <select id="competences_en_communication" name="competences_en_communication[]"
+                                            class="chosen-select" multiple>
+                                        @foreach($competences_en_communication as $comp)
+                                            <option value="{{$comp->sigle}}"
+                                                {{ in_array($comp->sigle, old('competences_en_communication') ?? []) ? 'selected' : '' }}>
+                                                {{$comp->libelle}}
+                                            </option>
+                                        @endforeach
                                     </select>
-
+                                    <x-input-error :messages="$errors->get('competences_en_communication')"
+                                                   class="mt-2"/>
                                 </div>
                                 <div class="mb-3">
                                     <h4>Compétences Transversales :</h4>
                                     <div>
-                                        <h6>Compétences Interpersonnelles :</h6>
-                                        <select id="competences_interpersonnelles" class="chosen-select" multiple>
-                                            <option value="travail_en_equipe">Travail en équipe</option>
-                                            <option value="empathie">Empathie</option>
+                                        <label for="competences_interpersonnelles" class="h6">Compétences
+                                            Interpersonnelles :</label>
+                                        <select id="competences_interpersonnelles"
+                                                name="competences_interpersonnelles[]" class="chosen-select" multiple>
+                                            @foreach($competences_interpersonnelles as $comp)
+                                                <option value="{{$comp->sigle}}"
+                                                    {{ in_array($comp->sigle, old('competences_interpersonnelles') ?? []) ? 'selected' : '' }}>
+                                                    {{$comp->libelle}}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('competences_interpersonnelles')"
+                                                       class="mt-2"/>
                                     </div>
                                     <div>
-                                        <h6>Compétences en Résolution de Problèmes :</h6>
-                                        <select id="competences_resolution_problemes" class="chosen-select" multiple>
-                                            <option value="pensée_critique">Pensée critique</option>
-                                            <option value="creativite">Créativité</option>
+                                        <label for="competences_resolution_problemes" class="h6">Compétences en
+                                            Résolution de Problèmes :</label>
+                                        <select id="competences_resolution_problemes"
+                                                name="competences_resolution_problemes[]" class="chosen-select"
+                                                multiple>
+                                            @foreach($competences_resolution_problemes as $comp)
+                                                <option value="{{$comp->sigle}}"
+                                                    {{ in_array($comp->sigle, old('competences_resolution_problemes') ?? []) ? 'selected' : '' }}>
+                                                    {{$comp->libelle}}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('competences_resolution_problemes')"
+                                                       class="mt-2"/>
                                     </div>
                                     <div>
-                                        <h6>Compétences en Adaptabilité :</h6>
-                                        <select id="competences_adaptabilite" class="chosen-select" multiple>
-                                            <option value="flexibilite">Flexibilité</option>
-                                            <option value="apprentissage_continu">Apprentissage continu</option>
+                                        <label for="competences_adaptabilite" class="h6">Compétences en Adaptabilité
+                                            :</label>
+                                        <select id="competences_adaptabilite" name="competences_adaptabilite[]"
+                                                class="chosen-select" multiple>
+                                            @foreach($competences_adaptabilite as $comp)
+                                                <option value="{{$comp->sigle}}"
+                                                    {{ in_array($comp->sigle, old('competences_adaptabilite') ?? []) ? 'selected' : '' }}>
+                                                    {{$comp->libelle}}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('competences_adaptabilite')"
+                                                       class="mt-2"/>
                                     </div>
                                     <div>
-                                        <h6>Compétences en Gestion du Stress :</h6>
-                                        <select id="competences_gestion_stress" class="chosen-select" multiple>
-                                            <option value="gestion_stress">Gestion du stress</option>
-                                            <option value="equilibre_travail_vie">Équilibre travail-vie personnelle
-                                            </option>
+                                        <label for="competences_gestion_stress" class="h6">Compétences en Gestion du
+                                            Stress :</label>
+                                        <select id="competences_gestion_stress" name="competences_gestion_stress[]"
+                                                class="chosen-select" multiple>
+                                            @foreach($competences_gestion_stress as $comp)
+                                                <option value="{{$comp->sigle}}"
+                                                    {{ in_array($comp->sigle, old('competences_gestion_stress') ?? []) ? 'selected' : '' }}>
+                                                    {{$comp->libelle}}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('competences_gestion_stress')"
+                                                       class="mt-2"/>
                                     </div>
                                     <div>
-                                        <h6>Compétences en Leadership :</h6>
-                                        <select id="competences_leadership" class="chosen-select" multiple>
-                                            <option value="gestion_equipe">Gestion d’équipe</option>
-                                            <option value="prise_decision">Prise de décision</option>
+                                        <label for="competences_leadership" class="h6">Compétences en Leadership
+                                            :</label>
+                                        <select id="competences_leadership" name="competences_leadership[]"
+                                                class="chosen-select" multiple>
+                                            @foreach($competences_leadership as $comp)
+                                                <option value="{{$comp->sigle}}"
+                                                    {{ in_array($comp->sigle, old('competences_leadership') ?? []) ? 'selected' : '' }}>
+                                                    {{$comp->libelle}}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('competences_leadership')" class="mt-2"/>
                                     </div>
                                     <div>
-                                        <h6>Compétences en Éthique et Responsabilité :</h6>
-                                        <select id="competences_ethique_responsabilite" class="chosen-select" multiple>
-                                            <option value="ethique_professionnelle">Éthique professionnelle</option>
-                                            <option value="responsabilite_sociale">Responsabilité sociale</option>
+                                        <label for="competences_ethique_responsabilite" class="h6">Compétences en
+                                            Éthique et Responsabilité :</label>
+                                        <select id="competences_ethique_responsabilite"
+                                                name="competences_ethique_responsabilite[]" class="chosen-select"
+                                                multiple>
+                                            @foreach($competences_ethique_responsabilite as $comp)
+                                                <option value="{{$comp->sigle}}"
+                                                    {{ in_array($comp->sigle, old('competences_ethique_responsabilite') ?? []) ? 'selected' : '' }}>
+                                                    {{$comp->libelle}}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('competences_ethique_responsabilite')"
+                                                       class="mt-2"/>
                                     </div>
                                     <div>
-                                        <h6>Compétences en Gestion Financière :</h6>
-                                        <select id="competences_gestion_financiere" class="chosen-select" multiple>
-                                            <option value="gestion_budget">Gestion de budget</option>
-                                            <option value="analyse_financiere">Analyse financière</option>
+                                        <label for="competences_gestion_financiere" class="h6">Compétences en Gestion
+                                            Financière :</label>
+                                        <select id="competences_gestion_financiere"
+                                                name="competences_gestion_financiere[]" class="chosen-select" multiple>
+                                            @foreach($competences_gestion_financiere as $comp)
+                                                <option value="{{$comp->sigle}}"
+                                                    {{ in_array($comp->sigle, old('competences_gestion_financiere') ?? []) ? 'selected' : '' }}>
+                                                    {{$comp->libelle}}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('competences_gestion_financiere')"
+                                                       class="mt-2"/>
                                     </div>
                                     <div>
-                                        <h6>Compétences en Langues :</h6>
-                                        <select id="competences_langues" class="chosen-select" multiple>
-                                            <option value="langues_etrangeres">Langues étrangères</option>
-                                            <option value="competences_interculturelles">Compétences interculturelles
-                                            </option>
+                                        <label for="competences_langues" class="h6">Compétences en Langues :</label>
+                                        <select id="competences_langues" name="competences_langues[]"
+                                                class="chosen-select" multiple>
+                                            @foreach($competences_langues as $comp)
+                                                <option value="{{$comp->sigle}}"
+                                                    {{ in_array($comp->sigle, old('competences_langues') ?? []) ? 'selected' : '' }}>
+                                                    {{$comp->libelle}}
+                                                </option>
+                                            @endforeach
                                         </select>
+                                        <x-input-error :messages="$errors->get('competences_langues')" class="mt-2"/>
                                     </div>
                                 </div>
                             </fieldset>
@@ -311,7 +397,8 @@
                                     <label for="portfolio" class="form-label">Liens vers des projets, articles,
                                         créations artistiques :</label>
                                     <textarea id="portfolio" name="portfolio" class="form-control" rows="4"
-                                              required></textarea>
+                                              required>{{old('portfolio')}}</textarea>
+                                    <x-input-error :messages="$errors->get('portfolio')" class="mt-2"/>
                                 </div>
                             </fieldset>
 
@@ -322,7 +409,8 @@
                                     <label for="centres-interet" class="form-label">Hobbies et intérêts personnels
                                         :</label>
                                     <textarea id="centres-interet" name="centres_interet" class="form-control" rows="4"
-                                              required></textarea>
+                                              required>{{old('centres_interet')}}</textarea>
+                                    <x-input-error :messages="$errors->get('centres_interet')" class="mt-2"/>
                                 </div>
                             </fieldset>
 
@@ -333,12 +421,14 @@
                                     <label for="diplome" class="form-label">Diplôme :</label>
                                     <input type="file" id="diplome" name="document_diplome" class="form-control"
                                            accept=".pdf,.doc,.docx" required>
+                                    <x-input-error :messages="$errors->get('document_diplome')" class="mt-2"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="document_recommandation" class="form-label">Lettre de recommandation
                                         :</label>
                                     <input type="file" id="document_recommandation" name="document_recommandation"
                                            class="form-control" accept=".pdf,.doc,.docx" required>
+                                    <x-input-error :messages="$errors->get('document_recommandation')" class="mt-2"/>
                                 </div>
                             </fieldset>
 
@@ -351,7 +441,7 @@
                                     <label for="secteur-activite" class="form-label">Secteur d'activité préféré
                                         :</label>
                                     <select id="secteur-activite" name="secteur_activite_preferer[]"
-                                            class="chosen-select multiple" multiple required>
+                                            class="chosen-select multiple" multiple>
                                         <optgroup label="Technologie de l'Information">
                                             <option value="Développement logiciel">Développement logiciel</option>
                                             <option value="Cybersécurité">Cybersécurité</option>
@@ -461,35 +551,44 @@
                                             </option>
                                         </optgroup>
                                     </select>
+                                    <x-input-error :messages="$errors->get('secteur_activite_preferer')" class="mt-2"/>
                                 </div>
 
                                 <!-- Type d'emploi recherché -->
                                 <div class="mb-3">
                                     <label for="type-emploi" class="form-label">Type d'emploi recherché :</label>
-                                    <select id="type-emploi" name="type_emploi_recherche[]" class="chosen-select multiples"
-                                            multiple required>
-                                        <option value="CDI">CDI</option>
-                                        <option value="Stage">Stage</option>
-                                        <option value="Contrat à durée déterminée">Contrat à durée déterminée</option>
-                                        <option value="Freelance">Freelance</option>
-                                        <option value="Alternance">Alternance</option>
+                                    <select id="type-emploi" name="type_emploi_recherche[]"
+                                            class="chosen-select multiples"
+                                            multiple>
+                                        @foreach($type_contrats as $contrat)
+                                            <option value="{{$contrat->sigle}}"
+                                                {{ in_array($contrat->sigle, old('type_emploi_recherche') ?? []) ? 'selected' : '' }}>
+                                                {{$contrat->libelle}}
+                                            </option>
+                                        @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('type_emploi_recherche')" class="mt-2"/>
                                 </div>
 
                                 <!-- Localisation géographique préférée -->
                                 <div class="mb-3">
-                                    <label for="localisation_geographique_preferee" class="form-label">Localisation géographique
+                                    <label for="localisation_geographique_preferee" class="form-label">Localisation
+                                        géographique
                                         préférée :</label>
-                                    <input type="text" id="localisation_geographique_preferee" name="localisation_geographique_preferee"
+                                    <input type="text" id="localisation_geographique_preferee"
+                                           name="localisation_geographique_preferee"
+                                           value="{{old('localisation_geographique_preferee')}}"
                                            class="form-control" required>
+                                    <x-input-error :messages="$errors->get('localisation_geographique_preferee')" class="mt-2"/>
                                 </div>
 
                                 <!-- Salaire souhaité -->
-                                <div class="mb-3">
+                                <!--<div class="mb-3">
                                     <label for="salaire-souhaite" class="form-label">Salaire souhaité :</label>
                                     <input type="number" id="salaire-souhaite" name="salaire_souhaite"
                                            class="form-control" required>
-                                </div>
+
+                                </div>-->
                             </fieldset>
 
                             <!-- Disponibilité de l’Étudiant Section -->
@@ -497,44 +596,52 @@
                                 <legend><h4>Disponibilité de l’Étudiant</h4></legend>
                                 <div class="form-group">
                                     <label for="duree_dispo">Durée de Disponibilité :</label>
-                                    <select class="form-control" id="duree_dispo" name="duree_disponibilite"
-                                            placeholder="Veuillez choisir">
-                                        <option value="Moins de 1 mois">Moins de 1 mois</option>
-                                        <option value="1 à 3 mois">1 à 3 mois</option>
-                                        <option value="3 à 6 mois">3 à 6 mois</option>
-                                        <option value="6 à 12 mois">6 à 12 mois</option>
-                                        <option value="Plus de 12 mois">Plus de 12 mois</option>
+                                    <select class="form-control" id="duree_dispo" name="duree_disponibilite">
+                                        @foreach($duree_contrats as $duree)
+                                            <option
+                                                value="{{$duree->sigle}}" {{ old('duree_disponibilite') == $duree->sigle ? 'selected' : '' }}>{{$duree->libelle}}</option>
+                                        @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('duree_disponibilite')" class="mt-2"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="semestre">Semestre en Cours :</label>
                                     <select class="form-control" id="semestre" name="semestre_cours">
-                                        <option value="semestre_1">Semestre 1</option>
-                                        <option value="semestre_2">Semestre 2</option>
+                                        <option value="Semestre 1" {{old('semestre_cours') == 'Semestre 1' ? 'selected' : ''}}>Semestre 1</option>
+                                        <option value="Semestre 2" {{old('semestre_cours') == 'Semestre 2' ? 'selected' : ''}}>Semestre 2</option>
                                     </select>
+                                    <x-input-error :messages="$errors->get('semestre_cours')" class="mt-2"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="vacances_ete">Vacances d'Été :</label>
                                     <div class="input-group">
                                         <input type="date" class="form-control" id="vacances_debut"
+                                               value="{{old('vacances_ete_debut')}}"
                                                name="vacances_ete_debut" placeholder="Date début">
                                         <input type="date" class="form-control" id="vacances_fin"
+                                               value="{{old('vacances_ete_fin')}}"
                                                name="vacances_ete_fin"
                                                placeholder="Date fin">
                                     </div>
-                                    <div class="form-group">
-                                        <label for="vacances_dispo">Date disponible pendant les vacances d'été</label>
-                                        <div class="input-group">
-                                            <input type="date" class="form-control" id="dispo_debut"
-                                                   name="dates_disponibles_vacances_ete_debut"
-                                                   placeholder="Date début">
-                                            <input type="date" class="form-control" id="dispo_fin"
-                                                   name="dates_disponibles_vacances_ete_fin"
-                                                   placeholder="Date fin">
-                                        </div>
+                                    <x-input-error :messages="$errors->get('vacances_ete_debut')" class="mt-2"/>
+                                    <x-input-error :messages="$errors->get('vacances_ete_fin')" class="mt-2"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="vacances_dispo">Date disponible pendant les vacances d'été</label>
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" id="dispo_debut"
+                                               value="{{old('dates_disponibles_vacances_ete_debut')}}"
+                                               name="dates_disponibles_vacances_ete_debut"
+                                               placeholder="Date début">
+                                        <input type="date" class="form-control" id="dispo_fin"
+                                               value="{{old('dates_disponibles_vacances_ete_fin')}}"
+                                               name="dates_disponibles_vacances_ete_fin"
+                                               placeholder="Date fin">
                                     </div>
+                                    <x-input-error :messages="$errors->get('dates_disponibles_vacances_ete_debut')" class="mt-2"/>
+                                    <x-input-error :messages="$errors->get('dates_disponibles_vacances_ete_fin')" class="mt-2"/>
                                 </div>
                             </fieldset>
 
@@ -547,78 +654,75 @@
                                     <p>Avez-vous besoin d’aménagements spécifiques pour participer à des événements ou
                                         des activités ?</p>
                                     <select class="form-control" id="accessibilite" name="accessibilite">
-                                        <option value="1">Oui</option>
-                                        <option value="0">Non</option>
+                                        <option value="1" {{old('accesibilite') == '1' ? 'selected': ''}}>Oui</option>
+                                        <option value="0" {{old('accesibilite') == '0' ? 'selected': ''}}>Non</option>
                                     </select>
+                                    <x-input-error :messages="$errors->get('accessibilite')" class="mt-2"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="details_accessibilite">Si oui, veuillez préciser :</label>
-                                    <textarea class="form-control" id="details_accessibilite" name="details_accessibilite" rows="3"
-                                              placeholder="Précisez les aménagements spécifiques"></textarea>
+                                    <textarea class="form-control" id="details_accessibilite"
+                                              name="details_accessibilite" rows="3"
+                                              placeholder="Précisez les aménagements spécifiques">{{old('details_accessibilite')}}</textarea>
+                                    <x-input-error :messages="$errors->get('details_accessibilite')" class="mt-2"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="origine_ethnique">Origine ethnique :</label>
                                     <select class="form-select" id="origine_ethnique" name="origine_ethnique">
-                                        <option value="antaimoro">Antaimoro</option>
-                                        <option value="antandroy">Antandroy</option>
-                                        <option value="antanosy">Antanosy</option>
-                                        <option value="betsileo">Betsileo</option>
-                                        <option value="betsimisaraka">Betsimisaraka</option>
-                                        <option value="francais">Français</option>
-                                        <option value="mahafaly">Mahafaly</option>
-                                        <option value="makoa">Makoa</option>
-                                        <option value="masikoro">Masikoro</option>
-                                        <option value="merina">Merina</option>
-                                        <option value="sakalava">Sakalava</option>
-                                        <option value="sihanaka">Sihanaka</option>
-                                        <option value="tanala">Tanala</option>
-                                        <option value="tsimihety">Tsimihety</option>
-                                        <option value="tsonga">Tsonga</option>
-                                        <option value="zafimaniry">Zafimaniry</option>
-
+                                        @foreach($ethnies as $foko)
+                                            <option
+                                                value="{{$foko}}" {{ old('origine_ethnique') == $foko ? 'selected' : '' }}>{{$foko}}</option>
+                                        @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('origine_ethnique')" class="mt-2"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="statut_socio_economique">Statut socio-économique :</label>
                                     <select class="form-select" id="statut_socio_economique"
                                             name="statut_socio_economique">
-                                        <option value="origine_modeste">Origine modeste</option>
-                                        <option value="classe_moyenne">Classe moyenne</option>
-                                        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                        @foreach($statut_socio_economiques as $param)
+                                            <option
+                                                value="{{$param->sigle}}" {{ old('statut_socio_economique') == $param->sigle ? 'selected' : '' }}>{{$param->libelle}}</option>
+                                        @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('statut_socio_economique')" class="mt-2"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="conditions_vie_specifiques">Conditions de vie spécifiques :</label>
-                                    <select class="form-select" id="conditions_vie_specifiques" name="conditions_vie_specifiques">
-                                        <option value="prefere_pas_dire">Préfère ne pas dire</option>
-                                        <option value="sans_domicile_fixe">Sans domicile fixe</option>
-                                        <option value="handicap">En situation de handicap</option>
+                                    <select class="form-select" id="conditions_vie_specifiques"
+                                            name="conditions_vie_specifiques">
+                                        @foreach($conditions_vie_specifiques as $param)
+                                            <option
+                                                value="{{$param->sigle}}" {{ old('conditions_vie_specifiques') == $param->sigle ? 'selected' : '' }}>{{$param->libelle}}</option>
+                                        @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('conditions_vie_specifiques')" class="mt-2"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="religion_belief">Religion ou croyance :</label>
                                     <select class="form-select" id="religion_belief" name="religion_belief">
-                                        <option value="chretien">Chrétien</option>
-                                        <option value="musulman">Musulman</option>
-                                        <option value="bouddhiste">Bouddhiste</option>
-                                        <option value="hindou">Hindou</option>
-                                        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                        @foreach($religions as $param)
+                                            <option
+                                                value="{{$param->sigle}}" {{ old('religion_belief') == $param->sigle ? 'selected' : '' }}>{{$param->libelle}}</option>
+                                        @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('religion_belief')" class="mt-2"/>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="orientation_sexuelle">Orientation sexuelle :</label>
                                     <select class="form-select" id="orientation_sexuelle" name="orientation_sexuelle">
-                                        <option value="heterosexuel">Hétérosexuel</option>
-                                        <option value="homosexuel">Homosexuel</option>
-                                        <option value="bisexuel">Bisexuel</option>
-                                        <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                        @foreach($orientation_sexuelles as $param)
+                                            <option
+                                                value="{{$param->sigle}}" {{ old('orientation_sexuelle') == $param->sigle ? 'selected' : '' }}>{{$param->libelle}}</option>
+                                        @endforeach
                                     </select>
+                                    <x-input-error :messages="$errors->get('orientation_sexuelle')" class="mt-2"/>
                                 </div>
                             </fieldset>
 
@@ -780,11 +884,11 @@
         document.addEventListener('DOMContentLoaded', function () {
             let mada_regions = [];
             @foreach($mada_regions as $region)
-                mada_regions.push(@json($region));
+            mada_regions.push(@json($region));
             @endforeach
             let france_regions = [];
             @foreach($france_regions as $region)
-                france_regions.push(@json($region));
+            france_regions.push(@json($region));
             @endforeach
             const regions = {
                 madagascar: mada_regions,
@@ -806,6 +910,9 @@
                     const option = document.createElement('option');
                     option.value = region;
                     option.textContent = region;
+                    if(region === "{{old('region')}}") {
+                        option.setAttribute('selected', 'selected');
+                    }
                     regionSelect.appendChild(option);
                 });
             }
