@@ -8,18 +8,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class DomaineEtudeCategorie extends Model implements Sluggable
+class ListCategorie extends Model implements Sluggable
 {
     use HasFactory, HasSlug;
 
     protected $fillable = [
+        'table',
         'name',
         'slug'
     ];
 
-    public function domaines_etudes(): HasMany
+    public function list_with_categories(): HasMany
     {
-        return $this->hasMany(DomaineEtude::class);
+        return $this->hasMany(ListWithCategory::class);
     }
 
     public function slugAttribute(): string

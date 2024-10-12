@@ -28,7 +28,7 @@
 
                     <div class="admin-table table-responsive mb-5">
                         <div class="mb-3 d-flex justify-content-end">
-                            <a href="{{route('admin.domaines_etudes.create')}}" class="btn btn-primary"><i class="la la-plus"></i> Ajouter nouveau</a>
+                            <a href="{{route('admin.list_categories.create')}}" class="btn btn-primary"><i class="la la-plus"></i> Ajouter nouveau</a>
                         </div>
                         <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
                             <div>
@@ -42,8 +42,8 @@
                                 <label for="categorie">Categorie:</label>
                                 <select id="categorie" class="form-control" onchange="handleCategorieChange()">
                                     <option value="tout" {{$search_data['categorie'] == 'tout' ? 'selected' : '' }}>Tout</option>
-                                    @foreach($domaine_etude_categories as $cat)
-                                        <option value="{{$cat->id}}" {{$search_data['categorie'] == $cat->id ? 'selected' : '' }}>{{$cat->name}}</option>
+                                    @foreach($list_categories as $cat)
+                                        <option value="{{$cat->id}}" {{$search_data['categorie'] == $cat->id ? 'selected' : '' }}>{{str_replace('_', ' ', $cat->table) . ' - ' .$cat->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -61,6 +61,7 @@
                         <table class="table table-striped">
                             <thead>
                             <tr>
+                                <th>Table</th>
                                 <th>Nom</th>
                                 <th>Description</th>
                                 <th>Categorie</th>
@@ -68,15 +69,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse($domaines_etudes as $de)
+                            @forelse($list_avec_categories as $de)
                                 <tr>
+                                    <td>{{$de->list_categorie->table}}</td>
                                     <td>{{$de->name}}</td>
                                     <td>{{$de->description}}</td>
-                                    <td>{{$de->domaine_etude_categorie->name}}</td>
+                                    <td>{{$de->list_categorie->name}}</td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="{{route('admin.domaines_etudes.update', ['domaine_etude' => $de->slug])}}" class="btn btn-warning">Modifier</a>
-                                            <form method="POST" id="{{'delete_form_' . $de->id}}" action="{{route('admin.domaines_etudes.delete')}}">
+                                            <a href="{{route('admin.list_categories.update', ['list_with_categorie' => $de->slug])}}" class="btn btn-warning">Modifier</a>
+                                            <form method="POST" id="{{'delete_form_' . $de->id}}" action="{{route('admin.list_categories.delete')}}">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{$de->id}}">
                                             </form>
@@ -94,7 +96,7 @@
                             </tbody>
                         </table>
                         <div class="mt-3">
-                            {{ $domaines_etudes->onEachSide(2)->links('pagination::bootstrap-5') }}
+                            {{ $list_avec_categories->onEachSide(2)->links('pagination::bootstrap-5') }}
                         </div>
                     </div>
                 </div>

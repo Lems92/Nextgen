@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class DomaineEtude extends Model implements Sluggable
+class ListWithCategory extends Model implements Sluggable
 {
     use HasFactory, HasSlug;
 
@@ -16,12 +16,12 @@ class DomaineEtude extends Model implements Sluggable
         'name',
         'description',
         'slug',
-        'domaine_etude_categorie_id'
+        'list_categorie_id'
     ];
 
-    public function domaine_etude_categorie(): BelongsTo
+    public function list_categorie(): BelongsTo
     {
-        return $this->belongsTo(DomaineEtudeCategorie::class, 'domaine_etude_categorie_id');
+        return $this->belongsTo(ListCategorie::class, 'list_categorie_id');
     }
     public function slugAttribute(): string
     {

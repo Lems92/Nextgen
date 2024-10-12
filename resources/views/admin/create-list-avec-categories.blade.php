@@ -1,6 +1,6 @@
 @extends('dashboard-layout')
 
-@section('title', isset($domaine_etude) ? 'Modifier ' . $domaine_etude->name : 'Ajouter domaine d\'étude')
+@section('title', isset($list_with_categorie) ? 'Modifier ' . $list_with_categorie->name : 'Ajouter domaine d\'étude')
 
 @section('content')
 
@@ -12,46 +12,46 @@
         <section class="contact-section bgc-home20">
             <div class="auto-container">
                 <div class="upper-title-box">
-                    <h3>@if(isset($domaine_etude)) Modifier @else Ajouter @endif domaine d'étude</h3>
+                    <h3>@if(isset($list_with_categorie)) Modifier @else Ajouter @endif domaine d'étude</h3>
                 </div>
 
                 <div class="form-container">
 
-                    <form action="{{ isset($domaine_etude) ? route('admin.domaines_etudes.validate_update', ['domaine_etude' => $domaine_etude->slug]) : route('admin.domaines_etudes.store') }}" method="POST" class="default-form">
+                    <form action="{{ isset($list_with_categorie) ? route('admin.list_categories.validate_update', ['list_with_categorie' => $list_with_categorie->slug]) : route('admin.list_categories.store') }}" method="POST" class="default-form">
                         @csrf
                         <div class="row">
-                            <div class="form-group col-lg-6 col-md-12">
+                            <div class="form-group col-md-12">
                                 <label for="domaine_etude_categorie_id">Categorie :</label>
-                                @if(isset($domaine_etude))
-                                    <select id="domaine_etude_categorie_id" name="domaine_etude_categorie_id" class="chosen-select" disabled>
+                                @if(isset($list_with_categorie))
+                                    <select id="list_categorie_id" name="list_categorie_id" class="chosen-select" disabled>
                                         @foreach($categories as $cat)
-                                            <option value="{{$cat->id}}" {{ $domaine_etude->domaine_etude_categorie_id == $cat->id ? 'selected' : '' }}>{{$cat->name}}</option>
+                                            <option value="{{$cat->id}}" {{ $list_with_categorie->list_categorie_id == $cat->id ? 'selected' : '' }}>{{$cat->table . ' - ' .$cat->name}}</option>
                                         @endforeach
                                     </select>
                                 @else
-                                <select id="domaine_etude_categorie_id" name="domaine_etude_categorie_id" class="chosen-select" required>
+                                <select id="list_categorie_id" name="list_categorie_id" class="chosen-select" required>
                                     @foreach($categories as $cat)
-                                        <option value="{{$cat->id}}" {{ old('domaine_etude_categorie_id') == $cat->id ? 'selected' : '' }}>{{$cat->name}}</option>
+                                        <option value="{{$cat->id}}" {{ old('list_categorie_id') == $cat->id ? 'selected' : '' }}>{{$cat->table . ' - ' .$cat->name}}</option>
                                     @endforeach
                                 </select>
                                 @endif
-                                <x-input-error :messages="$errors->get('domaine_etude_categorie_id')" class="mt-2" />
+                                <x-input-error :messages="$errors->get('list_categorie_id')" class="mt-2" />
                             </div>
 
                             <div class="form-group col-lg-12 col-md-12 mt-2">
                                 <label for="name">Nom</label>
-                                <input type="text" id="name" name="name" value="{{isset($domaine_etude) ? $domaine_etude->name : old('name')}}" placeholder="Nom" required>
+                                <input type="text" id="name" name="name" value="{{isset($list_with_categorie) ? $list_with_categorie->name : old('name')}}" placeholder="Nom" required>
                                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
                             </div>
 
                             <div class="form-group col-lg-12 col-md-12 mt-2">
                                 <label for="description">Description</label>
-                                <textarea type="text" id="description" name="description" placeholder="Description" >{{isset($domaine_etude) ? $domaine_etude->description : old('description')}}</textarea>
+                                <textarea type="text" id="description" name="description" placeholder="Description" >{{isset($list_with_categorie) ? $list_with_categorie->description : old('description')}}</textarea>
                                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
                             </div>
 
                             <div class="form-group col-lg-12 col-md-12 text-right">
-                                <button class="theme-btn btn-style-one" type="submit">@if(isset($domaine_etude)) Valider la modification @else Valider l'ajout @endif</button>
+                                <button class="theme-btn btn-style-one" type="submit">@if(isset($list_with_categorie)) Valider la modification @else Valider l'ajout @endif</button>
                             </div>
                         </div>
                     </form>

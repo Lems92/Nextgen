@@ -117,113 +117,16 @@
                         <label for="domaines_etudes_proposes">Domaines d'études proposés :</label>
                         <select class="chosen-select multiple" id="domaines_etudes_proposes"
                                 name="domaines_etudes_proposes[]" multiple>
-                            <optgroup label="Arts et Humanités">
-                                <option>Histoire</option>
-                                <option>Littérature</option>
-                                <option>Philosophie</option>
-                                <option>Langues étrangères</option>
-                                <option>Études culturelles</option>
-                                <option>Arts visuels</option>
-                                <option>Musique</option>
-                            </optgroup>
-                            <optgroup label="Sciences Sociales">
-                                <option>Psychologie</option>
-                                <option>Sociologie</option>
-                                <option>Sciences politiques</option>
-                                <option>Économie</option>
-                                <option>Géographie</option>
-                                <option>Relations internationales</option>
-                                <option>Travail social</option>
-                            </optgroup>
-                            <optgroup label="Sciences Naturelles">
-                                <option>Biologie</option>
-                                <option>Chimie</option>
-                                <option>Physique</option>
-                                <option>Mathématiques</option>
-                                <option>Géologie</option>
-                                <option>Sciences de l'environnement</option>
-                                <option>Astronomie</option>
-                            </optgroup>
-                            <optgroup label="Ingénierie et Technologies">
-                                <option>Génie civil</option>
-                                <option>Génie mécanique</option>
-                                <option>Génie électrique</option>
-                                <option>Génie chimique</option>
-                                <option>Informatique</option>
-                                <option>Télécommunications</option>
-                                <option>Énergies renouvelables</option>
-                            </optgroup>
-                            <optgroup label="Médecine et Santé">
-                                <option>Médecine</option>
-                                <option>Sciences infirmières</option>
-                                <option>Pharmacie</option>
-                                <option>Médecine vétérinaire</option>
-                                <option>Santé publique</option>
-                                <option>Réhabilitation et physiothérapie</option>
-                                <option>Nutrition</option>
-                            </optgroup>
-                            <optgroup label="Commerce et Gestion">
-                                <option>Administration des affaires</option>
-                                <option>Marketing</option>
-                                <option>Finance</option>
-                                <option>Ressources humaines</option>
-                                <option>Gestion de projet</option>
-                                <option>Entrepreneuriat</option>
-                                <option>Logistique et Supply Chain</option>
-                            </optgroup>
-                            <optgroup label="Droit">
-                                <option>Droit pénal</option>
-                                <option>Droit civil</option>
-                                <option>Droit international</option>
-                                <option>Droit commercial</option>
-                                <option>Droit du travail</option>
-                                <option>Droit public</option>
-                                <option>Droit de la propriété intellectuelle</option>
-                            </optgroup>
-                            <optgroup label="Éducation">
-                                <option>Pédagogie</option>
-                                <option>Gestion de l'éducation</option>
-                                <option>Formation des enseignants</option>
-                                <option>Psychologie de l'éducation</option>
-                                <option>Technologies éducatives</option>
-                            </optgroup>
-                            <optgroup label="Architecture et Urbanisme">
-                                <option>Architecture</option>
-                                <option>Urbanisme</option>
-                                <option>Design d'intérieur</option>
-                                <option>Aménagement du territoire</option>
-                                <option>Conservation du patrimoine</option>
-                            </optgroup>
-                            <optgroup label="Sciences et Technologies de l'Information">
-                                <option>Développement logiciel</option>
-                                <option>Sécurité informatique</option>
-                                <option>Intelligence artificielle</option>
-                                <option>Big Data</option>
-                                <option>Réseaux et systèmes</option>
-                                <option>Design web et UX</option>
-                            </optgroup>
-                            <optgroup label="Agriculture et Environnement">
-                                <option>Sciences agronomiques</option>
-                                <option>Gestion des ressources naturelles</option>
-                                <option>Agronomie</option>
-                                <option>Écologie</option>
-                                <option>Développement durable</option>
-                                <option>Gestion de l'eau</option>
-                            </optgroup>
-                            <optgroup label="Tourisme et Hôtellerie">
-                                <option>Gestion hôtelière</option>
-                                <option>Gestion du tourisme</option>
-                                <option>Planification d'événements</option>
-                                <option>Marketing touristique</option>
-                                <option>Gestion des loisirs</option>
-                            </optgroup>
-                            <optgroup label="Sciences Politiques et Relations Internationales">
-                                <option>Théorie politique</option>
-                                <option>Relations internationales</option>
-                                <option>Diplomatie</option>
-                                <option>Analyse des politiques publiques</option>
-                                <option>Études de sécurité</option>
-                            </optgroup>
+                            @foreach($domaines_etudes_categories as $categorie)
+                                <optgroup label="{{$categorie->name}}">
+                                    @foreach($categorie->domaines_etudes as $de)
+                                        <option value="{{$de->name}}"
+                                                title="{{$de->description}}"
+                                                {{ in_array($de->name, old('domaines_etudes_proposes') ?? []) ? 'selected' : '' }}
+                                        >{{$de->name}}</option>
+                                    @endforeach
+                                </optgroup>
+                            @endforeach
                         </select>
                         <x-input-error :messages="$errors->get('domaines_etudes_proposes')" class="mt-2"/>
                     </div>

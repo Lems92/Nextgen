@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ListWithCategory;
+use App\Models\ListCategorie;
 use App\Models\Entreprise;
 use App\Models\Etudiant;
 use App\Models\Parametrage;
@@ -67,7 +69,7 @@ class RegistrationController extends Controller
         $ethnies = File::json(base_path("/resources/data/foko.json"));
 
         $genres = Parametrage::where('table', 'LIKE', 'genre')->get();
-        $domaine_etudes = Parametrage::where('table', 'LIKE', 'domaine_etude')->get();
+        //$domaine_etudes = Parametrage::where('table', 'LIKE', 'domaine_etude')->get();
         $niveau_etudes = Parametrage::where('table', 'LIKE', 'niveau_etude')->get();
         $competences_techniques = Parametrage::where('table', 'LIKE', 'competence_technique')->get();
         $competences_en_recherche_et_analyse = Parametrage::where('table', 'LIKE', 'competences_en_recherche_et_analyse')->get();
@@ -86,13 +88,13 @@ class RegistrationController extends Controller
         $conditions_vie_specifiques = Parametrage::where('table', 'LIKE', 'conditions_vie_specifiques')->get();
         $religions = Parametrage::where('table', 'LIKE', 'religion')->get();
         $orientation_sexuelles = Parametrage::where('table', 'LIKE', 'orientation_sexuelle')->get();
-
+        $domaines_etudes_categories = ListCategorie::with('domaines_etudes')->get();
 
         return view('inscription.form-etudiant', compact([
             'mada_regions',
             'france_regions',
             'genres',
-            'domaine_etudes',
+            //'domaine_etudes',
             'niveau_etudes',
             'competences_techniques',
             'competences_en_recherche_et_analyse',
@@ -112,6 +114,7 @@ class RegistrationController extends Controller
             'conditions_vie_specifiques',
             'religions',
             'orientation_sexuelles',
+            'domaines_etudes_categories',
         ]));
     }
 
@@ -330,9 +333,12 @@ class RegistrationController extends Controller
         $nombre_etudiants = Parametrage::where('table', 'LIKE', 'nombre_etudiant')->get();
         $niveaux_etudes_proposes = Parametrage::where('table', 'LIKE', 'niveaux_etudes_proposes')->get();
 
+        $domaines_etudes_categories = ListCategorie::with('domaines_etudes')->get();
+
         return view('inscription.form-service-carriere', compact([
             'nombre_etudiants',
             'niveaux_etudes_proposes',
+            'domaines_etudes_categories'
         ]));
     }
 

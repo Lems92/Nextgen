@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\EntrepriseRegistrationConfirmationMail;
 use App\Mail\UniversiteRegistrationConfirmationMail;
-use App\Models\DomaineEtude;
-use App\Models\DomaineEtudeCategorie;
+use App\Models\ListWithCategory;
+use App\Models\ListCategorie;
 use App\Models\Entreprise;
 use App\Models\Parametrage;
 use App\Models\Table;
@@ -163,7 +163,7 @@ class AdminController extends Controller
         return redirect()->intended(route('admin.parametrages'))->with('success', 'Parametre modifié avec succès!');
     }
 
-    public function domaines_etudes(Request $request): View
+    public function list_categories(Request $request): View
     {
         $search_data = [];
 
@@ -171,9 +171,9 @@ class AdminController extends Controller
         $search_data['per_page'] = $per_page;
         $search_data['categorie'] = $request->get('categorie') ?? 'tout';
         $search_data['name'] = $request->get('name') ?? '';
-        $domaines_etudes = DomaineEtude::with('domaine_etude_categorie')
+        $list_avec_categories = ListWithCategory::with('list_categorie')
         ->when($request->get('categorie') && $request->get('categorie') !== 'tout', function ($query) use ($request) {
-            $query->where('domaine_etude_categorie_id', '=', (int) $request->get('categorie'));
+            $query->where('list_categorie_id', '=', (int) $request->get('categorie'));
         })
             ->when($request->get('name'), function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->get('name') . '%');
@@ -181,64 +181,64 @@ class AdminController extends Controller
             ->paginate($per_page)
             ->withQueryString();
 
-        $domaines_etudes->withPath('/admin/domaines_etudes');
+        $list_avec_categories->withPath('/admin/list-avec-categories');
 
-        $domaine_etude_categories = DomaineEtudeCategorie::all();
+        $list_categories = ListCategorie::all();
 
-        return view('admin.domaines-etudes', [
-            'domaines_etudes' => $domaines_etudes,
-            'domaine_etude_categories' => $domaine_etude_categories,
+        return view('admin.list-avec-categories', [
+            'list_avec_categories' => $list_avec_categories,
+            'list_categories' => $list_categories,
             'search_data' => $search_data,
         ]);
     }
 
-    public function create_domaine_etude(): View
+    public function create_list_categories(): View
     {
-        $categories = DomaineEtudeCategorie::all();
-        return view('admin.create-domaine-etude', [
+        $categories = ListCategorie::all();
+        return view('admin.create-list-avec-categories', [
             'categories' => $categories,
         ]);
     }
 
-    public function store_domaine_etude(Request $request): RedirectResponse
+    public function store_list_categories(Request $request): RedirectResponse
     {
         $validatedData = $request->validate([
-            'domaine_etude_categorie_id' => 'required',
+            'list_categorie_id' => 'required',
             'name' => 'required|string',
             'description' => 'nullable|string',
         ]);
 
-        DomaineEtude::create($validatedData);
+        ListWithCategory::create($validatedData);
 
-        return redirect()->intended(route('admin.domaines_etudes'))->with('success', 'Domaine d\'etude ajouté avec succès!');
+        return redirect()->intended(route('admin.list_categories'))->with('success', 'Liste élément ajouté avec succès!');
     }
 
-    public function delete_domaine_etude(Request $request)
+    public function delete_list_categories(Request $request): RedirectResponse
     {
         $id = $request->get('id');
-        $de = DomaineEtude::findOrFail($id);
+        $de = ListWithCategory::findOrFail($id);
         $de->delete();
-        return redirect()->intended(route('admin.domaines_etudes'))->with('success', 'Domaine d\'étude supprimé avec succès!');
+        return redirect()->intended(route('admin.list_categories'))->with('success', 'Liste élément supprimé avec succès!');
     }
 
-    public function update_domaine_etude(Request $request, DomaineEtude $domaineEtude)
+    public function update_list_categories(Request $request, ListWithCategory $list_with_categorie): View
     {
-        $categories = DomaineEtudeCategorie::all();
-        return view('admin.create-domaine-etude', [
-            'domaine_etude' => $domaineEtude,
+        $categories = ListCategorie::all();
+        return view('admin.create-list-avec-categories', [
+            'list_with_categorie' => $list_with_categorie,
             'categories' => $categories
         ]);
     }
 
-    public function validate_update_domaine_etude(Request $request, DomaineEtude $domaineEtude)
+    public function validate_update_list_categories(Request $request, ListWithCategory $list_with_categorie): RedirectResponse
     {
         $validatedData = $request->validate([
             'name' => 'required|string',
             'description' => 'nullable|string',
         ]);
 
-        $domaineEtude->update($validatedData);
+        $list_with_categorie->update($validatedData);
 
-        return redirect()->intended(route('admin.domaines_etudes'))->with('success', 'Domaine d\'étude modifié avec succès!');
+        return redirect()->intended(route('admin.list_categories'))->with('success', 'Liste élément modifié avec succès!');
     }
 }

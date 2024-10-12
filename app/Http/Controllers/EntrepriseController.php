@@ -41,7 +41,7 @@ class EntrepriseController extends Controller
         ]));
     }
 
-    public function validate_publier_offre(Request $request)
+    public function validate_publier_offre(Request $request): RedirectResponse
     {
         // Validation des données
         $entrepriseId = $request->user()->userable->id;

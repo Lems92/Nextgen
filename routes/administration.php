@@ -19,11 +19,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])
         Route::get('/parametrages/{id}/update', [AdminController::class, 'update_parametrage'])->name('admin.parametrages.update');
         Route::post('/parametrages/{id}/update', [AdminController::class, 'validate_update_parametrage'])->name('admin.parametrages.validate_update');
         //domaines etudes
-        Route::get('/domaines_etudes', [AdminController::class, 'domaines_etudes'])->name('admin.domaines_etudes');
-        Route::get('/domaines_etudes/create', [AdminController::class, 'create_domaine_etude'])->name('admin.domaines_etudes.create');
-        Route::post('/domaines_etudes/create', [AdminController::class, 'store_domaine_etude'])->name('admin.domaines_etudes.store');
-        Route::post('/domaines_etudes/delete', [AdminController::class, 'delete_domaine_etude'])->name('admin.domaines_etudes.delete');
-        Route::get('/domaines_etudes/{domaine_etude:slug}/update', [AdminController::class, 'update_domaine_etude'])->name('admin.domaines_etudes.update');
-        Route::post('/domaines_etudes/{domaine_etude:slug}/update', [AdminController::class, 'validate_update_domaine_etude'])->name('admin.domaines_etudes.validate_update');
+        Route::get('/list-avec-categories', [AdminController::class, 'list_categories'])->name('admin.list_categories');
+        Route::get('/list-avec-categories/create', [AdminController::class, 'create_list_categories'])->name('admin.list_categories.create');
+        Route::post('/list-avec-categories/create', [AdminController::class, 'store_list_categories'])->name('admin.list_categories.store');
+        Route::post('/list-avec-categories/delete', [AdminController::class, 'delete_list_categories'])->name('admin.list_categories.delete');
+        Route::get('/list-avec-categories/{list_with_categorie:slug}/update', [AdminController::class, 'update_list_categories'])->name('admin.list_categories.update');
+        Route::post('/list-avec-categories/{list_with_categorie:slug}/update', [AdminController::class, 'validate_update_list_categories'])->name('admin.list_categories.validate_update');
     });
 

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('domaine_etudes', function (Blueprint $table) {
+        Schema::create('list_with_categories', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('domaine_etude_categorie_id')->constrained()->onDelete('cascade');
+            $table->foreignId('list_categorie_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('slug', 255)->unique();
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('domaine_etudes');
+        Schema::dropIfExists('list_with_categories');
     }
 };

@@ -29,21 +29,24 @@
                               method="POST">
                             @csrf
                             <fieldset class="form-section">
-                                <legend><h4> Personnelles </h4></legend>
+                                <legend><h4> Informations Personnelles </h4></legend>
                                 <div class="row">
                                     <div class="form-group col-lg-12 col-md-12 mt-4">
                                         <label for="prenom" class="form-label">Prénom :</label>
-                                        <input type="text" id="prenom" name="prenom" value="{{old('prenom')}}" class="form-control" required>
+                                        <input type="text" id="prenom" name="prenom" value="{{old('prenom')}}"
+                                               class="form-control" required>
                                         <x-input-error :messages="$errors->get('prenom')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="nom" class="form-label">Nom :</label>
-                                        <input type="text" id="nom" name="nom" value="{{old('nom')}}" class="form-control" required>
+                                        <input type="text" id="nom" name="nom" value="{{old('nom')}}"
+                                               class="form-control" required>
                                         <x-input-error :messages="$errors->get('nom')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="numero_telephone" class="form-label">Numéro de téléphone :</label>
-                                        <input type="tel" id="numero_telephone" value="{{old('numero_telephone')}}" name="numero_telephone"
+                                        <input type="tel" id="numero_telephone" value="{{old('numero_telephone')}}"
+                                               name="numero_telephone"
                                                class="form-control" required>
                                         <x-input-error :messages="$errors->get('numero_telephone')" class="mt-2"/>
                                     </div>
@@ -66,7 +69,8 @@
                                     </div>
                                     <div class="col-md-12">
                                         <label for="adresse-postale" class="form-label">Adresse postale :</label>
-                                        <input type="text" id="adresse-postale" value="{{old('adresse_postale')}}" name="adresse_postale"
+                                        <input type="text" id="adresse-postale" value="{{old('adresse_postale')}}"
+                                               name="adresse_postale"
                                                class="form-control" required>
                                         <x-input-error :messages="$errors->get('adresse_postale')" class="mt-2"/>
                                     </div>
@@ -96,12 +100,14 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="ville" class="form-label">Ville :</label>
-                                        <input type="text" id="ville" name="ville" value="{{old('ville')}}" class="form-control" required>
+                                        <input type="text" id="ville" name="ville" value="{{old('ville')}}"
+                                               class="form-control" required>
                                         <x-input-error :messages="$errors->get('ville')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="code-postal" class="form-label">Code postal :</label>
-                                        <input type="text" id="code-postal" value="{{old('code_postal')}}" name="code_postal" class="form-control"
+                                        <input type="text" id="code-postal" value="{{old('code_postal')}}"
+                                               name="code_postal" class="form-control"
                                                required>
                                         <x-input-error :messages="$errors->get('code_postal')" class="mt-2"/>
                                     </div>
@@ -114,16 +120,23 @@
                                 <div class="mb-3">
                                     <label for="nom-ecole" class="form-label">Nom de l'école ou de l'université
                                         :</label>
-                                    <input type="text" id="nom-ecole" name="nom_ecole_universite" value="{{old('nom_ecole_universite')}}" class="form-control"
+                                    <input type="text" id="nom-ecole" name="nom_ecole_universite"
+                                           value="{{old('nom_ecole_universite')}}" class="form-control"
                                            required>
                                     <x-input-error :messages="$errors->get('nom_ecole_universite')" class="mt-2"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
                                     <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
-                                        @foreach($domaine_etudes as $de)
-                                            <option
-                                                value="{{$de->sigle}}" {{ old('domaine_etudes') == $de->sigle ? 'selected' : '' }}>{{$de->libelle}}</option>
+                                        @foreach($domaines_etudes_categories as $categorie)
+                                            <optgroup label="{{$categorie->name}}">
+                                                @foreach($categorie->domaines_etudes as $de)
+                                                    <option value="{{$de->name}}"
+                                                            title="{{$de->description}}"
+                                                        {{ old('domaine_etudes') == $de->name ? 'selected' : '' }}
+                                                    >{{$de->name}}</option>
+                                                @endforeach
+                                            </optgroup>
                                         @endforeach
                                     </select>
                                     <x-input-error :messages="$errors->get('domaine_etudes')" class="mt-2"/>
@@ -141,7 +154,8 @@
                                 <div class="mb-3">
                                     <label for="annee-diplome" class="form-label">Année d'obtention du diplôme ou année
                                         d'inscription en cours :</label>
-                                    <input type="number" id="annee-diplome" value="{{old('annee_obtention_diplome')}}" name="annee_obtention_diplome"
+                                    <input type="number" id="annee-diplome" value="{{old('annee_obtention_diplome')}}"
+                                           name="annee_obtention_diplome"
                                            class="form-control"
                                            required>
                                     <x-input-error :messages="$errors->get('annee_obtention_diplome')" class="mt-2"/>
@@ -586,7 +600,8 @@
                                            name="localisation_geographique_preferee"
                                            value="{{old('localisation_geographique_preferee')}}"
                                            class="form-control" required>
-                                    <x-input-error :messages="$errors->get('localisation_geographique_preferee')" class="mt-2"/>
+                                    <x-input-error :messages="$errors->get('localisation_geographique_preferee')"
+                                                   class="mt-2"/>
                                 </div>
 
                                 <!-- Salaire souhaité -->
@@ -615,8 +630,14 @@
                                 <div class="form-group">
                                     <label for="semestre">Semestre en Cours :</label>
                                     <select class="form-control" id="semestre" name="semestre_cours">
-                                        <option value="Semestre 1" {{old('semestre_cours') == 'Semestre 1' ? 'selected' : ''}}>Semestre 1</option>
-                                        <option value="Semestre 2" {{old('semestre_cours') == 'Semestre 2' ? 'selected' : ''}}>Semestre 2</option>
+                                        <option
+                                            value="Semestre 1" {{old('semestre_cours') == 'Semestre 1' ? 'selected' : ''}}>
+                                            Semestre 1
+                                        </option>
+                                        <option
+                                            value="Semestre 2" {{old('semestre_cours') == 'Semestre 2' ? 'selected' : ''}}>
+                                            Semestre 2
+                                        </option>
                                     </select>
                                     <x-input-error :messages="$errors->get('semestre_cours')" class="mt-2"/>
                                 </div>
@@ -647,8 +668,10 @@
                                                name="dates_disponibles_vacances_ete_fin"
                                                placeholder="Date fin">
                                     </div>
-                                    <x-input-error :messages="$errors->get('dates_disponibles_vacances_ete_debut')" class="mt-2"/>
-                                    <x-input-error :messages="$errors->get('dates_disponibles_vacances_ete_fin')" class="mt-2"/>
+                                    <x-input-error :messages="$errors->get('dates_disponibles_vacances_ete_debut')"
+                                                   class="mt-2"/>
+                                    <x-input-error :messages="$errors->get('dates_disponibles_vacances_ete_fin')"
+                                                   class="mt-2"/>
                                 </div>
                             </fieldset>
 
@@ -745,7 +768,7 @@
 
     <style>
         .sec-title {
-            margin-top: 50px;
+            margin-top: 70px;
         }
 
         .contact-section {
@@ -754,8 +777,8 @@
 
         /* Style pour les titres de sections */
         .sec-title h2 {
-            margin-bottom: 30px;
-            font-size: 28px;
+            margin-bottom: 24px;
+            font-size: 20px !important;
             color: #333;
         }
 
@@ -917,7 +940,7 @@
                     const option = document.createElement('option');
                     option.value = region;
                     option.textContent = region;
-                    if(region === "{{old('region')}}") {
+                    if (region === "{{old('region')}}") {
                         option.setAttribute('selected', 'selected');
                     }
                     regionSelect.appendChild(option);

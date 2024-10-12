@@ -193,8 +193,8 @@
                         <li class="{{ is_active('admin/parametrages') ? 'active' : '' }}">
                             <a href="{{ route('admin.parametrages') }}"><i class="las la-cog"></i>Parametrages</a>
                         </li>
-                        <li class="{{ is_active('admin/domaines_etudes') ? 'active' : '' }}">
-                            <a href="{{ route('admin.domaines_etudes') }}"><i class="las la-list"></i>Domaines d'etudes</a>
+                        <li class="{{ is_active('admin/list-avec-categories') ? 'active' : '' }}">
+                            <a href="{{ route('admin.list_categories') }}"><i class="las la-list"></i>Liste avec categorie</a>
                         </li>
                     @endif
 
