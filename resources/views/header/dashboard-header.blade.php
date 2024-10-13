@@ -1,6 +1,5 @@
 @php
     use Illuminate\Support\Facades\Auth;
-    use Illuminate\Support\Facades\Route;
     $user = Auth::user();
 
     function is_active ($url_pattern): bool {
@@ -37,8 +36,8 @@
                                 <li class="dropdown">
                                     <span>Étudiant</span>
                                     <ul class="dropdown">
-                                        <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
-                                        <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
+                                        <li><a href="{{route('etudiants.explorer_offre')}}">Explorer les offres</a></li>
+                                        <li><a href="{{route('etudiants.explorer_event')}}">Explorer les évenements</a></li>
                                     </ul>
                                 </li>
                             @endif
@@ -46,8 +45,8 @@
                                 <li class="dropdown">
                                     <span>Entreprise</span>
                                     <ul>
-                                        <li><a href="{{route('gerer-candidat')}}">Gerer les candidat</a></li>
-                                        <li><a href="{{route('offre')}}">Publier une offre</a></li>
+                                        <li><a href="{{route('entreprise.gerer-candidat')}}">Gerer les candidat</a></li>
+                                        <li><a href="{{route('entreprise.offres.create')}}">Publier une offre</a></li>
                                     </ul>
                                 </li>
                             @endif
@@ -138,17 +137,23 @@
 
                     <!-- Etudiant -->
                     @if($user->hasRole('etudiant'))
-                        <li class="{{ request()->is('dashboard-etudiant') ? 'active' : '' }}">
-                            <a href="{{route('etudiant.dashboard')}}"> <i class="la la-home"></i>Tableau de bord</a>
+                        <li class="{{ is_active('etudiants/dashboard') ? 'active' : '' }}">
+                            <a href="{{route('etudiants.dashboard')}}"> <i class="la la-home"></i>Tableau de bord</a>
                         </li>
-                        <li class="{{ request()->is('profil') ? 'active' : '' }}">
-                            <a href="{{route('profil')}}"> <i class="la la-user-tie"></i>Mon profil</a>
+                        <li class="{{ is_active('etudiants/explorer-offre') ? 'active' : '' }}">
+                            <a href="{{route('etudiants.explorer_offre')}}"><i class="la la-hashtag"></i>Explorer offres</a>
                         </li>
-                        <li class="{{ request()->is('modifierProfil') ? 'active' : '' }}">
-                            <a href="{{route('modifierProfil')}}"> <i class="la la-pen"></i>Modifier profil</a>
+                        <li class="{{ is_active('etudiants/mes-candidatures') ? 'active' : '' }}">
+                            <a href="{{route('etudiants.mes_candidatures')}}"><i class="la la-briefcase"></i>Mes candidatures</a>
                         </li>
-                        <li class="{{ request()->is('candidature') ? 'active' : '' }}">
-                            <a href="{{route('candidature')}}"><i class="la la-briefcase"></i>Candidatures</a>
+                        <li class="{{ is_active('etudiants/explorer-event') ? 'active' : '' }}">
+                            <a href="{{route('etudiants.explorer_event')}}"><i class="lar la-calendar"></i>Evenements</a>
+                        </li>
+                        <li class="{{ is_active('etudiants/portfolio') ? 'active' : '' }}">
+                            <a href="{{route('etudiants.portfolio')}}"> <i class="la la-user-tie"></i>Mon portfolio</a>
+                        </li>
+                        <li class="{{ is_active('etudiants/modfier-profile') ? 'active' : '' }}">
+                            <a href="{{route('etudiants.edit_profile')}}"> <i class="la la-pen"></i>Modifier profil</a>
                         </li>
 
                         <!--- Entreprise -->
@@ -159,8 +164,8 @@
                         <li class="{{ is_active('entreprises/offres') ? 'active' : '' }}">
                             <a href="{{ route('entreprise.offres') }}"><i class="la la-briefcase"></i>Gérer mes offres</a>
                         </li>
-                        <li class="{{ request()->is('gerer-candidat') ? 'active' : '' }}">
-                            <a href="{{ route('gerer-candidat') }}"><i class="la la-file-invoice"></i>Mes candidats</a>
+                        <li class="{{ request()->is('entreprises/gerer-candidat') ? 'active' : '' }}">
+                            <a href="{{ route('entreprise.gerer-candidat') }}"><i class="la la-file-invoice"></i>Mes candidats</a>
                         </li>
 
                         <!--- Université -->

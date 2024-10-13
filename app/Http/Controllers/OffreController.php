@@ -23,12 +23,6 @@ class OffreController extends Controller
         return view('offers.show', compact('offre'));
     }
 
-    public function index()
-    {
-        $offers = Offre::all(); // or use appropriate query to get offers
-        return view('etudiant.explorer-offres', compact('offers'));
-    }
-
     public function apply($id)
     {
         $offre = Offre::find($id);

@@ -32,21 +32,20 @@ Route::middleware(['guest'])->group(function () {
     Route::post('/inscription-entreprise', [RegistrationController::class, 'register_entreprise_post'])->name('inscription.entreprise.post');
     Route::get('/inscription-service-carriere', [RegistrationController::class, 'register_service_carriere_get'])->name('inscription.service-carriere.get');
     Route::post('/inscription-service-carriere', [RegistrationController::class, 'register_service_carriere_post'])->name('inscription.service-carriere.post');
-
 });
 
 //auth not verified
 Route::middleware(['auth'])->group(function () {
     Route::get('/attente-verification-email', [WaitingController::class, 'waiting_email'])->name('attente_verification_email');
     Route::post('/deconnexion', [LoginController::class, 'logout'])->name('logout');
+    Route::get('/etudiants/modifer-profile', function () {
+        return view('etudiant.modifierProfil');
+    })->middleware('role:etudiant')->name('etudiants.edit_profile');
 });
 
 //commun
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/attente-verification-admin', [WaitingController::class, 'waiting_admin'])->name('attente_verification_admin');
-    Route::get('/modiferProfil', function () {
-        return view('etudiant.modifierProfil');
-    })->name('modifierProfil');
 });
 
 //email verification

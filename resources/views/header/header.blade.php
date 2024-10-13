@@ -19,15 +19,15 @@
                             <li class="dropdown">
                                 <span>Étudiant</span>
                                 <ul class="dropdown">
-                                    <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
-                                    <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
+                                    <li><a href="{{route('etudiants.explorer_offre')}}">Explorer les offres</a></li>
+                                    <li><a href="{{route('etudiants.explorer_event')}}">Explorer les évenements</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <span>Entreprise</span>
                                 <ul>
-                                    <li><a href="{{route('gerer-candidat')}}">Gerer les candidat</a></li>
-                                    <li><a href="{{route('offre')}}">Publier une offre</a></li>
+                                    <li><a href="{{route('entreprise.gerer-candidat')}}">Gerer les candidat</a></li>
+                                    <li><a href="{{route('entreprise.offres.create')}}">Publier une offre</a></li>
                                 </ul>
                             </li>
                             <li class=" dropdown">

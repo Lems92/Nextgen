@@ -19,5 +19,5 @@ Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
         //candidature
         Route::get('/gerer-candidat', function () {
             return view('entreprise.gerer-candidat');
-        })->name('gerer-candidat');
+        })->name('entreprise.gerer-candidat');
     });
