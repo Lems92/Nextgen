@@ -793,13 +793,13 @@
                 <input type="text" name="${secteur}_titre[]" class="form-control" placeholder="Titre" required>
             </div>
             <div class="mb-3">
-                <input type="text" name="${secteur}_annee[]" class="form-control" placeholder="Année" required>
+                <input type="number" name="${secteur}_annee[]" class="form-control" placeholder="Année" required>
             </div>
             <div class="mb-3">
-                <input type="text" name="${secteur}_durree[]" class="form-control" placeholder="Durrée" required>
+                <input type="text" name="${secteur}_duree[]" class="form-control" placeholder="Durrée" required>
             </div>
             <div class="mb-3">
-                <textarea name="${secteur}_description[]" class="form-control" placeholder="Description" rows="4" required></textarea>
+                <textarea name="${secteur}_description[]" class="form-control" placeholder="Description" rows="4"></textarea>
             </div>
         `;
 

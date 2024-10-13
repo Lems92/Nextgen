@@ -6,6 +6,7 @@ use App\Interface\Sluggable;
 use App\Trait\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Etudiant extends Model implements Sluggable
@@ -93,6 +94,11 @@ class Etudiant extends Model implements Sluggable
     public function user(): MorphOne
     {
         return $this->morphOne(User::class, 'userable');
+    }
+
+    public function experiences_academiques(): HasMany
+    {
+        return $this->hasMany(ExperienceAcademique::class);
     }
 
     protected $casts = [

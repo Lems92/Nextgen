@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExperienceAcademique;
 use App\Models\ListWithCategory;
 use App\Models\ListCategorie;
 use App\Models\Entreprise;
@@ -24,9 +25,9 @@ use Mockery\Exception;
 class RegistrationController extends Controller
 {
 
-    public function register_get(): View | RedirectResponse
+    public function register_get(): View|RedirectResponse
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $user = Auth::user();
             return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
@@ -59,7 +60,7 @@ class RegistrationController extends Controller
         if (!Session::get('register_data')) {
             return redirect()->route('inscription');
         }
-        if(Auth::check()) {
+        if (Auth::check()) {
             $user = Auth::user();
             return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
@@ -148,7 +149,6 @@ class RegistrationController extends Controller
             'domaine_etudes' => 'required|string',
             'niveau_etudes' => 'required|string',
             'annee_obtention_diplome' => 'required|integer',
-            //TODO experiences
 
             // competences
             'competences_techniques' => 'required|array',
@@ -187,39 +187,76 @@ class RegistrationController extends Controller
             'orientation_sexuelle' => 'required|string',
         ]);
 
-        //dd($validateData);
-
-        //upload des fichiers
-        if($request->hasFile('document_diplome')) {
-            $validateData['document_diplome'] = Storage::disk('public')->put('document_diplome', $request->file('document_diplome'));
-        } else {
-            return back()->withErrors([
-                'document_diplome' => 'Erreur lors de l\'importation du document diplôme'
-            ]);
-        }
-
-        if($request->hasFile('document_recommandation')) {
-            $validateData['document_recommandation'] = Storage::disk('public')->put('document_recommandation', $request->file('document_recommandation'));
-        } else {
-            return back()->withErrors([
-                'document_recommandation' => 'Erreur lors de l\'importation du document recommendation'
-            ]);
-        }
-
-        // Si l'université n'est pas dans la base de données
-        // TODO à verifier
-        $is_univ_partenaire = Universite::where('nom_etablissement', 'LIKE', "%".$validateData['nom_ecole_universite']."%")->count();
-
-        $status_compte = false;
-        if($is_univ_partenaire === 0) {
-            $status_compte = true;
-        }
-
         try {
-            // enregistrement via un transaction
-            DB::transaction(function () use ($status_compte, $registerData, $validateData) {
+
+            DB::transaction(function () use ($registerData, $request, $validateData) {
+
+                //upload des fichiers
+                if ($request->hasFile('document_diplome')) {
+                    $validateData['document_diplome'] = Storage::disk('public')->put('document_diplome', $request->file('document_diplome'));
+                } else {
+                    return back()->withErrors([
+                        'document_diplome' => 'Erreur lors de l\'importation du document diplôme'
+                    ]);
+                }
+
+                if ($request->hasFile('document_recommandation')) {
+                    $validateData['document_recommandation'] = Storage::disk('public')->put('document_recommandation', $request->file('document_recommandation'));
+                } else {
+                    return back()->withErrors([
+                        'document_recommandation' => 'Erreur lors de l\'importation du document recommendation'
+                    ]);
+                }
+
+                // Si l'université n'est pas dans la base de données
+                // TODO à verifier
+                $is_univ_partenaire = Universite::where('nom_etablissement', 'LIKE', "%" . $validateData['nom_ecole_universite'] . "%")->count();
+
+                $status_compte = false;
+                if ($is_univ_partenaire === 0) {
+                    $status_compte = true;
+                }
+
                 $etudiant = Etudiant::create($validateData);
 
+                // Expericens academiques
+                $type_experiences_academmiques = ['stage_academique', 'projet_academique', 'these_memoire', 'realisations', 'cours_speciaux', 'autres_experiences'];
+
+                foreach ($type_experiences_academmiques as $type_experiences_academmique) {
+                    if ($request->has($type_experiences_academmique . '_titre')
+                        && $request->has($type_experiences_academmique . '_annee')
+                        && $request->has($type_experiences_academmique . '_duree')
+                    ) {
+                        $titres = $request->get($type_experiences_academmique . '_titre');
+                        $annees = $request->get($type_experiences_academmique . '_annee');
+                        $durees = $request->get($type_experiences_academmique . '_duree');
+                        $descriptions = $request->get($type_experiences_academmique . '_description');
+
+                        //si les tableaux ont même taille
+                        if (count($titres) == count($annees) && count($titres) == count($durees)) {
+                            for ($i = 0; $i < count($titres); $i++) {
+                                $titre = $titres[$i];
+                                $duree = $durees[$i];
+                                $annee = $annees[$i];
+                                $description = "";
+                                if (isset($descriptions[$i])) {
+                                    $description = $descriptions[$i];
+                                }
+                                ExperienceAcademique::create([
+                                    'type' => $type_experiences_academmique,
+                                    'titre' => $titre,
+                                    'duree' => $duree,
+                                    'annee' => $annee,
+                                    'description' => $description,
+                                    'etudiant_id' => $etudiant->id
+                                ]);
+                            }
+                        }
+                    }
+
+                }
+
+                // création du compte utilisateur
                 $user = User::create([
                     'email' => $registerData['email'],
                     'password' => bcrypt($registerData['password']),
@@ -234,11 +271,14 @@ class RegistrationController extends Controller
                 $user->sendEmailVerificationNotification();
 
                 Auth::login($user);
-
             });
-        } catch (\Exception $exception) {
+
+        } catch (Exception $exception) {
+            Storage::delete($validateData['document_diplome']);
+            Storage::delete($validateData['document_recommandation']);
             throw new Exception($exception->getMessage());
         }
+
 
         // Nettoyer les données de la session
         Session::forget('register_data');
@@ -253,7 +293,7 @@ class RegistrationController extends Controller
             return redirect()->route('inscription');
         }
 
-        if(Auth::check()) {
+        if (Auth::check()) {
             $user = Auth::user();
             return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
@@ -347,7 +387,7 @@ class RegistrationController extends Controller
             return redirect()->route('inscription');
         }
 
-        if(Auth::check()) {
+        if (Auth::check()) {
             $user = Auth::user();
             return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
