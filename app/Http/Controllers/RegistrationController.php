@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ExperienceAcademique;
+use App\Models\ExperienceProfessionnelle;
 use App\Models\ListWithCategory;
 use App\Models\ListCategorie;
 use App\Models\Entreprise;
@@ -235,25 +236,70 @@ class RegistrationController extends Controller
                         //si les tableaux ont même taille
                         if (count($titres) == count($annees) && count($titres) == count($durees)) {
                             for ($i = 0; $i < count($titres); $i++) {
-                                $titre = $titres[$i];
-                                $duree = $durees[$i];
-                                $annee = $annees[$i];
-                                $description = "";
+                                $data = [];
+                                $data['titre'] = $titres[$i];
+                                $data['duree'] = $durees[$i];
+                                $data['annee'] = $annees[$i];
                                 if (isset($descriptions[$i])) {
-                                    $description = $descriptions[$i];
+                                    $data['description'] = $descriptions[$i];
                                 }
-                                ExperienceAcademique::create([
-                                    'type' => $type_experiences_academmique,
-                                    'titre' => $titre,
-                                    'duree' => $duree,
-                                    'annee' => $annee,
-                                    'description' => $description,
-                                    'etudiant_id' => $etudiant->id
-                                ]);
+                                $data['etudiant_id'] = $etudiant->id;
+                                ExperienceAcademique::create($data);
                             }
                         }
                     }
 
+                }
+
+                // Experiences pro
+                $exp_pro = "experiences_professionnelles";
+                if ($request->has($exp_pro . '_titre_poste')
+                    && $request->has($exp_pro . '_nom_entreprise')
+                    && $request->has($exp_pro . '_date_debut')
+                    && $request->has($exp_pro . '_lieu')
+                    && $request->has($exp_pro . '_secteur')
+                    && $request->has($exp_pro . '_type_contrat')
+                ) {
+                    $titre_postes = $request->get($exp_pro . '_titre_poste');
+                    $nom_entreprises = $request->get($exp_pro . '_nom_entreprise');
+                    $date_debuts = $request->get($exp_pro . '_date_debut');
+                    $date_fins = $request->get($exp_pro . '_date_fin');
+                    $lieus = $request->get($exp_pro . '_lieu');
+                    $secteurs = $request->get($exp_pro . '_secteur');
+                    $type_contrats = $request->get($exp_pro . '_type_contrat');
+                    $salaires = $request->get($exp_pro . '_salaire');
+                    $descriptions = $request->get($exp_pro . '_description');
+
+                    //si les tableaux ont même taille
+                    if (count($titre_postes) == count($nom_entreprises)
+                        && count($titre_postes) == count($date_debuts)
+                        && count($titre_postes) == count($lieus)
+                        && count($titre_postes) == count($secteurs)
+                        && count($titre_postes) == count($type_contrats)
+                    ) {
+                        for ($i = 0; $i < count($titre_postes); $i++) {
+                            $data = [];
+                            $data['titre_poste'] = $titre_postes[$i];
+                            $data['nom_entreprise'] = $nom_entreprises[$i];
+                            $data['date_debut'] = $date_debuts[$i];
+                            if (isset($date_fins[$i])) {
+                                $data['date_fin'] = $date_fins[$i];
+                            }
+                            $data['lieu'] = $lieus[$i];
+                            $data['secteur'] = $secteurs[$i];
+                            $data['type_contrat'] = $type_contrats[$i];
+                            if (isset($salaires[$i])) {
+                                $data['salaire'] = $salaires[$i];
+                            }
+                            if (isset($descriptions[$i])) {
+                                $data['description'] = $descriptions[$i];
+                            }
+
+                            $data['etudiant_id'] = $etudiant->id;
+
+                            ExperienceProfessionnelle::create($data);
+                        }
+                    }
                 }
 
                 // création du compte utilisateur

@@ -31,30 +31,6 @@ class Etudiant extends Model implements Sluggable
         'domaine_etudes',
         'niveau_etudes',
         'annee_obtention_diplome',
-        /*'titre_stage_academique',
-        'annee_stage_academique',
-        'duree_stage_academique',
-        'description_stage_academique',
-        'titre_projet_academique',
-        'annee_projet_academique',
-        'duree_projet_academique',
-        'description_projet_academique',
-        'titre_these_memoire',
-        'annee_these_memoire',
-        'duree_these_memoire',
-        'description_these_memoire',
-        'titre_realisations',
-        'annee_realisations',
-        'duree_realisations',
-        'description_realisations',
-        'titre_cours_specialises',
-        'annee_cours_specialises',
-        'duree_cours_specialises',
-        'description_cours_specialises',
-        'titre_autres_experiences',
-        'annee_autres_experiences',
-        'duree_autres_experiences',
-        'description_autres_experiences',*/
         'competences_techniques',
         'competences_en_recherche_et_analyse',
         'competences_en_communication',
@@ -99,6 +75,11 @@ class Etudiant extends Model implements Sluggable
     public function experiences_academiques(): HasMany
     {
         return $this->hasMany(ExperienceAcademique::class);
+    }
+
+    public function experiences_professionnelles(): HasMany
+    {
+        return $this->hasMany(ExperienceProfessionnelle::class);
     }
 
     protected $casts = [

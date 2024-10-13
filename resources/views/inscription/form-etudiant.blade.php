@@ -406,7 +406,7 @@
                                         publications et contributions...</p>
                                     <div id="experiences_professionnelles_conteneur"></div>
                                     <button type="button" class="theme-btn btn-style-four"
-                                            onclick="ajouterChamp('experiences_professionnelles')">Ajouter
+                                            onclick="ajouterExperiencesPro()">Ajouter
                                     </button>
                                 </div>
                             </fieldset>
@@ -505,14 +505,6 @@
                                     <x-input-error :messages="$errors->get('localisation_geographique_preferee')"
                                                    class="mt-2"/>
                                 </div>
-
-                                <!-- Salaire souhaité -->
-                                <!--<div class="mb-3">
-                                    <label for="salaire-souhaite" class="form-label">Salaire souhaité :</label>
-                                    <input type="number" id="salaire-souhaite" name="salaire_souhaite"
-                                           class="form-control" required>
-
-                                </div>-->
                             </fieldset>
 
                             <!-- Disponibilité de l’Étudiant Section -->
@@ -807,6 +799,86 @@
         }
 
         function supprimerChamp(button) {
+            const div = button.closest('.champ-academique');
+            if (div) {
+                div.remove();
+            }
+        }
+
+        function ajouterExperiencesPro() {
+            const conteneur = document.getElementById(`experiences_professionnelles_conteneur`);
+            if (!conteneur) {
+                console.error(`Le conteneur pour experiences_professionnelles_conteneur n'existe pas.`);
+                return;
+            }
+
+            const div = document.createElement('div');
+            div.classList.add('champ-academique');
+            div.innerHTML = `
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-danger btn-sm" onclick="supprimerExperiencesPro(this)">X</button>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" name="experiences_professionnelles_titre_poste[]" class="form-control" placeholder="Titre du poste" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" name="experiences_professionnelles_nom_entreprise[]" class="form-control" placeholder="Nom de l'entreprise" required>
+                     </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>Date debut *</label>
+                        <input type="date" class="form-control" name="experiences_professionnelles_date_debut[]" placeholder="Date debut" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Date fin (optionnel si en cours)</label>
+                        <input type="date" class="form-control" name="experiences_professionnelles_date_fin[]" placeholder="Date fin">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <input type="text" name="experiences_professionnelles_lieu[]" class="form-control" placeholder="Lieu" required>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" name="experiences_professionnelles_secteur[]" class="form-control" placeholder="Secteur" required>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="type_contrat">Type contrat</label>
+                        <select id="type_contrat" class="form-control" name="experiences_professionnelles_type_contrat[]">
+                            <option>CDI</option>
+                            <option>CDD</option>
+                            <option>Stage</option>
+                            <option>Alternance</option>
+                            <option>Freelance / Indépendant</option>
+                            <option>Intérim</option>
+                            <option>Apprentissage</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Salaire (optionnel)</label>
+                        <input type="number" name="experiences_professionnelles_salaire[]" class="form-control" placeholder="Salaire">
+                    </div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <textarea name="experiences_professionnelles_description[]" class="form-control" placeholder="Description" rows="4"></textarea>
+            </div>
+        `;
+
+            conteneur.appendChild(div);
+        }
+
+        function supprimerExperiencesPro(button) {
             const div = button.closest('.champ-academique');
             if (div) {
                 div.remove();
