@@ -468,7 +468,7 @@
                                                 @foreach($categorie->list_with_categories as $sous_cat)
                                                     <option value="{{$sous_cat->name}}"
                                                             title="{{$sous_cat->description}}"
-                                                        {{ old('secteur_activite_preferer') == $sous_cat->name ? 'selected' : '' }}
+                                                        {{ in_array($sous_cat->name, old('secteur_activite_preferer') ?? []) ? 'selected' : '' }}
                                                     >{{$sous_cat->name}}</option>
                                                 @endforeach
                                             </optgroup>
