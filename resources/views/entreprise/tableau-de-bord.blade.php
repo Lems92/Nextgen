@@ -11,7 +11,6 @@
             <div class="dashboard-outer">
                 <div class="upper-title-box">
                     <h3>Howdy, Invision!</h3>
-                    <div class="text">Ready to jump back in?</div>
                 </div>
                 <div class="row">
                     <div class="ui-block col-md-6 col-sm-12">
@@ -22,7 +21,7 @@
                                 </div>
                                 <div class="right">
                                     <h4>22</h4>
-                                    <p>Posted Jobs</p>
+                                    <p>Offres publié</p>
                                 </div>
                             </div>
                             </a>
@@ -35,7 +34,7 @@
                                 </div>
                                 <div class="right">
                                     <h4>9382</h4>
-                                    <p>Application</p>
+                                    <p>Candidats</p>
                                 </div>
                             </div>
                         </a>
@@ -63,8 +62,7 @@
         <section class="user-dashboard">
             <div class="dashboard-outer">
               <div class="upper-title-box">
-                <h3>Manage Jobs</h3>
-                <div class="text">Ready to jump back in?</div>
+                <h3>Gerer offre</h3>
               </div>
       
                 <div class="col-lg-12">
@@ -72,7 +70,7 @@
                   <div class="ls-widget">
                     <div class="tabs-box">
                       <div class="widget-title">
-                        <h4>My Job Listings</h4>
+                        <h4>Mes offress</h4>
       
                         <div class="chosen-outer">
                           <!--Tabs Box-->

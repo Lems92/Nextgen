@@ -1,0 +1,271 @@
+[33mcommit af1f8c272a5dd93fb25a8621b73b42f265d688b0[m[33m ([m[1;36mHEAD -> [m[1;32mLems[m[33m)[m
+Merge: 8a13b81 b8576a8
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Sun Oct 13 20:52:28 2024 +0300
+
+    merge to Lems
+
+[33mcommit 8a13b818486a52f3282645f548358a59f755ab70[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Sun Oct 13 20:06:41 2024 +0300
+
+    nothing
+
+[33mcommit b8576a83bbccdc7b2394f7988d4a0233ed576ae4[m[33m ([m[1;31morigin/fix-model[m[33m, [m[1;32mfix-model[m[33m)[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Sun Oct 13 10:13:15 2024 +0300
+
+    fix old value secteur activites preferer inscription etudiants
+
+[33mcommit 1ee92ac4aca39b3f051044d0048255e5bfded25d[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Sun Oct 13 10:10:27 2024 +0300
+
+    add experiences pro to registration student
+
+[33mcommit f69cfb8307754fa5417db0925bdf2ccacfc88dd9[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Sun Oct 13 08:42:07 2024 +0300
+
+    add experiences academiques inscription étudiants
+
+[33mcommit a1c02c0e6b19fa2304a0ac3a3c876ee6dcd6d67a[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Sat Oct 12 22:04:51 2024 +0300
+
+    add pagination entreprise et universite cote administration
+
+[33mcommit 42e2a6934d8aaed2bbf024adf9302e570b9eea26[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Sat Oct 12 21:50:43 2024 +0300
+
+    show étudiants part one
+
+[33mcommit a4b5ba993266c020bba6538a2761516d6163ab46[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Sat Oct 12 20:29:37 2024 +0300
+
+    update readme for development usage
+
+[33mcommit 264eb30efe7e653cba84dbcc9878eb416c054626[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Sat Oct 12 20:09:17 2024 +0300
+
+    finalize inscripion service carriere et entreprise
+
+[33mcommit c32c221a5abe07f02669ebc3f98c291bcd966f30[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Sat Oct 12 18:00:01 2024 +0300
+
+    update domaines etudes more flexible with name list category
+
+[33mcommit f6dae39785490b6bd7aeacaa075e3943c8c2f5ff[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Sat Oct 12 14:00:21 2024 +0300
+
+    crud domaines d'études
+
+[33mcommit 91de288ff2c1541f02f612b1c2104037765fd502[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Sat Oct 12 10:29:20 2024 +0300
+
+    suite inscription etudiant
+
+[33mcommit f59b051b1c112f83e5aa1095d8d6ce54566ba800[m[33m ([m[1;31morigin/Lems[m[33m)[m
+Merge: a063e98 e5483db
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Fri Oct 11 22:44:15 2024 +0300
+
+    merge
+
+[33mcommit a063e98572277fe67f0ebdc72694ade0f63c2986[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Fri Oct 11 22:29:23 2024 +0300
+
+    css
+
+[33mcommit e5483db3755d2490d64d6bbaf65fc6cb95d402a4[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Fri Oct 11 19:15:41 2024 +0300
+
+    add some dynamic data for registration
+
+[33mcommit 5626f41d73a4ce7968266c467e220cb031c92880[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Fri Oct 11 15:09:15 2024 +0300
+
+    finish crud offres entreprises
+
+[33mcommit a0582828004742e8ec85651fc7a7cf00a7ac7974[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Fri Oct 11 13:54:17 2024 +0300
+
+    show offre entreprise
+
+[33mcommit 3ca18b2b538359d966595e6861369ac312475827[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Fri Oct 11 10:41:09 2024 +0300
+
+    add parametrages gestion to admin
+
+[33mcommit cf25fe323c2419fbbb8af32fdedc1e9dc37d5425[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Thu Oct 10 22:04:06 2024 +0300
+
+    send email notification when accepting account registration
+
+[33mcommit dbb226ed147ffdb26c99e047cc0e35c9898dedbd[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Thu Oct 10 21:22:54 2024 +0300
+
+    afficher liste offres entreprises
+
+[33mcommit c098ef2c910d72505b111c75275910225e3e33f5[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Thu Oct 10 19:29:33 2024 +0300
+
+    charge region from json
+
+[33mcommit cd847434b02c555bad2b22a740a9bb271ab949f7[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Thu Oct 10 12:07:55 2024 +0300
+
+    admin: add user register confirmation
+
+[33mcommit d1e0b3001fb56669fe8c2e94859b9f045d6f520d[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Wed Oct 9 22:03:28 2024 +0300
+
+    Ajustement form inscription etu-entreprise-univ
+
+[33mcommit b119b8dab40f2e618c0b94cbe4d7dfa6ad3a0437[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Wed Oct 9 21:43:40 2024 +0300
+
+    Ajout javascript inscription
+
+[33mcommit 4ad837fcc39e0594d1df3c0a1931aded09e5aa83[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Wed Oct 9 21:28:03 2024 +0300
+
+    fix publish offre
+
+[33mcommit e732f5da7fcf76c0dea533969e38274fdf711f8e[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Wed Oct 9 20:51:03 2024 +0300
+
+    change to unique layout dashboard
+
+[33mcommit 3f38ea3d6c405cec840833408723bc9a002887f9[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Wed Oct 9 18:09:28 2024 +0300
+
+    email verification
+
+[33mcommit fe3c52d272054ba4f6fb21aeeca344c350e16e44[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Wed Oct 9 16:04:35 2024 +0300
+
+    add slug to models
+
+[33mcommit bb13580fba2354a6bb6b40c8548ad3f640318770[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Tue Oct 8 21:43:10 2024 +0300
+
+    fix redirection to connexion when not authenticated
+
+[33mcommit 2c1ee907eb66d6576d9a8b7b5e6b2284abf5a734[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Tue Oct 8 21:17:54 2024 +0300
+
+    add middleware routing depending on role
+
+[33mcommit d8288f8406c63a6da9ba9bf175e7eedd36936f58[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Tue Oct 8 19:22:45 2024 +0300
+
+    add middleware routing depending on role
+
+[33mcommit 376ae843ed6be6df4f6574cbefee3549e422ef28[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Tue Oct 8 18:32:31 2024 +0300
+
+    fix login redirection
+
+[33mcommit b95a4b9946d65e0c221b560e5a3b83dcd9b73ff7[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Tue Oct 8 17:47:27 2024 +0300
+
+    first try register service carriere
+
+[33mcommit b5072568a6df3a50dd013ed9a79c71c6f949e439[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Tue Oct 8 15:07:50 2024 +0300
+
+    first step register entreprise
+
+[33mcommit 733a05b62687ae718c2dd40446bad0cb27834953[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Tue Oct 8 13:53:23 2024 +0300
+
+    first try register student
+
+[33mcommit 6f3b6a2bdf208dbd20653a91c28d5a740278f42d[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Tue Oct 8 07:35:25 2024 +0300
+
+    integrating laravel spatie for role management
+
+[33mcommit 01771a0256e140c6dbec9c5ad54a262402fd3284[m
+Author: radoheritiana <radoheritiana.rhja.123@gmail.com>
+Date:   Mon Oct 7 20:15:57 2024 +0300
+
+    fix composer.lock
+
+[33mcommit 45f412c655cb007eb5a211a996ad31296a975e3a[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Fri Sep 6 12:26:48 2024 +0300
+
+    Update composer.lock
+
+[33mcommit b16786bbcbfb1422ca43b523ce39b3d59fd09648[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Fri Sep 6 12:23:27 2024 +0300
+
+    form-etudiant
+
+[33mcommit a78fb03889aecefb08568b3e4f1edeba3680a355[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Fri Sep 6 11:27:25 2024 +0300
+
+    aujdhui
+
+[33mcommit 48974ba5a84103b6010524c93dad552f6b6f1ceb[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Fri Sep 6 02:48:46 2024 +0300
+
+    nisy modification kely
+
+[33mcommit 39c7bcec7616279f301cde8313f4b9ba1472a80e[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Fri Sep 6 02:15:45 2024 +0300
+
+    admin entreprise
+
+[33mcommit 27fa1c77b3bc962f27e2c1c10209e24d04d3be3a[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Thu Sep 5 19:58:15 2024 +0300
+
+    autres page
+
+[33mcommit 9bf94cdb5f627b08937a10acc4a10fd92a694a64[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Tue Sep 3 00:17:09 2024 +0300
+
+    all form
+
+[33mcommit 9144afdb6f5487884a6c07b900ad4828e2eefbe5[m
+Author: Lems92 <raharison.miharintsoa@gmail.com>
+Date:   Sun Sep 1 22:16:12 2024 +0300
+
+    new

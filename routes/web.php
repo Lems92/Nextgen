@@ -65,11 +65,15 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     // Route pour publier l'offre
     Route::post('/offres', [OffreController::class, 'store'])->name('offres.store');
     Route::get('/gerer-offre', function () {return view('entreprise.gerer-offre');})->name('gerer-offre');
+    // Candidat
+    Route::get('/voir-candidat',function () {return view('entreprise.voir-candidat');})->name('voir-candidat');
     Route::get('/gerer-candidat', function () {return view('entreprise.gerer-candidat');})->name('gerer-candidat');
+    // Modifier offre
+    Route::get('/modifier-offre', function () {return view('entreprise.modifier-offre');})->name('modifier-offre');
 // });
 
 // service-carriere
-Route::middleware(['auth', 'verified', 'role:service-carriere'])->group(function () {
+//Route::middleware(['auth', 'verified', 'role:service-carriere'])->group(function () {
     Route::get('/dashboard-service', function() {return view('universite.tableau-de-bord');})->name('service_carriere.dashboard');
     Route::get('/gerer-event', function () {return view('universite.gerer-event');})->name('gerer-event');
     Route::get('/gestion-etudiants', function () {return view('universite.gestion-etudiants');})->name('gestion-etudiants');
@@ -83,4 +87,4 @@ Route::middleware(['auth', 'verified', 'role:service-carriere'])->group(function
 
 // Soumettre le formulaire
     Route::post('/events/store', [EventController::class, 'store'])->name('events.store');
-});
+//});

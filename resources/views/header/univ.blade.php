@@ -19,35 +19,7 @@
 
             <nav class="nav main-menu">
               <ul class="navigation" id="navbar">
-                <li><a href="{{route('accueil')}}"><span>Accueil</span></a></li>
-                            <li class="dropdown">
-                                <span>Étudiant</span>
-                                <ul class="dropdown">
-                                    <li><a href="{{route('offers.index')}}">Explorer les offres</a></li>
-                                    <li><a href="{{route('explorer-event')}}">Explorer les évenements</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <span>Entreprise</span>
-                                <ul>
-                                    <li><a href="{{route('gerer-candidat')}}">Gerer les candidat</a></li>
-                                    <li><a href="{{route('offre')}}">Publier une offre</a></li>
-                                </ul>
-                            </li>
-                            <li class=" dropdown">
-                                <span>Service carrière</span>
-                                <ul class="dropdown">
-                                    <li><a href="{{route('publier-event')}}">Publier un évenement</a></li>
-                                    <li><a href="{{route('gestion-etudiants')}}">Gerer les étudiants</a></li>
-                                </ul>
-                            </li>
-                             <li class="dropdown">
-                                <span>NextGen</span>
-                                <ul>
-                                    <li><a href="blog-list-v1.html">A propos</a></li>
-                                    <li><a href="blog-list-v2.html">F.A.Q</a></li>
-                                    <li><a href="blog-list-v3.html">Nous contacter</a></li>
-                                </ul>
+              
                 </li>
                 <!-- End header -->
 

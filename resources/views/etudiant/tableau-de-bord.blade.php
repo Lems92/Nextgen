@@ -31,50 +31,11 @@
               </div>
               <div class="right">
                 <h4>9382</h4>
-                <p>Job Alerts</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="ui-item ui-yellow">
-              <div class="left">
-                <i class="icon la la-comment-o"></i>
-              </div>
-              <div class="right">
-                <h4>74</h4>
-                <p>Messages</p>
+                <p>Offres</p>
               </div>
             </div>
           </div>
         </div>
-
-
-
-
-          <div class="col-lg-7">
-            <!-- Graph widget -->
-            <div class="graph-widget ls-widget">
-              <div class="tabs-box">
-                <div class="widget-title">
-                  <h4>Your Profile Views</h4>
-                  <div class="chosen-outer">
-                    <!--Tabs Box-->
-                    <select class="chosen-select">
-                      <option>Last 6 Months</option>
-                      <option>Last 12 Months</option>
-                      <option>Last 16 Months</option>
-                      <option>Last 24 Months</option>
-                      <option>Last 5 year</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="widget-content">
-                  <canvas id="chart" width="100" height="45"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <div class="col-lg-5">
             <!-- Notification Widget -->
@@ -100,7 +61,7 @@
             <!-- applicants Widget -->
             <div class="applicants-widget ls-widget">
               <div class="widget-title">
-                <h4>Jobs Applied Recently</h4>
+                <h4>Offres postulé</h4>
               </div>
               <div class="widget-content">
                 <div class="row">

@@ -58,7 +58,7 @@
                                             <td>
                                                 <div class="option-box">
                                                     <ul class="option-list">
-                                                        <li><button data-text="Modifier"><span class="la la-pencil"></span></button></li>
+                                                        <li><a href="{{ route('modifier-offre') }}"><button data-text="Modifier"><span class="la la-pencil"></span></button></a></li>
                                                         <li><button data-text="Supprimer"><span class="la la-trash"></span></button></li>
                                                     </ul>
                                                 </div>

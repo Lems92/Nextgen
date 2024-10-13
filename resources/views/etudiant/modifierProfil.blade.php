@@ -11,7 +11,7 @@
       <div class="row justify-content-center">
           <div class="col-lg-8 col-md-10">
               <div class="sec-title -type-2 text-center">
-                  <h2>Formulaire d'Inscription Étudiant</h2>
+                  <h2>Modifier Profil</h2>
               </div>
 
               <form id="default-form">

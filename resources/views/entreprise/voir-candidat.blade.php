@@ -1,10 +1,10 @@
 @extends('app')
 
-@section('title', 'Dashboard')
+@section('title', 'Voir candidat')
 
 @section('content')
 
-@include('header.etudiant')
+@include('header.entreprise')
     <!-- End User Sidebar -->
 
     <!-- Dashboard -->
@@ -18,6 +18,10 @@
               <figure class="image"><img src="images/resource/candidate-4.png" alt=""></figure>
               <h4 class="name"><a href="#">Darlene Robertson</a></h4>
               <span class="designation">UI Designer at Invision</span>
+              <div class="btn-box">
+                <a href="" class="theme-btn btn-style-two">Accepter</a>
+                <a href="" class="theme-btn btn-style-three">Refuser</a>
+            </div>
               <div class="content">
                 <ul class="post-tags">
                   <li><a href="#">App</a></li>
@@ -287,4 +291,10 @@
       },
     });
   </script>
+  <style>
+    .candidate-block-six .btn-box {
+    position: relative;
+    display: block;
+    text-align: center;
+  </style>
 @endsection
