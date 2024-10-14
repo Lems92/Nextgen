@@ -233,14 +233,13 @@
                         <!--- Université -->
                     @elseif($user->hasRole('service-carriere'))
                         <li class="{{ is_active('service-carriere/dashboard') ? 'active' : '' }}">
-                            <a href="{{ route('universite.dashboard') }}"><i class="la la-home"></i>Tableau de
-                                bord</a>
+                            <a href="{{ route('universite.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
                         </li>
-                        <li class="{{ is_active('service-carriere/gerer-evenement') ? 'active' : '' }}">
-                            <a href="{{ route('universite.gerer_event') }}"><i class="la la-briefcase"></i>Gérer les évenemnts</a>
+                        <li class="{{ is_active('service-carriere/gerer-event') ? 'active' : '' }}">
+                            <a href="{{ route('universite.gerer_event') }}"><i class="la la-briefcase"></i>Gérer événements</a>
                         </li>
                         <li class="{{ is_active('service-carriere/gestion-etudiants') ? 'active' : '' }}">
-                            <a href="{{ route('universite.gestion_etudiants') }}"><i class="la la-lock"></i>Gerer les étudiants</a>
+                            <a href="{{ route('universite.gestion_etudiants') }}"><i class="la la-user-graduate"></i>Gerer étudiants</a>
                         </li>
 
                         <!-- Admin --->
@@ -267,16 +266,6 @@
                     @endif
 
                 @endif
-
-                <!-- Commun -->
-                <li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="la la-sign-out"></i>Déconnecter
-                    </a>
-                </li>
             </ul>
         </div>
     </div>

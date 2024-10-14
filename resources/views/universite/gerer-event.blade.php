@@ -70,11 +70,15 @@
                                                     </button>
                                                 </li>-->
                                                 <li>
-                                                    <button data-text="Edit Event"><span class="la la-pencil"></span>
-                                                    </button>
+                                                    <a href="{{route('universite.edit_event', ['event' => $event->id])}}" data-text="Modifier événement"><span class="la la-pencil"></span>
+                                                    </a>
                                                 </li>
                                                 <li>
-                                                    <button data-text="Delete Event"><span class="la la-trash"></span>
+                                                    <form method="post" id="delete_event_form{{$event->id}}" action="{{route('universite.delete_event')}}">
+                                                        @csrf
+                                                        <input type="hidden" name="event_id" value="{{$event->id}}">
+                                                    </form>
+                                                    <button onclick="deleteEvent('delete_event_form{{$event->id}}')" data-text="Supprimer l'événement"><span class="la la-trash"></span>
                                                     </button>
                                                 </li>
                                             </ul>
@@ -94,5 +98,22 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function deleteEvent(form_id) {
+            Swal.fire({
+                title: "Voulez vous vraiment supprimer cet élément?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#ff2443",
+                cancelButtonColor: "#3d3d3d",
+                confirmButtonText: "Oui, supprimer"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(form_id).submit();
+                }
+            });
+        }
+    </script>
 
 @endsection
