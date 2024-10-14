@@ -17,7 +17,5 @@ Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
         Route::post('/offres/{offre:slug}/modifier', [EntrepriseController::class, 'update_offre'])->name('entreprise.offres.update');
         Route::post('/offres/{offre:slug}/supprimer', [EntrepriseController::class, 'delete_offre'])->name('entreprise.offres.delete');
         //candidature
-        Route::get('/gerer-candidat', function () {
-            return view('entreprise.gerer-candidat');
-        })->name('entreprise.gerer-candidat');
+        Route::get('/gerer-candidat', [EntrepriseController::class, 'gerer_candidat'])->name('entreprise.gerer-candidat');
     });

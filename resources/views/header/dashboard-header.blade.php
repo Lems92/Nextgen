@@ -38,7 +38,8 @@
                                     <span>Étudiant</span>
                                     <ul class="dropdown">
                                         <li><a href="{{route('etudiants.explorer_offre')}}">Explorer les offres</a></li>
-                                        <li><a href="{{route('etudiants.explorer_event')}}">Explorer les évenements</a></li>
+                                        <li><a href="{{route('etudiants.explorer_event')}}">Explorer les évenements</a>
+                                        </li>
                                     </ul>
                                 </li>
                             @endif
@@ -55,8 +56,8 @@
                                 <li class=" dropdown">
                                     <span>Service carrière</span>
                                     <ul class="dropdown">
-                                        <li><a href="{{route('publier-event')}}">Publier un évenement</a></li>
-                                        <li><a href="{{route('gestion-etudiants')}}">Gerer les étudiants</a></li>
+                                        <li><a href="{{route('universite.gerer_event')}}">Mes évenement</a></li>
+                                        <li><a href="{{route('universite.gestion_etudiants')}}">Gerer les étudiants</a></li>
                                     </ul>
                                 </li>
                             @endif
@@ -93,23 +94,24 @@
                 </div>
 
                 <div class="outer-box">
-                    <div class="dropdown">
-                        <a href="#" class="d-flex align-items-center text-decoration-none gap-2"
-                           id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="custom-dropdown dropdown">
+                        <a href="#" class="d-flex align-items-center text-decoration-none gap-2 custom-dropdown-toggle"
+                           id="userDropdown" aria-expanded="false">
                             <!-- Avatar -->
                             @if($user->hasRole('admin'))
-                                <img src="{{asset('storage/images/default-avatar.png')}}" alt="avatar" class="rounded-circle"
-                                     width="40" height="40"><i style="color: white;"
-                                                               class="la la-caret-down"></i>
+                                <img src="{{asset('storage/images/default-avatar.png')}}" alt="avatar"
+                                     class="rounded-circle"
+                                     width="40" height="40">
+                                <i class="la la-caret-down" style="color: white;"></i>
                             @else
-                                <img src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default-avatar.png'))}}" alt="avatar" class="rounded-circle"
-                                     width="40" height="40"><i style="color: white;"
-                                                               class="la la-caret-down"></i>
+                                <img
+                                    src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default-avatar.png'))}}"
+                                    alt="avatar" class="rounded-circle"
+                                    width="40" height="40">
+                                <i class="la la-caret-down" style="color: white;"></i>
                             @endif
-
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm"
-                            aria-labelledby="userDropdown">
+                        <ul class="custom-dropdown-menu" id="customDropdownMenu">
                             <!-- Email non clickable -->
                             <li class="px-3 py-2">
                                 @if($user->hasRole('admin'))
@@ -119,13 +121,11 @@
                                 @elseif($user->hasRole('service-carriere'))
                                     <span class="d-block fw-bold">{{$user->userable->nom_etablissement}}</span>
                                 @elseif($user->hasRole('entreprise'))
-                                    <span class="d-block fw-bold">J{{$user->userable->nom_entreprise}}</span>
+                                    <span class="d-block fw-bold">{{$user->userable->nom_entreprise}}</span>
                                 @endif
                                 <span class="text-muted">{{$user->email}}</span>
                             </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                            <hr class="dropdown-divider">
                             <!-- Menu items -->
                             <li>
                                 @php
@@ -138,46 +138,47 @@
                                         $route = 'universite.dashboard';
                                     }
                                 @endphp
-                                <a class="dropdown-item" href="{{route($route)}}">Dashboard</a>
+                                <a href="{{route($route)}}">Dashboard</a>
                             </li>
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a href="#">Profile</a></li>
+                            <hr class="dropdown-divider">
                             <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li>
-                                <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
                                     @csrf
                                 </form>
-                                <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('dropdown-logout-form').submit();">Déconnexion</a>
+                                <a class="text-danger" href="#"
+                                   onclick="event.preventDefault(); document.getElementById('dropdown-logout-form').submit();">Déconnexion</a>
                             </li>
                         </ul>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Mobile Header -->
-        <div class="mobile-header">
-            <div class="logo"><a href="{{route('accueil')}}"><img src="{{asset('images/logo.svg')}}" alt=""
-                                                                  title=""></a></div>
-
-            <!--Nav Box-->
-            <div class="nav-outer clearfix">
-
-                <div class="outer-box">
-                    <!-- Login/Register -->
-                    <button id="toggle-user-sidebar"><img src="{{asset('images/icons/icon-user-2.svg')}}" alt="avatar"
-                                                          class="thumb">
-                    </button>
-                    <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span
-                            class="flaticon-menu-1"></span></a>
                 </div>
             </div>
 
-        </div>
+            <!-- Mobile Header -->
+            <div class="mobile-header">
+                <div class="logo"><a href="{{route('accueil')}}"><img src="{{asset('images/logo.svg')}}" alt=""
+                                                                      title=""></a></div>
 
-        <!-- Mobile Nav -->
-        <div id="nav-mobile"></div>
+                <!--Nav Box-->
+                <div class="nav-outer clearfix">
+
+                    <div class="outer-box">
+                        <!-- Login/Register -->
+                        <button id="toggle-user-sidebar"><img src="{{asset('images/icons/icon-user-2.svg')}}"
+                                                              alt="avatar"
+                                                              class="thumb">
+                        </button>
+                        <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span
+                                class="flaticon-menu-1"></span></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Mobile Nav -->
+            <div id="nav-mobile"></div>
     </header>
     <!--End Main Header -->
 
@@ -201,10 +202,12 @@
                             <a href="{{route('etudiants.explorer_offre')}}"><i class="la la-hashtag"></i>Explorer offres</a>
                         </li>
                         <li class="{{ is_active('etudiants/mes-candidatures') ? 'active' : '' }}">
-                            <a href="{{route('etudiants.mes_candidatures')}}"><i class="la la-briefcase"></i>Mes candidatures</a>
+                            <a href="{{route('etudiants.mes_candidatures')}}"><i class="la la-briefcase"></i>Mes
+                                candidatures</a>
                         </li>
                         <li class="{{ is_active('etudiants/explorer-event') ? 'active' : '' }}">
-                            <a href="{{route('etudiants.explorer_event')}}"><i class="lar la-calendar"></i>Evenements</a>
+                            <a href="{{route('etudiants.explorer_event')}}"><i
+                                    class="lar la-calendar"></i>Evenements</a>
                         </li>
                         <li class="{{ is_active('etudiants/portfolio') ? 'active' : '' }}">
                             <a href="{{route('etudiants.portfolio')}}"> <i class="la la-user-tie"></i>Mon portfolio</a>
@@ -219,26 +222,25 @@
                             <a href="{{ route('entreprise.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
                         </li>
                         <li class="{{ is_active('entreprises/offres') ? 'active' : '' }}">
-                            <a href="{{ route('entreprise.offres') }}"><i class="la la-briefcase"></i>Gérer mes offres</a>
+                            <a href="{{ route('entreprise.offres') }}"><i class="la la-briefcase"></i>Gérer mes
+                                offres</a>
                         </li>
                         <li class="{{ request()->is('entreprises/gerer-candidat') ? 'active' : '' }}">
-                            <a href="{{ route('entreprise.gerer-candidat') }}"><i class="la la-file-invoice"></i>Mes candidats</a>
+                            <a href="{{ route('entreprise.gerer-candidat') }}"><i class="la la-file-invoice"></i>Mes
+                                candidats</a>
                         </li>
 
                         <!--- Université -->
                     @elseif($user->hasRole('service-carriere'))
-                        <li class="{{ request()->is('dashboard-service') ? 'active' : '' }}">
+                        <li class="{{ is_active('service-carriere/dashboard') ? 'active' : '' }}">
                             <a href="{{ route('universite.dashboard') }}"><i class="la la-home"></i>Tableau de
                                 bord</a>
                         </li>
-                        <li class="{{ request()->is('publier-event') ? 'active' : '' }}">
-                            <a href="{{ route('publier-event') }}"><i class="la la-paper-plane"></i>Publier un évenement</a>
+                        <li class="{{ is_active('service-carriere/gerer-evenement') ? 'active' : '' }}">
+                            <a href="{{ route('universite.gerer_event') }}"><i class="la la-briefcase"></i>Gérer les évenemnts</a>
                         </li>
-                        <li class="{{ request()->is('gerer-event') ? 'active' : '' }}">
-                            <a href="{{ route('gerer-event') }}"><i class="la la-briefcase"></i>Gérer les évenemnts</a>
-                        </li>
-                        <li class="{{ request()->is('gestion-etudiants') ? 'active' : '' }}">
-                            <a href="{{ route('gestion-etudiants') }}"><i class="la la-lock"></i>Gerer les étudiants</a>
+                        <li class="{{ is_active('service-carriere/gestion-etudiants') ? 'active' : '' }}">
+                            <a href="{{ route('universite.gestion_etudiants') }}"><i class="la la-lock"></i>Gerer les étudiants</a>
                         </li>
 
                         <!-- Admin --->
@@ -259,7 +261,8 @@
                             <a href="{{ route('admin.parametrages') }}"><i class="las la-cog"></i>Parametrages</a>
                         </li>
                         <li class="{{ is_active('admin/list-avec-categories') ? 'active' : '' }}">
-                            <a href="{{ route('admin.list_categories') }}"><i class="las la-list"></i>Liste avec categorie</a>
+                            <a href="{{ route('admin.list_categories') }}"><i class="las la-list"></i>Liste avec
+                                categorie</a>
                         </li>
                     @endif
 
@@ -278,6 +281,27 @@
         </div>
     </div>
     <!-- End User Sidebar -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const dropdownToggle = document.getElementById("userDropdown");
+            const dropdownMenu = document.getElementById("customDropdownMenu");
+
+            // Toggle the dropdown menu on click
+            dropdownToggle.addEventListener("click", function (event) {
+                event.preventDefault();
+                dropdownMenu.classList.toggle("show");
+
+                // Optionally close dropdown if clicked outside
+                document.addEventListener("click", function (event) {
+                    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                        dropdownMenu.classList.remove("show");
+                    }
+                });
+            });
+        });
+
+    </script>
 
     <style>
 
@@ -361,5 +385,45 @@
             }
         }
 
+        .custom-dropdown {
+            position: relative;
+        }
+
+        .custom-dropdown-menu {
+            position: absolute;
+            right: 0;
+            display: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            min-width: 200px;
+        }
+
+        .custom-dropdown-menu li {
+            padding: 8px 16px;
+        }
+
+        .custom-dropdown-menu li a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .custom-dropdown-menu li:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown-divider {
+            border-top: 1px solid #939393;
+            margin: 0;
+        }
+
+        .custom-dropdown-menu.show {
+            display: block;
+        }
 
     </style>

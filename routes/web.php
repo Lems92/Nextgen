@@ -1,18 +1,13 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\VerifyEmailController;
-use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WaitingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
-use App\Http\Controllers\OffreController;
 use App\Http\Controllers\Auth\LoginController;
-
-use App\Http\Controllers\EventController;
 
 Route::get('/', [HomeController::class, 'home'])->name('accueil');
 Route::get('/about', [HomeController::class, 'about'])->name('about');

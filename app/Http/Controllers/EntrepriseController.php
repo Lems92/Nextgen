@@ -116,4 +116,10 @@ class EntrepriseController extends Controller
         return redirect()->route('entreprise.offres')
             ->with('success', 'Offre supprimée avec succès');
     }
+
+    public function gerer_candidat(): View
+    {
+        return view('entreprise.gerer-candidat');
+    }
+
 }

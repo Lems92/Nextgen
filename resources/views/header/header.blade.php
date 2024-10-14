@@ -43,8 +43,8 @@
                             <li class=" dropdown">
                                 <span>Service carrière</span>
                                 <ul class="dropdown">
-                                    <li><a href="{{route('publier-event')}}">Publier un évenement</a></li>
-                                    <li><a href="{{route('gestion-etudiants')}}">Gerer les étudiants</a></li>
+                                    <li><a href="{{route('universite.gerer_event')}}">Mes évenement</a></li>
+                                    <li><a href="{{route('universite.gestion_etudiants')}}">Gerer les étudiants</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -68,23 +68,24 @@
                         @endguest
                         @auth
                             <div class="outer-box">
-                                <div class="dropdown">
-                                    <a href="#" class="d-flex align-items-center text-decoration-none gap-2"
-                                       id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="custom-dropdown dropdown">
+                                    <a href="#" class="d-flex align-items-center text-decoration-none gap-2 custom-dropdown-toggle"
+                                       id="userDropdown" aria-expanded="false">
                                         <!-- Avatar -->
                                         @if($user->hasRole('admin'))
-                                            <img src="{{asset('storage/images/default-avatar.png')}}" alt="avatar" class="rounded-circle"
-                                                 width="40" height="40"><i style="color: white;"
-                                                                           class="la la-caret-down"></i>
+                                            <img src="{{asset('storage/images/default-avatar.png')}}" alt="avatar"
+                                                 class="rounded-circle"
+                                                 width="40" height="40">
+                                            <i class="la la-caret-down" style="color: white;"></i>
                                         @else
-                                            <img src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default-avatar.png'))}}" alt="avatar" class="rounded-circle"
-                                                 width="40" height="40"><i style="color: white;"
-                                                                           class="la la-caret-down"></i>
+                                            <img
+                                                src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default-avatar.png'))}}"
+                                                alt="avatar" class="rounded-circle"
+                                                width="40" height="40">
+                                            <i class="la la-caret-down" style="color: white;"></i>
                                         @endif
-
                                     </a>
-                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm"
-                                        aria-labelledby="userDropdown">
+                                    <ul class="custom-dropdown-menu" id="customDropdownMenu">
                                         <!-- Email non clickable -->
                                         <li class="px-3 py-2">
                                             @if($user->hasRole('admin'))
@@ -94,13 +95,11 @@
                                             @elseif($user->hasRole('service-carriere'))
                                                 <span class="d-block fw-bold">{{$user->userable->nom_etablissement}}</span>
                                             @elseif($user->hasRole('entreprise'))
-                                                <span class="d-block fw-bold">J{{$user->userable->nom_entreprise}}</span>
+                                                <span class="d-block fw-bold">{{$user->userable->nom_entreprise}}</span>
                                             @endif
                                             <span class="text-muted">{{$user->email}}</span>
                                         </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
+                                        <hr class="dropdown-divider">
                                         <!-- Menu items -->
                                         <li>
                                             @php
@@ -113,17 +112,17 @@
                                                     $route = 'universite.dashboard';
                                                 }
                                             @endphp
-                                            <a class="dropdown-item" href="{{route($route)}}">Dashboard</a>
+                                            <a href="{{route($route)}}">Dashboard</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        <li><a href="#">Profile</a></li>
+                                        <hr class="dropdown-divider">
                                         <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li>
-                                            <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST"
+                                                  style="display: none;">
                                                 @csrf
                                             </form>
-                                            <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('dropdown-logout-form').submit();">Déconnexion</a>
+                                            <a class="text-danger" href="#"
+                                               onclick="event.preventDefault(); document.getElementById('dropdown-logout-form').submit();">Déconnexion</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -170,6 +169,31 @@
         <!-- Mobile Nav -->
         <div id="nav-mobile"></div>
     </header>
+
+    <script>
+        @auth
+        document.addEventListener("DOMContentLoaded", function () {
+            const dropdownToggle = document.getElementById("userDropdown");
+            const dropdownMenu = document.getElementById("customDropdownMenu");
+
+            // Toggle the dropdown menu on click
+            dropdownToggle.addEventListener("click", function (event) {
+                event.preventDefault();
+                dropdownMenu.classList.toggle("show");
+
+                // Optionally close dropdown if clicked outside
+                document.addEventListener("click", function (event) {
+                    if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                        dropdownMenu.classList.remove("show");
+                    }
+                });
+            });
+        });
+        @endauth
+
+    </script>
+
+
     <style>
 
         header {
@@ -237,16 +261,45 @@
             }
         }
 
-        .dropdown-menu {
+        .custom-dropdown {
+            position: relative;
+        }
+
+        .custom-dropdown-menu {
+            position: absolute;
+            right: 0;
+            display: none;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
             min-width: 200px;
         }
 
-        .dropdown-item:hover {
-            background-color: #f8f9fa;
+        .custom-dropdown-menu li {
+            padding: 8px 16px;
         }
 
-        .text-danger:hover {
-            color: #dc3545 !important;
+        .custom-dropdown-menu li a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        .custom-dropdown-menu li:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown-divider {
+            border-top: 1px solid #939393;
+            margin: 0;
+        }
+
+        .custom-dropdown-menu.show {
+            display: block;
         }
 
 

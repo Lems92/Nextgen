@@ -20,32 +20,35 @@
 </head>
 
 <body data-anm=".anm">
-    <div class="page-wrapper">
-        <div class="preloader"></div>
+<div class="page-wrapper">
+    <div class="preloader"></div>
 
-        <main>
-            @yield('content')
-        </main>
-    </div>
+    <main>
+        @yield('content')
+        <div class="copyright-text">
+            <p>© {{Carbon\Carbon::now()->format('Y')}} NextGen. All Right Reserved.</p>
+        </div>
+    </main>
+</div>
 
-    <!-- Scripts JavaScript -->
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/chosen.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.fancybox.js') }}"></script>
-    <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
-    <script src="{{ asset('js/mmenu.polyfills.js') }}"></script>
-    <script src="{{ asset('js/mmenu.js') }}"></script>
-    <script src="{{ asset('js/appear.js') }}"></script>
-    <script src="{{ asset('js/anm.min.js') }}"></script>
-    <script src="{{ asset('js/ScrollMagic.min.js') }}"></script>
-    <script src="{{ asset('js/rellax.min.js') }}"></script>
-    <script src="{{ asset('js/owl.js') }}"></script>
-    <script src="{{ asset('js/wow.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
-    <!-- Scripts additionnels spécifiques aux pages -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @stack('scripts')
+<!-- Scripts JavaScript -->
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/chosen.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery.fancybox.js') }}"></script>
+<script src="{{ asset('js/jquery.modal.min.js') }}"></script>
+<script src="{{ asset('js/mmenu.polyfills.js') }}"></script>
+<script src="{{ asset('js/mmenu.js') }}"></script>
+<script src="{{ asset('js/appear.js') }}"></script>
+<script src="{{ asset('js/anm.min.js') }}"></script>
+<script src="{{ asset('js/ScrollMagic.min.js') }}"></script>
+<script src="{{ asset('js/rellax.min.js') }}"></script>
+<script src="{{ asset('js/owl.js') }}"></script>
+<script src="{{ asset('js/wow.js') }}"></script>
+<script src="{{ asset('js/script.js') }}"></script>
+<!-- Scripts additionnels spécifiques aux pages -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@stack('scripts')
 </body>
 </html>
