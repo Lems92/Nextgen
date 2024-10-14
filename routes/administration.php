@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth', 'verified', 'role:admin'])
@@ -28,5 +29,11 @@ Route::middleware(['auth', 'verified', 'role:admin'])
         Route::post('/list-avec-categories/delete', [AdminController::class, 'delete_list_categories'])->name('admin.list_categories.delete');
         Route::get('/list-avec-categories/{list_with_categorie:slug}/update', [AdminController::class, 'update_list_categories'])->name('admin.list_categories.update');
         Route::post('/list-avec-categories/{list_with_categorie:slug}/update', [AdminController::class, 'validate_update_list_categories'])->name('admin.list_categories.validate_update');
+        //abonnements
+        Route::get('/abonnements', [SubscriptionController::class, 'index'])->name('admin.subscriptions.index');
+        Route::get('/abonnements/ajouter/{user:slug}', [SubscriptionController::class, 'assignSubscriptionGet'])->name('admin.subscriptions.assign_get');
+        Route::post('/abonnements/ajouter/{user:slug}', [SubscriptionController::class, 'assignSubscription'])->name('admin.subscriptions.assign');
+        Route::get('/abonnements/renouveler/{user:slug}', [SubscriptionController::class, 'renewSubscriptionGet'])->name('admin.subscriptions.renew_get');
+        Route::post('/abonnements/renouveler/{user:slug}', [SubscriptionController::class, 'renewSubscription'])->name('admin.subscriptions.renew');
     });
 

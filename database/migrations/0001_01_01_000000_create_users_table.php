@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('userable_type')->nullable();
             $table->unsignedBigInteger('userable_id')->nullable();
             $table->string('slug', 255)->unique();
+            //subscription
+            $table->foreignId('subscription_id')->nullable()->constrained()->onDelete('set null');
+            $table->timestamp('subscription_started_at')->nullable();
+            $table->timestamp('subscription_expires_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

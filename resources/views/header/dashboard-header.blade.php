@@ -250,6 +250,9 @@
                         <li class="{{ is_active('admin/entreprises') ? 'active' : '' }}">
                             <a href="{{ route('admin.list_entreprises') }}"><i class="las la-briefcase"></i>Entreprises</a>
                         </li>
+                        <li class="{{ is_active('admin/abonnements') ? 'active' : '' }}">
+                            <a href="{{ route('admin.subscriptions.index') }}"><i class="las la-tags"></i>Abonnements</a>
+                        </li>
                         <li class="{{ is_active('admin/universites') ? 'active' : '' }}">
                             <a href="{{ route('admin.list_universites') }}"><i class="las la-university"></i>Universités</a>
                         </li>

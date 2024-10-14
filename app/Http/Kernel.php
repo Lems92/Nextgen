@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckSubscriptionPermission;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\UserStateMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -67,7 +68,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role' => RoleMiddleware::class,
-        'user_state' => UserStateMiddleware::class
+        'user_state' => UserStateMiddleware::class,
+        'subscription.permission' => CheckSubscriptionPermission::class,
     ];
 
     protected $routeMiddleware = [

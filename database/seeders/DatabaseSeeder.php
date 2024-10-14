@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             ParametrageSeeder::class,
             ListWithCategorySeeder::class,
             UserSeeder::class,
+            SubscriptionPermissionsSeeder::class,
+            SubscriptionSeeder::class,
         ]);
     }
 }

@@ -1,7 +1,4 @@
 <?php
-// app/Models/Entreprise.php
-
-// app/Models/Entreprise.php
 
 namespace App\Models;
 
@@ -9,6 +6,7 @@ use App\Interface\Sluggable;
 use App\Trait\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Entreprise extends Model implements Sluggable
@@ -37,7 +35,7 @@ class Entreprise extends Model implements Sluggable
         'training_support',
         'selected_offer',
         'profile_picture',
-        'slug'
+        'slug',
     ];
 
     protected $casts = [
@@ -53,7 +51,7 @@ class Entreprise extends Model implements Sluggable
         return $this->morphOne(User::class, 'userable');
     }
 
-    public function offres()
+    public function offres(): HasMany
     {
         return $this->hasMany(Offre::class, 'entreprise_id');
     }
