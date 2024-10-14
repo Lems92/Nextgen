@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('nombre_etudiants');
             $table->json('domaines_etudes_proposes');
             $table->json('niveaux_etudes_proposes');
+            $table->string('profile_picture')->nullable();
             $table->string('slug', 255)->unique();
             $table->timestamps();
         });

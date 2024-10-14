@@ -12,8 +12,8 @@ Route::middleware(['auth', 'verified', 'role:etudiant'])->prefix('etudiants')->g
     Route::get('/mot-de-passe', [EtudiantController::class, 'mot_de_passe'])->name('etudiants.mot_de_passe');
     Route::get('/postuler', [EtudiantController::class, 'postuler_offre'])->name('etudiants.postuler_offre');
     Route::get('/mes-candidature', [EtudiantController::class, 'mes_candidatures'])->name('etudiants.mes_candidatures');
-    Route::get('/offres/{id}', [OffreController::class, 'show'])->name('offers.show');
-    route::post('/offres/{id}/postuler', [OffreController::class, 'apply'])->name('offers.apply');
+    Route::get('/offres/{offre:slug}', [EtudiantController::class, 'show'])->name('etudiants.offers.show');
+    route::post('/offres/{offre:slug}/postuler', [OffreController::class, 'apply'])->name('etudiants.offers.apply');
     Route::get('/explorer-offre', [EtudiantController::class, 'explorer_offre'])->name('etudiants.explorer_offre');
     Route::get('/portfolio', [EtudiantController::class, 'portfolio'])->name('etudiants.portfolio');
 });

@@ -3,7 +3,12 @@
 @section('title', 'NextGen - Accueil')
 
 @section('content')
-
+    @if(session('error'))
+        <div class="alert alert-warning alert-dismissible text-center fade show" role="alert" style="margin-bottom: 0;">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
 @include('header.header')
 
         <!-- Banner Section-->
@@ -31,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Slide Item 2 -->
                 <div class="container-fluid bg-image">
                     <div class="row h-100">
@@ -55,7 +60,7 @@
                 </div>
             </div>
         </section>
-        
+
         <!-- End Banner Section-->
 
         <!--Clients Section-->
@@ -237,12 +242,12 @@
               <div class="sec-title text-center">
                 <h2>Témoignages</h2>
               </div>
-      
+
               <div class="carousel-outer wow fadeInUp">
-      
+
                 <!-- Testimonial Carousel -->
                 <div class="testimonial-carousel owl-carousel owl-theme">
-      
+
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -255,7 +260,7 @@
                       </div>
                     </div>
                   </div>
-      
+
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -268,7 +273,7 @@
                       </div>
                     </div>
                   </div>
-      
+
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -286,9 +291,9 @@
             </div>
           </section>
         <!-- End Testimonial Section -->
-        
+
         <!-- Features Section-->
-        
+
 
         <!-- Registeration Banners -->
         <!-- End Registeration Banners -->
@@ -323,22 +328,21 @@
                     display: none; /* Masquer l'image sur les petits écrans */
                 }
             }
-    
+
         </style>
 
-        <script>
+        <script defer>
             $(document).ready(function(){
-            $(".banner-carousel").owlCarousel({
-            items: 1, // Number of items to show
-            loop: true, // Infinite loop
-            margin: 0, // Margin between items
-            autoplay: true, // Enable autoplay
-            autoplayTimeout: 5000, // Time between slides (in milliseconds)
-            autoplayHoverPause: true, // Pause on hover
-            dots: true, // Show pagination dots
-            nav: false // Hide navigation arrows
+                $(".banner-carousel").owlCarousel({
+                    items: 1, // Number of items to show
+                    loop: true, // Infinite loop
+                    margin: 0, // Margin between items
+                    autoplay: true, // Enable autoplay
+                    autoplayTimeout: 5000, // Time between slides (in milliseconds)
+                    autoplayHoverPause: true, // Pause on hover
+                    dots: true, // Show pagination dots
+                    nav: false // Hide navigation arrows
+                });
             });
-        });
-    
         </script>
 @endsection

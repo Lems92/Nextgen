@@ -17,24 +17,6 @@
 
     <!-- Styles additionnels spécifiques aux pages -->
     @stack('styles')
-</head>
-
-<body data-anm=".anm">
-    <div class="page-wrapper">
-        <div class="preloader"></div>
-
-        <main>
-            @yield('content')
-        </main>
-        @include('pub.popup', [
-            'companyName' => 'Nom de l\'Entreprise',
-            'domain' => 'Technologie',
-            'numberOfPosts' => 5
-        ])
-
-    <!-- Pied de page (Footer) -->
-        @include('layouts.footer')
-    </div>
 
     <!-- Scripts JavaScript -->
     <script src="{{ asset('js/jquery.js') }}"></script>
@@ -54,5 +36,24 @@
     <script src="{{ asset('js/script.js') }}"></script>
     <!-- Scripts additionnels spécifiques aux pages -->
     @stack('scripts')
+
+</head>
+
+<body data-anm=".anm">
+    <div class="page-wrapper">
+        <div class="preloader"></div>
+
+        <main>
+            @yield('content')
+        </main>
+        @include('pub.popup', [
+            'companyName' => 'Nom de l\'Entreprise',
+            'domain' => 'Technologie',
+            'numberOfPosts' => 5
+        ])
+
+    <!-- Pied de page (Footer) -->
+        @include('layouts.footer')
+    </div>
 </body>
 </html>

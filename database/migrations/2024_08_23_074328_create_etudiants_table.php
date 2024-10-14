@@ -86,6 +86,7 @@ return new class extends Migration
             $table->string('conditions_vie_specifiques');
             $table->string('religion_belief');
             $table->string('orientation_sexuelle');
+            $table->string('profile_picture')->nullable();
             $table->string('slug', 255)->unique();
             $table->timestamps();
         });

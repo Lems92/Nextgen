@@ -80,7 +80,7 @@
                                         <option value="" disabled selected>Région</option>
                                         @foreach($mada_regions as $region)
                                             {{$region}}
-                                            <option value="{{$region}}">{{$region}}</option>
+                                            <option value="{{$region}}" {{ old('region') == $region ? 'selected' : '' }}>{{$region}}</option>
                                         @endforeach
                                     </select>
                                     <x-input-error :messages="$errors->get('region')" class="mt-2" />

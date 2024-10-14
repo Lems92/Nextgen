@@ -9,11 +9,11 @@ class Redirection
         $route = 'accueil';
 
         if ($user->hasRole('etudiant')) {
-            $route = 'etudiant.dashboard';
+            $route = 'etudiants.dashboard';
         } elseif ($user->hasRole('entreprise')) {
             $route = 'entreprise.dashboard';
         } elseif ($user->hasRole('service-carriere')) {
-            $route = 'service_carriere.dashboard';
+            $route = 'universite.dashboard';
         } elseif ($user->hasRole('admin')) {
             $route = 'admin.dashboard';
         }

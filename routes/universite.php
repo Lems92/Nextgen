@@ -8,7 +8,7 @@ Route::middleware(['auth', 'verified', 'role:service-carriere', 'user_state'])
     ->group(function () {
         Route::get('/dashboard', function () {
             return view('universite.tableau-de-bord');
-        })->name('service_carriere.dashboard');
+        })->name('universite.dashboard');
         Route::get('/gerer-event', function () {
             return view('universite.gerer-event');
         })->name('gerer-event');

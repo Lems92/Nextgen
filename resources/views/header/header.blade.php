@@ -1,3 +1,13 @@
+@php
+    use Illuminate\Support\Facades\Auth;
+
+    $user = Auth::user();
+    if($user) {
+        $user->load('userable');
+    }
+
+@endphp
+
 <link href="{{ asset('css/header.css') }}" rel="stylesheet">
 
 <div class="page-wrapper">
@@ -13,7 +23,7 @@
                                                                               title=""></a></div>
                     </div>
 
-                    <nav class="nav main-menu">
+                    <nav class="nav main-menu d-flex gap-5 flex-wrap">
                         <ul class="navigation" id="navbar">
                             <li><a href="{{route('accueil')}}"><span>Accueil</span></a></li>
                             <li class="dropdown">
@@ -47,14 +57,78 @@
                             </li>
                         </ul>
                         @guest
-                        <div class="outer-box">
-                            <!-- Login/Register -->
-                            <div class="btn-box">
-                                <a href="{{route('connexion')}}" class="theme-btn btn-style-two">Se connecter</a>
-                                <a href="{{route('inscription')}}" class="theme-btn btn-style-three">Créer un compte</a>
+                            <div class="outer-box">
+                                <!-- Login/Register -->
+                                <div class="btn-box">
+                                    <a href="{{route('connexion')}}" class="theme-btn btn-style-two">Se connecter</a>
+                                    <a href="{{route('inscription')}}" class="theme-btn btn-style-three">Créer un
+                                        compte</a>
+                                </div>
                             </div>
-                        </div>
                         @endguest
+                        @auth
+                            <div class="outer-box">
+                                <div class="dropdown">
+                                    <a href="#" class="d-flex align-items-center text-decoration-none gap-2"
+                                       id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <!-- Avatar -->
+                                        @if($user->hasRole('admin'))
+                                            <img src="{{asset('storage/images/default-avatar.png')}}" alt="avatar" class="rounded-circle"
+                                                 width="40" height="40"><i style="color: white;"
+                                                                           class="la la-caret-down"></i>
+                                        @else
+                                            <img src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default-avatar.png'))}}" alt="avatar" class="rounded-circle"
+                                                 width="40" height="40"><i style="color: white;"
+                                                                           class="la la-caret-down"></i>
+                                        @endif
+
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end shadow-sm"
+                                        aria-labelledby="userDropdown">
+                                        <!-- Email non clickable -->
+                                        <li class="px-3 py-2">
+                                            @if($user->hasRole('admin'))
+                                                <span class="d-block fw-bold">Administration</span>
+                                            @elseif($user->hasRole('etudiant'))
+                                                <span class="d-block fw-bold">{{$user->userable->prenom}}</span>
+                                            @elseif($user->hasRole('service-carriere'))
+                                                <span class="d-block fw-bold">{{$user->userable->nom_etablissement}}</span>
+                                            @elseif($user->hasRole('entreprise'))
+                                                <span class="d-block fw-bold">J{{$user->userable->nom_entreprise}}</span>
+                                            @endif
+                                            <span class="text-muted">{{$user->email}}</span>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <!-- Menu items -->
+                                        <li>
+                                            @php
+                                                $route = 'admin.dashboard';
+                                                if($user->hasRole('etudiant')) {
+                                                    $route = 'etudiants.dashboard';
+                                                } else if($user->hasRole('entreprise')) {
+                                                    $route = 'entreprise.dashboard';
+                                                } else if($user->hasRole('service-carriere')) {
+                                                    $route = 'universite.dashboard';
+                                                }
+                                            @endphp
+                                            <a class="dropdown-item" href="{{route($route)}}">Dashboard</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li>
+                                            <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                            <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('dropdown-logout-form').submit();">Déconnexion</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        @endauth
                     </nav>
                     <!-- Main Menu End-->
                 </div>
@@ -161,6 +235,18 @@
             .page-wrapper {
                 padding-top: 0px; /* Ajustez cette valeur en fonction de la hauteur de votre navbar */
             }
+        }
+
+        .dropdown-menu {
+            min-width: 200px;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .text-danger:hover {
+            color: #dc3545 !important;
         }
 
 

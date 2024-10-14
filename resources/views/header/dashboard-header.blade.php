@@ -1,6 +1,7 @@
 @php
     use Illuminate\Support\Facades\Auth;
     $user = Auth::user();
+    $user->load('userable');
 
     function is_active ($url_pattern): bool {
         return request()->is("$url_pattern*");
@@ -92,9 +93,65 @@
                 </div>
 
                 <div class="outer-box">
+                    <div class="dropdown">
+                        <a href="#" class="d-flex align-items-center text-decoration-none gap-2"
+                           id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <!-- Avatar -->
+                            @if($user->hasRole('admin'))
+                                <img src="{{asset('storage/images/default-avatar.png')}}" alt="avatar" class="rounded-circle"
+                                     width="40" height="40"><i style="color: white;"
+                                                               class="la la-caret-down"></i>
+                            @else
+                                <img src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default-avatar.png'))}}" alt="avatar" class="rounded-circle"
+                                     width="40" height="40"><i style="color: white;"
+                                                               class="la la-caret-down"></i>
+                            @endif
 
-                    <!-- Dashboard Option -->
-
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm"
+                            aria-labelledby="userDropdown">
+                            <!-- Email non clickable -->
+                            <li class="px-3 py-2">
+                                @if($user->hasRole('admin'))
+                                    <span class="d-block fw-bold">Administration</span>
+                                @elseif($user->hasRole('etudiant'))
+                                    <span class="d-block fw-bold">{{$user->userable->prenom}}</span>
+                                @elseif($user->hasRole('service-carriere'))
+                                    <span class="d-block fw-bold">{{$user->userable->nom_etablissement}}</span>
+                                @elseif($user->hasRole('entreprise'))
+                                    <span class="d-block fw-bold">J{{$user->userable->nom_entreprise}}</span>
+                                @endif
+                                <span class="text-muted">{{$user->email}}</span>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <!-- Menu items -->
+                            <li>
+                                @php
+                                    $route = 'admin.dashboard';
+                                    if($user->hasRole('etudiant')) {
+                                        $route = 'etudiants.dashboard';
+                                    } else if($user->hasRole('entreprise')) {
+                                        $route = 'entreprise.dashboard';
+                                    } else if($user->hasRole('service-carriere')) {
+                                        $route = 'universite.dashboard';
+                                    }
+                                @endphp
+                                <a class="dropdown-item" href="{{route($route)}}">Dashboard</a>
+                            </li>
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li>
+                                <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                                <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('dropdown-logout-form').submit();">Déconnexion</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -171,7 +228,7 @@
                         <!--- Université -->
                     @elseif($user->hasRole('service-carriere'))
                         <li class="{{ request()->is('dashboard-service') ? 'active' : '' }}">
-                            <a href="{{ route('service_carriere.dashboard') }}"><i class="la la-home"></i>Tableau de
+                            <a href="{{ route('universite.dashboard') }}"><i class="la la-home"></i>Tableau de
                                 bord</a>
                         </li>
                         <li class="{{ request()->is('publier-event') ? 'active' : '' }}">

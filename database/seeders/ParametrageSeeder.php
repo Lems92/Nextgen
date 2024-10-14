@@ -48,7 +48,7 @@ class ParametrageSeeder extends Seeder
                 'Double diplôme en partenariat avec d\’autres institutions académiques',
             ],
             'genre' => ['Masculin', 'Féminin', 'Non binaire', 'Préfère ne pas dire'],
-            'niveau_etude' => ['Baccalaureat', 'License', 'Master', 'Doctorat'],
+            'niveau_etude' => ['Baccalauréat', 'Licence', 'Master', 'Doctorat'],
             'competences_en_recherche_et_analyse' => [
                 'Recherche documentaire',
                 'Analyse de donnée',

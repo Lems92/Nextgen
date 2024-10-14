@@ -32,6 +32,7 @@ return new class extends Migration
             $table->text('inclusion_diversity');
             $table->text('training_support');
             $table->string('selected_offer');
+            $table->string('profile_picture')->nullable();
             $table->string('slug', 255)->unique();
             $table->timestamps();
         });

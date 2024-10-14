@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Application;
 use App\Models\Offre;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use function Livewire\of;
 
@@ -26,6 +29,27 @@ class EtudiantController extends Controller
     {
         $offers = Offre::all();
         return view('etudiant.explorer-offres', compact('offers'));
+    }
+
+    public function show(Request $request, Offre $offre) : View | RedirectResponse
+    {
+        return view('etudiant.show-offer', compact('offre'));
+    }
+
+    public function apply(Request $request, Offre $offre): RedirectResponse
+    {
+        // Check if the user has already applied for this offer
+        if (Application::where('user_id', Auth::id())->where('offre_id', $id)->exists()) {
+            return redirect()->back()->with('error', 'You have already applied for this job');
+        }
+
+        // Create a new application record
+        Application::create([
+            'user_id' => Auth::id(),
+            'offre_id' => $id,
+        ]);
+
+        return redirect()->route('offers.index')->with('success', 'Application submitted successfully');
     }
 
     public function mes_candidatures(): View

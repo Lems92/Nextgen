@@ -244,6 +244,7 @@ class RegistrationController extends Controller
                                     $data['description'] = $descriptions[$i];
                                 }
                                 $data['etudiant_id'] = $etudiant->id;
+                                $data['type'] = $type_experiences_academmique;
                                 ExperienceAcademique::create($data);
                             }
                         }
