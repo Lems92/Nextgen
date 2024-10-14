@@ -259,6 +259,9 @@
                         <li class="{{ is_active('admin/etudiants') ? 'active' : '' }}">
                             <a href="{{ route('admin.list_etudiants') }}"><i class="las la-user-graduate"></i>Etudiants</a>
                         </li>
+                        <li class="{{ is_active('admin/type-abonnements') ? 'active' : '' }}">
+                            <a href="{{ route('admin.type_subscriptions') }}"><i class="las la-tag"></i>Type abonnement</a>
+                        </li>
                         <li class="{{ is_active('admin/parametrages') ? 'active' : '' }}">
                             <a href="{{ route('admin.parametrages') }}"><i class="las la-cog"></i>Parametrages</a>
                         </li>

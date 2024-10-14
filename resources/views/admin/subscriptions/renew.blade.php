@@ -28,7 +28,7 @@
                                 <input type="number" name="additional_days" id="additional_days{{ $user->id }}"
                                        class="form-control" min="1" value="30" required>
                             </div>
-                            <button type="submit" class="btn btn-warning">Renouveler</button>
+                            <button type="submit" class="heme-btn btn-style-one">Renouveler</button>
                         </form>
                     @endif
 

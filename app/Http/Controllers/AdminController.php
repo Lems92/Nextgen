@@ -9,6 +9,7 @@ use App\Models\ListWithCategory;
 use App\Models\ListCategorie;
 use App\Models\Entreprise;
 use App\Models\Parametrage;
+use App\Models\Subscription;
 use App\Models\Table;
 use App\Models\Universite;
 use App\Models\User;
@@ -306,5 +307,40 @@ class AdminController extends Controller
         $list_with_categorie->update($validatedData);
 
         return redirect()->intended(route('admin.list_categories'))->with('success', 'Liste élément modifié avec succès!');
+    }
+
+
+    /**
+     * Affiche la liste des types d'abonnements disponibles.
+     */
+    public function type_subscriptions(): View
+    {
+        $type_subscriptions = Subscription::all();
+        return view('admin.type_subscriptions.index', compact('type_subscriptions'));
+    }
+
+    public function update_subscription_get(Request $request, Subscription $subscription): View
+    {
+        return view('admin.type_subscriptions.edit', compact('subscription'));
+    }
+
+    /**
+     * Met à jour un type d'abonnement existant.
+     */
+    public function update_subscription(Request $request, Subscription $subscription): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required|string|max:255|unique:subscriptions,name,' . $subscription->id,
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
+        ]);
+
+        $subscription->update([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->intended(route('admin.type_subscriptions'))->with('success', 'Abonnement mis à jour avec succès.');
     }
 }

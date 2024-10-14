@@ -35,5 +35,9 @@ Route::middleware(['auth', 'verified', 'role:admin'])
         Route::post('/abonnements/ajouter/{user:slug}', [SubscriptionController::class, 'assignSubscription'])->name('admin.subscriptions.assign');
         Route::get('/abonnements/renouveler/{user:slug}', [SubscriptionController::class, 'renewSubscriptionGet'])->name('admin.subscriptions.renew_get');
         Route::post('/abonnements/renouveler/{user:slug}', [SubscriptionController::class, 'renewSubscription'])->name('admin.subscriptions.renew');
+        //gerer type d'abonnements
+        Route::get('/type-abonnements', [AdminController::class, 'type_subscriptions'])->name('admin.type_subscriptions');
+        Route::get('/type-abonnements/{subscription}/modifier', [AdminController::class, 'update_subscription_get'])->name('admin.type_subscriptions.update_get');
+        Route::put('/type-abonnements/{subscription}/modifier', [AdminController::class, 'update_subscription'])->name('admin.type_subscriptions.update');
     });
 
