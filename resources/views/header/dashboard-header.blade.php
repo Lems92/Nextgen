@@ -218,16 +218,29 @@
 
                         <!--- Entreprise -->
                     @elseif($user->hasRole('entreprise'))
-                        <li class="{{ request()->is('dashboard-entreprise') ? 'active' : '' }}">
+                        <li class="{{ is_active('entreprises/dashboard') ? 'active' : '' }}">
                             <a href="{{ route('entreprise.dashboard') }}"><i class="la la-home"></i>Tableau de bord</a>
                         </li>
                         <li class="{{ is_active('entreprises/offres') ? 'active' : '' }}">
                             <a href="{{ route('entreprise.offres') }}"><i class="la la-briefcase"></i>Gérer mes
                                 offres</a>
                         </li>
-                        <li class="{{ request()->is('entreprises/gerer-candidat') ? 'active' : '' }}">
+                        <li class="{{ is_active('entreprises/gerer-candidat') ? 'active' : '' }}">
                             <a href="{{ route('entreprise.gerer-candidat') }}"><i class="la la-file-invoice"></i>Mes
                                 candidats</a>
+                        </li>
+                        @if($user->hasPermissionTo('page_presentation_entreprise'))
+                        <li class="{{ is_active('entreprises/page-entreprise') ? 'active' : '' }}">
+                            <a href="{{ route('entreprise.page_entreprise') }}"><i class="la la-stream"></i>Page entreprise</a>
+                        </li>
+                        @endif
+                        @if($user->hasPermissionTo('shortlist_vip'))
+                        <li class="{{ is_active('entreprises/shortlist-vip') ? 'active' : '' }}">
+                            <a href="{{ route('entreprise.shortlist_vip') }}"><i class="la la-award"></i>Shortlist VIP</a>
+                        </li>
+                        @endif
+                        <li class="{{ is_active('entreprises/mon-abonnement') ? 'active' : '' }}">
+                            <a href="{{ route('entreprise.mon_abonnement') }}"><i class="la la-tag"></i>Mon abonnement</a>
                         </li>
 
                         <!--- Université -->

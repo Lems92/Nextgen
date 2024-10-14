@@ -122,4 +122,19 @@ class EntrepriseController extends Controller
         return view('entreprise.gerer-candidat');
     }
 
+    public function page_entreprise(): View
+    {
+        return view('entreprise.page-entreprise');
+    }
+
+    public function shortlist_vip(): View
+    {
+        return view('entreprise.shortlist-vip');
+    }
+
+    public function mon_abonnement(): View
+    {
+        return view('entreprise.mon-abonnement');
+    }
+
 }

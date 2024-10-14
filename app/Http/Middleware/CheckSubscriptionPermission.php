@@ -23,24 +23,24 @@ class CheckSubscriptionPermission
             $user->load('userable');
 
             if($user->userable_type == Entreprise::class) {
-                $entreprise = $user->userable;
+
                 // Vérifier les permissions directes ou via rôles
-                if ($entreprise->hasPermissionTo($permission)) {
+                if ($user->hasPermissionTo($permission)) {
                     return $next($request);
                 }
 
                 // Vérifier les permissions via l'abonnement actif
-                if ($entreprise->hasActiveSubscription() && $entreprise->subscription->permissions->contains('name', $permission)) {
+                if ($user->hasActiveSubscription() && $user->subscription->permissions->contains('name', $permission)) {
                     return $next($request);
                 }
 
             } else {
-                return redirect('/')
+                return redirect()->intended(route('entreprise.dashboard'))
                     ->with('error', "Vous n'avez pas la permission d'accéder à cette page.");
             }
         }
 
-        return redirect('/')
+        return redirect()->intended(route('entreprise.dashboard'))
             ->with('error', "Vous n'avez pas la permission d'accéder à cette page.");
     }
 }
