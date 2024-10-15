@@ -1,6 +1,6 @@
 @extends('dashboard-layout')
 
-@section('title', 'NextGen - Explorer offre')
+@section('title', 'NextGen - ' . $offre->titre_poste)
 
 @section('content')
 
@@ -9,154 +9,163 @@
     <section class="job-detail-section">
         <!-- Upper Box -->
         <div class="upper-box">
-          <div class="auto-container">
-            <!-- Job Block -->
-            <div class="job-block-seven">
-              <div class="inner-box">
-                <div class="content">
-                  <span class="company-logo"><img src="images/resource/company-logo/5-1.png" alt=""></span>
-                  <h4><a href="#">Product Designer / UI Designer</a></h4>
-                  <ul class="job-info">
-                    <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                    <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                    <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
-                    <li><span class="icon flaticon-money"></span> $35k - $45k</li>
-                  </ul>
-                  <ul class="job-other-info">
-                    <li class="time">Full Time</li>
-                    <li class="privacy">Private</li>
-                    <li class="required">Urgent</li>
-                  </ul>
-                </div>
-  
-                <div class="btn-box">
-                  <a href="#" class="theme-btn btn-style-one">Postuler</a>
-                  <button class="bookmark-btn"><i class="flaticon-bookmark"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="job-detail-outer">
-          <div class="auto-container">
-            <div class="row">
-              <div class="content-column col-lg-8 col-md-12 col-sm-12">
-                <div class="job-detail">
-                  <h4>Description</h4>
-                  <p>As a Product Designer, you will work within a Product Delivery Team fused with UX, engineering, product and data talent. You will help the team design beautiful interfaces that solve business challenges for our clients. We work with a number of Tier 1 banks on building web-based applications for AML, KYC and Sanctions List management workflows. This role is ideal if you are looking to segue your career into the FinTech or Big Data arenas.</p>
-                  <h4>Skill & Experience</h4>
-                  <ul class="list-style-three">
-                    <li>You have at least 3 years’ experience working as a Product Designer.</li>
-                    <li>You have experience using Sketch and InVision or Framer X</li>
-                    <li>You have some previous experience working in an agile environment – Think two-week sprints.</li>
-                    <li>You are familiar using Jira and Confluence in your workflow</li>
-                  </ul>
-                </div>
-  
-                <!-- Related Jobs -->
-              </div>
-  
-              <div class="sidebar-column col-lg-4 col-md-12 col-sm-12">
-                <aside class="sidebar">
-                  <div class="sidebar-widget">
-                    <!-- Job Overview -->
-                    <h4 class="widget-title">Job Overview</h4>
-                    <div class="widget-content">
-                      <ul class="job-overview">
-                        <li>
-                          <i class="icon icon-calendar"></i>
-                          <h5>Date Posted:</h5>
-                          <span>Posted 1 hours ago</span>
-                        </li>
-                        <li>
-                          <i class="icon icon-expiry"></i>
-                          <h5>Expiration date:</h5>
-                          <span>April 06, 2021</span>
-                        </li>
-                        <li>
-                          <i class="icon icon-location"></i>
-                          <h5>Location:</h5>
-                          <span>London, UK</span>
-                        </li>
-                        <li>
-                          <i class="icon icon-user-2"></i>
-                          <h5>Job Title:</h5>
-                          <span>Designer</span>
-                        </li>
-                        <li>
-                          <i class="icon icon-clock"></i>
-                          <h5>Hours:</h5>
-                          <span>50h / week</span>
-                        </li>
-                        <li>
-                          <i class="icon icon-rate"></i>
-                          <h5>Rate:</h5>
-                          <span>$15 - $25 / hour</span>
-                        </li>
-                        <li>
-                          <i class="icon icon-salary"></i>
-                          <h5>Salary:</h5>
-                          <span>$35k - $45k</span>
-                        </li>
-                      </ul>
-                    </div>
-  
-  
-                    <!-- Job Skills -->
-                    <h4 class="widget-title">Job Skills</h4>
-                    <div class="widget-content">
-                      <ul class="job-skills">
-                        <li><a href="#">app</a></li>
-                        <li><a href="#">administrative</a></li>
-                        <li><a href="#">android</a></li>
-                        <li><a href="#">wordpress</a></li>
-                        <li><a href="#">design</a></li>
-                        <li><a href="#">react</a></li>
-                      </ul>
-                    </div>
-                  </div>
-  
-                  <div class="sidebar-widget company-widget">
-                    <div class="widget-content">
-                      <div class="company-title">
-                        <div class="company-logo"><img src="images/resource/company-7.png" alt=""></div>
-                        <h5 class="company-name">InVision</h5>
-                        <a href="#" class="profile-link">View company profile</a>
-                      </div>
-  
-                      <ul class="company-info">
-                        <li>Primary industry: <span>Software</span></li>
-                        <li>Company size: <span>501-1,000</span></li>
-                        <li>Founded in: <span>2011</span></li>
-                        <li>Phone: <span>123 456 7890</span></li>
-                        <li>Email: <span>info@joio.com</span></li>
-                        <li>Location: <span>London, UK</span></li>
-                        <li>Social media:
-                          <div class="social-links">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                          </div>
-                        </li>
-                      </ul>
-  
-                      <div class="btn-box"><a href="#" class="theme-btn btn-style-three">www.invisionapp.com</a></div>
-                    </div>
-                  </div>
-                </aside>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            <div class="auto-container">
+                <!-- Job Block -->
+                <div class="job-block-seven">
+                    @if(session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if(session('error'))
+                        <div class="alert alert-warning">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    <div class="inner-box">
+                        <div class="content">
+                            <span class="company-logo"><img src="images/resource/company-logo/5-1.png" alt=""></span>
+                            <h4><a href="#">{{$offre->titre_poste}}</a></h4>
+                            <ul class="job-info">
+                                <li><span class="icon flaticon-briefcase"></span> {{$offre->type_contrat}}</li>
+                                <li><span class="icon flaticon-map-locator"></span> {{$offre->lieu_poste}}</li>
+                                <li><span class="icon flaticon-clock-3"></span>{{$offre->created_at->diffForHumans()}}</li>
+                                <li><span class="icon flaticon-target"></span> {{$offre->duree_contrat}}</li>
+                            </ul>
+                            <ul class="job-other-info">
+                                <li class="time">Full Time</li>
+                                <li class="privacy">Private</li>
+                                <li class="required">Urgent</li>
+                            </ul>
+                        </div>
 
-<style>
-    .job-block-seven {
-    position: relative;
-    padding-left: 50px;
-}
-</style>
+                        <div class="btn-box">
+                            <p class="mt-3">{{count($offre->etudiants)}} candidats pour ce poste</p>
+                            <form method="post" id="postuler_offre" action="{{route('etudiants.offers.apply', ['offre' => $offre->slug])}}">
+                                @csrf
+                            </form>
+                            <a href="javascript:void(0);" onclick="postuler()" class="theme-btn btn-style-one">Postuler</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="job-detail-outer">
+            <div class="auto-container">
+                <div class="row">
+                    <div class="content-column col-lg-8 col-md-12 col-sm-12">
+                        <div class="job-detail">
+                            <h4>Description</h4>
+                            <p>{{$offre->description_poste}}</p>
+                            <h4>Skill & Experience</h4>
+                            <h6 class="mb-3 ms-3"><i class="la la-check-square"></i> Competences techniques</h6>
+                            <ul class="ms-5 mb-4">
+                                @forelse($offre->competences_techniques as $element)
+                                    <li style="font-size: 14px!important;"><i class="la la-check"></i> {{$element}}</li>
+                                @empty
+                                    <li>Aucun !</li>
+                                @endforelse
+                            </ul>
+                            <h6 class="mb-3 ms-3"><i class="la la-check-square"></i> Competences transversales</h6>
+                            <ul class="ms-5 mb-4">
+                                @forelse($offre->competences_transversales as $element)
+                                    <li style="font-size: 14px!important;"><i class="la la-check"></i> {{$element}}</li>
+                                @empty
+                                    <li>Aucun !</li>
+                                @endforelse
+                            </ul>
+                            <h6 class="mb-3 ms-3"><i class="la la-check-square"></i> Langues requises</h6>
+                            <ul class="ms-5 mb-4">
+                                @forelse($offre->langues_requises as $element)
+                                    <li style="font-size: 14px!important;"><i class="la la-check"></i> {{$element}}</li>
+                                @empty
+                                    <li>Aucun !</li>
+                                @endforelse
+                            </ul>
+
+                            <h4>Avantages</h4>
+                            <p>{{$offre->avantages}}</p>
+                        </div>
+
+                        <!-- Related Jobs -->
+                    </div>
+
+                    <div class="sidebar-column col-lg-4 col-md-12 col-sm-12">
+                        <aside class="sidebar">
+                            <div class="sidebar-widget">
+                                <!-- Job Overview -->
+                                <h4 class="widget-title">A propos de l'offre</h4>
+                                <div class="widget-content">
+                                    <ul class="job-overview">
+                                        <li>
+                                            <i class="icon icon-calendar"></i>
+                                            <h5>Date publication:</h5>
+                                            <span>{{$offre->created_at->locale('fr')->diffForHumans()}}</span>
+                                        </li>
+                                        <li>
+                                            <i class="icon icon-expiry"></i>
+                                            <h5>Date limite candidature :</h5>
+                                            <span>{{$offre->date_limite_candidature->format("j F Y")}}</span>
+                                        </li>
+                                        <li>
+                                            <i class="icon icon-location"></i>
+                                            <h5>Lieu :</h5>
+                                            <span>{{$offre->lieu_poste}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="sidebar-widget company-widget">
+                                <div class="widget-content">
+                                    <div class="company-title">
+                                        <div class="company-logo"><img src="images/resource/company-7.png" alt=""></div>
+                                        <h5 class="company-name">{{$offre->entreprise->nom_entreprise}}</h5>
+                                        <a href="#" class="profile-link">Voir le profile de la compagnie</a>
+                                    </div>
+
+                                    <ul class="company-info">
+                                        <li>Secteur d'activité: <span>{{$offre->entreprise->secteur_activite}}</span></li>
+                                        <li>Adresse: <span>{{$offre->entreprise->adresse}}</span></li>
+                                        <li>Date création: <span>{{$offre->entreprise->date_creation->format('j F Y')}}</span></li>
+                                        <li>Téléphone: <span>{{$offre->entreprise->telephone_contact}}</span></li>
+                                        <li>Email: <span>{{$offre->entreprise->email_contact}}</span></li>
+                                    </ul>
+
+                                    <div class="btn-box"><a href="{{$offre->entreprise->site_web}}" class="theme-btn btn-style-three">{{$offre->entreprise->site_web}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .job-block-seven {
+            position: relative;
+            padding-left: 50px;
+        }
+    </style>
+
+    <script>
+        function postuler() {
+            Swal.fire({
+                title: "Voulez vous vraiment postuler pour cette offre?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#00cb5e",
+                cancelButtonColor: "rgba(52,52,52,0.36)",
+                confirmButtonText: "Oui, accepter"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('postuler_offre').submit();
+                }
+            });
+        }
+    </script>
 
 @endsection

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Offre extends Model implements Sluggable
 {
@@ -46,6 +47,12 @@ class Offre extends Model implements Sluggable
     public function entreprise(): BelongsTo
     {
         return $this->belongsTo(Entreprise::class, 'entreprise_id');
+    }
+
+    public function etudiants(): BelongsToMany
+    {
+        return $this->belongsToMany(Etudiant::class, 'postulations')
+            ->withTimestamps();
     }
 
 

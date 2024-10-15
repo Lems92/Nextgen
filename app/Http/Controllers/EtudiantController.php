@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\Offre;
+use App\Models\Postulation;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +22,7 @@ class EtudiantController extends Controller
     public function portfolio(Request $request): View
     {
         $etudiant = $request->user();
-        $etudiant->load('userable');
+        $etudiant->load(['userable']);
         return view('etudiant.portfolio', compact('etudiant'));
     }
 
@@ -31,25 +32,28 @@ class EtudiantController extends Controller
         return view('etudiant.explorer-offres', compact('offers'));
     }
 
-    public function show(Request $request, Offre $offre) : View | RedirectResponse
+    public function show_offer(Request $request, Offre $offre) : View | RedirectResponse
     {
+        $offre->load(['entreprise', 'etudiants']);
         return view('etudiant.show-offer', compact('offre'));
     }
 
     public function apply(Request $request, Offre $offre): RedirectResponse
     {
+        $user = $request->user();
+        $user->load('userable');
         // Check if the user has already applied for this offer
-        if (Application::where('user_id', Auth::id())->where('offre_id', $id)->exists()) {
-            return redirect()->back()->with('error', 'You have already applied for this job');
+        if (Postulation::where('etudiant_id', $user->userable->id)->where('offre_id', $offre->id)->exists()) {
+            return redirect()->back()->with('error', 'Vous avez déjà postuler pour ce poste!');
         }
 
         // Create a new application record
-        Application::create([
-            'user_id' => Auth::id(),
-            'offre_id' => $id,
+        Postulation::create([
+            'etudiant_id' => $user->userable->id,
+            'offre_id' => $offre->id,
         ]);
 
-        return redirect()->route('offers.index')->with('success', 'Application submitted successfully');
+        return redirect()->back()->with('success', 'Votre requête a été pris en compte!');
     }
 
     public function mes_candidatures(): View

@@ -43,6 +43,7 @@ class Entreprise extends Model implements Sluggable
         'domaines_activites' => 'array',
         'inclusion_diversity' => 'array',
         'training_support' => 'array',
+        'date_creation' => 'date',
     ];
 
 

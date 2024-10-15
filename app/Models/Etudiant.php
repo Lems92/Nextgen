@@ -6,6 +6,7 @@ use App\Interface\Sluggable;
 use App\Trait\HasSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 
@@ -81,6 +82,12 @@ class Etudiant extends Model implements Sluggable
     public function experiences_professionnelles(): HasMany
     {
         return $this->hasMany(ExperienceProfessionnelle::class);
+    }
+
+    public function offresEmplois(): BelongsToMany
+    {
+        return $this->belongsToMany(Offre::class, 'postulations')
+            ->withTimestamps();
     }
 
     protected $casts = [
