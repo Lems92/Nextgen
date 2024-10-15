@@ -14,6 +14,9 @@ Route::middleware(['auth', 'verified', 'role:etudiant'])->prefix('etudiants')->g
     Route::get('/offres/{offre:slug}', [EtudiantController::class, 'show_offer'])->name('etudiants.offers.show');
     route::post('/offres/{offre:slug}/postuler', [EtudiantController::class, 'apply'])->name('etudiants.offers.apply');
     Route::get('/explorer-offre', [EtudiantController::class, 'explorer_offre'])->name('etudiants.explorer_offre');
-    Route::get('/portfolio', [EtudiantController::class, 'portfolio'])->name('etudiants.portfolio');
     Route::post('/mes-candidatures/annuler', [EtudiantController::class, 'annuler_postulation'])->name('etudiant.postulation.annuler');
+});
+
+Route::middleware(['auth', 'verified'])->group(function (){
+    Route::get('/{etudiant:slug}/portfolio', [EtudiantController::class, 'portfolio'])->name('etudiants.portfolio'); //entreprise et universite peut aussi voir le protfloio
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Etudiant;
 use App\Models\Event;
 use App\Models\Offre;
 use App\Models\Postulation;
@@ -20,10 +21,9 @@ class EtudiantController extends Controller
         return view('etudiant.tableau-de-bord');
     }
 
-    public function portfolio(Request $request): View
+    public function portfolio(Request $request, Etudiant $etudiant): View
     {
-        $etudiant = $request->user();
-        $etudiant->load(['userable']);
+        $etudiant->load('user');
         return view('etudiant.portfolio', compact('etudiant'));
     }
 

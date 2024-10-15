@@ -209,8 +209,8 @@
                             <a href="{{route('etudiants.explorer_event')}}"><i
                                     class="lar la-calendar"></i>Evenements</a>
                         </li>
-                        <li class="{{ is_active('etudiants/portfolio') ? 'active' : '' }}">
-                            <a href="{{route('etudiants.portfolio')}}"> <i class="la la-user-tie"></i>Mon portfolio</a>
+                        <li class="{{ is_active('/portfolio') ? 'active' : '' }}">
+                            <a href="{{route('etudiants.portfolio', ['etudiant' => $user->userable->slug])}}"> <i class="la la-user-tie"></i>Mon portfolio</a>
                         </li>
                         <li class="{{ is_active('etudiants/modfier-profile') ? 'active' : '' }}">
                             <a href="{{route('etudiants.edit_profile')}}"> <i class="la la-pen"></i>Modifier profil</a>

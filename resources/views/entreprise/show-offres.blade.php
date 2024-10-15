@@ -29,8 +29,10 @@
                             <div>
                                 <span class="badge bg-success">Active</span>
                             </div>
-                            <a href="{{route('entreprise.offres.edit', ['offre' => $offre->slug])}}" class="btn btn-warning">Modifier</a>
-                            <form method="post" id="delete_offre_form" action="{{route('entreprise.offres.delete', ['offre' => $offre->slug])}}">
+                            <a href="{{route('entreprise.offres.edit', ['offre' => $offre->slug])}}"
+                               class="btn btn-warning">Modifier</a>
+                            <form method="post" id="delete_offre_form"
+                                  action="{{route('entreprise.offres.delete', ['offre' => $offre->slug])}}">
                                 @csrf
                             </form>
                             <button class="btn btn-danger" onclick="deleteOffre('delete_offre_form')">Supprimer</button>
@@ -112,6 +114,28 @@
                             </div>
                             <div class="col-md-6">
                                 <h4 class="mb-3 ms-3">Candidatures</h4>
+                                <div>
+                                    @forelse($offre->etudiants as $etudiant)
+                                        <div class="candidate-block-three">
+                                            <div class="inner-box">
+                                                <div class="content" style="padding-left: 0;">
+                                                    <h4 class="name"><a href="#">{{$etudiant->prenom . ' ' .$etudiant->nom}}</a></h4>
+                                                    <ul class="candidate-info">
+                                                        <li class="designation">{{$etudiant->domaine_etudes}}</li>
+                                                        <li><span class="icon flaticon-map-locator"></span> {{$etudiant->adresse_postale}}
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="btn-box">
+                                                    <a href="{{route('etudiants.portfolio', ['etudiant' => $etudiant->slug])}}" class="theme-btn btn-style-three"><span
+                                                            class="btn-title">Voir profile</span></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @empty
+                                        <p>Aucun étudiant n'a encore postulé</p>
+                                    @endforelse
+                                </div>
                             </div>
                         </div>
                     </div>

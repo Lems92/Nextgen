@@ -66,7 +66,7 @@
                                                 <h6>{{$offre->titre_poste}}</h6>
                                                 <span class="info"><i class="icon flaticon-map-locator"></i> {{$offre->lieu_poste}}</span>
                                             </td>
-                                            <td class="applied"><a href="#">3+ Applied</a></td>
+                                            <td class="applied"><a href="#">{{count($offre->etudiants)}} candidature(s)</a></td>
                                             <td>{{ $offre->created_at->format('j F Y') }}</td>
                                             <td>{{ $offre->date_limite_candidature->format('j F Y')}}</td>
                                             <td class="status">Active</td>

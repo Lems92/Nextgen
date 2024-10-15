@@ -21,6 +21,7 @@ class EntrepriseController extends Controller
         $user->load('userable');
         $entreprise = $user->userable;
         $entreprise->load('offres');
+        $entreprise->offres->load('etudiants');
         return view('entreprise.offres', [
             'offres' => $entreprise->offres
         ]);
@@ -70,6 +71,7 @@ class EntrepriseController extends Controller
 
     public function show_offre(Request $request, Offre $offre) : View | RedirectResponse
     {
+        $offre->load('etudiants');
         return view('entreprise.show-offres', compact('offre'));
     }
 
