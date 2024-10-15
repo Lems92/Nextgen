@@ -210,12 +210,11 @@
                             </div>
 
                         </div>
+                    </div>
                         <div class="auto-container mt-5">
                             <div class="sec-title text-center">
                                 <h2>Les plans pour les entreprises</h2>
                             </div>
-
-
                             <!--Tabs Container-->
                             <div class="tabs-content">
                                 <!--Tab / Active Tab-->
