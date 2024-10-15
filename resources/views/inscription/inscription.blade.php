@@ -22,7 +22,8 @@ q@extends('app')
 
           <form method="post" action="{{ route('inscription.post') }}">
             @csrf
-
+            <h4> Vous êtes ? </h4>
+            <p>Veuillez selectionner votre type de compte : </p>
               <x-text-input id="role" class="block mt-1 w-full" type="hidden" name="role"
                             :value="old('role')" required autocomplete="role" />
 
@@ -83,6 +84,44 @@ q@extends('app')
   </div>
 
 <script>
+document.querySelector('form').addEventListener('submit', function(event) {
+        let isValid = true;
+        const role = document.getElementById('role').value;
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const passwordConfirmation = document.getElementById('password_confirmation').value;
+
+        // Reset 
+        document.querySelectorAll('.text-danger').forEach(el => el.remove());
+
+        // Vérification rôle
+        if (!role) {
+            displayError('Veuillez sélectionner un type de compte.', document.querySelector('p'));
+            isValid = false;
+        }
+
+        // Vérification email
+        if (!validateEmail(email)) {
+            displayError('Veuillez entrer une adresse email valide.', document.getElementById('email'));
+            isValid = false;
+        }
+
+        // Vérification mot de passe
+        if (password.length < 6) {
+            displayError('Le mot de passe doit contenir au moins 6 caractères.', document.getElementById('password'));
+            isValid = false;
+        }
+
+        // confirmation mot de passe
+        if (password !== passwordConfirmation) {
+            displayError('Les mots de passe ne correspondent pas.', document.getElementById('password_confirmation'));
+            isValid = false;
+        }
+
+        if (!isValid) {
+            event.preventDefault();
+        }
+    });
 
     function setRole(role, element) {
         document.getElementById('role').value = role;
@@ -91,6 +130,19 @@ q@extends('app')
             btn.classList.remove('active');
         });
         element.classList.add('active');
+    }
+
+    function displayError(message, element) {
+        const errorDiv = document.createElement('div');
+        errorDiv.classList.add('text-danger');
+        errorDiv.textContent = message;
+        //element.parentNode.appendChild(errorDiv);
+        element.insertAdjacentElement('afterend', errorDiv);
+    }
+
+    function validateEmail(email) {
+        const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return re.test(email);
     }
 </script>
 @endsection

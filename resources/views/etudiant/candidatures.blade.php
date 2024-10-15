@@ -1,6 +1,6 @@
 @extends('dashboard-layout')
 
-@section('title', 'Dashboard')
+@section('title', 'Candidatures')
 
 @section('content')
 
@@ -9,8 +9,7 @@
 <section class="user-dashboard">
     <div class="dashboard-outer">
       <div class="upper-title-box">
-        <h3>Applied Jobs</h3>
-        <div class="text">Ready to jump back in?</div>
+        <h3>Offres</h3>
       </div>
 
         <div class="col-lg-12">
@@ -18,7 +17,7 @@
           <div class="ls-widget">
             <div class="tabs-box">
               <div class="widget-title">
-                <h4>My Applied Jobs</h4>
+                <h4>offres postulés</h4>
 
                 <div class="chosen-outer">
                   <!--Tabs Box-->

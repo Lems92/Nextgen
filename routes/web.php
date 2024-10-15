@@ -64,3 +64,4 @@ require __DIR__.'/universite.php';
 
 Route::get('/show-offer', function () {return view('etudiant.show-offer');})->name('etudiants.show-offer');
 Route::get('/page-entreprise', function () {return view('entreprise.page-entreprise');})->name('entreprise.page-entreprise');
+Route::get('/vip', function () {return view('entreprise.shortlist-vip');})->name('entreprise.shortlist-vip');

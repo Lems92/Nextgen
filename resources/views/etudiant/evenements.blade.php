@@ -1,7 +1,7 @@
 
 @extends('dashboard-layout')
 
-@section('title', 'Dashboard')
+@section('title', 'Evenements')
 
 @section('content')
 
@@ -14,13 +14,13 @@
             <!-- Content Column -->
             <div class="content-column col-lg-12 col-md-12 col-sm-12">
                 <div class="ls-outer">
-                    <!-- ls Switcher -->
+                    <!-- ls Switcher 
                     <div class="ls-switcher">
                         <div class="showing-result">
                             <div class="text">Showing <strong>1-3</strong> of <strong>3</strong> events</div>
                         </div>
                     </div>
-
+                    -->
                     <!-- Event Block -->
                     <div class="job-block">
                         <div class="inner-box">

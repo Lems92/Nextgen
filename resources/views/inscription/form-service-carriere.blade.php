@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title','Inscription Service Carriere')
+
 @section('content')
 
     @include('header.header')

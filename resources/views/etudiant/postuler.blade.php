@@ -1,5 +1,6 @@
 @extends('dashboard-layout')
 
+@section('title', 'Postuler')
 @section('content')
 
 @include('header.dashboard-header')

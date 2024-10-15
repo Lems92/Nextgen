@@ -6,8 +6,7 @@
     <div class="flex justify-between items-center">
         <div>
             <h2 class="text-lg font-bold">{{ $companyName }}</h2>
-            <p class="text-sm">Domaine : {{ $domain }}</p>
-            <p class="text-sm">Nombre de postes disponibles : {{ $numberOfPosts }}</p>
+            <p class="text-sm">{{ $numberOfPosts }} postes disponible</p>
         </div>
     </div>
 </div>
