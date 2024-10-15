@@ -10,9 +10,12 @@ use Illuminate\View\View;
 
 class EntrepriseController extends Controller
 {
-    public function dashboard(): View
+    public function dashboard(Request $request): View
     {
-        return view('entreprise.tableau-de-bord');
+        $user = $request->user();
+        $user->load('userable');
+        $offres = Offre::where('entreprise_id', '=', $user->userable->id)->limit(3)->get();
+        return view('entreprise.tableau-de-bord', compact('offres'));
     }
 
     public function offres(Request $request): View
