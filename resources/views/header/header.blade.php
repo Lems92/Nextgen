@@ -23,7 +23,7 @@
                                                                               title=""></a></div>
                     </div>
 
-                    <nav class="nav main-menu d-flex gap-5 flex-wrap">
+                    <nav class="nav main-menu d-flex justify-content-between gap-2 flex-wrap">
                         <ul class="navigation" id="navbar">
                             <li><a href="{{route('accueil')}}"><span>Accueil</span></a></li>
                             <li class="dropdown">
@@ -304,3 +304,4 @@
 
 
     </style>
+
