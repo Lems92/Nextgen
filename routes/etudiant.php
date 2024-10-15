@@ -15,4 +15,5 @@ Route::middleware(['auth', 'verified', 'role:etudiant'])->prefix('etudiants')->g
     route::post('/offres/{offre:slug}/postuler', [EtudiantController::class, 'apply'])->name('etudiants.offers.apply');
     Route::get('/explorer-offre', [EtudiantController::class, 'explorer_offre'])->name('etudiants.explorer_offre');
     Route::get('/portfolio', [EtudiantController::class, 'portfolio'])->name('etudiants.portfolio');
+    Route::post('/mes-candidatures/annuler', [EtudiantController::class, 'annuler_postulation'])->name('etudiant.postulation.annuler');
 });

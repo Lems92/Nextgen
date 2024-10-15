@@ -52,6 +52,7 @@ class Offre extends Model implements Sluggable
     public function etudiants(): BelongsToMany
     {
         return $this->belongsToMany(Etudiant::class, 'postulations')
+            ->withPivot('id')
             ->withTimestamps();
     }
 

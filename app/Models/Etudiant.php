@@ -84,9 +84,10 @@ class Etudiant extends Model implements Sluggable
         return $this->hasMany(ExperienceProfessionnelle::class);
     }
 
-    public function offresEmplois(): BelongsToMany
+    public function offres_postules(): BelongsToMany
     {
         return $this->belongsToMany(Offre::class, 'postulations')
+            ->withPivot('id')
             ->withTimestamps();
     }
 

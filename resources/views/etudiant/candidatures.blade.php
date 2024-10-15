@@ -8,8 +8,13 @@
 
 <section class="user-dashboard">
     <div class="dashboard-outer">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
       <div class="upper-title-box">
-        <h3>Offres</h3>
+        <h3>Offres postulés</h3>
       </div>
 
         <div class="col-lg-12">
@@ -36,14 +41,15 @@
                   <table class="default-table manage-job-table">
                     <thead>
                       <tr>
-                        <th>Job Title</th>
-                        <th>Date Applied</th>
+                        <th>Titre de l'offre</th>
+                        <th>Date d'application</th>
                         <th>Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
 
                     <tbody>
+                    @forelse($candidatures as $candidature)
                       <tr>
                         <td>
                           <!-- Job Block -->
@@ -51,109 +57,37 @@
                             <div class="inner-box">
                               <div class="content">
                                 <span class="company-logo"><img src="images/resource/company-logo/1-1.png" alt=""></span>
-                                <h4><a href="#">Senior Full Stack Engineer, Creator Success</a></h4>
+                                <h4><a href="#">{{$candidature->titre_poste}}</a></h4>
                                 <ul class="job-info">
-                                  <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                  <li><span class="icon flaticon-map-locator"></span> London, UK</li>
+                                  <li><span class="icon flaticon-briefcase"></span> {{$candidature->type_contrat}}</li>
+                                  <li><span class="icon flaticon-map-locator"></span> {{$candidature->lieu_poste}}</li>
                                 </ul>
                               </div>
                             </div>
                           </div>
                         </td>
-                        <td>Dec 5, 2020</td>
+                        <td>{{$candidature->pivot->created_at->format('j F Y à H:i')}}</td>
                         <td class="status">Active</td>
                         <td>
                           <div class="option-box">
                             <ul class="option-list">
-                              <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
-                              <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
+                              <li><a href="{{route('etudiants.offers.show', ['offre' => $candidature->slug])}}" data-text="Voir l'offre"><span class="la la-eye"></span></a></li>
+                              <li>
+                                  <form method="post" id="delete_apply_{{$candidature->pivot->id}}" action="{{route('etudiant.postulation.annuler')}}">
+                                      @csrf
+                                      <input type="hidden" name="id" value="{{$candidature->pivot->id}}">
+                                  </form>
+                                  <button data-text="Supprimer l'application" onclick="annuler_postulation('delete_apply_{{$candidature->pivot->id}}')"><span class="la la-trash"></span></button>
+                              </li>
                             </ul>
                           </div>
                         </td>
                       </tr>
-
-                      <tr>
-                        <td>
-                          <!-- Job Block -->
-                          <div class="job-block">
-                            <div class="inner-box">
-                              <div class="content">
-                                <span class="company-logo"><img src="images/resource/company-logo/1-2.png" alt=""></span>
-                                <h4><a href="#">Senior Product Designer</a></h4>
-                                <ul class="job-info">
-                                  <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                  <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>Dec 5, 2020</td>
-                        <td class="status">Active</td>
-                        <td>
-                          <div class="option-box">
-                            <ul class="option-list">
-                              <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
-                              <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <!-- Job Block -->
-                          <div class="job-block">
-                            <div class="inner-box">
-                              <div class="content">
-                                <span class="company-logo"><img src="images/resource/company-logo/1-3.png" alt=""></span>
-                                <h4><a href="#">Sr. Full Stack Engineer</a></h4>
-                                <ul class="job-info">
-                                  <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                  <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>Dec 5, 2020</td>
-                        <td class="status">Active</td>
-                        <td>
-                          <div class="option-box">
-                            <ul class="option-list">
-                              <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
-                              <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
-
-                      <tr>
-                        <td>
-                          <!-- Job Block -->
-                          <div class="job-block">
-                            <div class="inner-box">
-                              <div class="content">
-                                <span class="company-logo"><img src="images/resource/company-logo/1-4.png" alt=""></span>
-                                <h4><a href="#">Product Manager, Studio</a></h4>
-                                <ul class="job-info">
-                                  <li><span class="icon flaticon-briefcase"></span> Segment</li>
-                                  <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
-                        <td>Dec 5, 2020</td>
-                        <td class="status">Active</td>
-                        <td>
-                          <div class="option-box">
-                            <ul class="option-list">
-                              <li><button data-text="View Aplication"><span class="la la-eye"></span></button></li>
-                              <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button></li>
-                            </ul>
-                          </div>
-                        </td>
-                      </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4">Vous n'avez pas encore postulé à aucun offre !</td>
+                        </tr>
+                    @endforelse
                     </tbody>
                   </table>
                 </div>
@@ -176,4 +110,21 @@
   margin-right: 0;
 }
 </style>
+
+    <script>
+        function annuler_postulation(form_id) {
+            Swal.fire({
+                title: "Voulez vous vraiment annuler votre candidature?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonColor: "#ffcd29",
+                cancelButtonColor: "rgba(52,52,52,0.36)",
+                confirmButtonText: "Oui, accepter"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(form_id).submit();
+                }
+            });
+        }
+    </script>
 @endsection

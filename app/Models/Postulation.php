@@ -10,7 +10,7 @@ class Postulation extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['etudiant_id', 'offre_id'];
+    protected $fillable = ['id', 'etudiant_id', 'offre_id'];
 
     public function etudiant(): BelongsTo
     {
@@ -21,4 +21,8 @@ class Postulation extends Model
     {
         return $this->belongsTo(Offre::class);
     }
+
+    protected $casts = [
+        'created_at' => 'datetime'
+    ];
 }

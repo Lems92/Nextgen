@@ -53,12 +53,24 @@ class EtudiantController extends Controller
             'offre_id' => $offre->id,
         ]);
 
-        return redirect()->back()->with('success', 'Votre requête a été pris en compte!');
+        return redirect()->back()->with('success', 'Candidature envoyé avec succès!');
     }
 
-    public function mes_candidatures(): View
+    public function mes_candidatures(Request $request): View
     {
-        return view('etudiant.candidatures');
+        $user = $request->user();
+        $user->load('userable');
+        $user->userable->load('offres_postules');
+        $candidatures = $user->userable->offres_postules;
+        return view('etudiant.candidatures', compact('candidatures'));
+    }
+
+    public function annuler_postulation(Request $request): RedirectResponse
+    {
+        $id = $request->get('id');
+        $postulation = Postulation::findOrFail((int) $id);
+        $postulation->delete();
+        return redirect()->back()->with('success', 'Candidature annulé avec succès!');
     }
 
     public function explorer_event(): View
