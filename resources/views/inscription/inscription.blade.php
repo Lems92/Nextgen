@@ -1,4 +1,4 @@
-@extends('app')
+q@extends('app')
 
 
 @section('title', 'NextGen - Inscription')

@@ -22,7 +22,9 @@ class AdminController extends Controller
 {
     public function dashboard(): View
     {
-        return view('admin.admin-dashboard');
+        $entreprises = Entreprise::limit(5)->orderBy('created_at', 'DESC')->get();
+        $type_abonnements = Subscription::all();
+        return view('admin.admin-dashboard', compact('entreprises', 'type_abonnements'));
     }
 
     public function list_entreprises(Request $request): View
