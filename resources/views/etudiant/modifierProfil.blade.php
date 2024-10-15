@@ -1,6 +1,6 @@
 @extends('dashboard-layout')
 
-@section('title', 'Dashboard')
+@section('title', 'Modifier le profil')
 
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('dashboard-layout')
 
-@section('title', 'NextGen - Inscription')
+@section('title', 'NextGen - Offres')
 
 @section('content')
 

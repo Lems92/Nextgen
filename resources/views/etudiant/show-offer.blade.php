@@ -1,6 +1,6 @@
 @extends('dashboard-layout')
 
-@section('title', 'NextGen - Explorer offre')
+@section('title', 'NextGen - Voir offre')
 
 @section('content')
 

@@ -1,7 +1,7 @@
 
 @extends('dashboard-layout')
 
-@section('title', 'Dashboard')
+@section('title', 'Evenements')
 
 @section('content')
 

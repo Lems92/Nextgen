@@ -1,6 +1,6 @@
 @extends('dashboard-layout')
 
-@section('title', 'NextGen - Service carrière - Gestion candidat')
+@section('title', 'NextGen - Gerer candidat')
 
 @section('content')
 
@@ -9,8 +9,7 @@
         <section class="user-dashboard">
             <div class="dashboard-outer">
               <div class="upper-title-box">
-                <h3>All Aplicants</h3>
-                <div class="text">Ready to jump back in?</div>
+                <h3>Candidats</h3>
               </div>
 
                 <div class="col-lg-12">
@@ -18,7 +17,7 @@
                   <div class="ls-widget">
                     <div class="tabs-box">
                       <div class="widget-title">
-                        <h4>Applicant</h4>
+                        <h4>Candidats</h4>
                       <div class="widget-content">
 
                         <div class="tabs-box">
@@ -26,8 +25,8 @@
                             <h6>Senior Product Designer</h6>
                             <ul class="aplicantion-status tab-buttons clearfix">
                               <li class="tab-btn active-btn totals" data-tab="#totals">Total(s): 6</li>
-                              <li class="tab-btn approved" data-tab="#approved">Approved: 2</li>
-                              <li class="tab-btn rejected" data-tab="#rejected">Rejected(s): 4</li>
+                              <li class="tab-btn approved" data-tab="#approved">Apprové(s): 2</li>
+                              <li class="tab-btn rejected" data-tab="#rejected">Rejecté(s): 4</li>
                             </ul>
                           </div>
 
@@ -395,6 +394,86 @@
         <!-- Copyright -->
 
     </div><!-- End Page Wrapper -->
+
+
+    <script>
+      Chart.defaults.global.defaultFontFamily = "Sofia Pro";
+      Chart.defaults.global.defaultFontColor = '#888';
+      Chart.defaults.global.defaultFontSize = '14';
+
+      var ctx = document.getElementById('chart').getContext('2d');
+
+      var chart = new Chart(ctx, {
+
+        type: 'line',
+        // The data for our dataset
+        data: {
+          labels: ["January", "February", "March", "April", "May", "June"],
+          // Information about the dataset
+          datasets: [{
+            label: "Views",
+            backgroundColor: 'transparent',
+            borderColor: '#1967D2',
+            borderWidth: "1",
+            data: [196, 132, 215, 362, 210, 252],
+            pointRadius: 3,
+            pointHoverRadius: 3,
+            pointHitRadius: 10,
+            pointBackgroundColor: "#1967D2",
+            pointHoverBackgroundColor: "#1967D2",
+            pointBorderWidth: "2",
+          }]
+        },
+
+        // Configuration options
+        options: {
+
+          layout: {
+            padding: 10,
+          },
+
+          legend: {
+            display: false
+          },
+          title: {
+            display: false
+          },
+
+          scales: {
+            yAxes: [{
+              scaleLabel: {
+                display: false
+              },
+              gridLines: {
+                borderDash: [6, 10],
+                color: "#d8d8d8",
+                lineWidth: 1,
+              },
+            }],
+            xAxes: [{
+              scaleLabel: {
+                display: false
+              },
+              gridLines: {
+                display: false
+              },
+            }],
+          },
+
+          tooltips: {
+            backgroundColor: '#333',
+            titleFontSize: 13,
+            titleFontColor: '#fff',
+            bodyFontColor: '#fff',
+            bodyFontSize: 13,
+            displayColors: false,
+            xPadding: 10,
+            yPadding: 10,
+            intersect: false
+          }
+        },
+      });
+    </script>
 
 </body>
 
