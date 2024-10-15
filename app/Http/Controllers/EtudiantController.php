@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Event;
 use App\Models\Offre;
 use App\Models\Postulation;
 use Illuminate\Http\RedirectResponse;
@@ -75,7 +76,17 @@ class EtudiantController extends Controller
 
     public function explorer_event(): View
     {
-        return view('etudiant.evenements');
+        $event_coming = Event::with('universite')->where('end_date', '>', now())
+            ->orderBy('end_date', 'asc')
+            ->limit(5)
+            ->get();
+
+        $event_passed = Event::with('universite')->where('end_date', '<', now())
+            ->orderBy('end_date', 'desc')
+            ->limit(5)
+            ->get();
+
+        return view('etudiant.evenements', compact('event_coming', 'event_passed'));
     }
 
     public function mot_de_passe(): View
