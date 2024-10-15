@@ -9,21 +9,19 @@
         <section class="user-dashboard">
             <div class="dashboard-outer">
               <div class="upper-title-box">
-                <h3>All Aplicants</h3>
-                <div class="text">Ready to jump back in?</div>
+                <h3>Tous les listes</h3>
               </div>
-
                 <div class="col-lg-12">
                   <!-- Ls widget -->
                   <div class="ls-widget">
                     <div class="tabs-box">
                       <div class="widget-title">
-                        <h4>Applicant</h4>
+                        <h4>Etudiants</h4>
                       <div class="widget-content">
 
                         <div class="tabs-box">
                           <div class="aplicants-upper-bar">
-                            <h6>Senior Product Designer</h6>
+                            <h6>Etudiantss</h6>
                             <ul class="aplicantion-status tab-buttons clearfix">
                               <li class="tab-btn active-btn totals" data-tab="#totals">Total(s): 6</li>
                               <li class="tab-btn approved" data-tab="#approved">Approved: 2</li>
@@ -57,10 +55,8 @@
                                     </div>
                                   </div>
                                 </div>
-
                               </div>
                             </div>
-                                <!-- Candidate block three -->
                           </div>
                         </div>
                       </div>

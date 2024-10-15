@@ -21,8 +21,7 @@
                 </div>
             @endif
             <div class="upper-title-box">
-                <h3>Howdy, {{$user->userable->nom_entreprise}}!</h3>
-                <div class="text">Ready to jump back in?</div>
+                <h3>Bienvenu, {{$user->userable->nom_entreprise}}!</h3>
             </div>
             <div class="row">
                 <div class="ui-block col-md-6 col-sm-12">
