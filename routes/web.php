@@ -61,3 +61,5 @@ require __DIR__.'/administration.php';
 require __DIR__.'/etudiant.php';
 require __DIR__.'/entreprise.php';
 require __DIR__.'/universite.php';
+
+Route::get('/show-offer', function () {return view('etudiant.show-offer');})->name('etudiants.show-offer');
