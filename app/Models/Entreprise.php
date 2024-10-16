@@ -129,6 +129,20 @@ class Entreprise extends Model implements Sluggable
         // Si la propriété n'est pas dans les attributs de l'objet, utiliser le comportement par défaut
         return parent::__get($key);
     }
+
+    public static function getRandomEntreprise(): array
+    {
+        $count_all = Entreprise::whereHas('user', function ($query) {
+            $query->where('is_accepted_by_admin', '=', 1);
+        })->count();
+
+        $entreprise = Entreprise::find(rand(0, $count_all - 1));
+        return [
+            'nom_entreprise' => $entreprise->nom_entreprise,
+            'secteur_activite' => $entreprise->secteur_activite,
+            'offre_count' => count($entreprise->offres),
+        ];
+    }
 }
 
 

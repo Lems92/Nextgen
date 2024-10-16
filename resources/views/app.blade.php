@@ -26,10 +26,14 @@
         <main>
             @yield('content')
         </main>
+
+        @php
+            $random_ese = \App\Models\Entreprise::getRandomEntreprise();
+        @endphp
         @include('pub.popup', [
-            'companyName' => 'Nom de l\'Entreprise',
-            'domain' => 'Technologie',
-            'numberOfPosts' => 5
+            'companyName' => $random_ese['nom_entreprise'],
+            'domain' => $random_ese['secteur_activite'],
+            'numberOfPosts' => $random_ese['offre_count']
         ])
 
     <!-- Pied de page (Footer) -->
