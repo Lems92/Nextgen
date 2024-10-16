@@ -69,7 +69,7 @@
                                         <h5>Compétences techniques requis</h5>
                                         <div class="h6 mt-2">
                                             <ul class="list-group">
-                                                @forelse($offre->competences_techniques_formated as $comp)
+                                                @forelse($offre->competences_techniques as $comp)
                                                     <li class="list-group-item">{{$comp}}</li>
                                                 @empty
                                                     <li class="list-group-item">Pas de compétence technique requis</li>
@@ -81,7 +81,7 @@
                                         <h5>Compétences transversales requis</h5>
                                         <div class="h6 mt-2">
                                             <ul class="list-group">
-                                                @forelse($offre->competences_transversales_formated as $comp)
+                                                @forelse($offre->competences_transversales as $comp)
                                                     <li class="list-group-item">{{$comp}}</li>
                                                 @empty
                                                     <li class="list-group-item">Pas de compétence transversale requis
@@ -94,7 +94,7 @@
                                         <h5>Langues requises</h5>
                                         <div class="h6 mt-2">
                                             <ul class="list-group">
-                                                @forelse($offre->langues_requises_formated as $comp)
+                                                @forelse($offre->langues_requises as $comp)
                                                     <li class="list-group-item">{{$comp}}</li>
                                                 @empty
                                                     <li class="list-group-item">Pas de langue requise</li>

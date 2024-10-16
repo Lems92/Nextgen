@@ -263,8 +263,8 @@
 
                                             <li>
                                                 <i class="icon icon-expiry"></i>
-                                                <h5>Age:</h5>
-                                                <span>{{Carbon\Carbon::parse($etudiant->date_naissance)->age}} Ans</span>
+                                                <h5>Date de naissance:</h5>
+                                                <span>{{$etudiant->date_naissance}}</span>
                                             </li>
 
                                             <li>

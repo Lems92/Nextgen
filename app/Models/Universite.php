@@ -53,4 +53,17 @@ class Universite extends Model implements Sluggable
     {
         return 'nom_etablissement';
     }
+
+    public function getNiveauxEtudesProposesAttribute(): array
+    {
+        $new_array = [];
+        $attr = json_decode($this->attributes['niveaux_etudes_proposes'], true);
+        if(is_array($attr)) {
+            foreach ($attr as $sigle) {
+                $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
+                $new_array[] = $param->libelle;
+            }
+        }
+        return $new_array;
+    }
 }

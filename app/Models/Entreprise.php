@@ -67,6 +67,68 @@ class Entreprise extends Model implements Sluggable
     {
         return 'nom_entreprise';
     }
+
+    public function getParametrageLibelle(string $attribute): ?string
+    {
+        $attr = $this->attributes[$attribute];
+
+        $param = Parametrage::where('sigle', 'LIKE', $attr)->first();
+
+        return $param->libelle;
+    }
+
+    public function getParametrageLibelleArray(string $attribute): array
+    {
+        $new_array = [];
+        $attr = json_decode($this->attributes[$attribute], true);
+        if(is_array($attr)) {
+            foreach ($attr as $sigle) {
+                $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
+                $new_array[] = $param->libelle;
+            }
+        }
+        return $new_array;
+    }
+
+    public function __get($key)
+    {
+        // Vérifier si l'attribut demandé est dans les attributs de l'objet
+        if (array_key_exists($key, $this->attributes)) {
+            // Vérifier si un paramétrage doit être appliqué
+            /*if ($key == 'secteur_activite') {
+                return $this->getParametrageLibelle($key);
+            }*/
+
+            // Si c'est un tableau
+            if (in_array($key, [
+                'opportunities',
+                'inclusion_diversity',
+                'training_support',
+            ])) {
+                return $this->getParametrageLibelleArray($key);
+            }
+
+            if($key == 'domaines_activites') {
+                return json_decode($this->attributes[$key]);
+            }
+
+            // Si l'attribut est casté dans $casts, utiliser le cast
+            if (array_key_exists($key, $this->casts)) {
+                $castType = $this->casts[$key];
+
+                // Gérer les types de cast spécifiques, par exemple pour les dates
+                if ($castType === 'date' || $castType === 'datetime') {
+                    return \Carbon\Carbon::parse($this->attributes[$key])->format('d F Y'); // Par exemple, formatage des dates
+                }
+            }
+
+            // Retourner l'attribut brut si aucune transformation n'est nécessaire
+            return $this->attributes[$key];
+        }
+
+        // Si la propriété n'est pas dans les attributs de l'objet, utiliser le comportement par défaut
+        return parent::__get($key);
+    }
 }
 
 

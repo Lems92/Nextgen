@@ -1,4 +1,4 @@
-q@extends('app')
+@extends('app')
 
 
 @section('title', 'NextGen - Inscription')
@@ -91,7 +91,7 @@ document.querySelector('form').addEventListener('submit', function(event) {
         const password = document.getElementById('password').value;
         const passwordConfirmation = document.getElementById('password_confirmation').value;
 
-        // Reset 
+        // Reset
         document.querySelectorAll('.text-danger').forEach(el => el.remove());
 
         // Vérification rôle

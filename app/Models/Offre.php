@@ -38,11 +38,6 @@ class Offre extends Model implements Sluggable
         'date_debut' => 'date',
     ];
 
-    protected $appends = [
-        'competences_transversales_formated',
-        'competences_transversales_formated',
-        'langues_requises_formated',
-    ];
 
     public function entreprise(): BelongsTo
     {
@@ -56,43 +51,64 @@ class Offre extends Model implements Sluggable
             ->withTimestamps();
     }
 
-
-    /*public function getDateDebutAttribute($value)
-    {
-        return Carbon::parse($value);
-    }*/
-
     public function slugAttribute(): string
     {
         return 'titre_poste';
     }
 
-    public function getCompetencesTransversalesFormatedAttribute()
+    public function getTypeContratAttribute()
+    {
+        $attr = $this->attributes['type_contrat'];
+
+        $param = Parametrage::where('sigle', 'LIKE', $attr)->first();
+
+        return $param->libelle;
+    }
+
+    public function getDureeContratAttribute()
+    {
+        $attr = $this->attributes['duree_contrat'];
+
+        $param = Parametrage::where('sigle', 'LIKE', $attr)->first();
+
+        return $param->libelle;
+    }
+
+    public function getCompetencesTransversalesAttribute(): array
     {
         $new_array = [];
-        foreach ($this->competences_transversales as $sigle) {
-            $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
-            $new_array[] = $param->libelle;
+        $attr = json_decode($this->attributes['competences_transversales'], true);
+        if(is_array($attr)) {
+            foreach ($attr as $sigle) {
+                $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
+                $new_array[] = $param->libelle;
+            }
         }
         return $new_array;
     }
 
-    public function getCompetencesTechniquesFormatedAttribute()
+    public function getCompetencesTechniquesAttribute(): array
     {
         $new_array = [];
-        foreach ($this->competences_techniques as $sigle) {
-            $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
-            $new_array[] = $param->libelle;
+        $attr = json_decode($this->attributes['competences_techniques'], true);
+        if(is_array($attr)) {
+            foreach ($attr as $sigle) {
+                $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
+                $new_array[] = $param->libelle;
+            }
         }
         return $new_array;
     }
 
-    public function getLanguesRequisesFormatedAttribute()
+    public function getLanguesRequisesAttribute(): array
     {
         $new_array = [];
-        foreach ($this->langues_requises as $sigle) {
-            $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
-            $new_array[] = $param->libelle;
+        $attr = json_decode($this->attributes['langues_requises'], true);
+        if(is_array($attr)) {
+            foreach ($attr as $sigle) {
+                $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
+                $new_array[] = $param->libelle;
+            }
         }
         return $new_array;
     }

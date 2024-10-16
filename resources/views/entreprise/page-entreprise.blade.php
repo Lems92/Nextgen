@@ -34,7 +34,7 @@
                             <h6 class="mt-3">Description</h6>
                             <p>{{$entreprise->description ?? 'Aucun description'}}</p>
                             <h6 class="mt-3">Date création</h6>
-                            <p>{{$entreprise->date_creation->format('j F Y') ?? 'Aucun description'}}</p>
+                            <p>{{$entreprise->date_creation ?? ''}}</p>
 
                             <h4 class="widget-title mt-3">Opportunités</h4>
                             <div class="widget-content">
@@ -113,7 +113,7 @@
                                     <ul class="company-info mt-0">
                                         <li>Secteur d'activité: <span>{{$entreprise->secteur_activite ?? ''}}</span>
                                         </li>
-                                        <li>Crée en: <span>{{$entreprise->date_creation->format('j F Y') ?? ''}}</span>
+                                        <li>Crée en: <span>{{$entreprise->date_creation ?? ''}}</span>
                                         </li>
                                         <li>Tel.: <span>{{$entreprise->telephone_contact ?? ''}}</span></li>
                                         <li>Email: <span>{{$entreprise->email_contact ?? ''}}</span></li>
