@@ -23,7 +23,7 @@
                                                                               title=""></a></div>
                     </div>
 
-                    <nav class="nav main-menu d-flex justify-content-between gap-2 flex-wrap">
+                    <nav class="nav main-menu d-flex justify-content-between align-items-center">
                         <ul class="navigation" id="navbar">
                             <li><a href="{{route('accueil')}}"><span>Accueil</span></a></li>
                             <li class="dropdown">
@@ -59,7 +59,7 @@
                         @guest
                             <div class="outer-box">
                                 <!-- Login/Register -->
-                                <div class="btn-box">
+                                <div class="btn-box d-flex">
                                     <a href="{{route('connexion')}}" class="theme-btn btn-style-two">Se connecter</a>
                                     <a href="{{route('inscription')}}" class="theme-btn btn-style-three">Créer un
                                         compte</a>
@@ -215,6 +215,7 @@
             border-radius: 4px; /* Optional: Adjust border-radius */
             margin-left: 10px; /* Adjust margin between buttons */
         }
+        
 
         .sticky-header .theme-btn {
             padding: 6px 12px; /* Further reduce padding for sticky header */
