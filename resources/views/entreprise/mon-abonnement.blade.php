@@ -9,14 +9,12 @@
     <style>
         .user-dashboard {
             padding: 30px;
-            background-color: #f9f9f9;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             margin-top: 20px;
         }
 
         .dashboard-outer {
-            background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -62,21 +60,22 @@
             background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 10px;
-            padding: 15px; 
+            padding: 15px;
             margin-bottom: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             min-height: 150px;
             max-height: 250px;
             flex: 1;
             margin-right: 10px;
+            height: auto;
+
         }
 
         .card h4 {
-            margin-bottom: 10px; 
+            margin-bottom: 10px;
         }
 
         .contact-admin {
-            background-color: #f1f1f1;
             padding: 20px;
             border-radius: 10px;
             margin-top: 40px;
@@ -94,22 +93,22 @@
         .contact-admin .btn {
             margin-top: 15px;
             padding: 10px 15px;
-            font-size: 0.9em; 
+            font-size: 0.9em;
         }
 
         .card-container {
-            display: flex; 
-            justify-content: space-between; 
-            margin-bottom: 20px; 
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
         }
 
- 
+
         @media (max-width: 768px) {
             .card-container {
-                flex-direction: column; 
+                flex-direction: column;
             }
             .card {
-                margin-right: 0; 
+                margin-right: 0;
                 margin-bottom: 15px;
             }
         }
@@ -125,7 +124,7 @@
 
             <div class="card-container">
 
-                <div class="card">
+                <div class="card" style="height: auto; padding-bottom: 10px;">
                     <h4 class="mb-3">État de l'abonnement</h4>
                     @if(Auth::user()->subscription)
                         <p><strong>Type :</strong> {{ Auth::user()->subscription->name }}</p>
@@ -150,9 +149,9 @@
                     @endif
                 </div>
 
-                <div class="card">
+                <div class="card" style="height: auto; padding-bottom: 10px;">
                     <h4 class="mb-3">Permissions</h4>
-                    <ul>
+                    <ul class="">
                         @foreach(Auth::user()->getAllPermissions()->pluck('name') as $permission)
                             <li>{{ $permission }}</li>
                         @endforeach
