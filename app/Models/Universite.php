@@ -24,6 +24,7 @@ class Universite extends Model implements Sluggable
         'nombre_etudiants',
         'domaines_etudes_proposes',
         'niveaux_etudes_proposes',
+        'description',
         'profile_picture',
         'slug'
     ];

@@ -35,6 +35,7 @@ class Entreprise extends Model implements Sluggable
         'training_support',
         'selected_offer',
         'profile_picture',
+        'description',
         'slug',
     ];
 

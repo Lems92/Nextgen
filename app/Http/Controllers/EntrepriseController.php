@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Entreprise;
 use App\Models\Offre;
 use App\Models\Parametrage;
 use Illuminate\Http\RedirectResponse;
@@ -127,9 +128,23 @@ class EntrepriseController extends Controller
         return view('entreprise.gerer-candidat');
     }
 
-    public function page_entreprise(): View
+    public function page_entreprise(Request $request): View
     {
-        return view('entreprise.page-entreprise');
+        $user = $request->user();
+        $user->load('userable');
+        $entreprise = Entreprise::with(['user', 'offres'])->findOrFail($user->userable->id);
+        return view('entreprise.page-entreprise', compact('entreprise'));
+    }
+
+    public function public_show_entreprise(Request $request, Entreprise $entreprise): View | RedirectResponse
+    {
+        $entreprise->load(['user', 'offres']);
+
+        if($entreprise->user->hasPermissionTo('page_presentation_entreprise')) {
+            return view('entreprise.page-entreprise', compact('entreprise'));
+        }
+
+        return redirect()->back()->with('error', 'L\'entreprise que vous essayez de voir ne dispose pas les permissions necessaires pour ce fonctionnalité!');
     }
 
     public function shortlist_vip(): View

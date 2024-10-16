@@ -37,3 +37,9 @@ Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
         //abonnement
         Route::get('/mon-abonnement', [EntrepriseController::class, 'mon_abonnement'])->name('entreprise.mon_abonnement');
     });
+
+
+// Page entreprise visible par tous
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/{entreprise:slug}/page-entreprise', [EntrepriseController::class, 'public_show_entreprise'])->name('public.show_entreprise');
+});

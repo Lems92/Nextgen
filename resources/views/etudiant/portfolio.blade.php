@@ -16,8 +16,8 @@
                     <div class="candidate-block-six">
                         <div class="inner-box">
                             <figure class="image"><img src="images/resource/candidate-4.png" alt=""></figure>
-                            <h4 class="name"><a href="#">{{$etudiant->prenom}} {{$etudiant->nom}}</a></h4>
-                            <span class="designation">{{$etudiant->domaine_etudes}}</span>
+                            <h4 class="name"><a href="#">{{$etudiant->prenom ?? ''}} {{$etudiant->nom ?? ''}}</a></h4>
+                            <span class="designation">{{$etudiant->domaine_etudes ?? ''}}</span>
                             <div class="content">
                                 <ul class="post-tags">
                                     <li><a href="#">App</a></li>
@@ -26,9 +26,9 @@
                                 </ul>
 
                                 <ul class="candidate-info">
-                                    <li><span class="icon flaticon-map-locator"></span> {{$etudiant->adresse_postale}}
+                                    <li><span class="icon flaticon-map-locator"></span> {{$etudiant->adresse_postale ?? ''}}
                                     </li>
-                                    <li>{{$etudiant->pays}} - {{$etudiant->region}} - {{$etudiant->ville}} - {{$etudiant->code_postal}}</li>
+                                    <li>{{$etudiant->pays ?? ''}} - {{$etudiant->region ?? ''}} - {{$etudiant->ville ?? ''}} - {{$etudiant->code_postal ?? ''}}</li>
                                 </ul>
                             </div>
                         </div>
@@ -41,18 +41,9 @@
                     <div class="row">
                         <div class="content-column col-lg-8 col-md-12 col-sm-12 order-2">
                             <div class="job-detail">
-                                <h4>Candidates About</h4>
+                                <h4>A propos du candidat</h4>
 
-                                <p>Hello my name is Nicole Wells and web developer from Portland. In pharetra orci
-                                    dignissim, blandit mi semper, ultricies diam. Suspendisse malesuada suscipit nunc
-                                    non volutpat. Sed porta nulla id orci laoreet tempor non consequat enim. Sed vitae
-                                    aliquam velit. Aliquam ante erat, blandit at pretium et, accumsan ac est. Integer
-                                    vehicula rhoncus molestie. Morbi ornare ipsum sed sem condimentum, et pulvinar
-                                    tortor luctus. Suspendisse condimentum lorem ut elementum aliquam.</p>
-                                <p>Mauris nec erat ut libero vulputate pulvinar. Aliquam ante erat, blandit at pretium
-                                    et, accumsan ac est. Integer vehicula rhoncus molestie. Morbi ornare ipsum sed sem
-                                    condimentum, et pulvinar tortor luctus. Suspendisse condimentum lorem ut elementum
-                                    aliquam. Mauris nec erat ut libero vulputate pulvinar.</p>
+                                <p>{{$etudiant->description ?? 'Aucun information à afficher'}}</p>
 
                                 <!-- Resume / Education -->
                                 <div class="resume-outer">
@@ -65,14 +56,14 @@
                                             <span class="name">M</span>
                                             <div class="title-box">
                                                 <div class="info-box">
-                                                    <h3>{{$etudiant->domaine_etudes}}</h3>
-                                                    <span>{{$etudiant->nom_ecole_universite}}</span>
+                                                    <h3>{{$etudiant->domaine_etudes ?? ''}}</h3>
+                                                    <span>{{$etudiant->nom_ecole_universite ?? ''}}</span>
                                                 </div>
                                                 <div class="edit-box">
-                                                    <span class="year">{{$etudiant->annee_obtention_diplome}}</span>
+                                                    <span class="year">{{$etudiant->annee_obtention_diplome ?? ''}}</span>
                                                 </div>
                                             </div>
-                                            <div class="text">Diplome de {{$etudiant->niveau_etudes}}</div>
+                                            <div class="text">Diplome de {{$etudiant->niveau_etudes ?? ''}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -228,10 +219,10 @@
                                 </div>
 
                                 <h4 class="widget-title mt-3">Centres d'intérêts</h4>
-                                <p>{{$etudiant->centres_interet}}</p>
+                                <p>{{$etudiant->centres_interet ?? ''}}</p>
 
                                 <h4 class="widget-title mt-3">Lien portfolio</h4>
-                                <p>{{$etudiant->portfolio}}</p>
+                                <p>{{$etudiant->portfolio ?? ''}}</p>
 
                                 <h4 class="widget-title mt-3">Secteur activités préférées</h4>
                                 <div class="widget-content">
@@ -255,7 +246,7 @@
                                 <p>{{$etudiant->localisation_geographique_preferee}}</p>
 
                                 <h4 class="widget-title mt-3">Durée disponibilité</h4>
-                                <p>{{$etudiant->duree_disponibilite}}</p>
+                                <p>{{$etudiant->duree_disponibilite ?? ''}}</p>
                             </div>
                         </div>
 
@@ -279,7 +270,7 @@
                                             <li>
                                                 <i class="icon icon-user-2"></i>
                                                 <h5>Genre :</h5>
-                                                <span>{{$etudiant->genre}}</span>
+                                                <span>{{$etudiant->genre ?? ''}}</span>
                                             </li>
 
                                             <li>
@@ -293,14 +284,14 @@
                                             <li>
                                                 <i class="icon icon-degree"></i>
                                                 <h5>Niveaux d'études :</h5>
-                                                <span>{{$etudiant->niveau_etudes}}</span>
+                                                <span>{{$etudiant->niveau_etudes ?? ''}}</span>
                                             </li>
 
                                         </ul>
                                         <h4>Contact</h4>
                                         <ul>
-                                            <li>Email: {{$etudiant->user->email}}</li>
-                                            <li>Téléphone : {{$etudiant->numero_telephone}}</li>
+                                            <li>Email: {{$etudiant->user->email ?? ''}}</li>
+                                            <li>Téléphone : {{$etudiant->numero_telephone ?? ''}}</li>
                                         </ul>
                                     </div>
 
