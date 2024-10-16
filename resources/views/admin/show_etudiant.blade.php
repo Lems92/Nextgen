@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <strong>Date de naissance :</strong>
-                                    <p>{{ $etudiant->date_naissance->format("j F Y") }}</p>
+                                    <p>{{ $etudiant->date_naissance }}</p>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <strong>Origine ethnique :</strong>

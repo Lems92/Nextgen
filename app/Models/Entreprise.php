@@ -130,18 +130,21 @@ class Entreprise extends Model implements Sluggable
         return parent::__get($key);
     }
 
-    public static function getRandomEntreprise(): array
+    public static function getRandomEntreprise(): array | null
     {
         $count_all = Entreprise::whereHas('user', function ($query) {
             $query->where('is_accepted_by_admin', '=', 1);
         })->count();
 
-        $entreprise = Entreprise::find(rand(0, $count_all - 1));
-        return [
-            'nom_entreprise' => $entreprise->nom_entreprise,
-            'secteur_activite' => $entreprise->secteur_activite,
-            'offre_count' => count($entreprise->offres),
-        ];
+        if($count_all >= 1) {
+            $entreprise = Entreprise::find(rand(0, $count_all - 1));
+            return [
+                'nom_entreprise' => $entreprise->nom_entreprise,
+                'secteur_activite' => $entreprise->secteur_activite,
+                'offre_count' => count($entreprise->offres),
+            ];
+        }
+        return null;
     }
 }
 

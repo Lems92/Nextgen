@@ -20,43 +20,45 @@
 </head>
 
 <body data-anm=".anm">
-    <div class="page-wrapper">
-        <div class="preloader"></div>
+<div class="page-wrapper">
+    <div class="preloader"></div>
 
-        <main>
-            @yield('content')
-        </main>
+    <main>
+        @yield('content')
+    </main>
 
-        @php
-            $random_ese = \App\Models\Entreprise::getRandomEntreprise();
-        @endphp
+    @php
+        $random_ese = \App\Models\Entreprise::getRandomEntreprise();
+    @endphp
+    @if(isset($random_ese))
         @include('pub.popup', [
-            'companyName' => $random_ese['nom_entreprise'],
-            'domain' => $random_ese['secteur_activite'],
-            'numberOfPosts' => $random_ese['offre_count']
-        ])
+        'companyName' => $random_ese['nom_entreprise'],
+        'domain' => $random_ese['secteur_activite'],
+        'numberOfPosts' => $random_ese['offre_count']
+    ])
+    @endif
 
     <!-- Pied de page (Footer) -->
-        @include('layouts.footer')
-    </div>
+    @include('layouts.footer')
+</div>
 
-    <!-- Scripts JavaScript -->
-    <script src="{{ asset('js/jquery.js') }}"></script>
-    <script src="{{ asset('js/popper.min.js') }}"></script>
-    <script src="{{ asset('js/chosen.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.fancybox.js') }}"></script>
-    <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
-    <script src="{{ asset('js/mmenu.polyfills.js') }}"></script>
-    <script src="{{ asset('js/mmenu.js') }}"></script>
-    <script src="{{ asset('js/appear.js') }}"></script>
-    <script src="{{ asset('js/anm.min.js') }}"></script>
-    <script src="{{ asset('js/ScrollMagic.min.js') }}"></script>
-    <script src="{{ asset('js/rellax.min.js') }}"></script>
-    <script src="{{ asset('js/owl.js') }}"></script>
-    <script src="{{ asset('js/wow.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
-    <!-- Scripts additionnels spécifiques aux pages -->
-    @stack('scripts')
+<!-- Scripts JavaScript -->
+<script src="{{ asset('js/jquery.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/chosen.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/jquery.fancybox.js') }}"></script>
+<script src="{{ asset('js/jquery.modal.min.js') }}"></script>
+<script src="{{ asset('js/mmenu.polyfills.js') }}"></script>
+<script src="{{ asset('js/mmenu.js') }}"></script>
+<script src="{{ asset('js/appear.js') }}"></script>
+<script src="{{ asset('js/anm.min.js') }}"></script>
+<script src="{{ asset('js/ScrollMagic.min.js') }}"></script>
+<script src="{{ asset('js/rellax.min.js') }}"></script>
+<script src="{{ asset('js/owl.js') }}"></script>
+<script src="{{ asset('js/wow.js') }}"></script>
+<script src="{{ asset('js/script.js') }}"></script>
+<!-- Scripts additionnels spécifiques aux pages -->
+@stack('scripts')
 </body>
 </html>

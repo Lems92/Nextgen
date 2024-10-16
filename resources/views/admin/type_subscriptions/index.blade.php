@@ -6,6 +6,17 @@
     <!-- Header -->
     @include('header.dashboard-header')
 
+
+    @php
+
+        function reformat_permission_name(string $string): string {
+            $string = str_replace('_', ' ', $string);
+            $string[0] = strtoupper($string[0]);
+            return $string;
+        }
+
+    @endphp
+
     <section class="user-dashboard">
         <div class="dashboard-outer">
             <!-- Section: Company Submissions Overview -->
@@ -48,7 +59,7 @@
                                     <td>
                                         <ul>
                                         @foreach($subscription->permissions as $permission)
-                                                <li><span class="badge bg-secondary">{{ $permission->name }}</span></li>
+                                                <li><span class="badge bg-secondary">{{ reformat_permission_name($permission->name) }}</span></li>
                                         @endforeach
                                         </ul>
                                     </td>
