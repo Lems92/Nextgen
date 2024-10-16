@@ -123,9 +123,22 @@ class EntrepriseController extends Controller
             ->with('success', 'Offre supprimée avec succès');
     }
 
-    public function gerer_candidat(): View
+    public function gerer_candidat(Request $request): View
     {
-        return view('entreprise.gerer-candidat');
+        $user = $request->user();
+        $user->load('userable');
+        $entreprise = $user->userable;
+        $entreprise->load('offres');
+        $candidats = [];
+        foreach ($entreprise->offres as $offre) {
+            foreach ($offre->etudiants as $etudiant) {
+                $candidats[] = [
+                    'offre' => $offre,
+                    'etudiant' => $etudiant
+                ];
+            }
+        }
+        return view('entreprise.gerer-candidat', compact('candidats'));
     }
 
     public function page_entreprise(Request $request): View
