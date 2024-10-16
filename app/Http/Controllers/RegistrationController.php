@@ -9,6 +9,7 @@ use App\Models\ListCategorie;
 use App\Models\Entreprise;
 use App\Models\Etudiant;
 use App\Models\Parametrage;
+use App\Models\Subscription;
 use App\Models\Universite;
 use App\Models\User;
 use App\Utils\Redirection;
@@ -357,14 +358,18 @@ class RegistrationController extends Controller
         $soutien_formations = Parametrage::where('table', 'LIKE', 'soutien_formation')->get();
 
 
-        return view('inscription.form-entreprise', compact([
+        $offres = Subscription::with('permissions')->get();
+
+
+        return view('inscription.form-entreprise', compact(
             'mada_regions',
             'secteur_activites_categories',
             'opportunites_proposes',
             'domaines_etudes_categories',
             'engagement_inclusivite_diversites',
-            'soutien_formations'
-        ]));
+            'soutien_formations',
+            'offres',
+        ));
     }
 
     public function register_entreprise_post(Request $request): RedirectResponse
@@ -394,7 +399,7 @@ class RegistrationController extends Controller
             'domaines_activites' => 'nullable|array',
             'inclusion_diversity' => 'nullable|array',
             'training_support' => 'nullable|array',
-            //'selected_offer' => 'nullable|string',
+            'selected_offer' => 'required|string',
         ]);
 
         try {
