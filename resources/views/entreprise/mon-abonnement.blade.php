@@ -145,16 +145,17 @@
                         @endif
                     @else
                         <p>Vous n'avez actuellement aucun abonnement.</p>
-                        <a href="{{ route('subscriptions.index') }}" class="btn btn-primary">Choisir un Abonnement</a>
                     @endif
                 </div>
 
                 <div class="card" style="height: auto; padding-bottom: 10px;">
                     <h4 class="mb-3">Permissions</h4>
                     <ul class="">
-                        @foreach(Auth::user()->getAllPermissions()->pluck('name') as $permission)
+                        @forelse(Auth::user()->getAllPermissions()->pluck('name') as $permission)
                             <li>{{ $permission }}</li>
-                        @endforeach
+                        @empty
+                            <li>Pas de permissions à afficher</li>
+                        @endforelse
                     </ul>
                 </div>
             </div>
