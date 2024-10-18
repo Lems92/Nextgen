@@ -132,12 +132,14 @@ class Entreprise extends Model implements Sluggable
 
     public static function getRandomEntreprise(): array | null
     {
-        $count_all = Entreprise::whereHas('user', function ($query) {
+        $all = Entreprise::whereHas('user', function ($query) {
             $query->where('is_accepted_by_admin', '=', 1);
-        })->count();
+        })->get();
 
-        if($count_all >= 1) {
-            $entreprise = Entreprise::find(rand(0, $count_all - 1));
+        $count = count($all);
+        if($count >= 1) {
+            $entreprise = $all[rand(0, $count - 1)];
+
             return [
                 'nom_entreprise' => $entreprise->nom_entreprise,
                 'secteur_activite' => $entreprise->secteur_activite,
