@@ -71,33 +71,49 @@ class RegistrationController extends Controller
         $france_regions = File::json(base_path("/resources/data/region_france.json"));
         $ethnies = File::json(base_path("/resources/data/foko.json"));
 
-        $genres = Parametrage::where('table', 'LIKE', 'genre')->get();
-        //$domaine_etudes = Parametrage::where('table', 'LIKE', 'domaine_etude')->get();
-        $niveau_etudes = Parametrage::where('table', 'LIKE', 'niveau_etude')->get();
-        $competences_techniques = Parametrage::where('table', 'LIKE', 'competence_technique')->get();
-        $competences_en_recherche_et_analyse = Parametrage::where('table', 'LIKE', 'competences_en_recherche_et_analyse')->get();
-        $competences_en_communication = Parametrage::where('table', 'LIKE', 'competences_en_communication')->get();
-        $competences_interpersonnelles = Parametrage::where('table', 'LIKE', 'competences_interpersonnelles')->get();
-        $competences_resolution_problemes = Parametrage::where('table', 'LIKE', 'competences_resolution_problemes')->get();
-        $competences_adaptabilite = Parametrage::where('table', 'LIKE', 'competences_adaptabilite')->get();
-        $competences_gestion_stress = Parametrage::where('table', 'LIKE', 'competences_gestion_stress')->get();
-        $competences_leadership = Parametrage::where('table', 'LIKE', 'competences_leadership')->get();
-        $competences_ethique_responsabilite = Parametrage::where('table', 'LIKE', 'competences_ethique_responsabilite')->get();
-        $competences_gestion_financiere = Parametrage::where('table', 'LIKE', 'competences_gestion_financiere')->get();
-        $competences_langues = Parametrage::where('table', 'LIKE', 'competence_linguistique')->get();
-        $type_contrats = Parametrage::where('table', 'LIKE', 'type_contrat')->get();
-        $duree_contrats = Parametrage::where('table', 'LIKE', 'duree_contrat')->get();
-        $statut_socio_economiques = Parametrage::where('table', 'LIKE', 'statut_socio_economique')->get();
-        $conditions_vie_specifiques = Parametrage::where('table', 'LIKE', 'conditions_vie_specifiques')->get();
-        $religions = Parametrage::where('table', 'LIKE', 'religion')->get();
-        $orientation_sexuelles = Parametrage::where('table', 'LIKE', 'orientation_sexuelle')->get();
+        // Définir les valeurs des tables que vous souhaitez récupérer
+        $parametres_tables = [
+            'genre', 'niveau_etude', 'competence_technique', 'competences_en_recherche_et_analyse',
+            'competences_en_communication', 'competences_interpersonnelles', 'competences_resolution_problemes',
+            'competences_adaptabilite', 'competences_gestion_stress', 'competences_leadership',
+            'competences_ethique_responsabilite', 'competences_gestion_financiere', 'competence_linguistique',
+            'type_contrat', 'duree_contrat', 'statut_socio_economique', 'conditions_vie_specifiques',
+            'religion', 'orientation_sexuelle'
+        ];
+
+        // Récupérer tous les paramètres en une seule requête
+        $parametres = Parametrage::whereIn('table', $parametres_tables)->get()->groupBy('table');
+
+        // Accéder aux données individuellement
+        $genres = $parametres->get('genre');
+        $niveau_etudes = $parametres->get('niveau_etude');
+        $competences_techniques = $parametres->get('competence_technique');
+        $competences_en_recherche_et_analyse = $parametres->get('competences_en_recherche_et_analyse');
+        $competences_en_communication = $parametres->get('competences_en_communication');
+        $competences_interpersonnelles = $parametres->get('competences_interpersonnelles');
+        $competences_resolution_problemes = $parametres->get('competences_resolution_problemes');
+        $competences_adaptabilite = $parametres->get('competences_adaptabilite');
+        $competences_gestion_stress = $parametres->get('competences_gestion_stress');
+        $competences_leadership = $parametres->get('competences_leadership');
+        $competences_ethique_responsabilite = $parametres->get('competences_ethique_responsabilite');
+        $competences_gestion_financiere = $parametres->get('competences_gestion_financiere');
+        $competences_langues = $parametres->get('competence_linguistique');
+        $type_contrats = $parametres->get('type_contrat');
+        $duree_contrats = $parametres->get('duree_contrat');
+        $statut_socio_economiques = $parametres->get('statut_socio_economique');
+        $conditions_vie_specifiques = $parametres->get('conditions_vie_specifiques');
+        $religions = $parametres->get('religion');
+        $orientation_sexuelles = $parametres->get('orientation_sexuelle');
+
         //categories
-        $domaines_etudes_categories = ListCategorie::with('list_with_categories')
-            ->where('table', 'LIKE', 'domaines_etudes')
-            ->get();
-        $secteur_activites_categories = ListCategorie::with('list_with_categories')
-            ->where('table', 'LIKE', 'secteur_activites')
-            ->get();
+        $list_avec_categories_tables = ['domaines_etudes', 'secteur_activites'];
+        $list_categories = ListCategorie::whereIn('table', $list_avec_categories_tables)->get()->groupBy('table');
+
+        $domaines_etudes_categories = $list_categories->get('domaines_etudes');
+        $secteur_activites_categories = $list_categories->get('secteur_activites');
+
+        //univeriste suggestions
+        //$universites = Universite::all(['nom_etablissement', 'id']);
 
         return view('inscription.form-etudiant', compact([
             'mada_regions',
@@ -125,6 +141,7 @@ class RegistrationController extends Controller
             'orientation_sexuelles',
             'domaines_etudes_categories',
             'secteur_activites_categories',
+            //'universites',
         ]));
     }
 
@@ -211,13 +228,12 @@ class RegistrationController extends Controller
                 }
 
                 // Si l'université n'est pas dans la base de données
-                // TODO à verifier
-                $is_univ_partenaire = Universite::where('nom_etablissement', 'LIKE', "%" . $validateData['nom_ecole_universite'] . "%")->count();
+                //$is_univ_partenaire = Universite::where('nom_etablissement', 'LIKE', "%" . $validateData['nom_ecole_universite'] . "%")->count();
 
-                $status_compte = false;
-                if ($is_univ_partenaire === 0) {
+                //$status_compte = false;
+                //if ($is_univ_partenaire === 0) {
                     $status_compte = true;
-                }
+                //}
 
                 $etudiant = Etudiant::create($validateData);
 
@@ -347,16 +363,22 @@ class RegistrationController extends Controller
         }
 
         $mada_regions = File::json(base_path("/resources/data/region_mada.json"));
-        $secteur_activites_categories = ListCategorie::with('list_with_categories')
-            ->where('table', 'LIKE', 'secteur_activites')
-            ->get();
-        $opportunites_proposes = Parametrage::where('table', 'LIKE', 'opportunites_proposes')->get();
-        $domaines_etudes_categories = ListCategorie::with('list_with_categories')
-            ->where('table', 'LIKE', 'domaines_etudes')
-            ->get();
-        $engagement_inclusivite_diversites = Parametrage::where('table', 'LIKE', 'engagement_inclusivite_diversite')->get();
-        $soutien_formations = Parametrage::where('table', 'LIKE', 'soutien_formation')->get();
 
+        $list_avec_categories_tables = ['domaines_etudes', 'secteur_activites'];
+        $list_categories = ListCategorie::whereIn('table', $list_avec_categories_tables)->get()->groupBy('table');
+
+        $domaines_etudes_categories = $list_categories->get('domaines_etudes');
+        $secteur_activites_categories = $list_categories->get('secteur_activites');
+
+
+        $parametres_tables = [
+            'opportunites_proposes', 'engagement_inclusivite_diversite', 'soutien_formation'
+        ];
+        $parametres = Parametrage::whereIn('table', $parametres_tables)->get()->groupBy('table');
+
+        $opportunites_proposes = $parametres->get('opportunites_proposes');
+        $engagement_inclusivite_diversites = $parametres->get('engagement_inclusivite_diversite');
+        $soutien_formations = $parametres->get('soutien_formation');
 
         $offres = Subscription::with('permissions')->get();
 
@@ -444,8 +466,14 @@ class RegistrationController extends Controller
             return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
 
-        $nombre_etudiants = Parametrage::where('table', 'LIKE', 'nombre_etudiant')->get();
-        $niveaux_etudes_proposes = Parametrage::where('table', 'LIKE', 'niveaux_etudes_proposes')->get();
+        $parametres_tables = [
+            'nombre_etudiant', 'niveaux_etudes_proposes'
+        ];
+        $parametres = Parametrage::whereIn('table', $parametres_tables)->get()->groupBy('table');
+
+
+        $nombre_etudiants = $parametres->get('nombre_etudiant');
+        $niveaux_etudes_proposes = $parametres->get('niveaux_etudes_proposes');
 
         $domaines_etudes_categories = ListCategorie::with('list_with_categories')
             ->where('table', 'LIKE', 'domaines_etudes')
