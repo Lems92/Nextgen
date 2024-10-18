@@ -498,6 +498,7 @@
                                     <label for="localisation_geographique_preferee" class="form-label">Localisation
                                         géographique
                                         préférée :</label>
+
                                            <select id="localisation_geographique_preferee" name="localisation_geographique_preferee" class="form-select" required>
                                             @foreach($mada_regions as $region)
                                                 {{$region}}
@@ -597,13 +598,14 @@
 
                                 <div class="form-group">
                                     <label for="origine_ethnique">Origine ethnique :</label>
-                                    <select class="form-select" id="origine_ethnique" name="origine_ethnique">
+                                    <select class="form-select" id="origine_ethnique" name="origine_ethnique" onchange="toggleOtherInput()">
                                         @foreach($ethnies as $foko)
-                                            <option
-                                                value="{{$foko}}" {{ old('origine_ethnique') == $foko ? 'selected' : '' }}>{{$foko}}</option>
+                                            <option value="{{ $foko }}" {{ old('origine_ethnique') == $foko ? 'selected' : '' }}>{{ $foko }}</option>
                                         @endforeach
+                                        <option value="Autres" {{ old('origine_ethnique') == 'Autres' ? 'selected' : '' }}>Autres</option>
                                     </select>
-                                    <x-input-error :messages="$errors->get('origine_ethnique')" class="mt-2"/>
+                                    <input type="text" class="form-control" id="origine_ethnique_input" name="origine_ethnique" placeholder="Veuillez spécifier" style="display: none;" value="{{ old('origine_ethnique') }}">
+                                    <x-input-error :messages="$errors->get('other_ethnicity')" class="mt-2"/>
                                 </div>
 
                                 <div class="form-group">
@@ -800,6 +802,18 @@
 
             conteneur.appendChild(div);
         }
+        function toggleOtherInput() {
+            const select = document.getElementById('origine_ethnique');
+            const autresInput = document.getElementById('origine_ethnique_input');
+            
+            if (select.value === 'Autres') {
+                autresInput.style.display = 'block';
+                autresInput.focus();
+            } else {
+                autresInput.style.display = 'none';
+                autresInput.value = ''; // Réinitialiser la valeur si une autre option est sélectionnée
+            }
+    }
 
         function supprimerChamp(button) {
             const div = button.closest('.champ-academique');
