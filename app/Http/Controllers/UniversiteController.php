@@ -20,11 +20,12 @@ class UniversiteController extends Controller
     {
         $user = $request->user();
         $user->load('userable');
+        $univ_name = $user->userable->nom_etablissement;
         $count_event = Event::where('universite_id', '=', $user->userable->id)->count();
         $count_etudiant = EtudiantUniversite::where('universite_id', '=', $user->userable->id)->count();
 
         $events = Event::where('universite_id', '=', $user->userable->id)->limit(5)->get();
-        return view('universite.tableau-de-bord', compact('count_event', 'count_etudiant', 'events'));
+        return view('universite.tableau-de-bord', compact('count_event', 'count_etudiant', 'events', 'univ_name'));
     }
 
     public function gerer_event(Request $request): View

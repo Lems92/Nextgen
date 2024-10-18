@@ -4,6 +4,17 @@
 
 @section('content')
 
+
+    @php
+
+        function reformat_permission_name(string $string): string {
+            $string = str_replace('_', ' ', $string);
+            $string[0] = strtoupper($string[0]);
+            return $string;
+        }
+
+    @endphp
+
     @include('header.dashboard-header')
 
     <style>
@@ -152,7 +163,7 @@
                     <h4 class="mb-3">Permissions</h4>
                     <ul class="">
                         @forelse(Auth::user()->getAllPermissions()->pluck('name') as $permission)
-                            <li>{{ $permission }}</li>
+                            <li>{{ reformat_permission_name($permission) }}</li>
                         @empty
                             <li>Pas de permissions à afficher</li>
                         @endforelse

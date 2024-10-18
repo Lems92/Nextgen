@@ -36,11 +36,11 @@ class CheckSubscriptionPermission
 
             } else {
                 return redirect()->intended(route('entreprise.dashboard'))
-                    ->with('error', "Vous n'avez pas la permission d'accéder à cette page.");
+                    ->with('error', "Vous n'avez pas la permission d'accéder à cette page. Verifier votre type d'abonnement!");
             }
         }
 
         return redirect()->intended(route('entreprise.dashboard'))
-            ->with('error', "Vous n'avez pas la permission d'accéder à cette page.");
+            ->with('error', "Vous n'avez pas la permission d'accéder à cette page. Verifier votre type d'abonnement!");
     }
 }

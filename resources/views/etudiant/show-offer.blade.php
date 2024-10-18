@@ -128,7 +128,7 @@
                                     <ul class="company-info">
                                         <li>Secteur d'activité: <span>{{$offre->entreprise->secteur_activite}}</span></li>
                                         <li>Adresse: <span>{{$offre->entreprise->adresse}}</span></li>
-                                        <li>Date création: <span>{{$offre->entreprise->date_creation->format('j F Y')}}</span></li>
+                                        <li>Date création: <span>{{$offre->entreprise->date_creation}}</span></li>
                                         <li>Téléphone: <span>{{$offre->entreprise->telephone_contact}}</span></li>
                                         <li>Email: <span>{{$offre->entreprise->email_contact}}</span></li>
                                     </ul>

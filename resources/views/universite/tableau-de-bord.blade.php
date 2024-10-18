@@ -10,7 +10,7 @@
     <section class="user-dashboard">
         <div class="dashboard-outer">
             <div class="upper-title-box">
-                <h3>Howdy, Invision!</h3>
+                <h3>Howdy, {{$univ_name}}!</h3>
                 <div class="text">Ready to jump back in?</div>
             </div>
             <div class="row">
