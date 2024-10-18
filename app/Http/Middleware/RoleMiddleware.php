@@ -14,10 +14,10 @@ class RoleMiddleware
      *
      * @param  Closure(Request): (Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
         // Vérifier si l'utilisateur est connecté et possède le rôle requis
-        if (Auth::check() && Auth::user()->hasRole($role)) {
+        if (Auth::check() && Auth::user()->hasAnyRole($roles)) {
             return $next($request);
         }
 

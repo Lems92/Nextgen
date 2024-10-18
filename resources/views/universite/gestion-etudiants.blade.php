@@ -58,6 +58,14 @@
                                                         <a href="{{route('etudiants.portfolio', ["etudiant" => $etudiant_univ->etudiant->slug])}}" data-text="Voir étudiant"><span class="la la-eye"></span>
                                                         </a>
                                                     </li>
+                                                    <li>
+                                                        <form method="post" id="supprimer_affiliation_univ_form{{$etudiant_univ->id}}" action="{{route('etu_univ.delete_affiliation')}}">
+                                                            @csrf
+                                                            <input type="hidden" name="etu_univ_id" value="{{$etudiant_univ->id}}">
+                                                        </form>
+                                                        <button onclick="supprimer_affiliation_univ('supprimer_affiliation_univ_form{{$etudiant_univ->id}}')" data-text="Supprimer l'affiliation"><span class="la la-trash"></span>
+                                                        </button>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -75,5 +83,23 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function supprimer_affiliation_univ(form_id) {
+            Swal.fire({
+                title: "Etes-vous sûr de supprimer l'affiliation?",
+                text: 'L\'action est irreversible',
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cb5e",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Oui, je suis sûr"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById(form_id).submit();
+                }
+            });
+        }
+    </script>
 
 @endsection

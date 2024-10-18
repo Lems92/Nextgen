@@ -20,6 +20,12 @@
                         </div>
                     @endif
 
+                    @if(session('warning'))
+                        <div class="alert alert-warning">
+                            {{ session('warning') }}
+                        </div>
+                    @endif
+
                     <form id="default-form" action="{{route('etudiant.demande_affiliation_univ_post')}}" method="post"
                           enctype="multipart/form-data">
                         <!-- Éducation -->

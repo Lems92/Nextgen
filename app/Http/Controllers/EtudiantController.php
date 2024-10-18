@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\DemandeAffiliationUniversite;
 use App\Models\Etudiant;
+use App\Models\EtudiantUniversite;
 use App\Models\Event;
 use App\Models\Offre;
 use App\Models\Postulation;
@@ -102,8 +103,31 @@ class EtudiantController extends Controller
         return view('etudiant.postuler');
     }
 
-    public function demander_affiliation_get(): View
+
+    public function mon_universite(Request $request): View
     {
+        $user = $request->user();
+        $user->load('userable');
+        $etudiant = $user->userable;
+
+        $universite_univ = EtudiantUniversite::with('universite')->where('etudiant_id', '=', $etudiant->id)->first();
+
+        $universite = $universite_univ?->universite;
+        $etudiant_univ_id = $universite_univ?->id;
+
+        return view("etudiant.mon-universite", compact('universite', 'etudiant_univ_id'));
+    }
+
+    public function demander_affiliation_get(Request $request): View | RedirectResponse
+    {
+        // si l'utilisateur est affilié à un univ
+        $user = $request->user();
+        $user->load('userable');
+        $est_deja_affilie_univ = EtudiantUniversite::where('etudiant_id', '=', $user->userable->id)->count();
+        if($est_deja_affilie_univ > 0) {
+            return redirect()->intended(route('etudiant.mon_universite'))->with('waring', 'Vous êtes déjà affilié à un université');
+        }
+
         $universites = Universite::whereHas('user', function ($query) {
             $query->where('is_accepted_by_admin', '=', 1);
         })->get(['nom_etablissement', 'id']);
@@ -112,14 +136,31 @@ class EtudiantController extends Controller
 
     public function demander_affiliation_post(Request $request): RedirectResponse
     {
+        // si l'utilisateur est affilié à un univ
+        $user = $request->user();
+        $user->load('userable');
+        $est_deja_affilie_univ = EtudiantUniversite::where('etudiant_id', '=', $user->userable->id)->count();
+        if($est_deja_affilie_univ > 0) {
+            return redirect()->intended(route('etudiant.mon_universite'))->with('waring', 'Vous êtes déjà affilié à un université');
+        }
+
         $validatedData = $request->validate([
             'universite_id' => 'required|integer',
             'matricule' => 'required|string',
             'document_scolaire' => 'required',
         ]);
 
+
         $user = $request->user();
         $user->load('userable');
+
+        //si une demande a déjà été envoyé à l'université
+        $demande_exist = DemandeAffiliationUniversite::where('universite_id', '=',$validatedData['universite_id'])
+            ->where('etudiant_id', '=', $user->userable->id)->count();
+
+        if($demande_exist > 0 ) {
+            return redirect()->back()->with('warning', 'Vous avez déjà envoyé une demande à cette université!');
+        }
 
         if ($request->hasFile('document_scolaire')) {
             $validatedData['document_scolaire'] = Storage::disk('public')->put('document_scolaire', $request->file('document_scolaire'));
@@ -134,5 +175,14 @@ class EtudiantController extends Controller
         DemandeAffiliationUniversite::create($validatedData);
 
         return redirect()->back()->with('success', 'Votre demande a été bien envoyé');
+    }
+
+    public function delete_affiliation(Request $request): RedirectResponse
+    {
+        if($request->has('etu_univ_id')) {
+            $etu_univ = EtudiantUniversite::findOrFail($request->etu_univ_id);
+            $etu_univ->delete();
+        }
+        return redirect()->back()->with('success', 'L\'affiliation a été supprimé avec succès !');
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Event;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Mockery\Exception;
 
@@ -67,6 +68,10 @@ class UniversiteController extends Controller
                     'universite_id' => $demande->universite_id,
                     'etudiant_id' => $demande->etudiant_id,
                 ]);
+                //supprimer le fichier
+                if(isset($demande->document_scolaire)) {
+                    Storage::delete($demande->document_scolaire);
+                }
                 $demande->delete();
             });
         } catch (\Exception $exception) {
@@ -80,6 +85,11 @@ class UniversiteController extends Controller
 
     public function refuser_demande_affiliation(Request $request, DemandeAffiliationUniversite $demande): RedirectResponse
     {
+        //supprimer le fichier
+        if(isset($demande->document_scolaire)) {
+            Storage::delete($demande->document_scolaire);
+        }
+
         $demande->delete();
         //send notification
 
