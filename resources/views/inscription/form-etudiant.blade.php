@@ -498,10 +498,13 @@
                                     <label for="localisation_geographique_preferee" class="form-label">Localisation
                                         géographique
                                         préférée :</label>
-                                    <input type="text" id="localisation_geographique_preferee"
-                                           name="localisation_geographique_preferee"
-                                           value="{{old('localisation_geographique_preferee')}}"
-                                           class="form-control" required>
+                                           <select id="localisation_geographique_preferee" name="localisation_geographique_preferee" class="form-select" required>
+                                            @foreach($mada_regions as $region)
+                                                {{$region}}
+                                                <option
+                                                    value="{{$region}}" {{ old('region') == $region ? 'selected' : '' }}>{{$region}}</option>
+                                            @endforeach
+                                        </select>
                                     <x-input-error :messages="$errors->get('localisation_geographique_preferee')"
                                                    class="mt-2"/>
                                 </div>
@@ -571,7 +574,7 @@
 
                             <!-- Détails spécifiques (Inclusivité Entreprise) Section -->
                             <fieldset class="form-section">
-                                <legend>Détails spécifiques (Inclusivité Entreprise)</legend>
+                                <legend>Détails spécifiques</legend>
 
                                 <div class="form-group">
                                     <label for="accessibilite">Accessibilité :</label>

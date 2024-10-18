@@ -159,41 +159,36 @@
                             </div>
 
                             <!-- Informations sur les Opportunités -->
-                            <div class="col-lg-12 form-group">
-                                <h3>Informations sur les Opportunités</h3>
-                            </div>
+<div class="col-lg-12 form-group">
+    <h3>Informations sur les Opportunités</h3>
+</div>
 
-                            <div class="col-lg-12 form-group">
-                                <h5 class="mb-2">Types d'Opportunités Proposées</h5>
-                                <div class="checkbox-group d-flex flex-wrap justify-content-start gap-2">
-                                    @foreach($opportunites_proposes as $opportunite)
-                                        <label>
-                                            <input type="checkbox" name="opportunities[]"
-                                                   value="{{$opportunite->sigle}}"
-                                                {{ in_array($opportunite->sigle, old('opportunities') ?? []) ? 'checked' : '' }}
-                                            > {{$opportunite->libelle}}
-                                        </label>
-                                    @endforeach
-                                </div>
-                                <x-input-error :messages="$errors->get('opportunities')" class="mt-2"/>
-                            </div>
+<div class="col-lg-12 form-group">
+    <label for="opportunites_proposees">Types d'Opportunités Proposées</label>
+    <select id="opportunites_proposees" name="opportunities[]" class="chosen-select" multiple>
+        @foreach($opportunites_proposes as $opportunite)
+            <option value="{{$opportunite->sigle}}" {{ in_array($opportunite->sigle, old('opportunities') ?? []) ? 'selected' : '' }}>
+                {{$opportunite->libelle}}
+            </option>
+        @endforeach
+    </select>
+    <x-input-error :messages="$errors->get('opportunities')" class="mt-2"/>
+</div>
 
-                            <div class="col-lg-12 form-group">
-                                <h5 class="mb-2">Domaines d'Activité des Opportunités</h5>
-                                <div class="checkbox-group d-flex flex-wrap justify-content-start gap-2">
-                                    @foreach($domaines_etudes_categories as $categorie)
-                                        @foreach($categorie->list_with_categories as $sous_cat)
-                                            <label>
-                                                <input type="checkbox" name="domaines_activites[]"
-                                                       value="{{$sous_cat->name}}"
-                                                    {{ in_array($sous_cat->name, old('domaines_activites') ?? []) ? 'checked' : '' }}
-                                                > {{$sous_cat->name}}
-                                            </label>
-                                        @endforeach
-                                    @endforeach
-                                </div>
-                                <x-input-error :messages="$errors->get('domaines_activites')" class="mt-2"/>
-                            </div>
+<div class="col-lg-12 form-group">
+    <label for="domaines_activites">Domaines d'Activité des Opportunités</label>
+    <select id="domaines_activites" name="domaines_activites[]" class="chosen-select" multiple>
+        @foreach($domaines_etudes_categories as $categorie)
+            @foreach($categorie->list_with_categories as $sous_cat)
+                <option value="{{$sous_cat->name}}" {{ in_array($sous_cat->name, old('domaines_activites') ?? []) ? 'selected' : '' }}>
+                    {{$sous_cat->name}}
+                </option>
+            @endforeach
+        @endforeach
+    </select>
+    <x-input-error :messages="$errors->get('domaines_activites')" class="mt-2"/>
+</div>
+
 
                             <!-- Responsabilités et Engagement -->
                             <div class="col-lg-12 form-group">
