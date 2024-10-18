@@ -16,9 +16,15 @@ use Mockery\Exception;
 class UniversiteController extends Controller
 {
 
-    public function dashboard(): View
+    public function dashboard(Request $request): View
     {
-        return view('universite.tableau-de-bord');
+        $user = $request->user();
+        $user->load('userable');
+        $count_event = Event::where('universite_id', '=', $user->userable->id)->count();
+        $count_etudiant = EtudiantUniversite::where('universite_id', '=', $user->userable->id)->count();
+
+        $events = Event::where('universite_id', '=', $user->userable->id)->limit(5)->get();
+        return view('universite.tableau-de-bord', compact('count_event', 'count_etudiant', 'events'));
     }
 
     public function gerer_event(Request $request): View
