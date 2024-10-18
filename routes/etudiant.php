@@ -15,6 +15,9 @@ Route::middleware(['auth', 'verified', 'role:etudiant'])->prefix('etudiants')->g
     route::post('/offres/{offre:slug}/postuler', [EtudiantController::class, 'apply'])->name('etudiants.offers.apply');
     Route::get('/explorer-offre', [EtudiantController::class, 'explorer_offre'])->name('etudiants.explorer_offre');
     Route::post('/mes-candidatures/annuler', [EtudiantController::class, 'annuler_postulation'])->name('etudiant.postulation.annuler');
+    Route::get('/demande-affiliation-universite', [EtudiantController::class, 'demander_affiliation_get'])->name('etudiant.demande_affiliation_univ_get');
+    Route::post('/demande-affiliation-universite', [EtudiantController::class, 'demander_affiliation_post'])->name('etudiant.demande_affiliation_univ_post');
+
 });
 
 Route::middleware(['auth', 'verified'])->group(function (){

@@ -39,6 +39,11 @@ class Universite extends Model implements Sluggable
         return $this->hasMany(Event::class);
     }
 
+    public function etudiants(): HasMany
+    {
+        return $this->hasMany(EtudiantUniversite::class);
+    }
+
     protected $casts = [
         'domaines_etudes_proposes' => 'array',
         'niveaux_etudes_proposes' => 'array',

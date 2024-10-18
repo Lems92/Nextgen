@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\DemandeAffiliationUniversite;
 use App\Models\Etudiant;
 use App\Models\Event;
 use App\Models\Offre;
 use App\Models\Postulation;
+use App\Models\Universite;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use function Livewire\of;
 
@@ -97,5 +100,39 @@ class EtudiantController extends Controller
     public function postuler_offre(Request $request, Offre $offre): View
     {
         return view('etudiant.postuler');
+    }
+
+    public function demander_affiliation_get(): View
+    {
+        $universites = Universite::whereHas('user', function ($query) {
+            $query->where('is_accepted_by_admin', '=', 1);
+        })->get(['nom_etablissement', 'id']);
+        return view('etudiant.demande-affiliation-univ', compact('universites'));
+    }
+
+    public function demander_affiliation_post(Request $request): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'universite_id' => 'required|integer',
+            'matricule' => 'required|string',
+            'document_scolaire' => 'required',
+        ]);
+
+        $user = $request->user();
+        $user->load('userable');
+
+        if ($request->hasFile('document_scolaire')) {
+            $validatedData['document_scolaire'] = Storage::disk('public')->put('document_scolaire', $request->file('document_scolaire'));
+        } else {
+            return back()->withErrors([
+                'document_scolaire' => 'Erreur lors de l\'importation du document scolaire'
+            ]);
+        }
+
+        $validatedData['etudiant_id'] = $user->userable->id;
+
+        DemandeAffiliationUniversite::create($validatedData);
+
+        return redirect()->back()->with('success', 'Votre demande a été bien envoyé');
     }
 }

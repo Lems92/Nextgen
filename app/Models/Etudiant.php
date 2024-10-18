@@ -114,6 +114,11 @@ class Etudiant extends Model implements Sluggable
         'dates_disponibles_vacances_ete_fin' => 'date',
     ];
 
+    public function universites(): HasMany
+    {
+        return $this->hasMany(EtudiantUniversite::class);
+    }
+
     public function __toString()
     {
         return $this->prenom;

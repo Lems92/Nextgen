@@ -300,21 +300,4 @@
             margin-top: 15px;
         }
     </style>
-
-    <script>
-        function activateAccount() {
-            Swal.fire({
-                title: "Voulez-vous vraiment accepter l'inscription ?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#00cb5e",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Oui, accepter"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById('activate_account_form').submit();
-                }
-            });
-        }
-    </script>
 @endsection

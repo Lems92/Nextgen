@@ -1,6 +1,6 @@
 @extends('dashboard-layout')
 
-@section('title', 'NextGen - Gérer les étudiants')
+@section('title', 'NextGen - Demande affiliation étudiants')
 
 @section('content')
 
@@ -16,19 +16,15 @@
                 </div>
             @endif
             <div class="upper-title-box">
-                <h3>Gerer les étudiants</h3>
-                <div class="text">Liste des étudiants affiliés à votre établissement</div>
-            </div>
-
-            <div class="d-flex justify-content-end mb-3">
-                <a href="{{route('universite.list_demande_affiliation_etudiant')}}" class="btn btn-secondary"><span class="badge bg-danger">{{$demande_count}}</span> Demande d'affiliation</a>
+                <h3>Demande affiliation des étudiants</h3>
+                <div class="text">Liste des étudiants qui demande affiliation</div>
             </div>
 
             <!-- Ls widget -->
             <div class="ls-widget">
                 <div class="tabs-box">
                     <div class="widget-title">
-                        <h4>Mes étudiants</h4>
+                        <h4>Liste des demandes des étudiants</h4>
                     </div>
 
                     <div class="widget-content">
@@ -37,25 +33,23 @@
                                 <thead>
                                 <tr>
                                     <th>Nom complet</th>
-                                    <th>Niveau d'etudes</th>
-                                    <th>Date obtention diplome</th>
+                                    <th>Matricule</th>
                                     <th>Téléphone</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @forelse($etudiants_univ as $etudiant_univ)
+                                @forelse($demandes as $demande)
                                     <tr>
-                                        <td><h6>{{$etudiant_univ->etudiant->prenom . ' ' . $etudiant_univ->etudiant->nom}}</h6></td>
-                                        <td>{{$etudiant_univ->etudiant->niveau_etudes}}</td>
-                                        <td>{{$etudiant_univ->etudiant->annee_obtention_diplome}}</td>
-                                        <td>{{$etudiant_univ->etudiant->numero_telephone}}</td>
+                                        <td><h6>{{$demande->etudiant->prenom . ' ' . $demande->etudiant->nom}}</h6></td>
+                                        <td>{{$demande->matricule}}</td>
+                                        <td>{{$demande->etudiant->numero_telephone}}</td>
                                         <td>
                                             <div class="option-box">
                                                 <ul class="option-list">
                                                     <li>
-                                                        <a href="{{route('etudiants.portfolio', ["etudiant" => $etudiant_univ->etudiant->slug])}}" data-text="Voir étudiant"><span class="la la-eye"></span>
+                                                        <a href="{{route('universite.show_demande_affiliation', ['demande' => $demande->slug])}}" data-text="View Event"><span class="la la-eye"></span>
                                                         </a>
                                                     </li>
                                                 </ul>

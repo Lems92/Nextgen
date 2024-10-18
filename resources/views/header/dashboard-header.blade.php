@@ -216,7 +216,7 @@
                             <a href="{{route('etudiants.edit_profile')}}"> <i class="la la-pen"></i>Modifier profil</a>
                         </li>
                         <li>
-                            <a href="{{route('etudiant.etu-univ')}}"> <i class="la la-university"></i>Mon Université</a>
+                            <a href="{{route('etudiant.demande_affiliation_univ_get')}}"> <i class="la la-university"></i>Mon Université</a>
                         </li>
 
                         <!--- Entreprise -->
