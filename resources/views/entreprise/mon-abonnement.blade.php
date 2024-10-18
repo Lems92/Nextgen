@@ -6,123 +6,112 @@
 
 
     @php
-
         function reformat_permission_name(string $string): string {
             $string = str_replace('_', ' ', $string);
             $string[0] = strtoupper($string[0]);
             return $string;
         }
-
     @endphp
 
     @include('header.dashboard-header')
 
     <style>
         .user-dashboard {
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
 
-        .dashboard-outer {
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-        }
+.dashboard-outer {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
 
-        .upper-title-box {
-            border-bottom: 2px solid #ccc;
-            margin-bottom: 20px;
-        }
+.upper-title-box {
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 20px;
+}
 
-        h3, h4 {
-            color: #333;
-        }
+h3, h4 {
+    color: #333;
+}
 
-        .text {
-            color: #666;
-        }
+.text {
+    color: #666;
+}
 
-        .badge {
-            padding: 5px 10px;
-            font-size: 0.9em;
-            border-radius: 5px;
-        }
+.badge {
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border-radius: 5px;
+}
 
-        .badge.bg-success {
-            background-color: #28a745;
-        }
+.badge.bg-success {
+    background-color: #28a745;
+}
 
-        .badge.bg-danger {
-            background-color: #dc3545;
-        }
+.badge.bg-danger {
+    background-color: #dc3545;
+}
 
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-            color: #fff;
-            padding: 10px 15px;
-            font-size: 0.9em;
-            border-radius: 5px;
-        }
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    border-radius: 5px;
+}
 
-        .card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            min-height: 150px;
-            max-height: 250px;
-            flex: 1;
-            margin-right: 10px;
-            height: auto;
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
 
-        }
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex: 1 1 300px; /* Allow cards to grow or shrink */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure content is spaced well */
+    height: auto; /* Remove any height constraints */
+}
 
-        .card h4 {
-            margin-bottom: 10px;
-        }
+.contact-admin {
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 40px;
+    text-align: center;
+}
 
-        .contact-admin {
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 40px;
-            text-align: center;
-        }
+.contact-admin h4 {
+    color: #333;
+}
 
-        .contact-admin h4 {
-            color: #333;
-        }
+.contact-admin p {
+    color: #555;
+}
 
-        .contact-admin p {
-            color: #555;
-        }
+.contact-admin .btn {
+    margin-top: 15px;
+    padding: 10px 15px;
+    font-size: 0.9em;
+}
 
-        .contact-admin .btn {
-            margin-top: 15px;
-            padding: 10px 15px;
-            font-size: 0.9em;
-        }
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+    }
+}
 
-        .card-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-
-        @media (max-width: 768px) {
-            .card-container {
-                flex-direction: column;
-            }
-            .card {
-                margin-right: 0;
-                margin-bottom: 15px;
-            }
-        }
     </style>
 
     <section class="user-dashboard">
@@ -132,10 +121,8 @@
                 <div class="text">Veuillez choisir l'offre qui vous convient</div>
             </div>
 
-
             <div class="card-container">
-
-                <div class="card" style="height: auto; padding-bottom: 10px;">
+                <div class="card">
                     <h4 class="mb-3">État de l'abonnement</h4>
                     @if(Auth::user()->subscription)
                         <p><strong>Type :</strong> {{ Auth::user()->subscription->name }}</p>
@@ -159,9 +146,9 @@
                     @endif
                 </div>
 
-                <div class="card" style="height: auto; padding-bottom: 10px;">
+                <div class="card">
                     <h4 class="mb-3">Permissions</h4>
-                    <ul class="">
+                    <ul class="list-unstyled">
                         @forelse(Auth::user()->getAllPermissions()->pluck('name') as $permission)
                             <li>{{ reformat_permission_name($permission) }}</li>
                         @empty
