@@ -33,12 +33,18 @@ class EntrepriseController extends Controller
 
     public function publier_offre(): View
     {
-        $type_contrats = Parametrage::where('table', 'LIKE', 'type_contrat')->get();
-        $duree_contrats = Parametrage::where('table', 'LIKE', 'duree_contrat')->get();
-        $lieu_postes = Parametrage::where('table', 'LIKE', 'lieu_poste')->get();
-        $competences_techniques = Parametrage::where('table', 'LIKE', 'competence_technique')->get();
-        $competences_transversales = Parametrage::where('table', 'LIKE', 'competence_transversale')->get();
-        $langues = Parametrage::where('table', 'LIKE', 'competence_linguistique')->get();
+        $parametres_tables = [
+            'type_contrat', 'duree_contrat', 'lieu_poste',
+            'competence_technique', 'competence_transversale', 'competence_linguistique'
+        ];
+        $parametres = Parametrage::whereIn('table', $parametres_tables)->get()->groupBy('table');
+
+        $type_contrats = $parametres->get('type_contrat');
+        $duree_contrats = $parametres->get('duree_contrat');
+        $lieu_postes = $parametres->get('lieu_poste');
+        $competences_techniques = $parametres->get('competence_technique');
+        $competences_transversales = $parametres->get('competence_transversale');
+        $langues = $parametres->get('competence_linguistique');
 
         return view('entreprise.publier-une-offre', compact([
             'type_contrats', 'duree_contrats', 'lieu_postes',
@@ -81,12 +87,18 @@ class EntrepriseController extends Controller
 
     public function edit_offre(Request $request, Offre $offre): View
     {
-        $type_contrats = Parametrage::where('table', 'LIKE', 'type_contrat')->get();
-        $duree_contrats = Parametrage::where('table', 'LIKE', 'duree_contrat')->get();
-        $lieu_postes = Parametrage::where('table', 'LIKE', 'lieu_poste')->get();
-        $competences_techniques = Parametrage::where('table', 'LIKE', 'competence_technique')->get();
-        $competences_transversales = Parametrage::where('table', 'LIKE', 'competence_transversale')->get();
-        $langues = Parametrage::where('table', 'LIKE', 'competence_linguistique')->get();
+        $parametres_tables = [
+            'type_contrat', 'duree_contrat', 'lieu_poste',
+            'competence_technique', 'competence_transversale', 'competence_linguistique'
+        ];
+        $parametres = Parametrage::whereIn('table', $parametres_tables)->get()->groupBy('table');
+
+        $type_contrats = $parametres->get('type_contrat');
+        $duree_contrats = $parametres->get('duree_contrat');
+        $lieu_postes = $parametres->get('lieu_poste');
+        $competences_techniques = $parametres->get('competence_technique');
+        $competences_transversales = $parametres->get('competence_transversale');
+        $langues = $parametres->get('competence_linguistique');
 
         return view('entreprise.publier-une-offre', compact([
             'type_contrats', 'duree_contrats', 'lieu_postes',
