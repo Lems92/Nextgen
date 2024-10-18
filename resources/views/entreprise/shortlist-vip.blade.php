@@ -41,7 +41,7 @@
                                       <ul class="candidate-info">
                                         <li class="designation">UI Designer</li>
                                         <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                                        <li><i class="las la-university"></i>Asja</li>
                                       </ul>
                                       <ul class="post-tags">
                                         <li><a href="#">App</a></li>

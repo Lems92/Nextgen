@@ -215,6 +215,9 @@
                         <li class="{{ is_active('etudiants/modfier-profile') ? 'active' : '' }}">
                             <a href="{{route('etudiants.edit_profile')}}"> <i class="la la-pen"></i>Modifier profil</a>
                         </li>
+                        <li>
+                            <a href="{{route('etudiant.etu-univ')}}"> <i class="la la-university"></i>Mon Université</a>
+                        </li>
 
                         <!--- Entreprise -->
                     @elseif($user->hasRole('entreprise'))
