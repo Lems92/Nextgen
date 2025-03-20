@@ -24,9 +24,15 @@
 
                     <!-- Localisation -->
                     <div class="col-md-2">
-                        <input type="text" class="form-control" id="location" placeholder="Localisation">
-                    </div>
 
+                               <select id="localisation_geographique" name="localisation_geographique" class="form-select" required>
+                                <option value="">Localisastion</option> 
+                                <option value="analamanga">ANALAMANGA</option>    
+                                <option value="vakinankaratra">VAKINANKARATRA</option>
+                            </select>
+                        <x-input-error :messages="$errors->get('localisation_geographique')"
+                                       class="mt-2"/>
+                    </div>
                     <!-- Type de contrat -->
                     <div class="col-md-2">
                         <select class="form-select" id="contractType">
