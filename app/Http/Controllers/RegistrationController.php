@@ -67,82 +67,14 @@ class RegistrationController extends Controller
             return redirect()->route(Redirection::redirect_if_authenticated($user));
         }
 
-        $mada_regions = File::json(base_path("/resources/data/region_mada.json"));
-        $france_regions = File::json(base_path("/resources/data/region_france.json"));
-        $ethnies = File::json(base_path("/resources/data/foko.json"));
-
-        // Définir les valeurs des tables que vous souhaitez récupérer
-        $parametres_tables = [
-            'genre', 'niveau_etude', 'competence_technique', 'competences_en_recherche_et_analyse',
-            'competences_en_communication', 'competences_interpersonnelles', 'competences_resolution_problemes',
-            'competences_adaptabilite', 'competences_gestion_stress', 'competences_leadership',
-            'competences_ethique_responsabilite', 'competences_gestion_financiere', 'competence_linguistique',
-            'type_contrat', 'duree_contrat', 'statut_socio_economique', 'conditions_vie_specifiques',
-            'religion', 'orientation_sexuelle'
+        $genres = [
+            (object) ['sigle' => 'M', 'libelle' => 'Masculin'],
+            (object) ['sigle' => 'F', 'libelle' => 'Féminin']
         ];
+        $mada_regions = ['Antananarivo', 'Fianarantsoa', 'Toamasina', 'Mahajanga', 'Toliara', 'Antsiranana'];
+        $france_regions = ['Île-de-France', 'Provence-Alpes-Côte d\'Azur', 'Auvergne-Rhône-Alpes'];
 
-        // Récupérer tous les paramètres en une seule requête
-        $parametres = Parametrage::whereIn('table', $parametres_tables)->get()->groupBy('table');
-
-        // Accéder aux données individuellement
-        $genres = $parametres->get('genre');
-        $niveau_etudes = $parametres->get('niveau_etude');
-        $competences_techniques = $parametres->get('competence_technique');
-        $competences_en_recherche_et_analyse = $parametres->get('competences_en_recherche_et_analyse');
-        $competences_en_communication = $parametres->get('competences_en_communication');
-        $competences_interpersonnelles = $parametres->get('competences_interpersonnelles');
-        $competences_resolution_problemes = $parametres->get('competences_resolution_problemes');
-        $competences_adaptabilite = $parametres->get('competences_adaptabilite');
-        $competences_gestion_stress = $parametres->get('competences_gestion_stress');
-        $competences_leadership = $parametres->get('competences_leadership');
-        $competences_ethique_responsabilite = $parametres->get('competences_ethique_responsabilite');
-        $competences_gestion_financiere = $parametres->get('competences_gestion_financiere');
-        $competences_langues = $parametres->get('competence_linguistique');
-        $type_contrats = $parametres->get('type_contrat');
-        $duree_contrats = $parametres->get('duree_contrat');
-        $statut_socio_economiques = $parametres->get('statut_socio_economique');
-        $conditions_vie_specifiques = $parametres->get('conditions_vie_specifiques');
-        $religions = $parametres->get('religion');
-        $orientation_sexuelles = $parametres->get('orientation_sexuelle');
-
-        //categories
-        $list_avec_categories_tables = ['domaines_etudes', 'secteur_activites'];
-        $list_categories = ListCategorie::whereIn('table', $list_avec_categories_tables)->get()->groupBy('table');
-
-        $domaines_etudes_categories = $list_categories->get('domaines_etudes');
-        $secteur_activites_categories = $list_categories->get('secteur_activites');
-
-        //univeriste suggestions
-        //$universites = Universite::all(['nom_etablissement', 'id']);
-
-        return view('inscription.form-etudiant', compact([
-            'mada_regions',
-            'france_regions',
-            'genres',
-            //'domaine_etudes',
-            'niveau_etudes',
-            'competences_techniques',
-            'competences_en_recherche_et_analyse',
-            'competences_en_communication',
-            'competences_interpersonnelles',
-            'competences_resolution_problemes',
-            'competences_adaptabilite',
-            'competences_gestion_stress',
-            'competences_leadership',
-            'competences_ethique_responsabilite',
-            'competences_gestion_financiere',
-            'competences_langues',
-            'type_contrats',
-            'duree_contrats',
-            'ethnies',
-            'statut_socio_economiques',
-            'conditions_vie_specifiques',
-            'religions',
-            'orientation_sexuelles',
-            'domaines_etudes_categories',
-            'secteur_activites_categories',
-            //'universites',
-        ]));
+        return view('inscription.form-etudiant', compact('genres', 'mada_regions', 'france_regions'));
     }
 
     public function register_etudiant_post(Request $request): RedirectResponse
@@ -153,196 +85,80 @@ class RegistrationController extends Controller
             return redirect()->route('inscription');
         }
 
-        $validateData = $request->validate([
-            'prenom' => 'required|string',
-            'nom' => 'required|string',
-            'numero_telephone' => 'required|string',
-            'date_naissance' => 'required|string',
-            'genre' => 'required|string',
-            'adresse_postale' => 'required|string',
-            'pays' => 'required|string',
-            'region' => 'required|string',
-            'ville' => 'required|string',
-            'code_postal' => 'required|string',
-            'nom_ecole_universite' => 'required|string',
-            'domaine_etudes' => 'required|string',
-            'niveau_etudes' => 'required|string',
-            'annee_obtention_diplome' => 'required|integer',
-
-            // competences
-            'competences_techniques' => 'nullable|array',
-            'competences_en_recherche_et_analyse' => 'nullable|array',
-            'competences_en_communication' => 'nullable|array',
-            'competences_interpersonnelles' => 'nullable|array',
-            'competences_resolution_problemes' => 'nullable|array',
-            'competences_adaptabilite' => 'nullable|array',
-            'competences_gestion_stress' => 'nullable|array',
-            'competences_leadership' => 'nullable|array',
-            'competences_ethique_responsabilite' => 'nullable|array',
-            'competences_gestion_financiere' => 'nullable|array',
-            'competences_langues' => 'nullable|array',
-
-            // Autres
-            'portfolio' => 'nullable|string',
-            'centres_interet' => 'required|string',
-            'document_diplome' => 'required',
-            'document_recommandation' => 'required',
-            'secteur_activite_preferer' => 'nullable|array',
-            'type_emploi_recherche' => 'nullable|array',
-            'localisation_geographique_preferee' => 'required|string',
-            //'salaire_souhaite' => 'required',
-            'duree_disponibilite' => 'required',
-            'semestre_cours' => 'required',
-            'vacances_ete_debut' => 'required',
-            'vacances_ete_fin' => 'required',
-            'dates_disponibles_vacances_ete_debut' => 'required',
-            'dates_disponibles_vacances_ete_fin' => 'required',
-            'accessibilite' => 'required',
-            'details_accessibilite' => 'nullable|string',
-            'origine_ethnique' => 'required|string',
-            'statut_socio_economique' => 'required|string',
-            'conditions_vie_specifiques' => 'required|string',
-            'religion_belief' => 'required|string',
-            'orientation_sexuelle' => 'required|string',
+        $validatedData = $request->validate([
+            'prenom' => 'required|string|max:255',
+            'nom' => 'required|string|max:255',
+            'numero_telephone' => 'required|string|max:20',
+            'date_naissance' => 'required|date',
+            'genre' => 'required|string|max:10',
+            'adresse_postale' => 'required|string|max:255',
+            'pays' => 'required|string|max:50',
+            'region' => 'required|string|max:50',
+            'ville' => 'required|string|max:100',
+            'code_postal' => 'required|string|max:10',
         ]);
 
         try {
+            $etudiant = Etudiant::create(array_merge($validatedData, [
+                'nom_ecole_universite' => '',
+                'domaine_etudes' => '',
+                'niveau_etudes' => '',
+                'annee_obtention_diplome' => '',
+                'competences_techniques' => json_encode([]),
+                'competences_en_recherche_et_analyse' => json_encode([]),
+                'competences_en_communication' => json_encode([]),
+                'competences_interpersonnelles' => json_encode([]),
+                'competences_resolution_problemes' => json_encode([]),
+                'competences_adaptabilite' => json_encode([]),
+                'competences_gestion_stress' => json_encode([]),
+                'competences_leadership' => json_encode([]),
+                'competences_ethique_responsabilite' => json_encode([]),
+                'competences_gestion_financiere' => json_encode([]),
+                'competences_langues' => json_encode([]),
+                'experience_professionnelle' => '',
+                'portfolio' => '',
+                'centres_interet' => '',
+                'document_diplome' => '',
+                'document_recommandation' => '',
+                'secteur_activite_preferer' => json_encode([]),
+                'type_emploi_recherche' => json_encode([]),
+                'localisation_geographique_preferee' => '',
+                'duree_disponibilite' => '',
+                'semestre_cours' => '',
+                'vacances_ete_debut' => null,
+                'vacances_ete_fin' => null,
+                'dates_disponibles_vacances_ete_debut' => null,
+                'dates_disponibles_vacances_ete_fin' => null,
+                'accessibilite' => false, // Valeur par défaut
+                'details_accessibilite' => '',
+                'origine_ethnique' => '',
+                'statut_socio_economique' => '',
+                'conditions_vie_specifiques' => '',
+                'religion_belief' => '',
+                'orientation_sexuelle' => '',
+                'profile_picture' => '',
+                'slug' => strtolower($validatedData['prenom']),
+                'description' => '',
+            ]));
 
-            DB::transaction(function () use ($registerData, $request, $validateData) {
+            // Créer l'utilisateur associé à l'étudiant
+            $user = User::create([
+                'email' => $registerData['email'],
+                'password' => bcrypt($registerData['password']),
+                'userable_id' => $etudiant->id,
+                'userable_type' => get_class($etudiant),
+            ]);
 
-                //upload des fichiers
-                if ($request->hasFile('document_diplome')) {
-                    $validateData['document_diplome'] = Storage::disk('public')->put('document_diplome', $request->file('document_diplome'));
-                } else {
-                    return back()->withErrors([
-                        'document_diplome' => 'Erreur lors de l\'importation du document diplôme'
-                    ]);
-                }
+            $user->assignRole('etudiant');
 
-                if ($request->hasFile('document_recommandation')) {
-                    $validateData['document_recommandation'] = Storage::disk('public')->put('document_recommandation', $request->file('document_recommandation'));
-                } else {
-                    return back()->withErrors([
-                        'document_recommandation' => 'Erreur lors de l\'importation du document recommendation'
-                    ]);
-                }
+            // Envoyer un email de vérification
+            $user->sendEmailVerificationNotification();
 
-                // Si l'université n'est pas dans la base de données
-                //$is_univ_partenaire = Universite::where('nom_etablissement', 'LIKE', "%" . $validateData['nom_ecole_universite'] . "%")->count();
+            Auth::login($user);
 
-                //$status_compte = false;
-                //if ($is_univ_partenaire === 0) {
-                    $status_compte = true;
-                //}
-
-                $etudiant = Etudiant::create($validateData);
-
-                // Expericens academiques
-                $type_experiences_academmiques = ['stage_academique', 'projet_academique', 'these_memoire', 'realisations', 'cours_speciaux', 'autres_experiences'];
-
-                foreach ($type_experiences_academmiques as $type_experiences_academmique) {
-                    if ($request->has($type_experiences_academmique . '_titre')
-                        && $request->has($type_experiences_academmique . '_annee')
-                        && $request->has($type_experiences_academmique . '_duree')
-                    ) {
-                        $titres = $request->get($type_experiences_academmique . '_titre');
-                        $annees = $request->get($type_experiences_academmique . '_annee');
-                        $durees = $request->get($type_experiences_academmique . '_duree');
-                        $descriptions = $request->get($type_experiences_academmique . '_description');
-
-                        //si les tableaux ont même taille
-                        if (count($titres) == count($annees) && count($titres) == count($durees)) {
-                            for ($i = 0; $i < count($titres); $i++) {
-                                $data = [];
-                                $data['titre'] = $titres[$i];
-                                $data['duree'] = $durees[$i];
-                                $data['annee'] = $annees[$i];
-                                if (isset($descriptions[$i])) {
-                                    $data['description'] = $descriptions[$i];
-                                }
-                                $data['etudiant_id'] = $etudiant->id;
-                                $data['type'] = $type_experiences_academmique;
-                                ExperienceAcademique::create($data);
-                            }
-                        }
-                    }
-
-                }
-
-                // Experiences pro
-                $exp_pro = "experiences_professionnelles";
-                if ($request->has($exp_pro . '_titre_poste')
-                    && $request->has($exp_pro . '_nom_entreprise')
-                    && $request->has($exp_pro . '_date_debut')
-                    && $request->has($exp_pro . '_lieu')
-                    && $request->has($exp_pro . '_secteur')
-                    && $request->has($exp_pro . '_type_contrat')
-                ) {
-                    $titre_postes = $request->get($exp_pro . '_titre_poste');
-                    $nom_entreprises = $request->get($exp_pro . '_nom_entreprise');
-                    $date_debuts = $request->get($exp_pro . '_date_debut');
-                    $date_fins = $request->get($exp_pro . '_date_fin');
-                    $lieus = $request->get($exp_pro . '_lieu');
-                    $secteurs = $request->get($exp_pro . '_secteur');
-                    $type_contrats = $request->get($exp_pro . '_type_contrat');
-                    $salaires = $request->get($exp_pro . '_salaire');
-                    $descriptions = $request->get($exp_pro . '_description');
-
-                    //si les tableaux ont même taille
-                    if (count($titre_postes) == count($nom_entreprises)
-                        && count($titre_postes) == count($date_debuts)
-                        && count($titre_postes) == count($lieus)
-                        && count($titre_postes) == count($secteurs)
-                        && count($titre_postes) == count($type_contrats)
-                    ) {
-                        for ($i = 0; $i < count($titre_postes); $i++) {
-                            $data = [];
-                            $data['titre_poste'] = $titre_postes[$i];
-                            $data['nom_entreprise'] = $nom_entreprises[$i];
-                            $data['date_debut'] = $date_debuts[$i];
-                            if (isset($date_fins[$i])) {
-                                $data['date_fin'] = $date_fins[$i];
-                            }
-                            $data['lieu'] = $lieus[$i];
-                            $data['secteur'] = $secteurs[$i];
-                            $data['type_contrat'] = $type_contrats[$i];
-                            if (isset($salaires[$i])) {
-                                $data['salaire'] = $salaires[$i];
-                            }
-                            if (isset($descriptions[$i])) {
-                                $data['description'] = $descriptions[$i];
-                            }
-
-                            $data['etudiant_id'] = $etudiant->id;
-
-                            ExperienceProfessionnelle::create($data);
-                        }
-                    }
-                }
-
-                // création du compte utilisateur
-                $user = User::create([
-                    'email' => $registerData['email'],
-                    'password' => bcrypt($registerData['password']),
-                    'userable_id' => $etudiant->id,
-                    'userable_type' => get_class($etudiant),
-                    'is_accepted_by_admin' => $status_compte
-                ]);
-
-                $user->assignRole('etudiant');
-
-                //envoyer email de verification
-                $user->sendEmailVerificationNotification();
-
-                Auth::login($user);
-            });
-
-        } catch (Exception $exception) {
-            Storage::delete($validateData['document_diplome']);
-            Storage::delete($validateData['document_recommandation']);
-            throw new Exception($exception->getMessage());
+        } catch (\Exception $exception) {
+            throw new \Exception($exception->getMessage());
         }
-
 
         // Nettoyer les données de la session
         Session::forget('register_data');

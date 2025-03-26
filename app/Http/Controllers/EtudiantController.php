@@ -185,4 +185,36 @@ class EtudiantController extends Controller
         }
         return redirect()->back()->with('success', 'L\'affiliation a été supprimé avec succès !');
     }
+
+    public function showInscriptionForm(): View
+    {
+        $genres = [
+            (object) ['sigle' => 'M', 'libelle' => 'Masculin'],
+            (object) ['sigle' => 'F', 'libelle' => 'Féminin']
+        ];
+        $mada_regions = ['Antananarivo', 'Fianarantsoa', 'Toamasina', 'Mahajanga', 'Toliara', 'Antsiranana'];
+        $france_regions = ['Île-de-France', 'Provence-Alpes-Côte d\'Azur', 'Auvergne-Rhône-Alpes'];
+
+        return view('inscription.form-etudiant', compact('genres', 'mada_regions', 'france_regions'));
+    }
+
+    public function storeInscription(Request $request): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'prenom' => 'required|string|max:255',
+            'nom' => 'required|string|max:255',
+            'numero_telephone' => 'required|string|max:20',
+            'date_naissance' => 'required|date',
+            'genre' => 'required|string|max:10',
+            'adresse_postale' => 'required|string|max:255',
+            'pays' => 'required|string|max:50',
+            'region' => 'required|string|max:50',
+            'ville' => 'required|string|max:100',
+            'code_postal' => 'required|string|max:10',
+        ]);
+
+        Etudiant::create($validatedData);
+
+        return redirect()->route('inscription.etudiant.success')->with('success', 'Inscription réussie!');
+    }
 }
