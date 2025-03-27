@@ -3,12 +3,7 @@
 @section('title', 'NextGen - Accueil')
 
 @section('content')
-    @if(session('error'))
-        <div class="alert alert-warning alert-dismissible text-center fade show" role="alert" style="margin-bottom: 0;">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+
 @include('header.header')
 
         <!-- Banner Section-->
@@ -21,11 +16,11 @@
                         <!-- Colonne de texte à gauche -->
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="hero-content">
-                                <h1>Commence ta carrière ici</h1>
+                                <h2>NextGen connecte les talents de demain aux meilleures entreprises. </h2>
+                                    <p>Trouvez un stage, 
+                                    une alternance ou un premier emploi en quelques clics</p>
                                 <ul class="list-style-one">
-                                        <li>Accède aux opportunités qui te sont dédiées. Trouve des offres d'emploi et de stages adaptées à ton profil et à tes aspirations.</li>
-                                        <li>Connecte-toi avec des recruteurs : Rencontre des entreprises et des recruteurs qui cherchent des talents comme le tien.</li>
-                                        <li>Fais le premier pas vers une carrière réussie. Inscris-toi dès maintenant et démarre ton aventure professionnelle avec confiance !</li>
+                                        <li>Connectez-vous aux talents de demain, sans frontières.</li>
                                 </ul>
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Inscris-toi maintenant</a>
                             </div>
@@ -36,18 +31,38 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <!-- Slide Item 2 -->
                 <div class="container-fluid bg-image">
                     <div class="row h-100">
                         <!-- Colonne de texte à gauche -->
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="hero-content">
-                                <h1>Dénichez votre jeune talent avec NextGen</h1>
+                                <h2>NextGen connecte les talents de demain aux meilleures entreprises. </h2>
+                                    <p>Trouvez un stage, 
+                                    une alternance ou un premier emploi en quelques clics</p>
                                 <ul class="list-style-one">
-                                    <li>Rencontrez les futurs leaders : une réserve de jeunes professionnels prêts à apporter leur énergie et leurs idées novatrices à votre équipe.</li>
-                                    <li>Trouvez des profils qui résonnent avec vos valeurs : Sélectionnez des candidats enthousiastes et engagés, alignés avec vos objectifs et votre culture d’entreprise.</li>
-                                    <li>Faites grandir votre équipe avec des talents prometteurs.</li>
+                                    <li>Le recrutement inclusif commence ici.</li>    
+                                </ul>
+                                <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Découvrez les talents</a>
+                            </div>
+                        </div>
+                        <!-- Colonne d'image à droite -->
+                        <div class="col-md-6 d-flex align-items-center justify-content-end">
+                            <img src="images/index-19/hero-img-1.png" alt="Image description" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid bg-image">
+                    <div class="row h-100">
+                        <!-- Colonne de texte à gauche -->
+                        <div class="col-md-6 d-flex align-items-center">
+                            <div class="hero-content">
+                                <h2>NextGen connecte les talents de demain aux meilleures entreprises. </h2>
+                                    <p>Trouvez un stage, 
+                                    une alternance ou un premier emploi en quelques clics</p>
+                                <ul class="list-style-one">
+                                    <li>Un avenir accessible à tous.</li>                                   
                                 </ul>
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Découvrez les talents</a>
                             </div>
@@ -61,12 +76,27 @@
             </div>
         </section>
 
+        <!-- About Section -->
+<section class="apropos-section">
+    <div class="auto-container">
+        <div class="row align-items-center">
+            <!-- Content Column -->
+            <div class="content-column col-lg-12">
+                <div class="inner-column text-center">
+                    <h2>À propos de NextGen</h2>
+                    <p>NextGen, c’est l’ambition de rapprocher jeunes talents et entreprises. Notre mission : simplifier le recrutement et maximiser les opportunités pour tous.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End About Section -->
+        
         <!-- End Banner Section-->
 
-        <!--Clients Section-->
+        <!--Clients Section
         <section class="clients-section">
             <div class="sponsors-outer wow fadeInUp">
-                <!--Sponsors Carousel-->
                 <ul class="sponsors-carousel owl-carousel owl-theme">
                     <li class="slide-item">
                         <figure class="image-box"><a href="#"><img src="images/clients/1-1.png" alt=""></a></figure>
@@ -92,7 +122,7 @@
                 </ul>
             </div>
         </section>
-        <!-- End Clients Section-->
+        End Clients Section-->
 
         <!-- About Section -->
         <section class="about-section" >
@@ -102,15 +132,10 @@
                     <div class="content-column col-lg-6 col-md-12 col-sm-12 order-2">
                         <div class="inner-column wow fadeInUp">
                             <div class="sec-title">
-                                <h2>Commencez votre parcours <br>dès maintenant.</h2>
-                                <div class="text">La première fois peut être intimidante, mais chez NextGen, nous
-                                    facilitons votre transition vers le monde professionnel.</div>
+                                <h2>Préparez votre avenir avec NextGen.</h2>
+                                <div class="text"> Trouvez rapidement des offres adaptées à votre profil 
+                                    Inscrivez-vous et accélérez votre carrière. </div>
                             </div>
-                            <ul class="list-style-one">
-                                <li>Accédez à des offres d'emploi réservées à nos membres</li>
-                                <li>Recevez des conseils pour optimiser vos candidatures</li>
-                                <li>Connectez-vous avec des recruteurs et élargissez votre réseau</li>
-                            </ul>
                             <a href="{{route('connexion')}}" class="theme-btn btn-style-one bg-blue"><span class="btn-title">Découvrir les
                                     opportunités</span></a>
                         </div>
@@ -137,15 +162,10 @@
                     <div class="content-column col-lg-6 order-2">
                         <div class="inner-column wow fadeInRight pt-0">
                             <div class="sec-title mb-4">
-                                <h2>Accédez au plus grand vivier de talents sur NextGen</h2>
-                                <div class="text">Découvrez les jeunes talents les plus prometteurs et innovants pour
-                                    dynamiser votre entreprise.</div>
+                                <h2>Accédez aux meilleurs jeunes talents.</h2>
+                                <div class="text">Publiez vos offres, présélectionnez des candidats 
+                                    qualifiés et recrutez efficacement. </div>
                             </div>
-                            <ul class="list-style-one at-home22 mb40 mt40">
-                                <li>Une communauté de talents exceptionnels</li>
-                                <li>Des jeunes talents qualifiés</li>
-                                <li>La plateforme carrière officielle d'établissements d'enseignement supérieur</li>
-                            </ul>
                             <a href="{{route('inscription')}}" class="theme-btn btn-style-one">Rejoindre NextGen<i
                                     class="fal fa-long-arrow-left ms-3"></i></a>
                         </div>
@@ -211,8 +231,8 @@
                         <div class="inner-box">
                             <div class="content">
                                 <h3>Entreprise</h3>
-                                <p>Connectez-vous avec les professionnels de demain et propulsez votre
-                                    entreprise vers de nouveaux sommets avec NextGen.</p>
+                                <p>Accédez aux meilleurs jeunes talents. Publiez vos offres, présélectionnez des candidats 
+                                    qualifiés et recrutez efficacement.</p>
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
                             </div>
                             <figure class="image"><img src="images/resource/employ.png" alt=""></figure>
@@ -224,8 +244,7 @@
                         <div class="inner-box">
                             <div class="content">
                                 <h3>Service carrière</h3>
-                                <p>Préparez vos étudiants pour l'avenir en les connectant avec les meilleures
-                                    opportunités de carrière grâce à NextGen.</p>
+                                <p>Facilitez l’insertion professionnelle de vos étudiants avec NextGen.</p>
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
                             </div>
                             <figure class="image"><img src="images/resource/candidate.png" alt=""></figure>
@@ -242,12 +261,12 @@
               <div class="sec-title text-center">
                 <h2>Témoignages</h2>
               </div>
-
+      
               <div class="carousel-outer wow fadeInUp">
-
+      
                 <!-- Testimonial Carousel -->
                 <div class="testimonial-carousel owl-carousel owl-theme">
-
+      
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -260,7 +279,7 @@
                       </div>
                     </div>
                   </div>
-
+      
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -273,7 +292,7 @@
                       </div>
                     </div>
                   </div>
-
+      
                   <!--Testimonial Block -->
                   <div class="testimonial-block">
                     <div class="inner-box">
@@ -291,9 +310,9 @@
             </div>
           </section>
         <!-- End Testimonial Section -->
-
+        
         <!-- Features Section-->
-
+        
 
         <!-- Registeration Banners -->
         <!-- End Registeration Banners -->
@@ -303,9 +322,9 @@
             <div class="auto-container wow fadeInUp">
                 <div class="outer-box">
                     <div class="sec-title light">
-                        <h2>Vous avez une question?</h2>
-                        <div class="text text-white">Nous sommes là pour vous aider. Consultez notre FAQ, envoyez-nous
-                            un courrier<br />ou appelez au +261 20 24 245 12.</div>
+                        <h2>Besoin d’aide ?</h2>
+                        <div class="text text-white"> Contactez notre équipe via le formulaire en ligne ou par email : 
+                            support@nextgen.com.<br />ou appelez au +261 20 24 245 12.</div>
                     </div>
 
                     <div class="btn-box">
@@ -315,6 +334,30 @@
                 </div>
             </div>
         </section>
+        
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="auto-container">
+                <div class="sec-title text-center">
+                    <h2>FAQ</h2>
+                </div>
+                <div class="faq-content">
+                    <div class="faq-item">
+                        <h4>Comment s’inscrire ?</h4>
+                        <p>Créez un compte et complétez votre profil en quelques minutes.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Quels types d’offres ?</h4>
+                        <p>Stages, alternances et premiers emplois.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Comment contacter un recruteur ?</h4>
+                        <p>Postulez et échangez directement via la plateforme.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End FAQ Section -->
 
         <style>
             /* Style par défaut pour les écrans plus grands */
@@ -328,21 +371,105 @@
                     display: none; /* Masquer l'image sur les petits écrans */
                 }
             }
+            .faq-section {
+        padding: 60px 0;
+        background-color: #f9f9f9;
+    }
+    
+    .faq-section .sec-title {
+        margin-bottom: 40px;
+    }
+
+    .faq-section .faq-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .faq-section .faq-item {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-section .faq-item h4 {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .faq-section .faq-item p {
+        margin: 0;
+        font-size: 16px;
+        color: #555;
+    }
+.apropos-section {
+    padding: 60px 0;
+    background-color: #f9f9f9;
+    text-align: center
+}
+
+.apropos-section .inner-column {
+    max-width: 800px;
+    margin-left: 100px;
+}
+.apropos-section .auto-container {
+    max-width: 100%;
+    width: 100%;
+    padding: 0; /* Optionnel : enlève les marges internes */
+    margin: 0; /* Optionnel : enlève les marges externes */
+}
+
+
+.apropos-section h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.apropos-section p {
+    font-size: 18px;
+    color: #555;
+}
+.apropos-section .content-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.auto-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+}
+
+.row.align-items-center {
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 
         </style>
 
-        <script defer>
+        <script>
             $(document).ready(function(){
-                $(".banner-carousel").owlCarousel({
-                    items: 1, // Number of items to show
-                    loop: true, // Infinite loop
-                    margin: 0, // Margin between items
-                    autoplay: true, // Enable autoplay
-                    autoplayTimeout: 5000, // Time between slides (in milliseconds)
-                    autoplayHoverPause: true, // Pause on hover
-                    dots: true, // Show pagination dots
-                    nav: false // Hide navigation arrows
-                });
+            $(".banner-carousel").owlCarousel({
+            items: 1, // Number of items to show
+            loop: true, // Infinite loop
+            margin: 0, // Margin between items
+            autoplay: true, // Enable autoplay
+            autoplayTimeout: 5000, // Time between slides (in milliseconds)
+            autoplayHoverPause: true, // Pause on hover
+            dots: true, // Show pagination dots
+            nav: false // Hide navigation arrows
             });
+        });
+    
         </script>
 @endsection
