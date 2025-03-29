@@ -2,15 +2,6 @@
     use Illuminate\Support\Facades\Auth;
     $user = Auth::user();
     $user->load('userable');
-
-    function is_active ($url_pattern): bool {
-        return request()->is("$url_pattern*");
-    }
-
-    // Debugging logs
-    Log::info('User Role:', ['roles' => $user->getRoleNames()]);
-    Log::info('User Accepted by Admin:', ['is_accepted_by_admin' => $user->is_accepted_by_admin]);
-    Log::info('User Email Verified At:', ['email_verified_at' => $user->email_verified_at]);
 @endphp
 
 <div class="page-wrapper dashboard">

@@ -5,11 +5,7 @@
 
 @php
 
-    function reformat_permission_name(string $string): string {
-        $string = str_replace('_', ' ', $string);
-        $string[0] = strtoupper($string[0]);
-        return $string;
-    }
+    
 
 @endphp
 
