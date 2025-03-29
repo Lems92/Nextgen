@@ -2,13 +2,6 @@
 
 @section('title', 'Inscription entreprise')
 
-
-@php
-
-    
-
-@endphp
-
 @section('content')
 
     @include('header.header')
