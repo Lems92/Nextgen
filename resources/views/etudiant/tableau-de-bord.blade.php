@@ -4,8 +4,6 @@
 
 @section('content')
 
-    @include('header.dashboard-header')
-
     @php
         use App\Models\Offre;use Illuminate\Support\Facades\Auth;
         $user = Auth::user();
@@ -16,6 +14,7 @@
         $offres_postule_recemment = $user->userable->offres_postules;
     @endphp
 
+    @include('header.dashboard-header')
         <!-- Dashboard -->
     <section class="user-dashboard">
         <div class="dashboard-outer">
