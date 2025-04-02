@@ -2,17 +2,6 @@
 
 @section('title', 'Inscription entreprise')
 
-
-@php
-
-    function reformat_permission_name(string $string): string {
-        $string = str_replace('_', ' ', $string);
-        $string[0] = strtoupper($string[0]);
-        return $string;
-    }
-
-@endphp
-
 @section('content')
 
     @include('header.header')

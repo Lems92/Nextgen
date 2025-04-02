@@ -135,7 +135,11 @@ class Etudiant extends Model implements Sluggable
 
         $param = Parametrage::where('sigle', 'LIKE', $attr)->first();
 
-        return $param->libelle;
+        if($param) {
+            return $param->libelle;
+        }
+
+        return null;
     }
 
     public function getParametrageLibelleArray(string $attribute): array
@@ -145,7 +149,9 @@ class Etudiant extends Model implements Sluggable
         if(is_array($attr)) {
             foreach ($attr as $sigle) {
                 $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
-                $new_array[] = $param->libelle;
+                if($param) {
+                    $new_array[] = $param->libelle;
+                }
             }
         }
         return $new_array;

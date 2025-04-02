@@ -34,9 +34,14 @@
                                         <span class="badge bg-success ms-3">Compte vérifié</span>
                                     </div>
                                 @else
-                                    <div>
-                                        <span class="badge bg-warning ms-3">En attente de validation</span>
-                                    </div>
+                                    <form method="POST" action="{{route('admin.activate_account')}}"
+                                          id="activate_account_form">
+                                        @csrf
+                                        <input type="hidden" name="type" value="etudiant">
+                                        <input type="hidden" name="route" value="{{route('admin.show_etudiant', ['etudiant' => $etudiant->slug])}}">
+                                        <input type="hidden" name="id" value="{{$etudiant->user->id}}">
+                                    </form>
+                                    <button onclick="activateAccount()" class="btn btn-warning ms-3">Accepter l'inscription</button>
                                 @endif
                             </div>
 
@@ -300,4 +305,21 @@
             margin-top: 15px;
         }
     </style>
+
+    <script>
+        function activateAccount() {
+            Swal.fire({
+                title: "Voulez-vous vraiment accepter l'inscription ?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#00cb5e",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Oui, accepter"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('activate_account_form').submit();
+                }
+            });
+        }
+    </script>
 @endsection
