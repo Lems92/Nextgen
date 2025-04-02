@@ -20,7 +20,7 @@
     <section class="user-dashboard">
         <div class="dashboard-outer">
             <div class="upper-title-box">
-                <h3>Howdy, {{$user->userable->prenom}}!!</h3>
+                <h3>Bonjour, {{$user->userable->prenom}}!!</h3>
             </div>
             <div class="row">
                 <div class="col">

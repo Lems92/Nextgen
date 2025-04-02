@@ -6,7 +6,7 @@
 @section('content')
 @include('header.header')
 <div class="login-section">
-    <div class="image-layer" style="background-image : url('images/background/signin.png');"></div>
+    <div class="image-layer" style="background-image : url('images/inscription1.jpg');"></div>
     <div class="outer-box">
       <!-- Login Form -->
       <div class="login-form default-form">

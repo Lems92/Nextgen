@@ -147,6 +147,7 @@ class RegistrationController extends Controller
                 'password' => bcrypt($registerData['password']),
                 'userable_id' => $etudiant->id,
                 'userable_type' => get_class($etudiant),
+                'is_accepted_by_admin' => true,
             ]);
 
             $user->assignRole('etudiant');

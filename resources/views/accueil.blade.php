@@ -145,12 +145,12 @@
                     <div class="image-column col-lg-6 col-md-12 col-sm-12">
                         <figure class="image wow fadeInLeft"><img src="images/resource/image-2.jpg" alt=""></figure>
 
-                        <!-- Count Employers -->
+                        <!-- Count Employers 
                         <div class="count-employers wow fadeInUp">
                             <div class="check-box"><span class="flaticon-tick"></span></div>
                             <span class="title">+ de 20 partenaires</span>
                             <figure class="image"><img src="images/resource/multi-logo.png" alt=""></figure>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
@@ -254,20 +254,19 @@
             </div>
         </section>
 
-        <!-- Testimonial Section Two -->
+        <!-- Testimonial Section Two
         <section class="testimonial-section">
             <div class="container-fluid">
-              <!-- Sec Title -->
+
               <div class="sec-title text-center">
                 <h2>Témoignages</h2>
               </div>
       
               <div class="carousel-outer wow fadeInUp">
       
-                <!-- Testimonial Carousel -->
+                 Testimonial Carousel 
                 <div class="testimonial-carousel owl-carousel owl-theme">
-      
-                  <!--Testimonial Block -->
+
                   <div class="testimonial-block">
                     <div class="inner-box">
                       <h4 class="title">Good theme</h4>
@@ -279,8 +278,7 @@
                       </div>
                     </div>
                   </div>
-      
-                  <!--Testimonial Block -->
+
                   <div class="testimonial-block">
                     <div class="inner-box">
                       <h4 class="title">Great quality!</h4>
@@ -293,7 +291,7 @@
                     </div>
                   </div>
       
-                  <!--Testimonial Block -->
+                  
                   <div class="testimonial-block">
                     <div class="inner-box">
                       <h4 class="title">Awesome Design </h4>
@@ -309,6 +307,7 @@
               </div>
             </div>
           </section>
+          -->
         <!-- End Testimonial Section -->
         
         <!-- Features Section-->
