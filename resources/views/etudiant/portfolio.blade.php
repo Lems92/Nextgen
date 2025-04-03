@@ -212,7 +212,7 @@
                                 <h4 class="widget-title mt-3">Compétences en gestion financière</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach($etudiant->competences_gestion_financiere as $comp)
+                                        @foreach($etudiant->competences_gestion_financiere ?? [] as $comp)
                                             <li><a href="#">{{$comp}}</a></li>
                                         @endforeach
                                     </ul>
@@ -227,7 +227,7 @@
                                 <h4 class="widget-title mt-3">Secteur activités préférées</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach($etudiant->secteur_activite_preferer as $comp)
+                                        @foreach((array) $etudiant->secteur_activite_preferer as $comp)
                                             <li><a href="#">{{$comp}}</a></li>
                                         @endforeach
                                     </ul>

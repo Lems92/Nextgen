@@ -217,4 +217,93 @@ class EtudiantController extends Controller
 
         return redirect()->route('inscription.etudiant.success')->with('success', 'Inscription réussie!');
     }
+
+    public function updateProfile(Request $request)
+    {
+        $request->merge([
+            'accessibilite' => $request->accessibilite === 'oui' ? true : false,
+        ]);
+        // Valider les données
+        $validatedData = $request->validate([
+            'prenom' => 'required|string|max:255',
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'telephone' => 'required|string|max:20',
+            'date_naissance' => 'required|date',
+            'genre' => 'required|string',
+            'adresse_postale' => 'required|string|max:255',
+            'pays' => 'required|string',
+            'region' => 'required|string',
+            'ville' => 'required|string|max:255',
+            'code_postal' => 'required|string|max:10',
+            'nom_ecole_universite' => 'nullable|string|max:255',
+            'domaine_etudes' => 'nullable|string|max:255',
+            'niveau_etudes' => 'nullable|string|max:255',
+            'annee_obtention_diplome' => 'nullable|integer',
+            'competences_techniques' => 'nullable|json',
+            'competences_en_recherche_et_analyse' => 'nullable|json',
+            'competences_en_communication' => 'nullable|json',
+            'competences_interpersonnelles' => 'nullable|json',
+            'competences_resolution_problemes' => 'nullable|json',
+            'competences_adaptabilite' => 'nullable|json',
+            'competences_gestion_stress' => 'nullable|json',
+            'competences_leadership' => 'nullable|json',
+            'competences_ethique_responsabilite' => 'nullable|json',
+            'competences_gestion_financiere' => 'nullable|json',
+            'competences_langues' => 'nullable|json',
+            'experience_professionnelle' => 'nullable|string',
+            'portfolio' => 'nullable|string',
+            'centres_interet' => 'nullable|string',
+            'document_diplome' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+            'document_recommandation' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
+            'secteur_activite_preferer' => 'nullable|json',
+            'type_emploi_recherche' => 'nullable|json',
+            'localisation_geographique_preferee' => 'nullable|string',
+            'duree_disponibilite' => 'nullable|string',
+            'semestre_cours' => 'nullable|string',
+            'vacances_ete_debut' => 'nullable|date',
+            'vacances_ete_fin' => 'nullable|date',
+            'dates_disponibles_vacances_ete_debut' => 'nullable|date',
+            'dates_disponibles_vacances_ete_fin' => 'nullable|date',
+            'accessibilite' => 'required|boolean',
+            'details_accessibilite' => 'nullable|string',
+            'origine_ethnique' => 'nullable|string',
+            'statut_socio_economique' => 'nullable|string',
+            'conditions_vie_specifiques' => 'nullable|string',
+            'religion_belief' => 'nullable|string',
+            'orientation_sexuelle' => 'nullable|string',
+            'profile_picture' => 'nullable|file|mimes:jpg,png|max:2048',
+            'slug' => 'nullable|string',
+            'description' => 'nullable|string',
+        ]);
+
+        // Récupérer l'utilisateur connecté
+        $etudiant = Auth::user()->userable;
+
+        if (!$etudiant) {
+            return redirect()->back()->with('error', 'Utilisateur non trouvé.');
+        }
+
+        // Mettre à jour les données
+        $etudiant->update($validatedData);
+
+        // Gérer les fichiers téléchargés
+        if ($request->hasFile('document_diplome')) {
+            $validatedData['document_diplome'] = $request->file('document_diplome')->store('documents/diplomes', 'public');
+        }
+
+        if ($request->hasFile('document_recommandation')) {
+            $validatedData['document_recommandation'] = $request->file('document_recommandation')->store('documents/recommandations', 'public');
+        }
+
+        if ($request->hasFile('profile_picture')) {
+            $validatedData['profile_picture'] = $request->file('profile_picture')->store('profile_pictures', 'public');
+        }
+
+        // Sauvegarder les fichiers dans la base de données
+        $etudiant->update($validatedData);
+
+        // Rediriger avec un message de succès
+        return redirect()->route('etudiants.edit_profile')->with('success', 'Profil mis à jour avec succès.');
+    }
 }

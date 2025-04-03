@@ -8,6 +8,7 @@ use App\Http\Controllers\WaitingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\EtudiantController;
 
 Route::get('/', [HomeController::class, 'home'])->name('accueil');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -36,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/etudiants/modifer-profile', function () {
         return view('etudiant.modifierProfil');
     })->middleware('role:etudiant')->name('etudiants.edit_profile');
+    Route::post('/etudiants/modifer-profile', [EtudiantController::class, 'updateProfile'])->name('etudiants.update_profile');
 });
 
 //commun

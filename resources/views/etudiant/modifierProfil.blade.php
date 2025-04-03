@@ -14,7 +14,24 @@
                   <h2>Formulaire d'Inscription Étudiant</h2>
               </div>
 
-              <form id="default-form">
+              @if(session('success'))
+                  <div class="alert alert-success">
+                      {{ session('success') }}
+                  </div>
+              @endif
+
+              @if($errors->any())
+                  <div class="alert alert-danger">
+                      <ul>
+                          @foreach($errors->all() as $error)
+                              <li>{{ $error }}</li>
+                          @endforeach
+                      </ul>
+                  </div>
+              @endif
+
+              <form id="default-form" method="POST" action="{{ route('etudiants.update_profile') }}" enctype="multipart/form-data">
+                  @csrf
 
                   <fieldset class="form-section">
                       <legend><h4> Personnelles </h4></legend>

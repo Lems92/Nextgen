@@ -27,7 +27,7 @@
                         </div>
                         <!-- Colonne d'image à droite -->
                         <div class="col-md-6 d-flex align-items-center justify-content-end">
-                            <img src="images/index-14/images/1.png" alt="Homme qui croise les bras" class="img-fluid">
+                            <img src="images/Imghero.png" alt="Homme qui croise les bras" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                         </div>
                         <!-- Colonne d'image à droite -->
                         <div class="col-md-6 d-flex align-items-center justify-content-end">
-                            <img src="images/index-19/hero-img-1.png" alt="Image description" class="img-fluid">
+                            <img src="images/Imghero.png" alt="Image description" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                         </div>
                         <!-- Colonne d'image à droite -->
                         <div class="col-md-6 d-flex align-items-center justify-content-end">
-                            <img src="images/index-19/hero-img-1.png" alt="Image description" class="img-fluid">
+                            <img src="images/Imghero.png" alt="Image description" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,7 @@
 
                     <!-- Image Column -->
                     <div class="image-column col-lg-6 col-md-12 col-sm-12">
-                        <figure class="image wow fadeInLeft"><img src="images/resource/image-2.jpg" alt=""></figure>
+                        <figure class="image wow fadeInLeft"><img src="images/inscription3.jpg" alt=""></figure>
 
                         <!-- Count Employers 
                         <div class="count-employers wow fadeInUp">
@@ -173,7 +173,7 @@
 
                     <!-- Image Column -->
                     <div class="image-column col-lg-6 mb-4 mb-lg-0">
-                        <figure class="image-box wow fadeInLeft mx-0"><img src="images/index-22/home22-img-3.png"
+                        <figure class="image-box wow fadeInLeft mx-0"><img src="images/hero2.jpeg"
                                 alt=""></figure>
                     </div>
                 </div>
@@ -235,7 +235,7 @@
                                     qualifiés et recrutez efficacement.</p>
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
                             </div>
-                            <figure class="image"><img src="images/resource/employ.png" alt=""></figure>
+                            <figure class="image"><img src="images/employ.png" alt=""></figure>
                         </div>
                     </div>
 
@@ -247,7 +247,7 @@
                                 <p>Facilitez l’insertion professionnelle de vos étudiants avec NextGen.</p>
                                 <a href="{{route('inscription')}}" class="theme-btn btn-style-two">Nous rejoindre</a>
                             </div>
-                            <figure class="image"><img src="images/resource/candidate.png" alt=""></figure>
+                            <figure class="image"><img src="images/candidate.png" alt=""></figure>
                         </div>
                     </div>
                 </div>
