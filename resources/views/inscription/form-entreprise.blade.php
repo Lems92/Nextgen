@@ -236,7 +236,7 @@
                                                         <ul>
                                                             @foreach($offre->permissions as $permission)
                                                                 <li>
-                                                                    <span>{{reformat_permission_name($permission->name)}}</span>
+                                                                    <span>{{ ucwords(str_replace('_', ' ', $permission->name)) }}</span>
                                                                 </li>
                                                             @endforeach
                                                         </ul>

@@ -59,10 +59,12 @@
                                     <td>{{$etudiant->nom_ecole_universite}}</td>
                                     <td>{{$etudiant->domaine_etudes}}</td>
                                     <td>
-                                        @if($etudiant->user->is_accepted_by_admin)
+                                        @if($etudiant->user && $etudiant->user->is_accepted_by_admin)
                                             <span class="badge bg-success">Accepté</span>
-                                        @else
+                                        @elseif($etudiant->user)
                                             <span class="badge bg-warning">en attente</span>
+                                        @else
+                                            <span class="badge bg-danger">Utilisateur non trouvé</span>
                                         @endif
                                     </td>
                                     <td>

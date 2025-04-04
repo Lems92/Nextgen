@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Carbon\Carbon;
 
 class Etudiant extends Model implements Sluggable
 {
@@ -19,7 +20,6 @@ class Etudiant extends Model implements Sluggable
     protected $fillable = [
         'prenom',
         'nom',
-        //'adresse_email',
         'numero_telephone',
         'date_naissance',
         'genre',
@@ -67,7 +67,18 @@ class Etudiant extends Model implements Sluggable
         'orientation_sexuelle',
         'description',
         'profile_picture',
-        'slug'
+        'slug',
+    ];
+
+    protected $casts = [
+        'date_naissance' => 'date',
+        'vacances_ete_debut' => 'date',
+        'vacances_ete_fin' => 'date',
+        'accessibilite' => 'boolean',
+        'secteur_activite_preferer' => 'array',
+        'type_emploi_recherche' => 'array',
+        'dates_disponibles_vacances_ete_debut' => 'date',
+        'dates_disponibles_vacances_ete_fin' => 'date',
     ];
 
     public function user(): MorphOne
@@ -92,34 +103,12 @@ class Etudiant extends Model implements Sluggable
             ->withTimestamps();
     }
 
-    protected $casts = [
-        'date_naissance' => 'date',
-        'vacances_ete_debut' => 'date',
-        'vacances_ete_fin' => 'date',
-        'accessibilite' => 'boolean',
-        'competences_techniques' => 'array',
-        'competences_en_recherche_et_analyse' => 'array',
-        'competences_en_communication' => 'array',
-        'competences_interpersonnelles' => 'array',
-        'competences_resolution_problemes' => 'array',
-        'competences_adaptabilite' => 'array',
-        'competences_gestion_stress' => 'array',
-        'competences_leadership' => 'array',
-        'competences_ethique_responsabilite' => 'array',
-        'competences_gestion_financiere' => 'array',
-        'competences_langues' => 'array',
-        'secteur_activite_preferer' => 'array',
-        'type_emploi_recherche' => 'array',
-        'dates_disponibles_vacances_ete_debut' => 'date',
-        'dates_disponibles_vacances_ete_fin' => 'date',
-    ];
-
     public function universites(): HasMany
     {
         return $this->hasMany(EtudiantUniversite::class);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->prenom;
     }
@@ -131,12 +120,11 @@ class Etudiant extends Model implements Sluggable
 
     public function getParametrageLibelle(string $attribute): ?string
     {
-        $attr = $this->attributes[$attribute];
+        $attr = $this->attributes[$attribute] ?? null;
 
-        $param = Parametrage::where('sigle', 'LIKE', $attr)->first();
-
-        if($param) {
-            return $param->libelle;
+        if ($attr) {
+            $param = Parametrage::where('sigle', 'LIKE', $attr)->first();
+            return $param ? $param->libelle : null;
         }
 
         return null;
@@ -145,15 +133,17 @@ class Etudiant extends Model implements Sluggable
     public function getParametrageLibelleArray(string $attribute): array
     {
         $new_array = [];
-        $attr = json_decode($this->attributes[$attribute], true);
-        if(is_array($attr)) {
+        $attr = json_decode($this->attributes[$attribute] ?? '[]', true);
+
+        if (is_array($attr)) {
             foreach ($attr as $sigle) {
                 $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
-                if($param) {
+                if ($param) {
                     $new_array[] = $param->libelle;
                 }
             }
         }
+
         return $new_array;
     }
 
@@ -171,25 +161,13 @@ class Etudiant extends Model implements Sluggable
 
             // Si c'est un tableau
             if (in_array($key, [
-                'competences_techniques',
-                'competences_en_recherche_et_analyse',
-                'competences_en_communication',
-                'competences_interpersonnelles',
-                'competences_resolution_problemes',
-                'competences_adaptabilite',
-                'competences_gestion_stress',
-                'competences_leadership',
-                'competences_ethique_responsabilite',
-                'competences_gestion_financiere',
-                'competences_langues',
                 'type_emploi_recherche',
             ])) {
                 return $this->getParametrageLibelleArray($key);
             }
 
-
-            if($key == 'secteur_activite_preferer') {
-                return json_decode($this->attributes[$key]);
+            if ($key === 'secteur_activite_preferer') {
+                return json_decode($this->attributes[$key], true);
             }
 
             // Si l'attribut est casté dans $casts, utiliser le cast
@@ -198,7 +176,7 @@ class Etudiant extends Model implements Sluggable
 
                 // Gérer les types de cast spécifiques, par exemple pour les dates
                 if ($castType === 'date' || $castType === 'datetime') {
-                    return \Carbon\Carbon::parse($this->attributes[$key])->format('d F Y'); // Par exemple, formatage des dates
+                    return Carbon::parse($this->attributes[$key])->format('d F Y');
                 }
             }
 
@@ -209,5 +187,4 @@ class Etudiant extends Model implements Sluggable
         // Si la propriété n'est pas dans les attributs de l'objet, utiliser le comportement par défaut
         return parent::__get($key);
     }
-
 }

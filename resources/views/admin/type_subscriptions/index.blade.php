@@ -49,7 +49,7 @@
                                     <td>
                                         <ul>
                                         @foreach($subscription->permissions as $permission)
-                                                <li><span class="badge bg-secondary">{{ reformat_permission_name($permission->name) }}</span></li>
+                                                <li><span class="badge bg-secondary">{{ ucwords(str_replace('_', ' ', $permission->name)) }}</span></li>
                                         @endforeach
                                         </ul>
                                     </td>

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use function Livewire\of;
+use Illuminate\Support\Facades\DB;
 
 class EtudiantController extends Controller
 {
@@ -220,44 +221,48 @@ class EtudiantController extends Controller
 
     public function updateProfile(Request $request)
     {
+        // Activer le Query Log
+        DB::enableQueryLog();
+        
         $request->merge([
             'accessibilite' => $request->accessibilite === 'oui' ? true : false,
         ]);
+
         // Valider les données
         $validatedData = $request->validate([
             'prenom' => 'required|string|max:255',
             'nom' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'telephone' => 'required|string|max:20',
+            'numero_telephone' => 'required|string|max:20',
             'date_naissance' => 'required|date',
             'genre' => 'required|string',
-            'adresse_postale' => 'required|string|max:255',
-            'pays' => 'required|string',
-            'region' => 'required|string',
-            'ville' => 'required|string|max:255',
-            'code_postal' => 'required|string|max:10',
+            'adresse_postale' => 'nullable|string|max:255',
+            'pays' => 'nullable|string',
+            'region' => 'nullable|string',
+            'ville' => 'nullable|string|max:255',
+            'code_postal' => 'nullable|string|max:10',
             'nom_ecole_universite' => 'nullable|string|max:255',
             'domaine_etudes' => 'nullable|string|max:255',
             'niveau_etudes' => 'nullable|string|max:255',
             'annee_obtention_diplome' => 'nullable|integer',
-            'competences_techniques' => 'nullable|json',
-            'competences_en_recherche_et_analyse' => 'nullable|json',
-            'competences_en_communication' => 'nullable|json',
-            'competences_interpersonnelles' => 'nullable|json',
-            'competences_resolution_problemes' => 'nullable|json',
-            'competences_adaptabilite' => 'nullable|json',
-            'competences_gestion_stress' => 'nullable|json',
-            'competences_leadership' => 'nullable|json',
-            'competences_ethique_responsabilite' => 'nullable|json',
-            'competences_gestion_financiere' => 'nullable|json',
-            'competences_langues' => 'nullable|json',
-            'experience_professionnelle' => 'nullable|string',
+            'competences_techniques' => 'nullable|string|max:4294967295',
+            'competences_en_recherche_et_analyse' => 'nullable|string|max:4294967295',
+            'competences_en_communication' => 'nullable|string|max:4294967295',
+            'competences_interpersonnelles' => 'nullable|string|max:4294967295',
+            'competences_resolution_problemes' => 'nullable|string|max:4294967295',
+            'competences_adaptabilite' => 'nullable|string|max:4294967295',
+            'competences_gestion_stress' => 'nullable|string|max:4294967295',
+            'competences_leadership' => 'nullable|string|max:4294967295',
+            'competences_ethique_responsabilite' => 'nullable|string|max:4294967295',
+            'competences_gestion_financiere' => 'nullable|string|max:4294967295',
+            'competences_langues' => 'nullable|string|max:4294967295',
+            'experience_professionnelle' => 'nullable|string|max:4294967295',
             'portfolio' => 'nullable|string',
             'centres_interet' => 'nullable|string',
             'document_diplome' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
             'document_recommandation' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
-            'secteur_activite_preferer' => 'nullable|json',
-            'type_emploi_recherche' => 'nullable|json',
+            'secteur_activite_preferer' => 'nullable|array',
+            'type_emploi_recherche' => 'nullable|array',
             'localisation_geographique_preferee' => 'nullable|string',
             'duree_disponibilite' => 'nullable|string',
             'semestre_cours' => 'nullable|string',
@@ -276,32 +281,40 @@ class EtudiantController extends Controller
             'slug' => 'nullable|string',
             'description' => 'nullable|string',
         ]);
-
-        // Récupérer l'utilisateur connecté
+        $validatedData['secteur_activite_preferer'] = json_encode($request->input('secteur_activite_preferer', []));
+        $validatedData['type_emploi_recherche'] = json_encode($request->input('type_emploi_recherche', []));
+        $validatedData['competences_techniques'] = trim($request->input('competences_techniques'));// Récupérer l'utilisateur connecté
+        
+        // Gérer les fichiers téléchargés
+        if ($request->hasFile('document_diplome')) {
+            $validatedData['document_diplome'] = $request->file('document_diplome')->store('documents/diplomes', 'public');
+        }
+        
+        if ($request->hasFile('document_recommandation')) {
+            $validatedData['document_recommandation'] = $request->file('document_recommandation')->store('documents/recommandations', 'public');
+        }
+        
+        if ($request->hasFile('profile_picture')) {
+            $validatedData['profile_picture'] = $request->file('profile_picture')->store('profile_pictures', 'public');
+        }
         $etudiant = Auth::user()->userable;
 
         if (!$etudiant) {
             return redirect()->back()->with('error', 'Utilisateur non trouvé.');
         }
-
+        //dd($request->all());
+        //dd($validatedData);
         // Mettre à jour les données
         $etudiant->update($validatedData);
 
-        // Gérer les fichiers téléchargés
-        if ($request->hasFile('document_diplome')) {
-            $validatedData['document_diplome'] = $request->file('document_diplome')->store('documents/diplomes', 'public');
-        }
+        // Récupérer les requêtes exécutées
+        //$queries = DB::getQueryLog();
 
-        if ($request->hasFile('document_recommandation')) {
-            $validatedData['document_recommandation'] = $request->file('document_recommandation')->store('documents/recommandations', 'public');
-        }
-
-        if ($request->hasFile('profile_picture')) {
-            $validatedData['profile_picture'] = $request->file('profile_picture')->store('profile_pictures', 'public');
-        }
-
-        // Sauvegarder les fichiers dans la base de données
-        $etudiant->update($validatedData);
+        // Afficher la dernière requête et son résultat
+        //dd([
+        //    'requette' => end($queries),
+        //    'resultat' => $etudiant->fresh(), // Récupérer les données mises à jour
+        //]);
 
         // Rediriger avec un message de succès
         return redirect()->route('etudiants.edit_profile')->with('success', 'Profil mis à jour avec succès.');
