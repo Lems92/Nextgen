@@ -15,7 +15,9 @@
                     <!-- Candidate block Six -->
                     <div class="candidate-block-six">
                         <div class="inner-box">
-                            <figure class="image"><img src="{{ asset('images/hero3.jpeg') }}" alt=""></figure>
+                            <figure class="image">
+                                <img src="{{ $etudiant->profile_picture ? asset('storage/' . $etudiant->profile_picture) : asset('storage/images/default_avatar.png') }}" alt="Photo de profil">
+                            </figure>
                             <h4 class="name"><a href="#">{{$etudiant->prenom ?? ''}} {{$etudiant->nom ?? ''}}</a></h4>
                             <span class="designation">{{$etudiant->domaine_etudes ?? ''}}</span>
                             <div class="content">
