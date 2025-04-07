@@ -47,21 +47,21 @@
                                                                 {{$candidat['etudiant']->adresse_postale}}
                                                             </li>
                                                         </ul>
-                                                        <ul class="post-tags">
-                                                            <li><a href="#">App</a></li>
-                                                            <li><a href="#">Design</a></li>
-                                                            <li><a href="#">Digital</a></li>
-                                                        </ul>
                                                     </div>
                                                     <div class="option-box">
                                                         <ul class="option-list">
                                                             <li>
-                                                                <button onclick="window.location.href='{{ route('entreprise.offres.show', ['offre' => $candidat['offre']->slug]) }}'" data-text="Voir l'offre">
+                                                                <button onclick="window.location.href='{{route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug])}}'" data-text="Voir l'offre">
                                                                     <span class="la la-eye"></span>
                                                                 </button>
                                                             </li>
                                                             <li>
-                                                                <button data-text="Approve Aplication"><span class="la la-check"></span></button>
+                                                                <form action="{{ route('candidats.approve', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir approuver ce candidat ?');">
+                                                                    @csrf
+                                                                    <button type="submit" data-text="Approve Application">
+                                                                        <span class="la la-check"></span>
+                                                                    </button>
+                                                                </form>
                                                             </li>
                                                             <li>
                                                                 <button data-text="Reject Aplication"><span class="la la-times-circle"></span></button>

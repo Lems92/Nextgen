@@ -100,6 +100,18 @@ class Etudiant extends Model implements Sluggable
             ->withTimestamps();
     }
 
+    public function universite()
+    {
+        return $this->hasOneThrough(
+            Universite::class,
+            EtudiantUniversite::class,
+            'etudiant_id', // Foreign key on etudiant_universite table
+            'id',          // Foreign key on universite table
+            'id',          // Local key on etudiant table
+            'universite_id' // Local key on etudiant_universite table
+        );
+    }
+
     public function universites(): HasMany
     {
         return $this->hasMany(EtudiantUniversite::class);
@@ -183,5 +195,10 @@ class Etudiant extends Model implements Sluggable
 
         // Si la propriété n'est pas dans les attributs de l'objet, utiliser le comportement par défaut
         return parent::__get($key);
+    }
+
+    public function getTypeEmploiRechercheAttribute($value)
+    {
+        return json_decode($value, true); // Décoder le JSON en tableau PHP
     }
 }

@@ -8,6 +8,8 @@ use App\Models\Parametrage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CandidatApproved;
 
 class EntrepriseController extends Controller
 {
@@ -151,6 +153,26 @@ class EntrepriseController extends Controller
             }
         }
         return view('entreprise.gerer-candidat', compact('candidats'));
+    }
+
+    public function approveCandidat(Request $request, $etudiantId): RedirectResponse
+    {
+        $etudiant = \App\Models\Etudiant::findOrFail($etudiantId);
+        $user = $etudiant->user; // Assuming the Etudiant model has a 'user' relationship
+
+        if (!$user || empty($user->email)) {
+            return redirect()->route('entreprise.gerer-candidat')
+                ->with('error', 'L\'adresse email associée à cet étudiant est manquante.');
+        }
+        // Logique pour approuver le candidat (par exemple, mettre à jour le statut)
+        //$etudiant->status = 'approved';
+        //$etudiant->save();
+
+        // Envoyer un email à l'étudiant
+        Mail::to($user->email)->send(new CandidatApproved($etudiant));
+
+        return redirect()->route('entreprise.gerer-candidat')
+            ->with('success', 'Le candidat a été approuvé et un email a été envoyé.');
     }
 
     public function page_entreprise(Request $request): View

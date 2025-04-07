@@ -106,13 +106,13 @@
                            id="userDropdown" aria-expanded="false">
                             <!-- Avatar -->
                             @if($user->hasRole('admin'))
-                                <img src="{{asset('storage/images/default-avatar.png')}}" alt="avatar"
+                                <img src="{{url('images/default_entreprise.png')}}" alt="avatar"
                                      class="rounded-circle"
                                      width="40" height="40">
                                 <i class="la la-caret-down" style="color: white;"></i>
                             @else
                                 <img
-                                    src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default-avatar.png'))}}"
+                                    src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default_avatar.png'))}}"
                                     alt="avatar" class="rounded-circle"
                                     width="40" height="40">
                                 <i class="la la-caret-down" style="color: white;"></i>

@@ -28,7 +28,25 @@ class EtudiantController extends Controller
 
     public function portfolio(Request $request, Etudiant $etudiant): View
     {
-        $etudiant->load('user');
+        $etudiant->load(['user', 'universite']); // Charge l'université associée
+
+        // Vérifiez si le champ est une chaîne JSON avant de le décoder
+        if (is_string($etudiant->type_emploi_recherche)) {
+            $etudiant->type_emploi_recherche = json_decode($etudiant->type_emploi_recherche, true);
+        }
+        if (is_string($etudiant->secteur_activite_preferer)) {
+            $etudiant->secteur_activite_preferer = json_decode($etudiant->secteur_activite_preferer, true);
+        }
+        if (is_string($etudiant->competences_techniques)) {
+            $etudiant->competences_techniques = json_decode($etudiant->competences_techniques, true);
+        }
+        if (is_string($etudiant->competences_en_recherche_et_analyse)) {
+            $etudiant->competences_en_recherche_et_analyse = json_decode($etudiant->competences_en_recherche_et_analyse, true);
+        }
+        if (is_string($etudiant->competences_en_communication)) {
+            $etudiant->competences_en_communication = json_decode($etudiant->competences_en_communication, true);
+        }
+
         return view('etudiant.portfolio', compact('etudiant'));
     }
 

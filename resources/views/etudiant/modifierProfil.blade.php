@@ -316,12 +316,12 @@
                             <div class="mb-3">
                                 <label for="diplome" class="form-label">Diplôme :</label>
                                 <input type="file" id="diplome" name="document_diplome" class="form-control"
-                                    accept=".pdf,.doc,.docx" required>
+                                    accept=".pdf,.doc,.docx">
                             </div>
                             <div class="mb-3">
                                 <label for="lettre-recommandation" class="form-label">Lettre de recommandation :</label>
                                 <input type="file" id="lettre-recommandation" name="document_recommandation"
-                                    class="form-control" accept=".pdf,.doc,.docx" required>
+                                    class="form-control" accept=".pdf,.doc,.docx">
                             </div>
                         </fieldset>
 

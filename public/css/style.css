@@ -13421,7 +13421,7 @@ Candidate Detail Section
 .candidate-block-six .content {
   position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .candidate-block-six .post-tags {

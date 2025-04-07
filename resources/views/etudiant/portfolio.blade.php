@@ -55,7 +55,6 @@
                                     <!-- Resume BLock -->
                                     <div class="resume-block">
                                         <div class="inner">
-                                            <span class="name">M</span>
                                             <div class="title-box">
                                                 <div class="info-box">
                                                     <h3>{{$etudiant->domaine_etudes ?? ''}}</h3>
@@ -69,7 +68,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                
                                 <!-- Resume / Work & Experience -->
                                 <div class="resume-outer theme-blue">
                                     <div class="upper-title">
@@ -139,15 +138,6 @@
                                     </ul>
                                 </div>
 
-                                <h4 class="widget-title mt-3">Compétences en recherche et analyse</h4>
-                                <div class="widget-content">
-                                    <ul class="job-skills">
-                                        @foreach((array) $etudiant->competences_en_recherche_et_analyse as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
                                 <h4 class="widget-title mt-3">Compétences en communication</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
@@ -164,6 +154,27 @@
                                 <h4 class="widget-title mt-3">Lien portfolio</h4>
                                 <p>{{$etudiant->portfolio ?? ''}}</p>
 
+                                <h4 class="widget-title mt-3">Documents</h4>
+                                <div class="widget-content">
+                                    <ul class="job-skills">
+                                        @if($etudiant->document_diplome)
+                                            <li>
+                                                <a href="{{ asset('storage/' . $etudiant->document_diplome) }}" target="_blank">Télécharger le diplôme</a>
+                                            </li>
+                                        @else
+                                            <li>Aucun document de diplôme disponible</li>
+                                        @endif
+
+                                        @if($etudiant->document_recommandation)
+                                            <li>
+                                                <a href="{{ asset('storage/' . $etudiant->document_recommandation) }}" target="_blank">Télécharger la lettre de recommandation</a>
+                                            </li>
+                                        @else
+                                            <li>Aucune lettre de recommandation disponible</li>
+                                        @endif
+                                    </ul>
+                                </div>
+
                                 <h4 class="widget-title mt-3">Secteur activités préférées</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
@@ -176,9 +187,13 @@
                                 <h4 class="widget-title mt-3">Type emploi recherché</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach($etudiant->type_emploi_recherche as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
+                                        @if(!empty($etudiant->type_emploi_recherche) && is_array($etudiant->type_emploi_recherche))
+                                            @foreach($etudiant->type_emploi_recherche as $comp)
+                                                <li><a href="#">{{$comp}}</a></li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune information disponible</li>
+                                        @endif
                                     </ul>
                                 </div>
 
@@ -219,6 +234,17 @@
                                                 <span>@foreach((array) $etudiant->competences_langues as $lang)
                                                         {{$lang}},
                                                     @endforeach</span>
+                                            </li>
+
+                                            <li>
+                                                <i class="icon icon-degree"></i>
+                                                <h5>Université :</h5>
+                                                <span>
+                                                @if($etudiant->universite)
+                                                    {{ $etudiant->universite->nom_etablissement }}
+                                                @else
+                                                    Aucune université associée.
+                                                @endif</span>
                                             </li>
 
                                             <li>
