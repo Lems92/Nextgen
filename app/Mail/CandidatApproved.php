@@ -14,13 +14,16 @@ class CandidatApproved extends Mailable
 
     public function __construct($etudiant)
     {
-        $this->etudiant = $etudiant;
+        $this->data = [
+            'prenom' => $etudiant->prenom,
+            'nom' => $etudiant->nom,
+        ];
     }
 
     public function build()
     {
         return $this->subject('Votre candidature a été approuvée')
                     ->view('mails.approver')
-                    ->with(['etudiant' => $this->etudiant]);
+                    ->with(['data' => $this->data]);
     }
 }

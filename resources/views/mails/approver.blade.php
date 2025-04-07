@@ -23,6 +23,7 @@
             </p>
             <p class="mt-4 text-gray-700">
                 Nous vous contacterons bientôt pour les prochaines étapes.
+
             </p>
         </div>
         <div class="mt-6 border-t border-gray-200 pt-4">
