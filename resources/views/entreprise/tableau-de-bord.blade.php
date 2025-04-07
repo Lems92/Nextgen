@@ -28,31 +28,31 @@
                 </div>
             @endif
             <div class="upper-title-box">
-                <h3>Bienvenu, {{$user->userable->nom_entreprise}}!</h3>
+                <h3>Bienvenue, {{$user->userable->nom_entreprise}}!</h3>
             </div>
             <div class="row">
                 <div class="ui-block col-md-6 col-sm-12">
-                    <a href="offre.html" class="ui-item-link">
+                    <a href="{{ route('entreprise.offres') }}" class="ui-item-link">
                         <div class="ui-item">
                             <div class="left">
                                 <i class="icon flaticon-briefcase"></i>
                             </div>
                             <div class="right">
                                 <h4>{{count($user->userable->offres)}}</h4>
-                                <p>Posted Jobs</p>
+                                <p>Offres publié</p>
                             </div>
                         </div>
                     </a>
                 </div>
                 <div class="ui-block col-md-6 col-sm-12">
-                    <a href="offre.html" class="ui-item-link">
+                    <a href="{{ route('entreprise.gerer-candidat') }}" class="ui-item-link">
                         <div class="ui-item ui-red">
                             <div class="left">
                                 <i class="icon la la-file-invoice"></i>
                             </div>
                             <div class="right">
                                 <h4>{{$applicant_count}}</h4>
-                                <p>Application</p>
+                                <p>Candidats</p>
                             </div>
                         </div>
                     </a>
@@ -65,8 +65,8 @@
     <section class="user-dashboard">
         <div class="dashboard-outer">
             <div class="upper-title-box">
-                <h3>Manage Jobs</h3>
-                <div class="text">Ready to jump back in?</div>
+                <h3>Gérer les emplois</h3>
+                <div class="text">Prêt à reprendre ?</div>
             </div>
 
             <div class="col-lg-12">
@@ -74,10 +74,10 @@
                 <div class="ls-widget">
                     <div class="tabs-box">
                         <div class="widget-title">
-                            <h4>My Job Listings</h4>
-
+                            <h4>Mes offres d'emploi</h4>
+                            <!--
                             <div class="chosen-outer">
-                                <!--Tabs Box-->
+                                Tabs Box
                                 <select class="chosen-select">
                                     <option>Last 6 Months</option>
                                     <option>Last 12 Months</option>
@@ -85,7 +85,7 @@
                                     <option>Last 24 Months</option>
                                     <option>Last 5 year</option>
                                 </select>
-                            </div>
+                            </div>-->
                         </div>
 
                         <div class="widget-content">

@@ -8,9 +8,9 @@
                                 <div class="big-column col-xl-3 col-lg-3 col-md-12">
                                     <div class="footer-column about-widget">
                                         <div class="logo"><a href="#"><img src="images/NextGen-logo.svg" alt=""></a></div>
-                                        <p class="phone-num"><span>Call us </span><a href="#">+261 20 24 245 12</a></p>
-                                        <p class="address">329 Queensberry Street, North Melbourne VIC<br> 3051, Australia.
-                                            <br><a href="mailto:support@superio.com" class="email">support@superio.com</a>
+                                        <p class="phone-num"><span>Appelle-nous </span><a href="#">+33 7 66 91 92 92</a></p>
+                                        <!--<p class="address">329 Queensberry Street, North Melbourne VIC<br> 3051, Australia.-->
+                                            <br><a href="mailto:join-nextgen@gmail.com" class="email">join-nextgen@gmail.com</a>
                                         </p>
                                     </div>
                                 </div>
@@ -57,20 +57,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="footer-column col-lg-2 col-md-6 col-sm-12">
-                                            <div class="footer-widget links-widget">
-                                                <h4 class="widget-title">About Us</h4>
-                                                <div class="widget-content">
-                                                    <ul class="list">
-                                                        <li><a href="#">Job Page</a></li>
-                                                        <li><a href="#">Job Page Alternative</a></li>
-                                                        <li><a href="#">Resume Page</a></li>
-                                                        <li><a href="#">Blog</a></li>
-                                                        <li><a href="#">Contact</a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -82,13 +69,13 @@
                     <div class="footer-bottom">
                         <div class="auto-container">
                             <div class="outer-box">
-                                <div class="copyright-text">© 2024 <a href="#">NextGen</a>. All Right Reserved.</div>
-                                <div class="social-links">
+                                <div class="copyright-text">© 2025 <a href="#">NextGen</a>. All Right Reserved.</div>
+                                <!--<div class="social-links">
                                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                                     <a href="#"><i class="fab fa-twitter"></i></a>
                                     <a href="#"><i class="fab fa-instagram"></i></a>
                                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>

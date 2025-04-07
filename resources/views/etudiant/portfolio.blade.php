@@ -19,11 +19,11 @@
                             <h4 class="name"><a href="#">{{$etudiant->prenom ?? ''}} {{$etudiant->nom ?? ''}}</a></h4>
                             <span class="designation">{{$etudiant->domaine_etudes ?? ''}}</span>
                             <div class="content">
-                                <ul class="post-tags">
+                                <!--<ul class="post-tags">
                                     <li><a href="#">App</a></li>
                                     <li><a href="#">Design</a></li>
                                     <li><a href="#">Digital</a></li>
-                                </ul>
+                                </ul>-->
 
                                 <ul class="candidate-info">
                                     <li><span class="icon flaticon-map-locator"></span> {{$etudiant->adresse_postale ?? ''}}
@@ -122,7 +122,7 @@
                                 <h4 class="widget-title">Compétences techniques</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach($etudiant->competences_techniques as $comp)
+                                        @foreach((array) $etudiant->competences_techniques as $comp)
                                             <li><a href="#">{{$comp}}</a></li>
                                         @endforeach
                                     </ul>
@@ -131,7 +131,7 @@
                                 <h4 class="widget-title mt-3">Compétences en recherche et analyse</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach($etudiant->competences_en_recherche_et_analyse as $comp)
+                                        @foreach((array) $etudiant->competences_en_recherche_et_analyse as $comp)
                                             <li><a href="#">{{$comp}}</a></li>
                                         @endforeach
                                     </ul>
@@ -140,7 +140,7 @@
                                 <h4 class="widget-title mt-3">Compétences en recherche et analyse</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach($etudiant->competences_en_recherche_et_analyse as $comp)
+                                        @foreach((array) $etudiant->competences_en_recherche_et_analyse as $comp)
                                             <li><a href="#">{{$comp}}</a></li>
                                         @endforeach
                                     </ul>
@@ -149,74 +149,12 @@
                                 <h4 class="widget-title mt-3">Compétences en communication</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach($etudiant->competences_en_communication as $comp)
+                                        @foreach((array) $etudiant->competences_en_communication as $comp)
                                             <li><a href="#">{{$comp}}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
 
-                                <h4 class="widget-title mt-3">Compétences interpersonnelles</h4>
-                                <div class="widget-content">
-                                    <ul class="job-skills">
-                                        @foreach($etudiant->competences_interpersonnelles as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                                <h4 class="widget-title mt-3">Compétences resolution de problèmes</h4>
-                                <div class="widget-content">
-                                    <ul class="job-skills">
-                                        @foreach($etudiant->competences_resolution_problemes as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                                <h4 class="widget-title mt-3">Compétences adaptabilité</h4>
-                                <div class="widget-content">
-                                    <ul class="job-skills">
-                                        @foreach($etudiant->competences_adaptabilite as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                                <h4 class="widget-title mt-3">Compétences en gestion de stress</h4>
-                                <div class="widget-content">
-                                    <ul class="job-skills">
-                                        @foreach($etudiant->competences_gestion_stress as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                                <h4 class="widget-title mt-3">Compétences en leadership</h4>
-                                <div class="widget-content">
-                                    <ul class="job-skills">
-                                        @foreach($etudiant->competences_leadership as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                                <h4 class="widget-title mt-3">Compétences éthiques et responsabilités</h4>
-                                <div class="widget-content">
-                                    <ul class="job-skills">
-                                        @foreach($etudiant->competences_ethique_responsabilite as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                                <h4 class="widget-title mt-3">Compétences en gestion financière</h4>
-                                <div class="widget-content">
-                                    <ul class="job-skills">
-                                        @foreach($etudiant->competences_gestion_financiere ?? [] as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
-                                    </ul>
-                                </div>
 
                                 <h4 class="widget-title mt-3">Centres d'intérêts</h4>
                                 <p>{{$etudiant->centres_interet ?? ''}}</p>
@@ -255,11 +193,11 @@
                                 <div class="sidebar-widget">
                                     <div class="widget-content">
                                         <ul class="job-overview">
-                                            <li>
+                                            <!--<li>
                                                 <i class="icon icon-calendar"></i>
                                                 <h5>Experience:</h5>
                                                 <span>0-2 ans</span>
-                                            </li>
+                                            </li>-->
 
                                             <li>
                                                 <i class="icon icon-expiry"></i>
@@ -276,7 +214,7 @@
                                             <li>
                                                 <i class="icon icon-language"></i>
                                                 <h5>Langages:</h5>
-                                                <span>@foreach($etudiant->competences_langues as $lang)
+                                                <span>@foreach((array) $etudiant->competences_langues as $lang)
                                                         {{$lang}},
                                                     @endforeach</span>
                                             </li>
@@ -297,7 +235,7 @@
 
                                 </div>
 
-                                <div class="sidebar-widget social-media-widget">
+                                <!--<div class="sidebar-widget social-media-widget">
                                     <h4 class="widget-title">Social media</h4>
                                     <div class="widget-content">
                                         <div class="social-links">
@@ -307,7 +245,7 @@
                                             <a href="#"><i class="fab fa-linkedin-in"></i></a>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                             </aside>
                         </div>
                     </div>

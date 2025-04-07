@@ -35,13 +35,6 @@ class Etudiant extends Model implements Sluggable
         'competences_techniques',
         'competences_en_recherche_et_analyse',
         'competences_en_communication',
-        'competences_interpersonnelles',
-        'competences_resolution_problemes',
-        'competences_adaptabilite',
-        'competences_gestion_stress',
-        'competences_leadership',
-        'competences_ethique_responsabilite',
-        'competences_gestion_financiere',
         'competences_langues',
         'experience_professionnelle',
         'portfolio',
@@ -71,6 +64,10 @@ class Etudiant extends Model implements Sluggable
     ];
 
     protected $casts = [
+        'competences_techniques' => 'array',
+        'competences_en_recherche_et_analyse'  => 'array',
+        'competences_en_communication'  => 'array',
+        'competences_langues' => 'array',
         'date_naissance' => 'date',
         'vacances_ete_debut' => 'date',
         'vacances_ete_fin' => 'date',
