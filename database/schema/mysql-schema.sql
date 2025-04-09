@@ -116,7 +116,7 @@ CREATE TABLE `etudiants` (
   `competences_en_recherche_et_analyse` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`competences_en_recherche_et_analyse`)),
   `competences_en_communication` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`competences_en_communication`)),
   `competences_langues` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`competences_langues`)),
-  `autres_competences` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `autres_competences` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `experience_professionnelle` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `portfolio` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `centres_interet` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
