@@ -15,7 +15,7 @@
                 </div>
             @endif
             <div class="text-center">
-                Merci de vous être inscrit ! Avant de commencer, pourriez-vous vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer par e-mail ? Si vous n'avez pas reçu l'e-mail, nous vous en enverrons un autre avec plaisir.
+                Merci de vous être inscrit ! Avant de commencer, pourriez-vous vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer par e-mail ? Si vous ne voyez pas l'e-mail, veuillez vérifier votre dossier spam. Si vous ne l'avez toujours pas reçu, nous vous en enverrons un autre avec plaisir.
             </div>
 
             <div class="mt-4 d-flex justify-content-center gap-4 align-items-center">
