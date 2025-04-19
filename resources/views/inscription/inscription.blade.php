@@ -13,7 +13,7 @@
         </style>
     </head>
   <div class="login-section">
-    <div class="image-layer" style="background-image : url('images/inscription2.jpg')">
+    <div class="image-layer" style="background-image : url('images/inscription3.jpg')">
     </div>
     <div class="outer-box">
       <div class="login-form default-form">

@@ -122,7 +122,7 @@
                                 <div class="col-md-6">
                                     <h5 class="mb-3">Compétences techniques</h5>
                                     <ul>
-                                        @foreach($etudiant->competences_techniques as $value)
+                                        @foreach($etudiant->competences_techniques ?? [] as $value)
                                             <li>{{ $value }}</li>
                                         @endforeach
                                     </ul>
@@ -131,7 +131,7 @@
                                 <div class="col-md-6">
                                     <h5 class="mb-3">Compétences en recherche et analyse</h5>
                                     <ul>
-                                        @foreach($etudiant->competences_en_recherche_et_analyse as $value)
+                                        @foreach($etudiant->competences_en_recherche_et_analyse ?? [] as $value)
                                             <li>{{ $value }}</li>
                                         @endforeach
                                     </ul>
@@ -146,94 +146,11 @@
                                 <div class="col-md-6">
                                     <h5 class="mb-3">Compétences en communication</h5>
                                     <ul>
-                                        @foreach($etudiant->competences_en_communication as $value)
+                                        @foreach($etudiant->competences_en_communication ?? [] as $value)
                                             <li>{{ $value }}</li>
                                         @endforeach
                                     </ul>
                                 </div>
-
-                                <div class="col-md-6">
-                                    <h5 class="mb-3">Compétences interpersonnelles</h5>
-                                    <ul>
-                                        @foreach($etudiant->competences_interpersonnelles as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                            </div>
-
-                            <hr>
-
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <h5 class="mb-3">Compétences en resolution de problème</h5>
-                                    <ul>
-                                        @foreach($etudiant->competences_resolution_problemes as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <h5 class="mb-3">Compétences adaptabilité</h5>
-                                    <ul>
-                                        @foreach($etudiant->competences_adaptabilite as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                            </div>
-
-                            <hr>
-
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <h5 class="mb-3">Compétences gestion de stress</h5>
-                                    <ul>
-                                        @foreach($etudiant->competences_gestion_stress as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <h5 class="mb-3">Compétences leadership</h5>
-                                    <ul>
-                                        @foreach($etudiant->competences_leadership as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                            </div>
-
-                            <hr>
-
-                            <div class="row">
-
-                                <div class="col-md-6">
-                                    <h5 class="mb-3">Compétences éthique et responsabilité</h5>
-                                    <ul>
-                                        @foreach($etudiant->competences_ethique_responsabilite as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <h5 class="mb-3">Compétences en gestion financières</h5>
-                                    <ul>
-                                        @foreach($etudiant->competences_gestion_financiere as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-
-                            </div>
 
                             <hr>
 
@@ -242,7 +159,7 @@
                                 <div class="col-md-6">
                                     <h5 class="mb-3">Compétences linguistiques</h5>
                                     <ul>
-                                        @foreach($etudiant->competences_langues as $value)
+                                        @foreach($etudiant->competences_langues ?? [] as $value)
                                             <li>{{ $value }}</li>
                                         @endforeach
                                     </ul>

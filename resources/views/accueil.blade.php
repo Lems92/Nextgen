@@ -323,7 +323,7 @@
                     <div class="sec-title light">
                         <h2>Besoin d’aide ?</h2>
                         <div class="text text-white"> Contactez notre équipe via le formulaire en ligne ou par email : 
-                            support@nextgen.com.<br />ou appelez au +261 20 24 245 12.</div>
+                            support@nextgen.com.<br />ou appelez au +33 7 66 91 92 92</div>
                     </div>
 
                     <div class="btn-box">
