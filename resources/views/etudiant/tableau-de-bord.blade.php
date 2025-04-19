@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
+                <!--<div class="col">
                     <div class="ui-item ui-yellow">
                         <div class="left">
                             <i class="icon la la-comment-o"></i>
@@ -54,7 +54,7 @@
                             <p>Messages</p>
                         </div>
                     </div>
-                </div>
+                </div>-->
             </div>
 
 

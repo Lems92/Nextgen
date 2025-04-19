@@ -69,30 +69,30 @@
                                 </li>
                             @endif
                             <li class="dropdown">
-                                <span>NextGen</span>
-                                <ul>
-                                    <li><a href="blog-list-v1.html">A propos</a></li>
-                                    <li><a href="blog-list-v2.html">F.A.Q</a></li>
-                                    <li><a href="blog-list-v3.html">Nous contacter</a></li>
-                                </ul>
+                                <li>
+                                    <form id="mobile-logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a class="text-danger" href="#" onclick="event.preventDefault(); document.getElementById('mobile-logout-form').submit();">Déconnexion</a>
+                                </li>
                             </li>
                             <!-- End header -->
 
                             <!-- Only for Mobile View -->
                             <li class="mm-add-listing">
-                                <a href="add-listing.html" class="theme-btn btn-style-one">Job Post</a>
+                                <!--<a href="add-listing.html" class="theme-btn btn-style-one">Job Post</a> -->
                                 <span>
                     <span class="contact-info">
-                      <span class="phone-num"><span>Call us</span><a href="tel:1234567890">123 456 7890</a></span>
-                      <span class="address">329 Queensberry Street, North Melbourne VIC <br>3051, Australia.</span>
-                      <a href="mailto:support@superio.com" class="email">support@superio.com</a>
+                      <span class="phone-num"><span>Contactez-nous</span><a href="tel:+33 7 66 91 92 92">+33 7 66 91 92 92</a></span>
+                      <!-- <span class="address">329 Queensberry Street, North Melbourne VIC <br>3051, Australia.</span> -->
+                      <a href="mailto:join-nextgen@gmail.com" class="email">join-nextgen@gmail.com</a>
                     </span>
-                    <span class="social-links">
+                    <!--<span class="social-links">
                       <a href="#"><span class="fab fa-facebook-f"></span></a>
                       <a href="#"><span class="fab fa-twitter"></span></a>
                       <a href="#"><span class="fab fa-instagram"></span></a>
                       <a href="#"><span class="fab fa-linkedin-in"></span></a>
-                    </span>
+                    </span>-->
                   </span>
                             </li>
                         </ul>
@@ -145,9 +145,9 @@
                                         $route = 'universite.dashboard';
                                     }
                                 @endphp
-                                <a href="{{route($route)}}">Dashboard</a>
+                                <a href="{{route($route)}}">Tableau de bord</a>
                             </li>
-                            <li><a href="#">Profile</a></li>
+                            <li><a href="{{route('etudiants.portfolio', ['etudiant' => $user->userable->slug])}}">Profil</a></li>
                             <hr class="dropdown-divider">
                             <li>
                                 <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST"
@@ -173,7 +173,7 @@
 
                     <div class="outer-box">
                         <!-- Login/Register -->
-                        <button id="toggle-user-sidebar"><img src="{{asset('images/icons/icon-user-2.svg')}}"
+                        <button id="toggle-user-sidebar"><img src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default_avatar.png'))}}"
                                                               alt="avatar"
                                                               class="thumb">
                         </button>

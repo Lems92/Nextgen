@@ -47,12 +47,11 @@
                                     <li><a href="{{route('universite.gestion_etudiants')}}">Gerer les étudiants</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <span>NextGen</span>
+                            <li class="dropdown mobile-only">
+                                <span>Connexion ou inscription</span>
                                 <ul>
-                                    <li><a href="blog-list-v1.html">A propos</a></li>
-                                    <li><a href="blog-list-v2.html">F.A.Q</a></li>
-                                    <li><a href="blog-list-v3.html">Nous contacter</a></li>
+                                    <li><a href="{{ route('connexion') }}">Se Connecter</a></li>
+                                    <li><a href="{{ route('inscription') }}">Inscription</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -73,13 +72,13 @@
                                        id="userDropdown" aria-expanded="false">
                                         <!-- Avatar -->
                                         @if($user->hasRole('admin'))
-                                            <img src="{{asset('storage/images/default-avatar.png')}}" alt="avatar"
+                                            <img src="{{asset('storage/images/default_avatar.png')}}" alt="avatar"
                                                  class="rounded-circle"
                                                  width="40" height="40">
                                             <i class="la la-caret-down" style="color: white;"></i>
                                         @else
                                             <img
-                                                src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default-avatar.png'))}}"
+                                                src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default_avatar.png'))}}"
                                                 alt="avatar" class="rounded-circle"
                                                 width="40" height="40">
                                             <i class="la la-caret-down" style="color: white;"></i>
@@ -112,9 +111,9 @@
                                                     $route = 'universite.dashboard';
                                                 }
                                             @endphp
-                                            <a href="{{route($route)}}">Dashboard</a>
+                                            <a href="{{route($route)}}">Tableau de bord</a>
                                         </li>
-                                        <li><a href="#">Profile</a></li>
+                                        <li><a href="{{route('etudiants.portfolio', ['etudiant' => $user->userable->slug])}}">Profil</a></li>
                                         <hr class="dropdown-divider">
                                         <li>
                                             <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST"
@@ -150,18 +149,61 @@
 
         <!-- Mobile Header -->
         <div class="mobile-header">
-            <div class="logo"><a href="{{route('accueil')}}"><img src="images/NextGen-logo.svg" alt="" title=""></a>
+            <div class="logo">
+                <a href="{{route('accueil')}}"><img src="images/NextGen-logo.svg" alt="" title=""></a>
             </div>
 
             <!--Nav Box-->
             <div class="nav-outer clearfix">
-                <div class="outer-box">
-                    <!-- Login/Register -->
-                    <div class="login-box">
-                        <a href="login-popup.html" class="call-modal"><span class="icon-user"></span></a>
-                    </div>
-                    <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span
-                            class="flaticon-menu-1"></span></a>
+                <div class="outer-box d-flex align-items-center">
+                    <!-- Custom Dropdown for Authenticated Users -->
+                    @auth
+                        <div class="custom-dropdown dropdown me-3">
+                            <a href="#" class="d-flex align-items-center text-decoration-none gap-2 custom-dropdown-toggle"
+                               id="mobileUserDropdown" aria-expanded="false">
+                                @if($user->hasRole('admin'))
+                                    <img src="{{asset('storage/images/default_avatar.png')}}" alt="avatar"
+                                         class="rounded-circle"
+                                         width="30" height="30">
+                                @else
+                                    <img
+                                        src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default_avatar.png'))}}"
+                                        alt="avatar" class="rounded-circle"
+                                        width="30" height="30">
+                                @endif
+                                <i class="la la-caret-down" style="color: white;"></i>
+                            </a>
+                            <ul class="custom-dropdown-menu" id="mobileCustomDropdownMenu">
+                                <li class="px-3 py-2">
+                                    @if($user->hasRole('admin'))
+                                        <span class="d-block fw-bold">Administration</span>
+                                    @elseif($user->hasRole('etudiant'))
+                                        <span class="d-block fw-bold">{{$user->userable->prenom}}</span>
+                                    @elseif($user->hasRole('service-carriere'))
+                                        <span class="d-block fw-bold">{{$user->userable->nom_etablissement}}</span>
+                                    @elseif($user->hasRole('entreprise'))
+                                        <span class="d-block fw-bold">{{$user->userable->nom_entreprise}}</span>
+                                    @endif
+                                    <span class="text-muted">{{$user->email}}</span>
+                                </li>
+                                <hr class="dropdown-divider">
+                                <li><a href="{{route($route)}}">Tableau de bord</a></li>
+                                <li><a href="{{route('etudiants.portfolio', ['etudiant' => $user->userable->slug])}}">Profil</a></li>
+                                <hr class="dropdown-divider">
+                                <li>
+                                    <form id="mobile-dropdown-logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+                                    <a class="text-danger" href="#"
+                                       onclick="event.preventDefault(); document.getElementById('mobile-dropdown-logout-form').submit();">Déconnexion</a>
+                                </li>
+                            </ul>
+                        </div>
+                    @endauth
+
+                    <!-- Mobile Menu Trigger -->
+                    <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span class="flaticon-menu-1"></span></a>
                 </div>
             </div>
         </div>
@@ -188,9 +230,24 @@
                     }
                 });
             });
+
+            const mobileDropdownToggle = document.getElementById("mobileUserDropdown");
+            const mobileDropdownMenu = document.getElementById("mobileCustomDropdownMenu");
+
+            // Toggle the dropdown menu on click
+            mobileDropdownToggle.addEventListener("click", function (event) {
+                event.preventDefault();
+                mobileDropdownMenu.classList.toggle("show");
+
+                // Optionally close dropdown if clicked outside
+                document.addEventListener("click", function (event) {
+                    if (!mobileDropdownToggle.contains(event.target) && !mobileDropdownMenu.contains(event.target)) {
+                        mobileDropdownMenu.classList.remove("show");
+                    }
+                });
+            });
         });
         @endauth
-
     </script>
 
 
@@ -250,7 +307,9 @@
                 font-size: 12px; /* Smaller font on mobile */
                 padding: 6px 8px; /* Reduce padding on mobile */
             }
-
+            .mobile-only {
+                display: block !important; /* Afficher uniquement sur les écrans de petite taille */
+            }
             .btn-box .theme-btn {
                 font-size: 12px; /* Smaller font on mobile */
                 padding: 6px 10px;
@@ -264,6 +323,7 @@
 
         .custom-dropdown {
             position: relative;
+            padding-left: 20px;
         }
 
         .custom-dropdown-menu {
@@ -302,7 +362,9 @@
         .custom-dropdown-menu.show {
             display: block;
         }
-
+        .mobile-only {
+            display: none; /* Masquer par défaut */
+        }
 
     </style>
 
