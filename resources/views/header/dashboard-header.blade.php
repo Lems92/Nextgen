@@ -124,11 +124,11 @@
                             <li class="px-3 py-2">
                                 @if($user->hasRole('admin'))
                                     <span class="d-block fw-bold">Administration</span>
-                                @elseif($user->hasRole('etudiant'))
+                                @elseif($user->hasRole('etudiant') && $user->userable)
                                     <span class="d-block fw-bold">{{$user->userable->prenom}}</span>
-                                @elseif($user->hasRole('service-carriere'))
+                                @elseif($user->hasRole('service-carriere') && $user->userable)
                                     <span class="d-block fw-bold">{{$user->userable->nom_etablissement}}</span>
-                                @elseif($user->hasRole('entreprise'))
+                                @elseif($user->hasRole('entreprise') && $user->userable)
                                     <span class="d-block fw-bold">{{$user->userable->nom_entreprise}}</span>
                                 @endif
                                 <span class="text-muted">{{$user->email}}</span>
@@ -223,7 +223,9 @@
                                     class="lar la-calendar"></i>Evenements</a>
                         </li>
                         <li class="{{ is_active('/portfolio') ? 'active' : '' }}">
-                            <a href="{{route('etudiants.portfolio', ['etudiant' => $user->userable->slug])}}"> <i class="la la-user-tie"></i>Mon portfolio</a>
+                            <a href="{{route('etudiants.portfolio', ['etudiant' => optional($user->userable)->slug ?? 'default-slug'])}}">
+                                <i class="la la-user-tie"></i>Mon portfolio
+                            </a>
                         </li>
                         <li class="{{ is_active('etudiants/modfier-profile') ? 'active' : '' }}">
                             <a href="{{route('etudiants.edit_profile')}}"> <i class="la la-pen"></i>Modifier profil</a>

@@ -46,6 +46,12 @@
                         <button type="submit" class="heme-btn btn-style-one">Assigner</button>
                     </form>
 
+                    <form action="{{ route('admin.subscriptions.remove', ['user' => $user->slug]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet abonnement ?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="heme-btn btn-style-two">Supprimer l'abonnement</button>
+                    </form>
+
                 </div>
             </section>
         </div>

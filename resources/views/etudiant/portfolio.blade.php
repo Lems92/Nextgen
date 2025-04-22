@@ -18,7 +18,14 @@
                             <figure class="image">
                                 <img src="{{ $etudiant->profile_picture ? asset('storage/' . $etudiant->profile_picture) : asset('storage/images/default_avatar.png') }}" alt="Photo de profil">
                             </figure>
-                            <h4 class="name"><a href="#">{{$etudiant->prenom ?? ''}} {{$etudiant->nom ?? ''}}</a></h4>
+                            <h4 class="name">
+                                <a href="#">{{$etudiant->prenom ?? ''}} {{$etudiant->nom ?? ''}}</a>
+                                @if(!empty($etudiant->nom_ecole_universite))
+                                    <span class="badge badge-success" style="background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
+                                        Vérifié
+                                    </span>
+                                @endif
+                            </h4>
                             <span class="designation">{{$etudiant->domaine_etudes ?? ''}}</span>
                             <div class="content">
                                 <!--<ul class="post-tags">

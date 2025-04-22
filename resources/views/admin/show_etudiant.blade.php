@@ -168,6 +168,15 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-12 text-end">
+                    <form method="POST" action="{{ route('admin.delete_etudiant', ['etudiant' => $etudiant->id]) }}" id="delete_etudiant_form">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete()">Supprimer l'étudiant</button>
+                    </form>
+                </div>
+
             </section>
 
         </div>
@@ -235,6 +244,23 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('activate_account_form').submit();
+                }
+            });
+        }
+
+        function confirmDelete() {
+            Swal.fire({
+                title: "Voulez-vous vraiment supprimer cet étudiant ?",
+                text: "Cette action est irréversible.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Oui, supprimer",
+                cancelButtonText: "Annuler"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete_etudiant_form').submit();
                 }
             });
         }

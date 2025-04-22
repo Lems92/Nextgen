@@ -40,28 +40,24 @@
                             @forelse($users as $user)
                                 <tr>
                                     <td>{{ $user->id }}</td>
-                                    <td>{{ $user->userable->nom_entreprise }}</td>
-                                    <td>{{ $user->userable->email_contact }}</td>
+                                    <td>{{ $user->userable?->nom_entreprise ?? 'Non spécifié' }}</td>
+                                    <td>{{ $user->userable?->email_contact ?? 'Non spécifié' }}</td>
                                     <td>
                                         @if($user->subscription)
                                             {{ $user->subscription->name }}<br>
                                             <small>Début : {{ $user->subscription_started_at->format('d/m/Y') }}</small>
                                             <br>
-                                            <small>Expiration
-                                                : {{ $user->subscription_expires_at->format('d/m/Y') }}</small>
+                                            <small>Expiration : {{ $user->subscription_expires_at->format('d/m/Y') }}</small>
                                         @else
                                             Aucun
                                         @endif
                                     </td>
                                     <td>
-                                        <!-- Bouton pour ouvrir le modal d'assignation/changement -->
-                                        <a href="{{route('admin.subscriptions.assign_get', ['user' => $user->slug])}}" class="btn btn-sm btn-primary">
+                                        <a href="{{ route('admin.subscriptions.assign_get', ['user' => $user->slug]) }}" class="btn btn-sm btn-primary">
                                             Assigner/Changer
                                         </a>
-
-                                        <!-- Bouton pour ouvrir le modal de renouvellement si abonnement actif -->
                                         @if($user->hasActiveSubscription())
-                                            <a href="{{route('admin.subscriptions.renew_get', ['user' => $user->slug])}}" class="btn btn-sm btn-warning">
+                                            <a href="{{ route('admin.subscriptions.renew_get', ['user' => $user->slug]) }}" class="btn btn-sm btn-warning">
                                                 Renouveler
                                             </a>
                                         @endif

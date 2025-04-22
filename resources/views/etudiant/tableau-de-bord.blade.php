@@ -5,13 +5,16 @@
 @section('content')
 
     @php
-        use App\Models\Offre;use Illuminate\Support\Facades\Auth;
+        use App\Models\Offre;
+        use Illuminate\Support\Facades\Auth;
+
         $user = Auth::user();
         $user->load('userable');
 
         $offre_count = Offre::all()->count();
 
-        $offres_postule_recemment = $user->userable->offres_postules;
+        // Safely handle null userable
+        $offres_postule_recemment = $user->userable ? $user->userable->offres_postules : [];
     @endphp
 
     @include('header.dashboard-header')
@@ -19,7 +22,7 @@
     <section class="user-dashboard">
         <div class="dashboard-outer">
             <div class="upper-title-box">
-                <h3>Bonjour, {{$user->userable->prenom}}!!</h3>
+                <h3>Bonjour, {{ $user->userable ? $user->userable->prenom : 'Utilisateur' }}!!</h3>
             </div>
             <div class="row">
                 <div class="col">
@@ -28,7 +31,7 @@
                             <i class="icon flaticon-briefcase"></i>
                         </div>
                         <div class="right">
-                            <h4>{{count($user->userable->offres_postules)}}</h4>
+                            <h4>{{ $user->userable ? count($user->userable->offres_postules) : 0 }}</h4>
                             <p>Offres postulés</p>
                         </div>
                     </div>
@@ -39,22 +42,11 @@
                             <i class="icon la la-file-invoice"></i>
                         </div>
                         <div class="right">
-                            <h4>{{$offre_count}}</h4>
+                            <h4>{{ $offre_count }}</h4>
                             <p>Offres disponibles</p>
                         </div>
                     </div>
                 </div>
-                <!--<div class="col">
-                    <div class="ui-item ui-yellow">
-                        <div class="left">
-                            <i class="icon la la-comment-o"></i>
-                        </div>
-                        <div class="right">
-                            <h4>74</h4>
-                            <p>Messages</p>
-                        </div>
-                    </div>
-                </div>-->
             </div>
 
 

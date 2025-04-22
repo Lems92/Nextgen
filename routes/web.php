@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SubscriptionController;
 
 Route::get('/', [HomeController::class, 'home'])->name('accueil');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -74,3 +75,5 @@ Route::get('/vip', function () {return view('entreprise.shortlist-vip');})->name
 
 Route::post('/candidats/approve/{id}', [EntrepriseController::class, 'approveCandidat'])->name('candidats.approve');
 Route::post('/admin/delete-entreprise', [AdminController::class, 'deleteEntreprise'])->name('admin.delete_entreprise');
+Route::delete('/admin/etudiant/{etudiant}', [EtudiantController::class, 'destroy'])->name('admin.delete_etudiant');
+Route::delete('/admin/subscriptions/remove/{user}', [SubscriptionController::class, 'remove'])->name('admin.subscriptions.remove');

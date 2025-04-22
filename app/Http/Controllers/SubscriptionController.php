@@ -67,4 +67,15 @@ class SubscriptionController extends Controller
 
         return redirect()->intended(route('admin.subscriptions.index'))->with('success', 'Abonnement renouvelé avec succès.');
     }
+
+    public function remove(User $user)
+    {
+        // Vérifiez si l'utilisateur a un abonnement
+        if ($user->subscription) {
+            $user->subscription()->detach(); // Suppression de l'abonnement
+            return redirect()->back()->with('success', 'Abonnement supprimé avec succès.');
+        }
+
+        return redirect()->back()->with('error', 'Aucun abonnement à supprimer.');
+    }
 }

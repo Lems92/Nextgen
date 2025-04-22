@@ -25,6 +25,16 @@ class EtudiantController extends Controller
     {
         return view('etudiant.tableau-de-bord');
     }
+    public function destroy($id)
+    {
+        $etudiant = Etudiant::findOrFail($id);
+
+        // Supprimer l'étudiant
+        $etudiant->delete();
+
+        // Rediriger avec un message de succès
+        return redirect()->route('admin.dashboard')->with('success', 'Étudiant supprimé avec succès.');
+    }
 
     public function portfolio(Request $request, Etudiant $etudiant): View
     {
