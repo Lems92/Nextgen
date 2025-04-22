@@ -113,7 +113,7 @@
                                             @endphp
                                             <a href="{{route($route)}}">Tableau de bord</a>
                                         </li>
-                                        <li><a href="{{route('etudiants.portfolio', ['etudiant' => $user->userable->slug])}}">Profil</a></li>
+                                        <li><a href="{{route('etudiants.portfolio', ['etudiant' => optional($user->userable)->slug ?? 'default-slug'])}}">Profil</a></li>
                                         <hr class="dropdown-divider">
                                         <li>
                                             <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST"
@@ -188,7 +188,7 @@
                                 </li>
                                 <hr class="dropdown-divider">
                                 <li><a href="{{route($route)}}">Tableau de bord</a></li>
-                                <li><a href="{{route('etudiants.portfolio', ['etudiant' => $user->userable->slug])}}">Profil</a></li>
+                                <li><a href="{{route('etudiants.portfolio', ['etudiant' => optional($user->userable)->slug ?? 'default-slug'])}}">Profil</a></li>
                                 <hr class="dropdown-divider">
                                 <li>
                                     <form id="mobile-dropdown-logout-form" action="{{ route('logout') }}" method="POST"

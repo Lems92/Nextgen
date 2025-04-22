@@ -111,10 +111,11 @@
                                      width="40" height="40">
                                 <i class="la la-caret-down" style="color: white;"></i>
                             @else
-                                <img
-                                    src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default_avatar.png'))}}"
-                                    alt="avatar" class="rounded-circle"
-                                    width="40" height="40">
+                                @if($user->userable && $user->userable->profile_picture)
+                                    <img src="{{asset('storage/' . $user->userable->profile_picture)}}" alt="avatar" class="rounded-circle" width="40" height="40">
+                                @else
+                                    <img src="{{asset('images/default_avatar.png')}}" alt="avatar" class="rounded-circle" width="40" height="40">
+                                @endif
                                 <i class="la la-caret-down" style="color: white;"></i>
                             @endif
                         </a>
@@ -147,7 +148,9 @@
                                 @endphp
                                 <a href="{{route($route)}}">Tableau de bord</a>
                             </li>
-                            <li><a href="{{route('etudiants.portfolio', ['etudiant' => $user->userable->slug])}}">Profil</a></li>
+                            <li>
+                                <a href="{{route('etudiants.portfolio', ['etudiant' => optional($user->userable)->slug ?? 'default-slug'])}}">Profil</a>
+                            </li>
                             <hr class="dropdown-divider">
                             <li>
                                 <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST"
@@ -173,9 +176,12 @@
 
                     <div class="outer-box">
                         <!-- Login/Register -->
-                        <button id="toggle-user-sidebar"><img src="{{asset('storage/' . (($user->userable->profile_picture !== null && $user->userable->profile_picture !== "") ? $user->userable->profile_picture : 'images/default_avatar.png'))}}"
-                                                              alt="avatar"
-                                                              class="thumb">
+                        <button id="toggle-user-sidebar">
+                            @if($user->userable && $user->userable->profile_picture)
+                                <img src="{{asset('storage/' . $user->userable->profile_picture)}}" alt="avatar" class="thumb">
+                            @else
+                                <img src="{{asset('images/default_avatar.png')}}" alt="avatar" class="thumb">
+                            @endif
                         </button>
                         <a href="#nav-mobile" class="mobile-nav-toggler navbar-trigger"><span
                                 class="flaticon-menu-1"></span></a>

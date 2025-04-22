@@ -369,6 +369,25 @@
                 .banner-carousel .bg-image img {
                     display: none; /* Masquer l'image sur les petits écrans */
                 }
+                .hero-content {
+                    text-align: center; /* Centrer le texte */
+                }
+                .hero-content h2 {
+                    font-size: 41px; /* Ajuster la taille de la police pour les petits écrans */
+                }
+                .hero-content h2, 
+                .hero-content p, 
+                .hero-content ul {
+                    margin: 0 auto;
+                    margin-left: -20px;
+                    margin-right: 20px;
+                    margin-bottom: 20px; /* Centrer les éléments */
+                }
+
+        .hero-content .theme-btn {
+            display: inline-block; /* Centrer le bouton */
+            margin: 20px auto 0; /* Ajouter un espace au-dessus */
+        }
             }
             .faq-section {
         padding: 60px 0;

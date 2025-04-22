@@ -10,6 +10,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\EntrepriseController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomeController::class, 'home'])->name('accueil');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -72,3 +73,4 @@ Route::get('/vip', function () {return view('entreprise.shortlist-vip');})->name
 //Route::get('/etu-univ', function () {return view('etudiant.etu-univ');})->name('etudiant.etu-univ');
 
 Route::post('/candidats/approve/{id}', [EntrepriseController::class, 'approveCandidat'])->name('candidats.approve');
+Route::post('/admin/delete-entreprise', [AdminController::class, 'deleteEntreprise'])->name('admin.delete_entreprise');

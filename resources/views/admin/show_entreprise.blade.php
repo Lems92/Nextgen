@@ -45,6 +45,11 @@
                                         l'inscription
                                     </button>
                                 @endif
+                                <form method="POST" action="{{ route('admin.delete_entreprise') }}" id="delete_entreprise_form">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $entreprise->id }}">
+                                </form>
+                                <button onclick="deleteEntreprise()" class="btn btn-danger ms-3">Supprimer l'entreprise</button>
                             </div>
                             <div class="row">
                                 <div class="col-md-12 mb-3">
@@ -217,6 +222,22 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('activate_account_form').submit();
+                }
+            });
+        }
+
+        function deleteEntreprise() {
+            Swal.fire({
+                title: "Voulez-vous vraiment supprimer cette entreprise ?",
+                text: "Cette action est irréversible.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Oui, supprimer"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete_entreprise_form').submit();
                 }
             });
         }

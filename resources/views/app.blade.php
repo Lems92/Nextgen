@@ -30,13 +30,7 @@
     @php
         $random_ese = \App\Models\Entreprise::getRandomEntreprise();
     @endphp
-    @if(isset($random_ese))
-        @include('pub.popup', [
-        'companyName' => $random_ese['nom_entreprise'],
-        'domain' => $random_ese['secteur_activite'],
-        'numberOfPosts' => $random_ese['offre_count']
-    ])
-    @endif
+    
 
     <!-- Pied de page (Footer) -->
     @include('layouts.footer')

@@ -59,6 +59,18 @@ class AdminController extends Controller
         ]);
     }
 
+    public function deleteEntreprise(Request $request)
+    {
+        $entreprise = Entreprise::find($request->id);
+
+        if ($entreprise) {
+            $entreprise->delete();
+            return redirect()->route('admin.dashboard')->with('success', 'Entreprise supprimée avec succès.');
+        }
+
+        return redirect()->back()->with('error', 'Entreprise introuvable.');
+    }
+
     public function list_universites(Request $request): View
     {
         $search_data = [];
