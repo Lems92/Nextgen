@@ -79,9 +79,20 @@
                                                                     </form>
                                                                 </li>
 
+                                                                <!-- Bouton pour recruter le candidat -->
+                                                                <li>
+                                                                    <form action="{{ route('candidats.recruitPage', ['id' => $candidat['etudiant']->id]) }}" method="GET" onsubmit="return confirm('Êtes-vous sûr de vouloir recruter ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Recruter">
+                                                                            <span class="la la-user-plus"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+
                                                                 <!-- Bouton pour rejeter le candidat -->
                                                                 <li>
-                                                                    <form action="{{ route('candidats.reject', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir rejeter ce candidat ?');">
+                                                                    <form action="{{ route('candidats.rejectPage', ['id' => $candidat['etudiant']->id]) }}" method="GET" onsubmit="return confirm('Êtes-vous sûr de vouloir rejeter ce candidat ?');">
                                                                         @csrf
                                                                         <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
                                                                         <button type="submit" data-text="Rejeter">
@@ -90,16 +101,6 @@
                                                                     </form>
                                                                 </li>
 
-                                                                <!-- Bouton pour recruter le candidat -->
-                                                                <li>
-                                                                    <form action="{{ route('candidats.recruit', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir recruter ce candidat ?');">
-                                                                        @csrf
-                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
-                                                                        <button type="submit" data-text="Recruter">
-                                                                            <span class="la la-user-plus"></span>
-                                                                        </button>
-                                                                    </form>
-                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -165,9 +166,18 @@
                                                                     </form>
                                                                 </li> -->
 
+                                                                <li>
+                                                                    <form action="{{ route('candidats.recruitPage', ['id' => $candidat['etudiant']->id]) }}" method="GET" onsubmit="return confirm('Êtes-vous sûr de vouloir recruter ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Recruter">
+                                                                            <span class="la la-user-plus"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
                                                                 <!-- Bouton pour rejeter le candidat -->
                                                                 <li>
-                                                                    <form action="{{ route('candidats.reject', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir rejeter ce candidat ?');">
+                                                                    <form action="{{ route('candidats.rejectPage', ['id' => $candidat['etudiant']->id]) }}" method="GET" onsubmit="return confirm('Êtes-vous sûr de vouloir rejeter ce candidat ?');">
                                                                         @csrf
                                                                         <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
                                                                         <button type="submit" data-text="Rejeter">
@@ -176,16 +186,6 @@
                                                                     </form>
                                                                 </li>
 
-                                                                <!-- Bouton pour recruter le candidat -->
-                                                                <li>
-                                                                    <form action="{{ route('candidats.recruit', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir recruter ce candidat ?');">
-                                                                        @csrf
-                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
-                                                                        <button type="submit" data-text="Recruter">
-                                                                            <span class="la la-user-plus"></span>
-                                                                        </button>
-                                                                    </form>
-                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -303,35 +303,13 @@
                                                                         </button>
                                                                     </form>
                                                                 </li>
-                                                                <!-- Bouton pour approuver le candidat -->
+                                                                <!-- Bouton pour mettre en attente -->
                                                                 <li>
-                                                                    <form action="{{ route('candidats.approve', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir approuver ce candidat ?');">
+                                                                    <form action="{{ route('candidats.pending', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir mettre ce candidat en attente ?');">
                                                                         @csrf
                                                                         <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
-                                                                        <button type="submit" data-text="Approuver">
-                                                                            <span class="la la-check-circle"></span>
-                                                                        </button>
-                                                                    </form>
-                                                                </li>
-
-                                                                <!-- Bouton pour rejeter le candidat 
-                                                                <li>
-                                                                    <form action="{{ route('candidats.reject', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir rejeter ce candidat ?');">
-                                                                        @csrf
-                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
-                                                                        <button type="submit" data-text="Rejeter">
-                                                                            <span class="la la-times-circle"></span>
-                                                                        </button>
-                                                                    </form>
-                                                                </li>-->
-
-                                                                <!-- Bouton pour recruter le candidat -->
-                                                                <li>
-                                                                    <form action="{{ route('candidats.recruit', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir recruter ce candidat ?');">
-                                                                        @csrf
-                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
-                                                                        <button type="submit" data-text="Recruter">
-                                                                            <span class="la la-user-plus"></span>
+                                                                        <button type="submit" data-text="Mettre en attente">
+                                                                            <span class="la la-clock-o"></span>
                                                                         </button>
                                                                     </form>
                                                                 </li>

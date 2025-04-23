@@ -44,7 +44,7 @@
                                 <tr>
                                     <td>{{ $subscription->id }}</td>
                                     <td>{{ $subscription->name }}</td>
-                                    <td>{{ number_format($subscription->price, 2) }} MGA</td>
+                                    <td>{{ number_format($subscription->price, 2) }} €</td>
                                     <td>{{ $subscription->description }}</td>
                                     <td>
                                         <ul>

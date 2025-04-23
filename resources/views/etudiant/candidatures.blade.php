@@ -71,9 +71,9 @@
                           @if($candidature->pivot->status === 'pending')
                             <span class="badge badge-warning">En attente</span>
                           @elseif($candidature->pivot->status === 'accepted')
-                            <span class="badge badge-success">Acceptée</span>
+                            <span class="badge badge-success">Accepté</span>
                           @elseif($candidature->pivot->status === 'rejected')
-                            <span class="badge badge-danger">Refusée</span>
+                            <span class="badge badge-danger">Refusé</span>
                           @elseif($candidature->pivot->status === 'recruited')
                             <span class="badge badge-primary">Recruté</span>
                           @endif

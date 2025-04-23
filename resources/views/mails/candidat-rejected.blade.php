@@ -11,7 +11,7 @@
 <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
         <div class="text-center">
-            <img class="mx-auto h-12 w-auto" src="<?= asset("/storage/NextGen-logo.svg"); ?>" alt="Logo">
+            <img class="mx-auto h-12 w-auto" src="{{ asset('/images/NextGen-logo.svg') }}" alt="Logo">
             <h2 class="mt-6 text-2xl font-bold text-gray-900">Candidature Rejetée</h2>
             <p class="mt-2 text-sm text-gray-600">Nous regrettons de vous informer que votre candidature n'a pas été retenue.</p>
         </div>
@@ -20,7 +20,7 @@
                 Bonjour {{ $data['prenom'] ?? 'Candidat' }},
             </p>
             <p class="mt-2 text-gray-700">
-                Nous vous remercions pour votre intérêt pour le poste de <strong>{{ $data['titre_poste'] ?? 'le poste spécifié' }}</strong>. Malheureusement, votre candidature n'a pas été retenue.
+                Nous vous remercions pour votre intérêt pour le poste de <strong>{{ $data['titre_poste'] ?? 'le poste spécifié' }}</strong> au sein de <strong>{{ $data['nom_entreprise'] ?? 'l\'entreprise' }}</strong>. Malheureusement, votre candidature n'a pas été retenue.
             </p>
             <p class="mt-4 text-gray-700">
                 Nous vous souhaitons bonne chance pour vos futures candidatures.

@@ -39,9 +39,14 @@ class CandidatRejected extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mails.candidat-rejected', // Chemin de la vue
+            view: 'mails.candidat-rejected',
             with: [
-                'etudiant' => $this->etudiant, // Passer les données à la vue
+                'etudiant' => $this->etudiant,
+                'data' => [
+                    'prenom' => $this->etudiant->prenom,
+                    'titre_poste' => $this->etudiant->offres->first()->titre_poste,
+                    'nom_entreprise' => $this->etudiant->offres->first()->entreprise->nom,
+                ],
             ],
         );
     }

@@ -249,17 +249,62 @@ class EntrepriseController extends Controller
     {
         $etudiant = Etudiant::with('user')->findOrFail($id); // Charge la relation 'user'
         $offre = Offre::findOrFail($request->input('offre_id')); // Vérifie que l'offre existe
+        $entreprise = $offre->entreprise; // Récupère l'entreprise associée à l'offre
 
         return view('entreprise.approve-email', [
             'etudiant' => $etudiant,
             'offre' => $offre,
+            'entreprise' => $entreprise, // Passe l'entreprise à la vue
+            
         ]);
     }
 
     public function approveWithEmail(Request $request)
     {
-        $etudiantId = $request->input('etudiant_id');
-        $offreId = $request->input('offre_id');
+        $validated = $request->validate([
+            'etudiant_id' => 'required|integer',
+            'offre_id' => 'required|integer',
+            'subject' => 'required|string|max:255',
+            'body' => 'required|string',
+            'interview_date' => 'required|date',
+            'interview_time' => 'required|date_format:H:i',
+        ]);
+
+        $etudiant = Etudiant::with('user')->findOrFail($validated['etudiant_id']);
+        $offre = Offre::with('entreprise')->findOrFail($validated['offre_id']);
+        $entreprise = $offre->entreprise;
+
+        // Mettre à jour le statut du candidat
+        $etudiant->offres()->updateExistingPivot($offre->id, ['status' => 'accepted']);
+
+        // Envoyer l'email
+        Mail::send('mails.approver', [
+            'etudiant' => $etudiant,
+            'offre' => $offre,
+            'entreprise' => $entreprise,
+            'interview_date' => $validated['interview_date'],
+            'interview_time' => $validated['interview_time'],
+        ], function ($message) use ($etudiant, $validated) {
+            $message->to($etudiant->user->email)
+                    ->subject($validated['subject']);
+        });
+
+        return redirect()->route('entreprise.gerer-candidat')->with('success', 'Email envoyé avec succès.');
+    }
+
+    public function showRejectPage($id, Request $request)
+    {
+        $etudiant = Etudiant::with('user')->findOrFail($id);
+        $offre = Offre::findOrFail($request->input('offre_id'));
+
+        return view('entreprise.reject-email', [
+            'etudiant' => $etudiant,
+            'offre' => $offre,
+        ]);
+    }
+
+    public function rejectWithEmail(Request $request)
+    {
         $validated = $request->validate([
             'etudiant_id' => 'required|integer',
             'offre_id' => 'required|integer',
@@ -269,20 +314,56 @@ class EntrepriseController extends Controller
 
         $etudiant = Etudiant::findOrFail($validated['etudiant_id']);
         $offre = Offre::findOrFail($validated['offre_id']);
-        $etudiant->offres()->updateExistingPivot($offreId, ['status' => 'accepted']);
+        $etudiant->offres()->updateExistingPivot($offre->id, ['status' => 'rejected']);
 
         // Envoyer l'email
-        Mail::send('mails.approver', [
-            'prenom' => $etudiant->prenom,
-            'entreprise_nom' => $offre->entreprise->nom,
-            'body' => $validated['body'], // Passer le contenu personnalisé
-        ], function ($message) use ($etudiant, $validated) {
-            $message->to($etudiant->user->email)
-                    ->subject($validated['subject']);
-        });
+        Mail::to($etudiant->user->email)->send(new CandidatRejected($etudiant, $validated['body']));
 
-        return redirect()->route('entreprise.gerer-candidat')->with('success', 'Email envoyé avec succès.');
+        return redirect()->route('entreprise.gerer-candidat')->with('success', 'Le candidat a été rejeté et un email a été envoyé.');
     }
+
+    public function showRecruitPage($id, Request $request)
+    {
+        $etudiant = Etudiant::with('user')->findOrFail($id); // Load the student and their user relationship
+        $offreId = $request->input('offre_id'); // Retrieve the offer ID from the request
+
+        if (!$offreId) {
+            return redirect()->route('entreprise.gerer-candidat')
+                ->with('error', 'L\'offre associée est introuvable.');
+        }
+
+        $offre = Offre::findOrFail($offreId); // Retrieve the offer
+        $entreprise = $offre->entreprise; // Retrieve the associated company
+
+        return view('entreprise.recruit-email', [
+            'etudiant' => $etudiant,
+            'offre' => $offre, // Pass the $offre variable to the view
+            'entreprise' => $entreprise, // Pass the $entreprise variable to the view
+        ]);
+    }
+
+    public function recruitWithEmail(Request $request)
+    {
+        $validated = $request->validate([
+            'etudiant_id' => 'required|integer',
+            'offre_id' => 'required|integer',
+            'subject' => 'required|string|max:255',
+            'body' => 'required|string',
+        ]);
+
+        $etudiant = Etudiant::findOrFail($validated['etudiant_id']);
+        $offre = Offre::with('entreprise')->findOrFail($validated['offre_id']); // Load the offer and its associated company
+        $entreprise = $offre->entreprise;
+
+        // Update the pivot table to mark the candidate as recruited
+        $etudiant->offres()->updateExistingPivot($offre->id, ['status' => 'recruited']);
+
+        // Send the recruitment email
+        Mail::to($etudiant->user->email)->send(new CandidatRecruited($etudiant, $offre, $entreprise));
+
+        return redirect()->route('entreprise.gerer-candidat')->with('success', 'Le candidat a été recruté et un email a été envoyé.');
+    }
+
     public function page_entreprise(Request $request): View
     {
         $user = $request->user();

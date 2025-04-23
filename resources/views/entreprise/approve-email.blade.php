@@ -11,7 +11,7 @@
 <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
         <div class="text-center">
-            <img class="mx-auto h-12 w-auto" src="{{ asset('/storage/NextGen-logo.svg') }}" alt="Logo">
+            <img class="mx-auto h-12 w-auto" src="{{ asset('/images/NextGen-logo.svg') }}" alt="Logo">
             <h2 class="mt-6 text-2xl font-bold text-gray-900">Modifier l'email avant l'envoi</h2>
         </div>
         <form action="{{ route('candidats.approveWithEmail') }}" method="POST" class="mt-6">
@@ -25,6 +25,18 @@
                 </p>
             </div>
             <div class="mb-4">
+                <label for="company_name" class="block text-sm font-medium text-gray-700">Nom de l'entreprise</label>
+                <input type="text" id="company_name" name="company_name" value="{{ $entreprise->nom_entreprise ?? '' }}" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="interview_date" class="block text-sm font-medium text-gray-700">Date de l'entretien</label>
+                <input type="date" id="interview_date" name="interview_date" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="mb-4">
+                <label for="interview_time" class="block text-sm font-medium text-gray-700">Heure de l'entretien</label>
+                <input type="time" id="interview_time" name="interview_time" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+            </div>
+            <div class="mb-4">
                 <label for="subject" class="block text-sm font-medium text-gray-700">Sujet</label>
                 <input type="text" id="subject" name="subject" value="Invitation à un entretien" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
             </div>
@@ -32,7 +44,13 @@
                 <label for="body" class="block text-sm font-medium text-gray-700">Message</label>
                 <textarea id="body" name="body" rows="6" required class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">Bonjour {{ $etudiant->prenom }},
 
-Nous sommes ravis de vous inviter à un entretien pour le poste de {{ $offre->titre_poste }}.</textarea>
+Nous sommes ravis de vous inviter à un entretien pour le poste de {{ $offre->titre_poste }} au sein de {{ $entreprise->nom ?? 'notre entreprise' }}.
+
+L'entretien est prévu pour le {{ old('interview_date') ?? '(Se remplit automatiquement)' }} à {{ old('interview_time') ?? '(Se remplit automatiquement)' }}.
+
+Veuillez nous contacter si vous avez des questions ou si vous souhaitez modifier la date ou l'heure de l'entretien.
+
+</textarea>
             </div>
             <div class="flex justify-between">
                 <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md shadow-sm">Envoyer</button>

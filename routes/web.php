@@ -76,6 +76,8 @@ Route::get('/vip', function () {return view('entreprise.shortlist-vip');})->name
 Route::post('/candidats/approve/{id}', [EntrepriseController::class, 'approveCandidat'])->name('candidats.approve');
 Route::get('/candidats/{id}/approve-page', [EntrepriseController::class, 'showApprovePage'])->name('candidats.approvePage');
 Route::post('/candidats/reject/{id}', [EntrepriseController::class, 'rejectCandidat'])->name('candidats.reject');
+Route::get('/candidats/{id}/reject-page', [EntrepriseController::class, 'showRejectPage'])->name('candidats.rejectPage');
+Route::post('/candidats/reject-with-email', [EntrepriseController::class, 'rejectWithEmail'])->name('candidats.rejectWithEmail');
 Route::post('/admin/delete-entreprise', [AdminController::class, 'deleteEntreprise'])->name('admin.delete_entreprise');
 Route::delete('/admin/etudiant/{etudiant}', [EtudiantController::class, 'destroy'])->name('admin.delete_etudiant');
 Route::delete('/admin/subscriptions/remove/{user}', [SubscriptionController::class, 'remove'])->name('admin.subscriptions.remove');
@@ -84,3 +86,6 @@ Route::post('/candidats/recruit/{id}', [EntrepriseController::class, 'recruitCan
 Route::post('/candidats/{id}/pending', [EntrepriseController::class, 'setPending'])->name('candidats.pending');
 Route::post('/candidats/approve-with-email', [EntrepriseController::class, 'approveWithEmail'])->name('candidats.approveWithEmail');
 Route::post('/candidats/approveWithEmail', [EntrepriseController::class, 'approveWithEmail'])->name('candidats.approveWithEmail');
+Route::get('/candidats/{id}/recruit-page', [EntrepriseController::class, 'showRecruitPage'])->name('candidats.recruitPage');
+Route::post('/candidats/recruit-with-email', [EntrepriseController::class, 'recruitWithEmail'])->name('candidats.recruitWithEmail');
+Route::get('/entreprise/recruit/{id}', [EntrepriseController::class, 'showRecruitPage'])->name('entreprise.recruit');

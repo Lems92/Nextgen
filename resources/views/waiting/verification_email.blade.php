@@ -15,7 +15,11 @@
                 </div>
             @endif
             <div class="text-center">
-                Merci de vous être inscrit ! Avant de commencer, pourriez-vous vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer par e-mail ? Si vous ne voyez pas l'e-mail, veuillez vérifier votre dossier spam. Si vous ne l'avez toujours pas reçu, nous vous en enverrons un autre avec plaisir.
+                Merci pour votre inscription sur NextGen !
+Veuillez vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer.
+Cela ne prendra qu’une minute et vous pourrez ensuite publier votre première mission.
+Pas reçu notre e-mail ?
+Cliquez ci-dessous pour le renvoyer.
             </div>
 
             <div class="mt-4 d-flex justify-content-center gap-4 align-items-center">

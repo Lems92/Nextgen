@@ -226,28 +226,29 @@
                                 <div class="row">
                                     <!-- Pricing Table - Standard -->
                                     @foreach($offres as $offre)
-                                        <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
-                                            <div class="inner-box d-flex justify-content-between flex-column" style="min-height: 580px;">
-                                                <div>
-                                                    <div class="title">{{$offre->name}}</div>
-                                                    <div class="price">Ar {{$offre->price}} <span class="duration">/ mois</span>
+                                        @if($offre->name === 'Standard') <!-- Afficher uniquement le plan Standard -->
+                                            <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
+                                                <div class="inner-box d-flex justify-content-between flex-column" style="min-height: 580px;">
+                                                    <div>
+                                                        <div class="title">{{$offre->name}}</div>
+                                                        <div class="price">€ {{$offre->price}} <span class="duration">/ mois</span></div>
+                                                        <div class="table-content">
+                                                            <ul>
+                                                                @foreach($offre->permissions as $permission)
+                                                                    <li>
+                                                                        <span>{{ ucwords(str_replace('_', ' ', $permission->name)) }}</span>
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                    <div class="table-content">
-                                                        <ul>
-                                                            @foreach($offre->permissions as $permission)
-                                                                <li>
-                                                                    <span>{{ ucwords(str_replace('_', ' ', $permission->name)) }}</span>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
+                                                    <div class="table-footer">
+                                                        <a href="#tabs-content" class="theme-btn btn-style-three"
+                                                           data-offer="{{$offre->name}}" onclick="selectOffer(this)">Sélectionner</a>
                                                     </div>
-                                                </div>
-                                                <div class="table-footer">
-                                                    <a href="#tabs-content" class="theme-btn btn-style-three"
-                                                       data-offer="{{$offre->name}}" onclick="selectOffer(this)">Sélectionner</a>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>

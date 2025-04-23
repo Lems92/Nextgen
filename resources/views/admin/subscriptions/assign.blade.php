@@ -33,7 +33,7 @@
                                 @foreach($subscriptions as $subscription)
                                     <option
                                         value="{{ $subscription->id }}" {{ ($user->subscription_id == $subscription->id) ? 'selected' : '' }}>
-                                        {{ $subscription->name }} - {{ number_format($subscription->price, 2) }} MGA
+                                        {{ $subscription->name }} - {{ number_format($subscription->price, 2) }} €
                                     </option>
                                 @endforeach
                             </select>
