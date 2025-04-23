@@ -96,8 +96,13 @@ class Etudiant extends Model implements Sluggable
     public function offres_postules(): BelongsToMany
     {
         return $this->belongsToMany(Offre::class, 'postulations')
-            ->withPivot('id')
+            ->withPivot('status') // Inclure le champ 'status' de la table pivot
             ->withTimestamps();
+    }
+
+    public function offres()
+    {
+        return $this->belongsToMany(Offre::class, 'postulations')->withPivot('status', 'created_at')->withTimestamps();
     }
 
     public function universite()

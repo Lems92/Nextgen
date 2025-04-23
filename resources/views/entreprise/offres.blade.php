@@ -12,7 +12,7 @@
             <div class="upper-title-box">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h3>Liste d publiés offres</h3>
+                        <h3>Liste des offres publiés offres</h3>
                         <div class="text">Gérer vos offres?</div>
                     </div>
                     <div>

@@ -11,19 +11,20 @@ class CandidatApproved extends Mailable
     use Queueable, SerializesModels;
 
     public $etudiant;
+    public $entrepriseNom;
 
-    public function __construct($etudiant)
+    public function __construct($etudiant, $entrepriseNom)
     {
-        $this->data = [
-            'prenom' => $etudiant->prenom,
-            'nom' => $etudiant->nom,
-        ];
+        $this->etudiant = $etudiant;
+        $this->entrepriseNom = $entrepriseNom;
     }
 
     public function build()
     {
-        return $this->subject('Votre candidature a été approuvée')
-                    ->view('mails.approver')
-                    ->with(['data' => $this->data]);
+        return $this->view('mails.approver')
+            ->with([
+                'prenom' => $this->etudiant->prenom,
+                'entreprise_nom' => $this->entrepriseNom,
+            ]);
     }
 }

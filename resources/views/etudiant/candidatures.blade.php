@@ -25,14 +25,14 @@
                 <h4>offres postulés</h4>
 
                 <div class="chosen-outer">
-                  <!--Tabs Box-->
+                  <!--Tabs Box
                   <select class="chosen-select">
                     <option>Last 6 Months</option>
                     <option>Last 12 Months</option>
                     <option>Last 16 Months</option>
                     <option>Last 24 Months</option>
                     <option>Last 5 year</option>
-                  </select>
+                  </select>-->
                 </div>
               </div>
 
@@ -43,7 +43,7 @@
                       <tr>
                         <th>Titre de l'offre</th>
                         <th>Date d'application</th>
-                        <th>Status</th>
+                        <th>Etat</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -67,7 +67,17 @@
                           </div>
                         </td>
                         <td>{{$candidature->pivot->created_at->format('j F Y à H:i')}}</td>
-                        <td class="status">Active</td>
+                        <td class="status">
+                          @if($candidature->pivot->status === 'pending')
+                            <span class="badge badge-warning">En attente</span>
+                          @elseif($candidature->pivot->status === 'accepted')
+                            <span class="badge badge-success">Acceptée</span>
+                          @elseif($candidature->pivot->status === 'rejected')
+                            <span class="badge badge-danger">Refusée</span>
+                          @elseif($candidature->pivot->status === 'recruited')
+                            <span class="badge badge-primary">Recruté</span>
+                          @endif
+                        </td>
                         <td>
                           <div class="option-box">
                             <ul class="option-list">
@@ -105,7 +115,9 @@
   margin-right: 0;
   padding-right: 0;
 }
-
+.badge{
+  color:black;
+}
 .default-table {
   margin-right: 0;
 }

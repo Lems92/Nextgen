@@ -74,6 +74,13 @@ Route::get('/vip', function () {return view('entreprise.shortlist-vip');})->name
 //Route::get('/etu-univ', function () {return view('etudiant.etu-univ');})->name('etudiant.etu-univ');
 
 Route::post('/candidats/approve/{id}', [EntrepriseController::class, 'approveCandidat'])->name('candidats.approve');
+Route::get('/candidats/{id}/approve-page', [EntrepriseController::class, 'showApprovePage'])->name('candidats.approvePage');
+Route::post('/candidats/reject/{id}', [EntrepriseController::class, 'rejectCandidat'])->name('candidats.reject');
 Route::post('/admin/delete-entreprise', [AdminController::class, 'deleteEntreprise'])->name('admin.delete_entreprise');
 Route::delete('/admin/etudiant/{etudiant}', [EtudiantController::class, 'destroy'])->name('admin.delete_etudiant');
 Route::delete('/admin/subscriptions/remove/{user}', [SubscriptionController::class, 'remove'])->name('admin.subscriptions.remove');
+Route::post('/entreprise/reject-candidat/{etudiantId}', [EntrepriseController::class, 'rejectCandidat'])->name('entreprise.reject-candidat');
+Route::post('/candidats/recruit/{id}', [EntrepriseController::class, 'recruitCandidat'])->name('candidats.recruit');
+Route::post('/candidats/{id}/pending', [EntrepriseController::class, 'setPending'])->name('candidats.pending');
+Route::post('/candidats/approve-with-email', [EntrepriseController::class, 'approveWithEmail'])->name('candidats.approveWithEmail');
+Route::post('/candidats/approveWithEmail', [EntrepriseController::class, 'approveWithEmail'])->name('candidats.approveWithEmail');

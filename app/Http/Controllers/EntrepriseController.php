@@ -8,8 +8,11 @@ use App\Models\Parametrage;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Models\Etudiant;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CandidatApproved;
+use App\Mail\CandidatRejected;
+use App\Mail\CandidatRecruited; // Assurez-vous de créer ce mail
 
 class EntrepriseController extends Controller
 {
@@ -143,38 +146,143 @@ class EntrepriseController extends Controller
         $user->load('userable');
         $entreprise = $user->userable;
         $entreprise->load('offres');
-        $candidats = [];
+        $candidats = collect();
+
         foreach ($entreprise->offres as $offre) {
             foreach ($offre->etudiants as $etudiant) {
-                $candidats[] = [
+                $candidats->push([
                     'offre' => $offre,
-                    'etudiant' => $etudiant
-                ];
+                    'etudiant' => $etudiant,
+                    'status' => $etudiant->pivot->status, // Charger le champ 'status' depuis la table pivot
+                ]);
             }
         }
+
         return view('entreprise.gerer-candidat', compact('candidats'));
     }
 
     public function approveCandidat(Request $request, $etudiantId): RedirectResponse
     {
         $etudiant = \App\Models\Etudiant::findOrFail($etudiantId);
-        $user = $etudiant->user; // Assuming the Etudiant model has a 'user' relationship
+        $user = $etudiant->user;
 
         if (!$user || empty($user->email)) {
             return redirect()->route('entreprise.gerer-candidat')
                 ->with('error', 'L\'adresse email associée à cet étudiant est manquante.');
         }
-        // Logique pour approuver le candidat (par exemple, mettre à jour le statut)
-        //$etudiant->status = 'approved';
-        //$etudiant->save();
+
+        // Mettre à jour le statut dans la table pivot
+        $offreId = $request->input('offre_id'); // Assurez-vous que l'ID de l'offre est envoyé dans la requête
+        $etudiant->offres()->updateExistingPivot($offreId, ['status' => 'accepted']);
+
+        // Récupérer le nom de l'entreprise
+        $entrepriseNom = $request->user()->userable->nom;
 
         // Envoyer un email à l'étudiant
-        Mail::to($user->email)->send(new CandidatApproved($etudiant));
+        Mail::to($user->email)->send(new CandidatApproved($etudiant, $entrepriseNom));
 
         return redirect()->route('entreprise.gerer-candidat')
             ->with('success', 'Le candidat a été approuvé et un email a été envoyé.');
     }
 
+    public function rejectCandidat(Request $request, $etudiantId): RedirectResponse
+    {
+        $etudiant = \App\Models\Etudiant::findOrFail($etudiantId);
+        $user = $etudiant->user;
+
+        if (!$user || empty($user->email)) {
+            return redirect()->route('entreprise.gerer-candidat')
+                ->with('error', 'L\'adresse email associée à cet étudiant est manquante.');
+        }
+
+        // Mettre à jour le statut dans la table pivot
+        $offreId = $request->input('offre_id'); // Assurez-vous que l'ID de l'offre est envoyé dans la requête
+        $etudiant->offres()->updateExistingPivot($offreId, ['status' => 'rejected']);
+
+        // Envoyer un email à l'étudiant
+        Mail::to($user->email)->send(new CandidatRejected($etudiant));
+
+        return redirect()->route('entreprise.gerer-candidat')
+            ->with('success', 'Le candidat a été rejeté et un email a été envoyé.');
+    }
+
+    public function recruitCandidat(Request $request, $etudiantId): RedirectResponse
+    {
+        $etudiant = \App\Models\Etudiant::findOrFail($etudiantId);
+        $user = $etudiant->user;
+
+        if (!$user || empty($user->email)) {
+            return redirect()->route('entreprise.gerer-candidat')
+                ->with('error', 'L\'adresse email associée à cet étudiant est manquante.');
+        }
+
+        // Mettre à jour le statut dans la table pivot
+        $offreId = $request->input('offre_id');
+        $etudiant->offres()->updateExistingPivot($offreId, ['status' => 'recruited']);
+
+        // Envoyer un email à l'étudiant
+        Mail::to($user->email)->send(new CandidatRecruited($etudiant));
+
+        return redirect()->route('entreprise.gerer-candidat')
+            ->with('success', 'Le candidat a été recruté et un email a été envoyé.');
+    }
+
+    public function setPending(Request $request, $etudiantId): RedirectResponse
+    {
+        $etudiant = \App\Models\Etudiant::findOrFail($etudiantId);
+        $user = $etudiant->user;
+
+        if (!$user) {
+            return redirect()->route('entreprise.gerer-candidat')
+                ->with('error', 'L\'utilisateur associé à cet étudiant est introuvable.');
+        }
+
+        // Mettre à jour le statut dans la table pivot
+        $offreId = $request->input('offre_id'); // Assurez-vous que l'ID de l'offre est envoyé dans la requête
+        $etudiant->offres()->updateExistingPivot($offreId, ['status' => 'pending']);
+
+        return redirect()->route('entreprise.gerer-candidat')
+            ->with('success', 'Le statut du candidat a été mis en attente avec succès.');
+    }
+
+    public function showApprovePage($id, Request $request)
+    {
+        $etudiant = Etudiant::with('user')->findOrFail($id); // Charge la relation 'user'
+        $offre = Offre::findOrFail($request->input('offre_id')); // Vérifie que l'offre existe
+
+        return view('entreprise.approve-email', [
+            'etudiant' => $etudiant,
+            'offre' => $offre,
+        ]);
+    }
+
+    public function approveWithEmail(Request $request)
+    {
+        $etudiantId = $request->input('etudiant_id');
+        $offreId = $request->input('offre_id');
+        $validated = $request->validate([
+            'etudiant_id' => 'required|integer',
+            'offre_id' => 'required|integer',
+            'subject' => 'required|string|max:255',
+            'body' => 'required|string',
+        ]);
+
+        $etudiant = Etudiant::findOrFail($validated['etudiant_id']);
+        $offre = Offre::findOrFail($validated['offre_id']);
+        $etudiant->offres()->updateExistingPivot($offreId, ['status' => 'accepted']);
+
+        // Envoyer l'email
+        Mail::send('mails.approver', [
+            'prenom' => $etudiant->prenom,
+            'entreprise_nom' => $offre->entreprise->nom,
+            'body' => $validated['body'], // Passer le contenu personnalisé
+        ], function ($message) use ($etudiant, $validated) {
+            $message->to($etudiant->user->email)
+                    ->subject($validated['subject']);
+        });
+
+        return redirect()->route('entreprise.gerer-candidat')->with('success', 'Email envoyé avec succès.');
+    }
     public function page_entreprise(Request $request): View
     {
         $user = $request->user();

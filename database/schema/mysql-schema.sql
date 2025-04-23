@@ -407,6 +407,7 @@ CREATE TABLE `postulations` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `etudiant_id` bigint(20) unsigned NOT NULL,
   `offre_id` bigint(20) unsigned NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'pending', -- Pour suivre l'état de la candidature
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),

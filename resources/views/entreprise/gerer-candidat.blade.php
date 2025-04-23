@@ -19,59 +19,328 @@
                         <div class="widget-content">
 
                             <div class="tabs-box">
+                                <ul class="tab-buttons d-flex justify-content-between">
+                                    <li class="tab-btn active-btn" data-tab="#pending">
+                                        En attente <span class="badge">{{ $candidats->where('status', 'pending')->count() }}</span>
+                                    </li>
+                                    <li class="tab-btn" data-tab="#accepted">
+                                        Acceptés pour un entretien <span class="badge">{{ $candidats->where('status', 'accepted')->count() }}</span>
+                                    </li>
+                                    <li class="tab-btn" data-tab="#recruited">
+                                        Recrutés <span class="badge">{{ $candidats->where('status', 'recruited')->count() }}</span>
+                                    </li>
+                                    <li class="tab-btn" data-tab="#rejected">
+                                        Refusés <span class="badge">{{ $candidats->where('status', 'rejected')->count() }}</span>
+                                    </li>
+                                </ul>
 
                                 <div class="tabs-content">
-                                    <!--Tab-->
-                                    <div class="tab active-tab" id="totals">
+                                    <!-- Section En attente -->
+                                    <div class="tab active-tab" id="pending">
                                         <div class="d-flex flex-column gap-2" style="padding-top: 30px;">
-                                            <!-- Candidate block three -->
-                                            @forelse($candidats as $candidat)
-                                            <div class="candidate-block-three">
-                                                <div class="inner-box">
-                                                    <div class="content" style="padding-left: 0;">
-                                                        <h5>Poste : </h5>
-                                                        <h4 class="name"><a href="{{route('entreprise.offres.show', ['offre' => $candidat['offre']->slug])}}">{{$candidat['offre']['titre_poste']}}</a></h4>
-                                                        <ul class="candidate-info">
-                                                            <li class="designation">{{$candidat['offre']['type_contrat']}}</li>
-                                                            <li class="designation">{{$candidat['offre']['duree_contrat']}}</li>
-                                                            <li class="designation">{{$candidat['offre']['lieu_poste']}}</li>
-                                                            <li class="designation">Début {{$candidat['offre']['date_debut']->format('j F Y')}}</li>
-                                                            <li class="designation">Limite {{$candidat['offre']['date_limite_candidature']->format('j F Y')}}</li>
-                                                        </ul>
-                                                        <h5 class="mt-3">Candidats :</h5>
-                                                        <h4 class="name"><a href="{{route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug])}}">{{$candidat['etudiant']->prenom}} {{$candidat['etudiant']->nom}}</a></h4>
-                                                        <ul class="candidate-info">
-                                                            <li class="designation">{{$candidat['etudiant']->domaine_etudes}}</li>
-                                                            <li class="designation">{{$candidat['etudiant']->niveau_etudes}}</li>
-                                                            <li><span class="icon flaticon-map-locator"></span>
-                                                                {{$candidat['etudiant']->adresse_postale}}
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="option-box">
-                                                        <ul class="option-list">
-                                                            <li>
-                                                                <button onclick="window.location.href='{{route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug])}}'" data-text="Voir le candidat">
-                                                                    <span class="la la-eye"></span>
-                                                                </button>
-                                                            </li>
-                                                            <li>
-                                                                <form action="{{ route('candidats.approve', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir approuver ce candidat ?');">
-                                                                    @csrf
-                                                                    <button type="submit" data-text="Approve Application">
-                                                                        <span class="la la-check"></span>
+                                            @forelse($candidats->where('status', 'pending') as $candidat)
+                                                <div class="candidate-block-three">
+                                                    <div class="inner-box">
+                                                        <div class="content" style="padding-left: 0;">
+                                                            <h5>Poste : </h5>
+                                                            <h4 class="name"><a href="{{ route('entreprise.offres.show', ['offre' => $candidat['offre']->slug]) }}">{{ $candidat['offre']['titre_poste'] }}</a></h4>
+                                                            <ul class="candidate-info">
+                                                                <li class="designation">{{ $candidat['offre']['type_contrat'] }}</li>
+                                                                <li class="designation">{{ $candidat['offre']['duree_contrat'] }}</li>
+                                                                <li class="designation">{{ $candidat['offre']['lieu_poste'] }}</li>
+                                                                <li class="designation">Début {{ $candidat['offre']['date_debut']->format('j F Y') }}</li>
+                                                                <li class="designation">Limite {{ $candidat['offre']['date_limite_candidature']->format('j F Y') }}</li>
+                                                            </ul>
+                                                            <h5 class="mt-3">Candidats :</h5>
+                                                            <h4 class="name"><a href="{{ route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug]) }}">{{ $candidat['etudiant']->prenom }} {{ $candidat['etudiant']->nom }}</a></h4>
+                                                            <ul class="candidate-info">
+                                                                <li class="designation">{{ $candidat['etudiant']->domaine_etudes }}</li>
+                                                                <li class="designation">{{ $candidat['etudiant']->niveau_etudes }}</li>
+                                                                <li><span class="icon flaticon-map-locator"></span>{{ $candidat['etudiant']->adresse_postale }}</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="option-box">
+                                                            <ul class="option-list">
+                                                                <!-- Bouton pour voir le portfolio -->
+                                                                <li>
+                                                                    <button onclick="window.location.href='{{ route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug]) }}'" data-text="Voir le portfolio">
+                                                                        <span class="la la-eye"></span>
                                                                     </button>
-                                                                </form>
-                                                            </li>
-                                                            <li>
-                                                                <button data-text="Rejeter"><span class="la la-times-circle"></span></button>
-                                                            </li>
-                                                        </ul>
+                                                                </li>
+
+                                                                <!-- Bouton pour approuver le candidat -->
+                                                                <li>
+                                                                    <form action="{{ route('candidats.approvePage', ['id' => $candidat['etudiant']->id]) }}" method="GET">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Approuver">
+                                                                            <span class="la la-check-circle"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+
+                                                                <!-- Bouton pour rejeter le candidat -->
+                                                                <li>
+                                                                    <form action="{{ route('candidats.reject', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir rejeter ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Rejeter">
+                                                                            <span class="la la-times-circle"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+
+                                                                <!-- Bouton pour recruter le candidat -->
+                                                                <li>
+                                                                    <form action="{{ route('candidats.recruit', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir recruter ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Recruter">
+                                                                            <span class="la la-user-plus"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
                                             @empty
-                                                <p>Pas de candidats à afficher</p>
+                                                <p>Pas de candidats en attente</p>
+                                            @endforelse
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Acceptés -->
+                                    <div class="tab" id="accepted">
+                                        <div class="d-flex flex-column gap-2" style="padding-top: 30px;">
+                                            @forelse($candidats->where('status', 'accepted') as $candidat)
+                                                <div class="candidate-block-three">
+                                                    <div class="inner-box">
+                                                        <div class="content" style="padding-left: 0;">
+                                                            <h5>Poste : </h5>
+                                                            <h4 class="name"><a href="{{route('entreprise.offres.show', ['offre' => $candidat['offre']->slug])}}">{{$candidat['offre']['titre_poste']}}</a></h4>
+                                                            <ul class="candidate-info">
+                                                                <li class="designation">{{$candidat['offre']['type_contrat']}}</li>
+                                                                <li class="designation">{{$candidat['offre']['duree_contrat']}}</li>
+                                                                <li class="designation">{{$candidat['offre']['lieu_poste']}}</li>
+                                                                <li class="designation">Début {{$candidat['offre']['date_debut']->format('j F Y')}}</li>
+                                                                <li class="designation">Limite {{$candidat['offre']['date_limite_candidature']->format('j F Y')}}</li>
+                                                            </ul>
+                                                            <h5 class="mt-3">Candidats :</h5>
+                                                            <h4 class="name"><a href="{{route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug])}}">{{$candidat['etudiant']->prenom}} {{$candidat['etudiant']->nom}}</a></h4>
+                                                            <ul class="candidate-info">
+                                                                <li class="designation">{{$candidat['etudiant']->domaine_etudes}}</li>
+                                                                <li class="designation">{{$candidat['etudiant']->niveau_etudes}}</li>
+                                                                <li><span class="icon flaticon-map-locator"></span>
+                                                                    {{$candidat['etudiant']->adresse_postale}}
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="option-box">
+                                                            <ul class="option-list">
+                                                                <!-- Bouton pour voir le portfolio -->
+                                                                <li>
+                                                                    <button onclick="window.location.href='{{ route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug]) }}'" data-text="Voir le portfolio">
+                                                                        <span class="la la-eye"></span>
+                                                                    </button>
+                                                                </li>
+                                                                
+                                                                <li>
+                                                                    <form action="{{ route('candidats.pending', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir mettre ce candidat en attente ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Mettre en attente">
+                                                                            <span class="la la-clock-o"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                                <!-- Bouton pour approuver le candidat
+                                                                <li>
+                                                                    <form action="{{ route('candidats.approve', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir approuver ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Approuver">
+                                                                            <span class="la la-check-circle"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li> -->
+
+                                                                <!-- Bouton pour rejeter le candidat -->
+                                                                <li>
+                                                                    <form action="{{ route('candidats.reject', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir rejeter ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Rejeter">
+                                                                            <span class="la la-times-circle"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+
+                                                                <!-- Bouton pour recruter le candidat -->
+                                                                <li>
+                                                                    <form action="{{ route('candidats.recruit', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir recruter ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Recruter">
+                                                                            <span class="la la-user-plus"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @empty
+                                                <p>Pas de candidats acceptés</p>
+                                            @endforelse
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Recrutés -->
+                                    <div class="tab" id="recruited">
+                                        <div class="d-flex flex-column gap-2" style="padding-top: 30px;">
+                                            @forelse($candidats->where('status', 'recruited') as $candidat)
+                                                <div class="candidate-block-three">
+                                                    <div class="inner-box">
+                                                        <div class="content" style="padding-left: 0;">
+                                                            <h5>Poste : </h5>
+                                                            <h4 class="name"><a href="{{ route('entreprise.offres.show', ['offre' => $candidat['offre']->slug]) }}">{{ $candidat['offre']['titre_poste'] }}</a></h4>
+                                                            <ul class="candidate-info">
+                                                                <li class="designation">{{ $candidat['offre']['type_contrat'] }}</li>
+                                                                <li class="designation">{{ $candidat['offre']['duree_contrat'] }}</li>
+                                                                <li class="designation">{{ $candidat['offre']['lieu_poste'] }}</li>
+                                                                <li class="designation">Début {{ $candidat['offre']['date_debut']->format('j F Y') }}</li>
+                                                                <li class="designation">Limite {{ $candidat['offre']['date_limite_candidature']->format('j F Y') }}</li>
+                                                            </ul>
+                                                            <h5 class="mt-3">Candidats :</h5>
+                                                            <h4 class="name"><a href="{{ route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug]) }}">{{ $candidat['etudiant']->prenom }} {{ $candidat['etudiant']->nom }}</a></h4>
+                                                            <ul class="candidate-info">
+                                                                <li class="designation">{{ $candidat['etudiant']->domaine_etudes }}</li>
+                                                                <li class="designation">{{ $candidat['etudiant']->niveau_etudes }}</li>
+                                                                <li><span class="icon flaticon-map-locator"></span>{{ $candidat['etudiant']->adresse_postale }}</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="option-box">
+                                                            <ul class="option-list">
+                                                                <!-- Bouton pour voir le portfolio -->
+                                                                <li>
+                                                                    <button onclick="window.location.href='{{ route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug]) }}'" data-text="Voir le portfolio">
+                                                                        <span class="la la-eye"></span>
+                                                                    </button>
+                                                                </li>
+
+                                                                <!-- Bouton pour mettre en attente -->
+                                                                <li>
+                                                                    <form action="{{ route('candidats.pending', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir mettre ce candidat en attente ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Mettre en attente">
+                                                                            <span class="la la-clock-o"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+
+                                                                <!-- Bouton pour rejeter le candidat -->
+                                                                <li>
+                                                                    <form action="{{ route('candidats.reject', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir rejeter ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Rejeter">
+                                                                            <span class="la la-times-circle"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @empty
+                                                <p>Pas de candidats recrutés</p>
+                                            @endforelse
+                                        </div>
+                                    </div>
+
+                                    <!-- Section Refusés -->
+                                    <div class="tab" id="rejected">
+                                        <div class="d-flex flex-column gap-2" style="padding-top: 30px;">
+                                            @forelse($candidats->where('status', 'rejected') as $candidat)
+                                                <div class="candidate-block-three">
+                                                    <div class="inner-box">
+                                                        <div class="content" style="padding-left: 0;">
+                                                            <h5>Poste : </h5>
+                                                            <h4 class="name"><a href="{{route('entreprise.offres.show', ['offre' => $candidat['offre']->slug])}}">{{$candidat['offre']['titre_poste']}}</a></h4>
+                                                            <ul class="candidate-info">
+                                                                <li class="designation">{{$candidat['offre']['type_contrat']}}</li>
+                                                                <li class="designation">{{$candidat['offre']['duree_contrat']}}</li>
+                                                                <li class="designation">{{$candidat['offre']['lieu_poste']}}</li>
+                                                                <li class="designation">Début {{$candidat['offre']['date_debut']->format('j F Y')}}</li>
+                                                                <li class="designation">Limite {{$candidat['offre']['date_limite_candidature']->format('j F Y')}}</li>
+                                                            </ul>
+                                                            <h5 class="mt-3">Candidats :</h5>
+                                                            <h4 class="name"><a href="{{route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug])}}">{{$candidat['etudiant']->prenom}} {{$candidat['etudiant']->nom}}</a></h4>
+                                                            <ul class="candidate-info">
+                                                                <li class="designation">{{$candidat['etudiant']->domaine_etudes}}</li>
+                                                                <li class="designation">{{$candidat['etudiant']->niveau_etudes}}</li>
+                                                                <li><span class="icon flaticon-map-locator"></span>
+                                                                    {{$candidat['etudiant']->adresse_postale}}
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="option-box">
+                                                            <ul class="option-list">
+                                                                <!-- Bouton pour voir le portfolio -->
+                                                                <li>
+                                                                    <button onclick="window.location.href='{{ route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug]) }}'" data-text="Voir le portfolio">
+                                                                        <span class="la la-eye"></span>
+                                                                    </button>
+                                                                </li>
+                                                                <li>
+                                                                    <form action="{{ route('candidats.pending', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir mettre ce candidat en attente ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Mettre en attente">
+                                                                            <span class="la la-clock-o"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                                <!-- Bouton pour approuver le candidat -->
+                                                                <li>
+                                                                    <form action="{{ route('candidats.approve', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir approuver ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Approuver">
+                                                                            <span class="la la-check-circle"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+
+                                                                <!-- Bouton pour rejeter le candidat 
+                                                                <li>
+                                                                    <form action="{{ route('candidats.reject', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir rejeter ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Rejeter">
+                                                                            <span class="la la-times-circle"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>-->
+
+                                                                <!-- Bouton pour recruter le candidat -->
+                                                                <li>
+                                                                    <form action="{{ route('candidats.recruit', ['id' => $candidat['etudiant']->id]) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir recruter ce candidat ?');">
+                                                                        @csrf
+                                                                        <input type="hidden" name="offre_id" value="{{ $candidat['offre']->id }}">
+                                                                        <button type="submit" data-text="Recruter">
+                                                                            <span class="la la-user-plus"></span>
+                                                                        </button>
+                                                                    </form>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @empty
+                                                <p>Pas de candidats refusés</p>
                                             @endforelse
                                         </div>
                                     </div>
@@ -84,7 +353,68 @@
         </div>
     </section>
 
+    <div id="approvalPopup" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
+            <h2 class="text-xl font-bold mb-4">Modifier l'email avant l'envoi</h2>
+            <form id="approvalForm" method="POST" action="{{ route('candidats.approveWithEmail') }}">
+                @csrf
+                <input type="hidden" name="etudiant_id" id="popupEtudiantId">
+                <input type="hidden" name="offre_id" id="popupOffreId">
+                <div class="mb-4">
+                    <label for="emailSubject" class="block text-sm font-medium text-gray-700">Sujet</label>
+                    <input type="text" name="subject" id="emailSubject" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="Invitation à un entretien">
+                </div>
+                <div class="mb-4">
+                    <label for="emailBody" class="block text-sm font-medium text-gray-700">Message</label>
+                    <textarea name="body" id="emailBody" rows="6" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+Bonjour {{ $candidat['etudiant']->prenom }},
 
+Nous sommes ravis de vous inviter à un entretien pour le poste de {{ $candidat['offre']->titre_poste }}.
+                    </textarea>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="closeApprovalPopup()" class="bg-gray-500 text-white px-4 py-2 rounded-md mr-2">Annuler</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md">Envoyer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        .tab-buttons {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tab-btn {
+    cursor: pointer;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s;
+}
+
+.tab-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.tab-btn .badge {
+    background-color: #6d0f27;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+#approvalPopup.hidden {
+    display: none;
+}
+    </style>
     <script>
         Chart.defaults.global.defaultFontFamily = "Sofia Pro";
         Chart.defaults.global.defaultFontColor = '#888';
@@ -162,6 +492,17 @@
                 }
             },
         });
+
+        function openApprovalPopup(etudiantId, offreId, prenom, titrePoste) {
+            document.getElementById('popupEtudiantId').value = etudiantId;
+            document.getElementById('popupOffreId').value = offreId;
+            document.getElementById('emailBody').value = `Bonjour ${prenom},\n\nNous sommes ravis de vous inviter à un entretien pour le poste de ${titrePoste}.`;
+            document.getElementById('approvalPopup').classList.remove('hidden');
+        }
+
+        function closeApprovalPopup() {
+            document.getElementById('approvalPopup').classList.add('hidden');
+        }
     </script>
 
     </body>
