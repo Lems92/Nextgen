@@ -63,7 +63,7 @@
                                     </li>
                                     <li class="list-group-item">
                                         <h5>Description du poste</h5>
-                                        <p class="h6 mt-2">{{ $offre->description_poste }}</p>
+                                        <p class="h6 mt-2">{!! nl2br(e($offre->description_poste)) !!}</p>
                                     </li>
                                     <li class="list-group-item">
                                         <h5>Compétences techniques requis</h5>
@@ -104,7 +104,7 @@
                                     </li>
                                     <li class="list-group-item">
                                         <h5>Avantages</h5>
-                                        <p class="h6 mt-2">{{ $offre->avantages }}</p>
+                                        <p class="h6 mt-2">{!! nl2br(e($offre->avantages)) !!}</p>
                                     </li>
                                     <li class="list-group-item">
                                         <h5>Date limite de candidature</h5>

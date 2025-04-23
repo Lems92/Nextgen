@@ -769,6 +769,20 @@ function headerStyle() {
 			disable_search_threshold: 10,
 			width: '100%',
 		});
+
+		// Fix for touch devices (iOS)
+		$(".chosen-select").on("touchstart", function (e) {
+			e.stopPropagation();
+			e.preventDefault();
+			$(this).trigger("mousedown");
+		});
+
+		// Ensure smooth scrolling on iOS
+		$(".chosen-container .chosen-results").css({
+			'max-height': '200px', // Adjust as needed
+			'overflow-y': 'auto',
+			'-webkit-overflow-scrolling': 'touch', // Enables momentum scrolling
+		});
 	}
 
 	//Chosen Search Select
@@ -777,6 +791,19 @@ function headerStyle() {
 			width: '100%',
 		});
 	}
+
+	// Fix for Chosen touch support
+	if ($('.chosen-container').length > 0) {
+		$('.chosen-container').on('touchstart', function (e) {
+			e.stopPropagation();
+			$(this).trigger('mousedown');
+		});
+	}
+
+	// Supprimez tout comportement qui pourrait bloquer l'effacement
+    $(".chosen-select").on("focus", function (e) {
+        e.stopPropagation();
+    });
 
 	// Custom Select Box
 	if ($('.sortby-select').length) {

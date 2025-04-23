@@ -69,7 +69,7 @@
 
                         <div class="form-group col-lg-12 col-md-12">
                             <label for="description_poste">Description du poste</label>
-                            <textarea id="description_poste" name="description_poste" placeholder="Décrivez les responsabilités principales et les missions du poste..." required>{{old('description_poste', isset($offre) ? $offre->description_poste : '')}}</textarea>
+                            <textarea id="description_poste" name="description_poste" placeholder="Décrivez les responsabilités principales et les missions du poste..." required>{{ old('description_poste', isset($offre) ? nl2br(e($offre->description_poste)) : '') }}</textarea>
                             <x-input-error :messages="$errors->get('description_poste')" class="mt-2" />
                         </div>
 
@@ -114,7 +114,7 @@
 
                         <div class="form-group col-lg-12 col-md-12">
                             <label for="avantages">Avantages offerts</label>
-                            <textarea id="avantages" name="avantages" placeholder="Décrivez les avantages associés au poste...">{{old('avantages', isset($offre) ? $offre->avantages : '')}}</textarea>
+                            <textarea id="avantages" name="avantages" placeholder="Décrivez les avantages associés au poste...">{{ old('avantages', isset($offre) ? nl2br(e($offre->avantages)) : '') }}</textarea>
                             <x-input-error :messages="$errors->get('avantages')" class="mt-2" />
                         </div>
 

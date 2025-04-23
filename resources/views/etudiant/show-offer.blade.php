@@ -57,7 +57,7 @@
                     <div class="content-column col-lg-8 col-md-12 col-sm-12">
                         <div class="job-detail">
                             <h4>Description</h4>
-                            <p>{{$offre->description_poste}}</p>
+                            <p>{!! nl2br(e($offre->description_poste)) !!}</p>
                             <h4>Skill & Experience</h4>
                             <h6 class="mb-3 ms-3"><i class="la la-check-square"></i> Competences techniques</h6>
                             <ul class="ms-5 mb-4">
@@ -85,7 +85,7 @@
                             </ul>
 
                             <h4>Avantages</h4>
-                            <p>{{$offre->avantages}}</p>
+                            <p>{!! nl2br(e($offre->avantages)) !!}</p>
                         </div>
 
                         <!-- Related Jobs -->

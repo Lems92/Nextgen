@@ -1006,6 +1006,11 @@ Radio bOX
 .radio-box input[type="radio"]:checked+label {
   border-color: #66022B;
 }
+input, select, textarea {
+  -webkit-user-select: auto; /* Permet la sélection sur iOS */
+  -webkit-touch-callout: default; /* Active les interactions tactiles */
+  user-select: auto;
+}
 
 .radio-box input[type="radio"]:checked+label:before {
   border-color: #66022B;
@@ -11019,6 +11024,9 @@ Section Title
 
 .chosen-container .chosen-drop,
 .chosen-container .chosen-results {
+  -webkit-overflow-scrolling: touch; /* Permet le défilement fluide sur iOS */
+  max-height: 200px; /* Limite la hauteur pour activer le défilement */
+  overflow-y: auto; /* Active le défilement vertical */
   border: 0 !important;
   outline: none !important;
   border-radius: 0px 0px 8px 8px !important;
