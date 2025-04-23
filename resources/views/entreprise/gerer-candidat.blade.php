@@ -51,7 +51,7 @@
                                                     <div class="option-box">
                                                         <ul class="option-list">
                                                             <li>
-                                                                <button onclick="window.location.href='{{route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug])}}'" data-text="Voir l'offre">
+                                                                <button onclick="window.location.href='{{route('etudiants.portfolio', ['etudiant' => $candidat['etudiant']->slug])}}'" data-text="Voir le candidat">
                                                                     <span class="la la-eye"></span>
                                                                 </button>
                                                             </li>
@@ -64,10 +64,7 @@
                                                                 </form>
                                                             </li>
                                                             <li>
-                                                                <button data-text="Reject Aplication"><span class="la la-times-circle"></span></button>
-                                                            </li>
-                                                            <li>
-                                                                <button data-text="Delete Aplication"><span class="la la-trash"></span></button>
+                                                                <button data-text="Rejeter"><span class="la la-times-circle"></span></button>
                                                             </li>
                                                         </ul>
                                                     </div>
