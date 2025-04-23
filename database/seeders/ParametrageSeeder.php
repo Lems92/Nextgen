@@ -16,7 +16,7 @@ class ParametrageSeeder extends Seeder
         $all = [
             'type_contrat' => ['Stage', 'CDI', 'CDD', 'Alternance', 'Freelance/Indépendant', 'Intérim', 'Apprentissage'],
             'duree_contrat' => ['Moins de 1 mois', '1 à 3 mois', '3 à 6 mois', 'Plus de 6 mois'],
-            'lieu_poste' => ['Antananarivo', 'Toamasina', 'Antsirabe', 'Fianrantsoa', 'Mahajanga'],
+            'lieu_poste' => ['Madagascar','France'],
             'competence_technique' => ['Bureautique', 'Programmation', 'Gestion de Bases de Données', 'Systèmes d\'Information', 'Cybersécurité'],
             'competence_transversale' => [
                 'Communication écrite et orale',

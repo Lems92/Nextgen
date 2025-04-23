@@ -64,8 +64,16 @@ class AdminController extends Controller
         $entreprise = Entreprise::find($request->id);
 
         if ($entreprise) {
+            // Supprimer l'utilisateur associé à l'entreprise
+            $user = $entreprise->user;
+            if ($user) {
+                $user->delete();
+            }
+
+            // Supprimer l'entreprise
             $entreprise->delete();
-            return redirect()->route('admin.dashboard')->with('success', 'Entreprise supprimée avec succès.');
+
+            return redirect()->route('admin.dashboard')->with('success', 'Entreprise et utilisateur associés supprimés avec succès.');
         }
 
         return redirect()->back()->with('error', 'Entreprise introuvable.');

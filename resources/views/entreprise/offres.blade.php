@@ -31,10 +31,10 @@
                 <div class="ls-widget">
                     <div class="tabs-box">
                         <div class="widget-title">
-                            <h4>My Job Listings</h4>
+                            <!--<h4>My Job Listings</h4>
 
                             <div class="chosen-outer">
-                                <!--Tabs Box-->
+                                Tabs Box
                                 <select class="chosen-select">
                                     <option>Last 6 Months</option>
                                     <option>Last 12 Months</option>
@@ -43,6 +43,7 @@
                                     <option>Last 5 year</option>
                                 </select>
                             </div>
+                            -->
                         </div>
 
                         <div class="widget-content">

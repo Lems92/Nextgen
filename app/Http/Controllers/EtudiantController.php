@@ -29,11 +29,16 @@ class EtudiantController extends Controller
     {
         $etudiant = Etudiant::findOrFail($id);
 
+        // Supprimer l'utilisateur associé
+        if ($etudiant->user) {
+            $etudiant->user->delete();
+        }
+
         // Supprimer l'étudiant
         $etudiant->delete();
 
         // Rediriger avec un message de succès
-        return redirect()->route('admin.dashboard')->with('success', 'Étudiant supprimé avec succès.');
+        return redirect()->route('admin.dashboard')->with('success', 'Étudiant et utilisateur associé supprimés avec succès.');
     }
 
     public function portfolio(Request $request, Etudiant $etudiant): View

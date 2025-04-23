@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                             @empty
-                                <h3>Vous n'avez pas encore postulé à aucun offre !</h3>
+                                <h3>Aucune offre postulée pour le moment </h3>
                             @endforelse
                         </div>
                     </div>

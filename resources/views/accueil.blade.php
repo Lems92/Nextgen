@@ -16,9 +16,8 @@
                         <!-- Colonne de texte à gauche -->
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="hero-content">
-                                <h2>NextGen connecte les talents de demain aux meilleures entreprises. </h2>
-                                    <p>Trouvez un stage, 
-                                    une alternance ou un premier emploi en quelques clics</p>
+                                <h2>La passerelle vers ton 1er job.</h2>
+                                    <p>Stage, alternance, premier emploi à impact et  innovant</p>
                                 <ul class="list-style-one">
                                         <li>Connectez-vous aux talents de demain, sans frontières.</li>
                                 </ul>
@@ -38,9 +37,8 @@
                         <!-- Colonne de texte à gauche -->
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="hero-content">
-                                <h2>NextGen connecte les talents de demain aux meilleures entreprises. </h2>
-                                    <p>Trouvez un stage, 
-                                    une alternance ou un premier emploi en quelques clics</p>
+                                <h2>La passerelle vers ton 1er job.</h2>
+                                    <p>Stage, alternance, premier emploi à impact et  innovant</p>
                                 <ul class="list-style-one">
                                     <li>Le recrutement inclusif commence ici.</li>    
                                 </ul>
@@ -58,9 +56,8 @@
                         <!-- Colonne de texte à gauche -->
                         <div class="col-md-6 d-flex align-items-center">
                             <div class="hero-content">
-                                <h2>NextGen connecte les talents de demain aux meilleures entreprises. </h2>
-                                    <p>Trouvez un stage, 
-                                    une alternance ou un premier emploi en quelques clics</p>
+                                <h2>La passerelle vers ton 1er job.</h2>
+                                    <p>Stage, alternance, premier emploi à impact et  innovant</p>
                                 <ul class="list-style-one">
                                     <li>Un avenir accessible à tous.</li>                                   
                                 </ul>
@@ -363,6 +360,9 @@
             .banner-carousel .bg-image img {
                 display: block; /* Assurez-vous que l'image est visible par défaut */
             }
+            h2{
+                    font-size: 45px; /* Ajuster la taille de la police pour les petits écrans */
+                }
 
             /* Masquer l'image sur les petits écrans */
             @media (max-width: 768px) {
@@ -383,7 +383,7 @@
                     margin-right: 20px;
                     margin-bottom: 20px; /* Centrer les éléments */
                 }
-
+                
         .hero-content .theme-btn {
             display: inline-block; /* Centrer le bouton */
             margin: 20px auto 0; /* Ajouter un espace au-dessus */

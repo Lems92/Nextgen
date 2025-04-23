@@ -36,7 +36,7 @@
 
                         <fieldset class="form-section">
                             <legend>
-                                <h4> Personnelles </h4>
+                                <h4> Informations Personnelles </h4>
                             </legend>
                             <div class="row">
                                 <div class="uploading-outer">
@@ -47,8 +47,7 @@
                                             photo</label>
                                         <span class="uploadButton-file-name"></span>
                                     </div>
-                                    <div class="text">Taille maximale du fichier : 1 Mo, Dimensions minimales : 330x300 et
-                                        les fichiers acceptés sont .jpg et .png</div>
+                                    <div class="text">Taille maximale : 1 Mo · Dimensions minimales : 330×300 px · Formats acceptés : .jpg, .png</div>
                                 </div>
                                 <div class="form-group col-lg-12 col-md-12 mt-4">
                                     <label for="prenom" class="form-label">Prénom :</label>
@@ -121,11 +120,11 @@
                             <legend>
                                 <h4>Éducation</h4>
                             </legend>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="nom-ecole" class="form-label">Nom de l'école ou de l'université :</label>
                                 <input type="text" id="nom-ecole" name="nom_ecole_universite" class="form-control"
                                     required>
-                            </div>
+                            </div>-->
                             <div class="mb-3">
                                 <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
                                 <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
@@ -531,25 +530,10 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="origine_ethnique">Origine ethnique :</label>
+                                <label for="origine_ethnique">Origine :</label>
                                 <select class="form-select" id="origine_ethnique" name="origine_ethnique">
-                                    <option value="antaimoro">Antaimoro</option>
-                                    <option value="antandroy">Antandroy</option>
-                                    <option value="antanosy">Antanosy</option>
-                                    <option value="betsileo">Betsileo</option>
-                                    <option value="betsimisaraka">Betsimisaraka</option>
-                                    <option value="francais">Français</option>
-                                    <option value="mahafaly">Mahafaly</option>
-                                    <option value="makoa">Makoa</option>
-                                    <option value="masikoro">Masikoro</option>
-                                    <option value="merina">Merina</option>
-                                    <option value="sakalava">Sakalava</option>
-                                    <option value="sihanaka">Sihanaka</option>
-                                    <option value="tanala">Tanala</option>
-                                    <option value="tsimihety">Tsimihety</option>
-                                    <option value="tsonga">Tsonga</option>
-                                    <option value="zafimaniry">Zafimaniry</option>
-
+                                    <option value="antaimoro">Malagasy</option>
+                                    <option value="antandroy">Autres</option>  
                                 </select>
                             </div>
 
