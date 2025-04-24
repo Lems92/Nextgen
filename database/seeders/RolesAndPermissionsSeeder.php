@@ -35,7 +35,7 @@ class RolesAndPermissionsSeeder extends Seeder
         // create admin
         $admin = User::create([
             'email' => 'admin@admin.com',
-            'password' => bcrypt('admin123'),
+            'password' => bcrypt('France2024.'),
             'userable_type' => null,
             'userable_id' => null,
             'email_verified_at' => now(),
