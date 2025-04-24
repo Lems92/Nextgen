@@ -331,33 +331,6 @@
         </div>
     </section>
 
-    <div id="approvalPopup" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-        <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
-            <h2 class="text-xl font-bold mb-4">Modifier l'email avant l'envoi</h2>
-            <form id="approvalForm" method="POST" action="{{ route('candidats.approveWithEmail') }}">
-                @csrf
-                <input type="hidden" name="etudiant_id" id="popupEtudiantId">
-                <input type="hidden" name="offre_id" id="popupOffreId">
-                <div class="mb-4">
-                    <label for="emailSubject" class="block text-sm font-medium text-gray-700">Sujet</label>
-                    <input type="text" name="subject" id="emailSubject" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" value="Invitation à un entretien">
-                </div>
-                <div class="mb-4">
-                    <label for="emailBody" class="block text-sm font-medium text-gray-700">Message</label>
-                    <textarea name="body" id="emailBody" rows="6" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
-Bonjour {{ $candidat['etudiant']->prenom }},
-
-Nous sommes ravis de vous inviter à un entretien pour le poste de {{ $candidat['offre']->titre_poste }}.
-                    </textarea>
-                </div>
-                <div class="flex justify-end">
-                    <button type="button" onclick="closeApprovalPopup()" class="bg-gray-500 text-white px-4 py-2 rounded-md mr-2">Annuler</button>
-                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-md">Envoyer</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <style>
         .tab-buttons {
     display: flex;

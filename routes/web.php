@@ -91,3 +91,4 @@ Route::get('/candidats/{id}/recruit-page', [EntrepriseController::class, 'showRe
 Route::post('/candidats/recruit-with-email', [EntrepriseController::class, 'recruitWithEmail'])->name('candidats.recruitWithEmail');
 Route::get('/entreprise/recruit/{id}', [EntrepriseController::class, 'showRecruitPage'])->name('entreprise.recruit');
 Route::delete('/admin/universites/{universite}', [UniversiteController::class, 'deleteUniversite'])->name('admin.delete_universite');
+Route::post('/etudiants/mes-candidatures/annuler', [EtudiantController::class, 'annuler_postulation'])->name('etudiant.postulation.annuler');
