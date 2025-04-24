@@ -106,8 +106,11 @@ class EtudiantController extends Controller
 
     public function annuler_postulation(Request $request): RedirectResponse
     {
-        $id = $request->get('id'); // Récupérer l'ID de la candidature
-        $postulation = Postulation::findOrFail((int) $id); // Trouver la candidature ou échouer
+        // Récupérer l'ID de la candidature depuis la requête
+        $id = $request->get('id');
+
+        // Trouver la candidature ou retourner une erreur 404
+        $postulation = Postulation::findOrFail((int) $id);
 
         // Supprimer la candidature
         $postulation->delete();

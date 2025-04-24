@@ -114,7 +114,7 @@
 
                         <div class="form-group col-lg-12 col-md-12">
                             <label for="avantages">Avantages offerts</label>
-                            <textarea id="avantages" name="avantages" placeholder="Décrivez les avantages associés au poste...">{{ old('avantages', isset($offre) ? nl2br(e($offre->avantages)) : '') }}</textarea>
+                            <textarea id="avantages" name="avantages" placeholder="Décrivez les avantages associés au poste..." required>{{ old('avantages', isset($offre) ? nl2br(e($offre->avantages)) : '') }}</textarea>
                             <x-input-error :messages="$errors->get('avantages')" class="mt-2" />
                         </div>
 
