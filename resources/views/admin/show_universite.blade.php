@@ -115,6 +115,14 @@
                                     </ul>
                                 </div>
                             </div>
+
+                            <hr>
+
+                            <form method="POST" action="{{ route('admin.delete_universite', ['universite' => $universite->id]) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette université ?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Supprimer l'université</button>
+                            </form>
                         </div>
                     </div>
                 </div>

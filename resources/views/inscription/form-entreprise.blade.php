@@ -80,16 +80,6 @@
                                            placeholder="Ville" required>
                                     <x-input-error :messages="$errors->get('ville')" class="mt-2"/>
 
-                                    <label for="region">Région</label>
-                                    <select id="region" name="region" class="chosen-select">
-                                        <option value="" disabled selected>Région</option>
-                                        @foreach($mada_regions as $region)
-                                            {{$region}}
-                                            <option
-                                                value="{{$region}}" {{ old('region') == $region ? 'selected' : '' }}>{{$region}}</option>
-                                        @endforeach
-                                    </select>
-                                    <x-input-error :messages="$errors->get('region')" class="mt-2"/>
 
                                     <input type="hidden" name="pays" value="Madagascar">
                                 </div>

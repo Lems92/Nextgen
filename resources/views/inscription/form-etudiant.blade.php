@@ -84,19 +84,11 @@
                                             <option value="france" {{ old('pays') == 'france' ? 'selected' : '' }}>
                                                 France
                                             </option>
+                                            <option value="autres" {{ old('pays') == 'autres' ? 'selected' : '' }}>
+                                                Autres
+                                            </option>
                                         </select>
                                         <x-input-error :messages="$errors->get('pays')" class="mt-2"/>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="region" class="form-label">Région :</label>
-                                        <select id="region" name="region" class="form-select" required>
-                                            @foreach($mada_regions as $region)
-                                                {{$region}}
-                                                <option
-                                                    value="{{$region}}" {{ old('region') == $region ? 'selected' : '' }}>{{$region}}</option>
-                                            @endforeach
-                                        </select>
-                                        <x-input-error :messages="$errors->get('region')" class="mt-2"/>
                                     </div>
                                     <div class="col-md-6">
                                         <label for="ville" class="form-label">Ville :</label>

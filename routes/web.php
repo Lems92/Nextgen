@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\WaitingController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UniversiteController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\EtudiantController;
@@ -89,3 +90,4 @@ Route::post('/candidats/approveWithEmail', [EntrepriseController::class, 'approv
 Route::get('/candidats/{id}/recruit-page', [EntrepriseController::class, 'showRecruitPage'])->name('candidats.recruitPage');
 Route::post('/candidats/recruit-with-email', [EntrepriseController::class, 'recruitWithEmail'])->name('candidats.recruitWithEmail');
 Route::get('/entreprise/recruit/{id}', [EntrepriseController::class, 'showRecruitPage'])->name('entreprise.recruit');
+Route::delete('/admin/universites/{universite}', [UniversiteController::class, 'deleteUniversite'])->name('admin.delete_universite');

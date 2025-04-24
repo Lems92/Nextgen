@@ -365,4 +365,5 @@ class AdminController extends Controller
 
         return redirect()->intended(route('admin.type_subscriptions'))->with('success', 'Abonnement mis à jour avec succès.');
     }
+    
 }

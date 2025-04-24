@@ -533,6 +533,7 @@
                                 <label for="origine_ethnique">Origine :</label>
                                 <select class="form-select" id="origine_ethnique" name="origine_ethnique">
                                     <option value="antaimoro">Malagasy</option>
+                                    <option value="antaimoro">Français</option>
                                     <option value="antandroy">Autres</option>  
                                 </select>
                             </div>

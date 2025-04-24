@@ -21,7 +21,6 @@ class Entreprise extends Model implements Sluggable
         'complement_adresse',
         'code_postal',
         'ville',
-        'region',
         'pays',
         'site_web',
         'date_creation',

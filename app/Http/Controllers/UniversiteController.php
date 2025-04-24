@@ -6,6 +6,7 @@ use App\Models\DemandeAffiliationUniversite;
 use App\Models\Etudiant;
 use App\Models\EtudiantUniversite;
 use App\Models\Event;
+use App\Models\Universite;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -158,5 +159,28 @@ class UniversiteController extends Controller
         $event->update($validatedData);
 
         return redirect()->intended(route('universite.gerer_event'))->with('success', 'Événement modifié avec succès.');
+    }
+
+    public function deleteUniversite(Request $request, Universite $universite): RedirectResponse
+    {
+        try {
+            DB::transaction(function () use ($universite) {
+                // Supprimer l'utilisateur associé
+                $universite->user()->delete();
+
+                // Supprimer les événements associés
+                $universite->events()->delete();
+
+                // Supprimer les étudiants associés
+                $universite->etudiants()->delete();
+
+                // Supprimer l'université
+                $universite->delete();
+            });
+
+            return redirect()->route('admin.list_universites')->with('success', 'Université supprimée avec succès.');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'Une erreur est survenue lors de la suppression : ' . $exception->getMessage());
+        }
     }
 }
