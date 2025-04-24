@@ -1082,6 +1082,12 @@ Switches
   align-items: center;
   cursor: pointer;
 }
+input, textarea, select {
+  -webkit-user-select: auto; /* Permet la sélection sur iOS */
+  -webkit-touch-callout: default; /* Active les interactions tactiles */
+  user-select: auto;
+  pointer-events: auto; /* Assurez-vous que les interactions sont activées */
+}
 
 .switch input {
   opacity: 0;
@@ -1310,7 +1316,10 @@ input:checked+.slider:before {
   line-height: 20px;
   padding: 10px 20px;
 }
-
+.chosen-container .chosen-search input {
+  -webkit-user-select: auto;
+  pointer-events: auto;
+}
 /*==========================
 typography
 ============================*/

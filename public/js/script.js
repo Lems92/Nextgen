@@ -770,6 +770,17 @@ function headerStyle() {
 			width: '100%',
 		});
 
+		// Fix pour les appareils tactiles (iOS)
+		$(".chosen-select").on("touchstart", function (e) {
+			e.stopPropagation();
+			$(this).trigger("mousedown");
+		});
+
+		// Supprimez tout comportement qui pourrait bloquer l'effacement
+		$(".chosen-select").on("focus", function (e) {
+			e.stopPropagation();
+		});
+
 		// Fix for touch devices (iOS)
 		$(".chosen-select").on("touchstart", function (e) {
 			e.stopPropagation();

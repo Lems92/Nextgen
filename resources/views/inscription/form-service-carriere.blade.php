@@ -97,7 +97,7 @@
                     </div>
                     <div class="form-group">
                         <label for="site_web">Site Web :</label>
-                        <input type="url" id="site_web" value="{{old('site_web')}}" class="form-control"
+                        <input type="text" id="site_web" value="{{old('site_web')}}" class="form-control"
                                name="site_web">
                         <x-input-error :messages="$errors->get('site_web')" class="mt-2"/>
                     </div>
