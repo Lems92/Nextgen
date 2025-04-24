@@ -32,11 +32,11 @@
                                 <li><span class="icon flaticon-clock-3"></span>{{$offre->created_at->diffForHumans()}}</li>
                                 <li><span class="icon flaticon-target"></span> {{$offre->duree_contrat}}</li>
                             </ul>
-                            <ul class="job-other-info">
+                            <!--<ul class="job-other-info">
                                 <li class="time">Full Time</li>
                                 <li class="privacy">Private</li>
                                 <li class="required">Urgent</li>
-                            </ul>
+                            </ul>-->
                         </div>
 
                         <div class="btn-box">
@@ -122,7 +122,6 @@
                                     <div class="company-title">
                                         <div class="company-logo"><img src="images/resource/company-7.png" alt=""></div>
                                         <h5 class="company-name">{{$offre->entreprise->nom_entreprise}}</h5>
-                                        <a href="#" class="profile-link">Voir le profile de la compagnie</a>
                                     </div>
 
                                     <ul class="company-info">
