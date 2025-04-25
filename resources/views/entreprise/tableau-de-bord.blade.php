@@ -75,15 +75,19 @@
             <div class="upper-title-box">
                 <h3>Bienvenue, {{$user->userable->nom_entreprise}}!</h3>
             </div>
-            <div class="row mb-3">
-                <div class="col-md-4">
-                    <label for="offreFilter" class="form-label fw-bold">Filtrer les statistiques :</label>
-                    <select id="offreFilter" class="form-select">
-                        <option value="global">Statistiques globales</option>
-                        @foreach($offres as $offre)
-                            <option value="{{ $offre->id }}">{{ $offre->titre_poste }}</option>
-                        @endforeach
-                    </select>
+            <div class="row">
+                <div class="ui-block col-md-6 col-sm-12">
+                    <a href="{{ route('entreprise.offres') }}" class="ui-item-link">
+                        <div class="ui-item">
+                            <div class="left">
+                                <i class="icon flaticon-briefcase"></i>
+                            </div>
+                            <div class="right">
+                                <h4>{{count($user->userable->offres)}}</h4>
+                                <p>Offres publiées</p>
+                            </div>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div id="stats-global" class="row mb-4 stats-block">
@@ -104,108 +108,92 @@
     </section>
     <!-- End Dashboard -->
 
+    <section class="user-dashboard">
+        <div class="dashboard-outer">
+            <div class="upper-title-box">
+                <h3>Gérer les emplois</h3>
+                <div class="text">Prêts à reprendre ?</div>
+            </div>
 
+            <div class="col-lg-12">
+                <!-- Ls widget -->
+                <div class="ls-widget">
+                    <div class="tabs-box">
+                        <div class="widget-title">
+                            <h4>Mes offres d'emplois</h4>
+                            <!--
+                            <div class="chosen-outer">
+                                Tabs Box
+                                <select class="chosen-select">
+                                    <option>Last 6 Months</option>
+                                    <option>Last 12 Months</option>
+                                    <option>Last 16 Months</option>
+                                    <option>Last 24 Months</option>
+                                    <option>Last 5 year</option>
+                                </select>
+                            </div>-->
+                        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <div class="widget-content">
+                            <div class="table-outer">
+                                <table class="default-table manage-job-table">
+                                    <thead>
+                                    <tr>
+                                        <th>Titre du poste</th>
+                                        <th>Candidatures</th>
+                                        <th>Date de publication</th>
+                                        <th>Date limite</th>
+                                        <th>Etat</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
 
-    <script>
-    document.querySelectorAll('.stat-box p').forEach(function(el) {
-        let end = parseInt(el.textContent);
-        let start = 0;
-        let duration = 800;
-        let step = Math.ceil(end / (duration / 16));
-        el.textContent = 0;
-        let interval = setInterval(function() {
-            start += step;
-            if (start >= end) {
-                el.textContent = end;
-                clearInterval(interval);
-            } else {
-                el.textContent = start;
-            }
-        }, 16);
-    });
-
-    // Données globales
-    const statsGlobal = @json($stats);
-
-    // Données par offre
-    const statsByOffer = @json($stats_by_offer);
-
-    // Labels pour le graphique
-    const chartLabels = [
-        'Vues',
-        'Candidatures',
-        'En attente',
-        'Acceptés',
-        'Refusés',
-        'Recrutés'
-    ];
-
-    // Fonction pour extraire les valeurs d'un objet stats
-    function getStatsArray(stats) {
-        return [
-            stats.total_views,
-            stats.total_postules,
-            stats.total_pending,
-            stats.total_accepted,
-            stats.total_rejected,
-            stats.total_recruited
-        ];
-    }
-
-    // Initialisation du graphique
-    let ctx = document.getElementById('statsChart').getContext('2d');
-    let chartData = {
-        labels: chartLabels,
-        datasets: [{
-            label: 'Statistiques',
-            data: getStatsArray(statsGlobal),
-            backgroundColor: [
-                '#66022b', '#a8325e', '#e57373', '#81c784', '#ffd54f', '#64b5f6'
-            ],
-            borderColor: [
-                '#66022b', '#a8325e', '#e57373', '#81c784', '#ffd54f', '#64b5f6'
-            ],
-            borderWidth: 1
-        }]
-    };
-    let statsChart = new Chart(ctx, {
-        type: 'bar',
-        data: chartData,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: { display: false }
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        callback: function(value) {
-                            if (Number.isInteger(value)) {
-                                return value;
-                            }
-                        },
-                        stepSize: 1
-                    }
-                }
-            }
-        }
-    });
-
-    // Mise à jour du graphique lors du changement de filtre
-    document.getElementById('offreFilter').addEventListener('change', function() {
-        let value = this.value;
-        let data;
-        if (value === 'global') {
-            data = getStatsArray(statsGlobal);
-        } else {
-            data = getStatsArray(statsByOffer[value]);
-        }
-        statsChart.data.datasets[0].data = data;
-        statsChart.update();
-    });
-    </script>
+                                    <tbody>
+                                    @forelse($offres as $offre)
+                                        <tr>
+                                            <td>
+                                                <h6>{{$offre->titre_poste}}</h6>
+                                                <span class="info"><i class="icon flaticon-map-locator"></i> {{$offre->lieu_poste}}</span>
+                                            </td>
+                                            <td class="applied"><a href="#">{{count($offre->etudiants)}} candidature(s)</a></td>
+                                            <td>{{ $offre->created_at->format('j F Y') }}</td>
+                                            <td>{{ $offre->date_limite_candidature->format('j F Y')}}</td>
+                                            <td class="status">Active</td>
+                                            <td>
+                                                <div class="option-box">
+                                                    <ul class="option-list">
+                                                        <li>
+                                                            <a href="{{route('entreprise.offres.show', ['offre' => $offre->slug])}}" data-text="Voir l'offre"><span
+                                                                    class="la la-eye"></span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="{{route('entreprise.offres.edit', ['offre' => $offre->slug])}}" data-text="Modifier l'offre"><span
+                                                                    class="la la-pencil"></span></a>
+                                                        </li>
+                                                        <li>
+                                                            <form method="post" id="delete_offre_form{{$offre->id}}" action="{{route('entreprise.offres.delete', ['offre' => $offre->slug])}}">
+                                                                @csrf
+                                                            </form>
+                                                            <button onclick="deleteOffre('delete_offre_form{{$offre->id}}')" data-text="Supprimer l'offre"><span
+                                                                    class="la la-trash"></span></button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-start">Aucun enregistrement trouvé !</td>
+                                        </tr>
+                                    @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 @endsection
