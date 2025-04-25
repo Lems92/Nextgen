@@ -216,7 +216,7 @@ class AdminController extends Controller
 
         Parametrage::create($validatedData);
 
-        return redirect()->intended(route('admin.parametrages'))->with('success', 'Parametre ajouté avec succès!');
+        return redirect()->intended(route('admin.parametrages'))->with('success', 'Paramètre ajouté avec succès!');
     }
 
     public function delete_parametrage(Request $request)
@@ -224,7 +224,7 @@ class AdminController extends Controller
         $id = $request->get('id');
         $param = Parametrage::findOrFail($id);
         $param->delete();
-        return redirect()->intended(route('admin.parametrages'))->with('success', 'Parametre supprimé avec succès!');
+        return redirect()->intended(route('admin.parametrages'))->with('success', 'Paramètre supprimé avec succès!');
     }
 
     public function update_parametrage(Request $request, $id)
@@ -249,7 +249,7 @@ class AdminController extends Controller
 
         $parametrage->update($validatedData);
 
-        return redirect()->intended(route('admin.parametrages'))->with('success', 'Parametre modifié avec succès!');
+        return redirect()->intended(route('admin.parametrages'))->with('success', 'Paramètre modifié avec succès!');
     }
 
     public function list_categories(Request $request): View
@@ -299,7 +299,7 @@ class AdminController extends Controller
 
         ListWithCategory::create($validatedData);
 
-        return redirect()->intended(route('admin.list_categories'))->with('success', 'Liste élément ajouté avec succès!');
+        return redirect()->intended(route('admin.list_categories'))->with('success', 'Element de liste ajouté avec succès!');
     }
 
     public function delete_list_categories(Request $request): RedirectResponse
@@ -307,7 +307,7 @@ class AdminController extends Controller
         $id = $request->get('id');
         $de = ListWithCategory::findOrFail($id);
         $de->delete();
-        return redirect()->intended(route('admin.list_categories'))->with('success', 'Liste élément supprimé avec succès!');
+        return redirect()->intended(route('admin.list_categories'))->with('success', 'Element de liste supprimé avec succès!');
     }
 
     public function update_list_categories(Request $request, ListWithCategory $list_with_categorie): View

@@ -12,8 +12,8 @@
             <div class="upper-title-box">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h3>Liste des offres publiés offres</h3>
-                        <div class="text">Gérer vos offres?</div>
+                        <h3>Liste des offres publiées</h3>
+                        <div class="text">Gérer vos offres ?</div>
                     </div>
                     <div>
                         <a href="{{route('entreprise.offres.create')}}" class="btn btn-primary"><i class="la la-plus"></i> Publier annonce</a>
@@ -53,7 +53,7 @@
                                     <tr>
                                         <th>Titre du poste</th>
                                         <th>Candidatures</th>
-                                        <th>Date publication</th>
+                                        <th>Date de publication</th>
                                         <th>Date limite</th>
                                         <th>Etat</th>
                                         <th>Action</th>
@@ -95,7 +95,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="text-start">Aucun enregistrement trouvés!</td>
+                                            <td colspan="6" class="text-start">Aucun enregistrement trouvé !</td>
                                         </tr>
                                     @endforelse
                                     </tbody>

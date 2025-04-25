@@ -83,7 +83,7 @@ class EtudiantController extends Controller
         $user->load('userable');
         // Check if the user has already applied for this offer
         if (Postulation::where('etudiant_id', $user->userable->id)->where('offre_id', $offre->id)->exists()) {
-            return redirect()->back()->with('error', 'Vous avez déjà postuler pour ce poste!');
+            return redirect()->back()->with('error', 'Vous avez déjà postulé pour ce poste!');
         }
 
         // Create a new application record
@@ -92,7 +92,7 @@ class EtudiantController extends Controller
             'offre_id' => $offre->id,
         ]);
 
-        return redirect()->back()->with('success', 'Candidature envoyé avec succès!');
+        return redirect()->back()->with('success', 'Candidature envoyée avec succès!');
     }
 
     public function mes_candidatures(Request $request): View
@@ -116,7 +116,7 @@ class EtudiantController extends Controller
         $postulation->delete();
 
         // Rediriger avec un message de succès
-        return redirect()->back()->with('success', 'Candidature annulée avec succès!');
+        return redirect()->back()->with('success', 'Candidature annulée avec succès !');
     }
 
     public function explorer_event(): View
@@ -166,7 +166,7 @@ class EtudiantController extends Controller
         $user->load('userable');
         $est_deja_affilie_univ = EtudiantUniversite::where('etudiant_id', '=', $user->userable->id)->count();
         if($est_deja_affilie_univ > 0) {
-            return redirect()->intended(route('etudiant.mon_universite'))->with('waring', 'Vous êtes déjà affilié à un université');
+            return redirect()->intended(route('etudiant.mon_universite'))->with('waring', 'Vous êtes déjà affilié à une université');
         }
 
         $universites = Universite::whereHas('user', function ($query) {
@@ -215,7 +215,7 @@ class EtudiantController extends Controller
 
         DemandeAffiliationUniversite::create($validatedData);
 
-        return redirect()->back()->with('success', 'Votre demande a été bien envoyé');
+        return redirect()->back()->with('success', 'Votre demande a été bien envoyée');
     }
 
     public function delete_affiliation(Request $request): RedirectResponse
@@ -224,7 +224,7 @@ class EtudiantController extends Controller
             $etu_univ = EtudiantUniversite::findOrFail($request->etu_univ_id);
             $etu_univ->delete();
         }
-        return redirect()->back()->with('success', 'L\'affiliation a été supprimé avec succès !');
+        return redirect()->back()->with('success', 'L\'affiliation a été supprimée avec succès !');
     }
 
     public function showInscriptionForm(): View
