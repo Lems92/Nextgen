@@ -93,6 +93,7 @@ class RegistrationController extends Controller
             'genre' => 'required|string|max:10',
             'adresse_postale' => 'required|string|max:255',
             'pays' => 'required|string|max:50',
+            'region' => 'required|string|max:50',
             'ville' => 'required|string|max:100',
             'code_postal' => 'required|string|max:10',
         ]);
@@ -200,6 +201,7 @@ class RegistrationController extends Controller
 
 
         return view('inscription.form-entreprise', compact(
+            'mada_regions',
             'secteur_activites_categories',
             'opportunites_proposes',
             'domaines_etudes_categories',
@@ -224,6 +226,7 @@ class RegistrationController extends Controller
             'complement_adresse' => 'nullable|string',
             'code_postal' => 'required|string',
             'ville' => 'required|string',
+            'region' => 'required|string',
             'pays' => 'required|string',
             'site_web' => 'nullable|string|nullable',
             'date_creation' => 'required|string',
