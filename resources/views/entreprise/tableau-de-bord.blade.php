@@ -39,7 +39,7 @@
                             </div>
                             <div class="right">
                                 <h4>{{count($user->userable->offres)}}</h4>
-                                <p>Offres publié</p>
+                                <p>Offres publiées</p>
                             </div>
                         </div>
                     </a>
@@ -66,7 +66,7 @@
         <div class="dashboard-outer">
             <div class="upper-title-box">
                 <h3>Gérer les emplois</h3>
-                <div class="text">Prêt à reprendre ?</div>
+                <div class="text">Prêts à reprendre ?</div>
             </div>
 
             <div class="col-lg-12">
@@ -74,7 +74,7 @@
                 <div class="ls-widget">
                     <div class="tabs-box">
                         <div class="widget-title">
-                            <h4>Mes offres d'emploi</h4>
+                            <h4>Mes offres d'emplois</h4>
                             <!--
                             <div class="chosen-outer">
                                 Tabs Box
@@ -95,7 +95,7 @@
                                     <tr>
                                         <th>Titre du poste</th>
                                         <th>Candidatures</th>
-                                        <th>Date publication</th>
+                                        <th>Date de publication</th>
                                         <th>Date limite</th>
                                         <th>Etat</th>
                                         <th>Action</th>
@@ -137,7 +137,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="text-start">Aucun enregistrement trouvés!</td>
+                                            <td colspan="6" class="text-start">Aucun enregistrement trouvé !</td>
                                         </tr>
                                     @endforelse
                                     </tbody>
