@@ -122,18 +122,26 @@
                                 <div class="col-md-6">
                                     <h5 class="mb-3">Compétences techniques</h5>
                                     <ul>
-                                        @foreach($etudiant->competences_techniques ?? [] as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
+                                        @if(is_array($etudiant->competences_techniques) || is_object($etudiant->competences_techniques))
+                                            @foreach($etudiant->competences_techniques as $value)
+                                                <li>{{ $value }}</li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune compétence technique disponible</li>
+                                        @endif
                                     </ul>
                                 </div>
 
                                 <div class="col-md-6">
                                     <h5 class="mb-3">Compétences en recherche et analyse</h5>
                                     <ul>
-                                        @foreach($etudiant->competences_en_recherche_et_analyse ?? [] as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
+                                        @if(is_array($etudiant->competences_en_recherche_et_analyse) || is_object($etudiant->competences_en_recherche_et_analyse))
+                                            @foreach($etudiant->competences_en_recherche_et_analyse as $value)
+                                                <li>{{ $value }}</li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune compétence en recherche et analyse disponible</li>
+                                        @endif
                                     </ul>
                                 </div>
 
@@ -146,11 +154,17 @@
                                 <div class="col-md-6">
                                     <h5 class="mb-3">Compétences en communication</h5>
                                     <ul>
-                                        @foreach($etudiant->competences_en_communication ?? [] as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
+                                        @if(is_array($etudiant->competences_en_communication) || is_object($etudiant->competences_en_communication))
+                                            @foreach($etudiant->competences_en_communication as $value)
+                                                <li>{{ $value }}</li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune compétence en communication disponible</li>
+                                        @endif
                                     </ul>
                                 </div>
+
+                            </div>
 
                             <hr>
 
@@ -159,9 +173,13 @@
                                 <div class="col-md-6">
                                     <h5 class="mb-3">Compétences linguistiques</h5>
                                     <ul>
-                                        @foreach($etudiant->competences_langues ?? [] as $value)
-                                            <li>{{ $value }}</li>
-                                        @endforeach
+                                        @if(is_array($etudiant->competences_langues) || is_object($etudiant->competences_langues))
+                                            @foreach($etudiant->competences_langues as $value)
+                                                <li>{{ $value }}</li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune compétence linguistique disponible</li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
