@@ -304,9 +304,7 @@ class EtudiantController extends Controller
             'niveau_etudes' => 'nullable|string|max:255',
             'annee_obtention_diplome' => 'nullable|integer',
             'competences_techniques' => 'nullable|string',
-            'competences_techniques' => 'nullable|array',
             'competences_en_recherche_et_analyse' => 'nullable|string',
-            'competences_en_recherche_et_analyse' => 'nullable|array',
             'competences_en_communication' => 'nullable|string',
             'competences_interpersonnelles' => 'nullable|string',
             'competences_resolution_problemes' => 'nullable|string',
@@ -316,7 +314,6 @@ class EtudiantController extends Controller
             'competences_ethique_responsabilite' => 'nullable|string',
             'competences_gestion_financiere' => 'nullable|string',
             'competences_langues' => 'nullable|string',
-            'competences_langues' => 'nullable|array',
             'autres_competences' => 'nullable|string',
             'experiences_academique' => 'nullable|string',	
             'experience_professionnelle' => 'nullable|string',
@@ -346,10 +343,11 @@ class EtudiantController extends Controller
         ]);
         $validatedData['secteur_activite_preferer'] = json_encode($request->input('secteur_activite_preferer', []));
         $validatedData['type_emploi_recherche'] = json_encode($request->input('type_emploi_recherche', []));
-        $validatedData['competences_techniques'] = $request->input('competences_techniques');
-        $validatedData['competences_en_recherche_et_analyse'] = $request->input('competences_en_recherche_et_analyse', []);
-        $validatedData['competences_en_communication'] = $request->input('competences_en_communication', []);
-        $validatedData['competences_langues'] = $request->input('competences_langues', []);
+        $validatedData['competences_techniques'] = array_map('trim', explode(',', $request->input('competences_techniques', '')));
+        $validatedData['competences_en_recherche_et_analyse'] = array_map('trim', explode(',', $request->input('competences_en_recherche_et_analyse', '')));
+        $validatedData['competences_en_communication'] = array_map('trim', explode(',', $request->input('competences_en_communication', '')));
+        $validatedData['competences_langues'] = array_map('trim', explode(',', $request->input('competences_langues', '')));
+        $validatedData['autres_competences'] = array_map('trim', explode(',', $request->input('autres_competences', '')));
         //$validatedData['competences_techniques'] = trim($request->input('competences_techniques'));
         //$validatedData['autres_competences'] = json_encode($request->input('autres_competences', []));
         // Gérer les fichiers téléchargés
@@ -398,42 +396,15 @@ class EtudiantController extends Controller
     {
         // Récupérer l'utilisateur connecté
         $etudiant = Auth::user()->userable;
-        
+
         if (!$etudiant) {
             return redirect()->back()->with('error', 'Utilisateur non trouvé.');
         }
-        // Charger les relations nécessaires
-        $parametrage = Parametrage::where('table', 'type_contrat')->get();     
-        $parametrages = Parametrage::whereIn('table', [
-            'competence_technique',
-            'competence_transversale',
-            'competence_linguistique',
-        ])->get();   
-        $competences_techniques = $parametrages->where('table', 'competence_technique');
-        $competences_transversales = $parametrages->where('table', 'competence_transversale');
-        $competences_langues = $parametrages->where('table', 'competence_linguistique');
-        $typeEmploiDescriptions = Parametrage::getDescriptionsByTable('type_contrat');
-        $list_categories = ListCategorie::where('table', 'secteur_activites')->get();
 
-        //dd($competences_techniques, $competences_transversales, $competences_langues);
-        //dd($etudiant->accessibilite);
         // Convertir les champs JSON ou chaînes en tableaux
         $etudiant->competences_techniques = is_string($etudiant->competences_techniques) 
             ? json_decode($etudiant->competences_techniques, true) ?? explode(',', $etudiant->competences_techniques) 
             : $etudiant->competences_techniques;
-
-        // Vérifier et corriger le double encodage pour type_emploi_recherche
-        if (is_string($etudiant->type_emploi_recherche)) {
-            $decodedOnce = json_decode($etudiant->type_emploi_recherche, true);
-            if (is_string($decodedOnce)) {
-                // Si le résultat du premier décodage est encore une chaîne JSON, décodez à nouveau
-                $etudiant->type_emploi_recherche = json_decode($decodedOnce, true);
-            } else {
-                $etudiant->type_emploi_recherche = $decodedOnce ?? [];
-            }
-        } else {
-            $etudiant->type_emploi_recherche = $etudiant->type_emploi_recherche ?? [];
-        }
 
         $etudiant->competences_en_recherche_et_analyse = is_string($etudiant->competences_en_recherche_et_analyse) 
             ? json_decode($etudiant->competences_en_recherche_et_analyse, true) ?? explode(',', $etudiant->competences_en_recherche_et_analyse) 
@@ -450,60 +421,8 @@ class EtudiantController extends Controller
         $etudiant->autres_competences = is_string($etudiant->autres_competences) 
             ? json_decode($etudiant->autres_competences, true) ?? explode(',', $etudiant->autres_competences) 
             : $etudiant->autres_competences;
-        $typeEmploiRecherche = is_string($etudiant->type_emploi_recherche)
-            ? json_decode($etudiant->type_emploi_recherche, true)
-            : ($etudiant->type_emploi_recherche ?? []);
-        //dd(($parametrage));
 
-        
-        //dd($etudiant->religion_belief);
         // Retourner la vue avec les données de l'étudiant
-        return view('etudiant.modifierProfil', compact('etudiant','typeEmploiDescriptions','typeEmploiRecherche','list_categories','parametrage','competences_techniques',
-        'competences_transversales',
-        'competences_langues'));
-    }
-
-    public function fixDoubleEncodedData()
-    {
-        $etudiants = Etudiant::all();
-
-        foreach ($etudiants as $etudiant) {
-            if (is_string($etudiant->type_emploi_recherche)) {
-                $decodedOnce = json_decode($etudiant->type_emploi_recherche, true);
-                if (is_string($decodedOnce)) {
-                    // Si le résultat du premier décodage est encore une chaîne JSON, décodez à nouveau
-                    $etudiant->type_emploi_recherche = json_encode(json_decode($decodedOnce, true));
-                    $etudiant->save();
-                }
-            }
-        }
-
-        return "Correction terminée.";
-    }
-
-    public function explorer_entreprises(): View
-    {
-        // Récupérer toutes les entreprises avec leurs relations
-        $entreprises = Entreprise::with(['user', 'offres', 'user.permissions'])
-            ->whereHas('user', function($query) {
-                $query->where('is_accepted_by_admin', true);
-            })
-            ->get();
-
-        // Debug des entreprises et leurs permissions
-        foreach ($entreprises as $entreprise) {
-            \Log::info('Entreprise: ' . $entreprise->nom_entreprise, [
-                'is_accepted_by_admin' => $entreprise->user->is_accepted_by_admin,
-                'permissions' => $entreprise->user->permissions->pluck('name'),
-                'has_page_presentation' => $entreprise->user->hasPermissionTo('page_presentation_entreprise')
-            ]);
-        }
-
-        // Filtrer les entreprises qui ont la permission page_presentation_entreprise
-        $entreprises = $entreprises->filter(function($entreprise) {
-            return $entreprise->user->hasPermissionTo('page_presentation_entreprise');
-        });
-
-        return view('etudiant.explorer-entreprises', compact('entreprises'));
+        return view('etudiant.modifierProfil', compact('etudiant'));
     }
 }
