@@ -54,6 +54,7 @@ class EtudiantController extends Controller
         }
         if (is_string($etudiant->competences_techniques)) {
             $etudiant->competences_techniques = json_decode($etudiant->competences_techniques, true);
+            
         }
         if (is_string($etudiant->competences_en_recherche_et_analyse)) {
             $etudiant->competences_en_recherche_et_analyse = json_decode($etudiant->competences_en_recherche_et_analyse, true);
@@ -272,7 +273,6 @@ class EtudiantController extends Controller
         $validatedData = $request->validate([
             'prenom' => 'required|string|max:255',
             'nom' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
             'numero_telephone' => 'required|string|max:20',
             'date_naissance' => 'required|date',
             'genre' => 'required|string',
@@ -285,18 +285,20 @@ class EtudiantController extends Controller
             'domaine_etudes' => 'nullable|string|max:255',
             'niveau_etudes' => 'nullable|string|max:255',
             'annee_obtention_diplome' => 'nullable|integer',
-            'competences_techniques' => 'nullable|string|max:4294967295',
-            'competences_en_recherche_et_analyse' => 'nullable|string|max:4294967295',
-            'competences_en_communication' => 'nullable|string|max:4294967295',
-            'competences_interpersonnelles' => 'nullable|string|max:4294967295',
-            'competences_resolution_problemes' => 'nullable|string|max:4294967295',
-            'competences_adaptabilite' => 'nullable|string|max:4294967295',
-            'competences_gestion_stress' => 'nullable|string|max:4294967295',
-            'competences_leadership' => 'nullable|string|max:4294967295',
-            'competences_ethique_responsabilite' => 'nullable|string|max:4294967295',
-            'competences_gestion_financiere' => 'nullable|string|max:4294967295',
-            'competences_langues' => 'nullable|string|max:4294967295',
-            'experience_professionnelle' => 'nullable|string|max:4294967295',
+            'competences_techniques' => 'nullable|string',
+            'competences_en_recherche_et_analyse' => 'nullable|string',
+            'competences_en_communication' => 'nullable|string',
+            'competences_interpersonnelles' => 'nullable|string',
+            'competences_resolution_problemes' => 'nullable|string',
+            'competences_adaptabilite' => 'nullable|string',
+            'competences_gestion_stress' => 'nullable|string',
+            'competences_leadership' => 'nullable|string',
+            'competences_ethique_responsabilite' => 'nullable|string',
+            'competences_gestion_financiere' => 'nullable|string',
+            'competences_langues' => 'nullable|string',
+            'autres_competences' => 'nullable|string',
+            'experiences_academique' => 'nullable|string',	
+            'experience_professionnelle' => 'nullable|string',
             'portfolio' => 'nullable|string',
             'centres_interet' => 'nullable|string',
             'document_diplome' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
@@ -323,8 +325,13 @@ class EtudiantController extends Controller
         ]);
         $validatedData['secteur_activite_preferer'] = json_encode($request->input('secteur_activite_preferer', []));
         $validatedData['type_emploi_recherche'] = json_encode($request->input('type_emploi_recherche', []));
-        $validatedData['competences_techniques'] = trim($request->input('competences_techniques'));// Récupérer l'utilisateur connecté
-        
+        $validatedData['competences_techniques'] = array_map('trim', explode(',', $request->input('competences_techniques', '')));
+        $validatedData['competences_en_recherche_et_analyse'] = array_map('trim', explode(',', $request->input('competences_en_recherche_et_analyse', '')));
+        $validatedData['competences_en_communication'] = array_map('trim', explode(',', $request->input('competences_en_communication', '')));
+        $validatedData['competences_langues'] = array_map('trim', explode(',', $request->input('competences_langues', '')));
+        $validatedData['autres_competences'] = array_map('trim', explode(',', $request->input('autres_competences', '')));
+        //$validatedData['competences_techniques'] = trim($request->input('competences_techniques'));
+        //$validatedData['autres_competences'] = json_encode($request->input('autres_competences', []));
         // Gérer les fichiers téléchargés
         if ($request->hasFile('document_diplome')) {
             $validatedData['document_diplome'] = $request->file('document_diplome')->store('documents/diplomes', 'public');
@@ -338,6 +345,8 @@ class EtudiantController extends Controller
             $validatedData['profile_picture'] = $request->file('profile_picture')->store('profile_pictures', 'public');
         }
         $etudiant = Auth::user()->userable;
+
+        
 
         if (!$etudiant) {
             return redirect()->back()->with('error', 'Utilisateur non trouvé.');
@@ -358,5 +367,39 @@ class EtudiantController extends Controller
 
         // Rediriger avec un message de succès
         return redirect()->route('etudiants.edit_profile')->with('success', 'Profil mis à jour avec succès.');
+    }
+
+    public function editProfile(): View
+    {
+        // Récupérer l'utilisateur connecté
+        $etudiant = Auth::user()->userable;
+
+        if (!$etudiant) {
+            return redirect()->back()->with('error', 'Utilisateur non trouvé.');
+        }
+
+        // Convertir les champs JSON ou chaînes en tableaux
+        $etudiant->competences_techniques = is_string($etudiant->competences_techniques) 
+            ? json_decode($etudiant->competences_techniques, true) ?? explode(',', $etudiant->competences_techniques) 
+            : $etudiant->competences_techniques;
+
+        $etudiant->competences_en_recherche_et_analyse = is_string($etudiant->competences_en_recherche_et_analyse) 
+            ? json_decode($etudiant->competences_en_recherche_et_analyse, true) ?? explode(',', $etudiant->competences_en_recherche_et_analyse) 
+            : $etudiant->competences_en_recherche_et_analyse;
+
+        $etudiant->competences_en_communication = is_string($etudiant->competences_en_communication) 
+            ? json_decode($etudiant->competences_en_communication, true) ?? explode(',', $etudiant->competences_en_communication) 
+            : $etudiant->competences_en_communication;
+
+        $etudiant->competences_langues = is_string($etudiant->competences_langues) 
+            ? json_decode($etudiant->competences_langues, true) ?? explode(',', $etudiant->competences_langues) 
+            : $etudiant->competences_langues;
+
+        $etudiant->autres_competences = is_string($etudiant->autres_competences) 
+            ? json_decode($etudiant->autres_competences, true) ?? explode(',', $etudiant->autres_competences) 
+            : $etudiant->autres_competences;
+
+        // Retourner la vue avec les données de l'étudiant
+        return view('etudiant.modifierProfil', compact('etudiant'));
     }
 }
