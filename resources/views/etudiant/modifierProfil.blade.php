@@ -137,6 +137,10 @@
                                 <h4>Éducation</h4>
                             </legend>
                             <div class="mb-3">
+                                <label for="univ" class="form-label">Nom de l'école ou de l'université :</label>
+                                <input type="text" id="univ" name="univ" class="form-control" value="{{ old('univ', $etudiant->univ) }}" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
                                 <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
                                     <option value="sciences" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'sciences' ? 'selected' : '' }}>Sciences</option>
