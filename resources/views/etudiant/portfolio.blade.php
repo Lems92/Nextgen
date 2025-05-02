@@ -18,29 +18,12 @@
                             <figure class="image">
                                 <img src="{{ $etudiant->profile_picture ? asset('storage/' . $etudiant->profile_picture) : asset('storage/images/default_avatar.png') }}" alt="Photo de profil">
                             </figure>
-                            <div style="text-align: center;">
-                                <div style="display: inline-flex; align-items: center; gap: 10px;">
-                                    <h4 class="name" style="margin: 0;">
-                                        <a href="#" style="text-decoration: none; color: inherit;">
-                                            {{ $etudiant->prenom ?? '' }} {{ $etudiant->nom ?? '' }}
-                                        </a>
-                                    </h4>
-
-                                    @if(!empty($etudiant->universite))
-                                        <span class="badge badge-success" style="background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
-                                            Vérifié
-                                        </span>
-                                    @else
-                                        <span class="badge badge-danger" style="background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
-                                            Non vérifié
-                                        </span>
-                                    @endif
-                                </div>
-
-                                @if(empty($etudiant->universite))
-                                    <p class="text-danger" style="margin-top: 8px;">
-                                        Merci de vous affilier à une université afin de procéder à la vérification de votre compte.
-                                    </p>
+                            <h4 class="name">
+                                <a href="#">{{$etudiant->prenom ?? ''}} {{$etudiant->nom ?? ''}}</a>
+                                @if(!empty($etudiant->universite))
+                                    <span class="badge badge-success" style="background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
+                                        Vérifié
+                                    </span>
                                 @endif
                             </div>
                             <span class="designation">{{$etudiant->domaine_etudes ?? ''}}</span>
@@ -97,10 +80,9 @@
                                 <h4 class="widget-title">Expériences professionnelles</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-
                                         @if(!empty($etudiant->experience_professionnelle))
                                             @foreach(explode("\n", $etudiant->experience_professionnelle) as $exp_pro)
-                                                <p>{{ $exp_pro }}</p>
+                                                <li><a href="#">{{ $exp_pro }}</a></li>
                                             @endforeach
                                         @else
                                             <li>Aucune expérience professionnelle disponible</li>
@@ -114,10 +96,10 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->experiences_academique))
                                             @foreach(explode("\n", $etudiant->experiences_academique) as $exp_aca)
-                                                <p>{{ $exp_aca }}</p>
+                                                <li><a href="#">{{ $exp_aca }}</a></li>
                                             @endforeach
                                         @else
-                                            <p>Aucune expérience académique disponible</p>
+                                            <li>Aucune expérience académique disponible</li>
                                         @endif
                                     </ul>
                                 </div> 
@@ -127,10 +109,10 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->competences_techniques) && is_array(json_decode($etudiant->competences_techniques, true)))
                                             @foreach(json_decode($etudiant->competences_techniques, true) as $comp)
-                                                <li><a>{!! nl2br(e($comp)) !!}</a></li>
+                                                <li><a href="#">{!! nl2br(e($comp)) !!}</a></li>
                                             @endforeach
                                         @else
-                                            <p>Aucune compétence technique disponible</p>
+                                            <li>Aucune compétence technique disponible</li>
                                         @endif
                                     </ul>
                                 </div>
@@ -140,10 +122,23 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->competences_en_recherche_et_analyse) && is_array(json_decode($etudiant->competences_en_recherche_et_analyse, true)))
                                             @foreach(json_decode($etudiant->competences_en_recherche_et_analyse, true) as $comp)
-                                                <li><a>{!! nl2br(e($comp)) !!}</a></li>
+                                                <li><a href="#">{!! nl2br(e($comp)) !!}</a></li>
                                             @endforeach
                                         @else
-                                            <p>Aucune compétence en recherche et analyse disponible</p>
+                                            <li>Aucune compétence en recherche et analyse disponible</li>
+                                        @endif
+                                    </ul>
+                                </div>
+
+                                <h4 class="widget-title mt-3">Compétences en communication</h4>
+                                <div class="widget-content">
+                                    <ul class="job-skills">
+                                        @if(!empty($etudiant->competences_en_communication) && is_array(json_decode($etudiant->competences_en_communication, true)))
+                                            @foreach(json_decode($etudiant->competences_en_communication, true) as $comp)
+                                                <li><a href="#">{!! nl2br(e($comp)) !!}</a></li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune compétence en communication disponible</li>
                                         @endif
                                     </ul>
                                 </div>
@@ -202,6 +197,19 @@
                                 <h4 class="widget-title mt-3">Type d'emploi recherché</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
+                                        @if(!empty($etudiant->type_emploi_recherche) && is_array(json_decode($etudiant->type_emploi_recherche, true)))
+                                            @foreach(json_decode($etudiant->type_emploi_recherche, true) as $emploi)
+                                                <li><a href="#">{{ $emploi }}</a></li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucun type d'emploi recherché spécifié</li>
+                                        @endif
+                                    </ul>
+                                </div>
+
+                                <h4 class="widget-title mt-3">Type d'emploi recherché</h4>
+                                <div class="widget-content">
+                                    <ul class="job-skills">
                                         @php
                                             $type_emploi_recherche = is_array($etudiant->type_emploi_recherche) 
                                                 ? $etudiant->type_emploi_recherche
@@ -236,50 +244,6 @@
                                         Aucune durée de disponibilité spécifiée.
                                     @endif
                                 </p>
-                                <h4 class="widget-title mt-3">Accessibilité</h4>
-                                <p>
-                                    @if(!empty($etudiant->getAttribute('accessibilite')))
-                                        {{ $etudiant->getAttribute('accessibilite') }}
-                                    @else
-                                        Aucune information sur l'accessibilité spécifiée.
-                                    @endif
-                                </p>
-
-                                <h4 class="widget-title mt-3">Statut socio-économique</h4>
-                                <p>
-                                    @if(!empty($etudiant->getAttribute('statut_socio_economique')))
-                                        {{ $etudiant->getAttribute('statut_socio_economique') }}
-                                    @else
-                                        Aucune information sur le statut socio-économique spécifiée.
-                                    @endif
-                                </p>
-
-                                <h4 class="widget-title mt-3">Conditions de vie spécifiques</h4>
-                                <p>
-                                    @if(!empty($etudiant->getAttribute('conditions_vie_specifiques')))
-                                        {{ $etudiant->getAttribute('conditions_vie_specifiques') }}
-                                    @else
-                                        Aucune condition de vie spécifique spécifiée.
-                                    @endif
-                                </p>
-
-                                <h4 class="widget-title mt-3">Religion ou croyance</h4>
-                                <p>
-                                    @if(!empty($etudiant->getAttribute('religion_belief')))
-                                        {{ $etudiant->getAttribute('religion_belief') }}
-                                    @else
-                                        Aucune religion ou croyance spécifiée.
-                                    @endif
-                                </p>
-
-                                <h4 class="widget-title mt-3">Orientation sexuelle</h4>
-                                <p>
-                                    @if(!empty($etudiant->getAttribute('orientation_sexuelle')))
-                                        {{ $etudiant->getAttribute('orientation_sexuelle') }}
-                                    @else
-                                        Aucune orientation sexuelle spécifiée.
-                                    @endif
-</p>
                             </div>
                         </div>
 
@@ -309,15 +273,15 @@
                                             <li>
                                                 <i class="icon icon-language"></i>
                                                 <h5>Langages :</h5>
-                                                <div class="language-list">
+                                                <span>
                                                     @if(!empty($etudiant->competences_langues) && is_array(json_decode($etudiant->competences_langues, true)))
                                                         @foreach(json_decode($etudiant->competences_langues, true) as $lang)
-                                                            <span>{{ $lang }}</span>
+                                                            {{ $lang }},
                                                         @endforeach
                                                     @else
-                                                        <span>Aucune langue spécifiée.</span>
+                                                        Aucune langue spécifiée.
                                                     @endif
-                                                </div>
+                                                </span>
                                             </li>
 
                                             <li>

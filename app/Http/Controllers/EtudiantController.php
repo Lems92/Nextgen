@@ -422,6 +422,7 @@ class EtudiantController extends Controller
             ? json_decode($etudiant->autres_competences, true) ?? explode(',', $etudiant->autres_competences) 
             : $etudiant->autres_competences;
 
+
         // Retourner la vue avec les données de l'étudiant
         return view('etudiant.modifierProfil', compact('etudiant'));
     }

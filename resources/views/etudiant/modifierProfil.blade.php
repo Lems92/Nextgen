@@ -69,8 +69,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="date-naissance" class="form-label">Date de naissance :</label>
-                                    <input type="date" id="date-naissance" name="date_naissance" class="form-control" value="{{ old('date_naissance', $etudiant->date_naissance) }}"
-                                        required>
+                                    <input type="date" id="date-naissance" name="date_naissance" class="form-control" value="{{ old('date_naissance', $etudiant->date_naissance ? \Carbon\Carbon::parse($etudiant->date_naissance)->format('Y-m-d') : '') }}" required>
                                 </div>
                                 @php
                                     $options = [
@@ -494,11 +493,11 @@
                             <div class="form-group">
                                 <label for="duree_disponibilite">Durée de Disponibilité :</label>
                                 <select class="form-control" id="duree_disponibilite" name="duree_disponibilite">
-                                    <option value="Moins de 1 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'Moins de 1 mois' ? 'selected' : '' }}>Moins de 1 mois</option>
-                                    <option value="1 à 3 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '1 à 3 mois' ? 'selected' : '' }}>1 à 3 mois</option>
-                                    <option value="3 à 6 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '3 à 6 mois' ? 'selected' : '' }}>3 à 6 mois</option>
-                                    <option value="6 à 12 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '6 à 12 mois' ? 'selected' : '' }}>6 à 12 mois</option>
-                                    <option value="plus de 12 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'plus de 12 mois' ? 'selected' : '' }}>Plus de 12 mois</option>
+                                    <option value="moins_1_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'moins_1_mois' ? 'selected' : '' }}>Moins de 1 mois</option>
+                                    <option value="1_3_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '1_3_mois' ? 'selected' : '' }}>1 à 3 mois</option>
+                                    <option value="3_6_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '3_6_mois' ? 'selected' : '' }}>3 à 6 mois</option>
+                                    <option value="6_12_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '6_12_mois' ? 'selected' : '' }}>6 à 12 mois</option>
+                                    <option value="plus_12_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'plus_12_mois' ? 'selected' : '' }}>Plus de 12 mois</option>
                                 </select>
                             </div>
 
@@ -539,8 +538,8 @@
                                 <label for="accessibilite">Accessibilité :</label>
                                 <p>Avez-vous besoin d’aménagements spécifiques pour participer à des événements ou des activités ?</p>
                                 <select class="form-control" id="accessibilite" name="accessibilite">
-                                    <option value="1" {{ old('accessibilite', $etudiant->accessibilite) == '1' ? 'selected' : '' }}>Oui</option>
-                                    <option value="0" {{ old('accessibilite', $etudiant->accessibilite) == '0' ? 'selected' : '' }}>Non</option>
+                                    <option value="oui" {{ old('accessibilite', $etudiant->accessibilite) == 'oui' ? 'selected' : '' }}>Oui</option>
+                                    <option value="non" {{ old('accessibilite', $etudiant->accessibilite) == 'non' ? 'selected' : '' }}>Non</option>
                                 </select>
                             </div>
 
@@ -551,21 +550,12 @@
                             </div>
 
 
-                            @php
-                                $options = [
-                                    'Origine modeste' => 'Origine modeste',
-                                    'Classe moyenne' => 'Classe moyenne',
-                                    'Préfère ne pas dire' => 'Préfère ne pas dire',
-                                ];
-                                $selected = old('statut_socio_economique') ?? $etudiant->getAttribute('statut_socio_economique');
-                            @endphp
-
                             <div class="form-group">
                                 <label for="statut_socio_economique">Statut socio-économique :</label>
                                 <select class="form-select" id="statut_socio_economique" name="statut_socio_economique">
-                                    @foreach($options as $value => $label)
-                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
-                                    @endforeach
+                                    <option value="origine_modeste" {{ old('statut_socio_economique', $etudiant->statut_socio_economique) == 'origine_modeste' ? 'selected' : '' }}>Origine modeste</option>
+                                    <option value="classe_moyenne" {{ old('statut_socio_economique', $etudiant->statut_socio_economique) == 'classe_moyenne' ? 'selected' : '' }}>Classe moyenne</option>
+                                    <option value="prefere_pas_dire" {{ old('statut_socio_economique', $etudiant->statut_socio_economique) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
                                 </select>
                             </div>
                             
@@ -583,10 +573,11 @@
 
                             <div class="form-group">
                                 <label for="conditions_vie">Conditions de vie spécifiques :</label>
-                                <select name="conditions_vie_specifiques" class="form-select" id="conditions_vie">
-                                    @foreach($options as $value => $label)
-                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
-                                    @endforeach
+                                <select class="form-select" id="conditions_vie" name="conditions_vie_specifiques">
+                                    <option value="null" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'null' ? 'selected' : '' }}>null</option>
+                                    <option value="sans_domicile" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'sans_domicile' ? 'selected' : '' }}>Sans domicile fixe</option>
+                                    <option value="handicap" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'handicap' ? 'selected' : '' }}>En situation de handicap</option>
+                                    <option value="prefere_pas_dire" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
                                 </select>
                             </div>
                             
@@ -605,9 +596,11 @@
                             <div class="form-group">
                                 <label for="religion_croyance">Religion ou croyance :</label>
                                 <select class="form-select" id="religion_croyance" name="religion_belief">
-                                    @foreach($options as $value => $label)
-                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
-                                    @endforeach
+                                    <option value="chretien" {{ old('religion_belief', $etudiant->religion_belief) == 'chretien' ? 'selected' : '' }}>Chrétien</option>
+                                    <option value="musulman" {{ old('religion_belief', $etudiant->religion_belief) == 'musulman' ? 'selected' : '' }}>Musulman</option>
+                                    <option value="bouddhiste" {{ old('religion_belief', $etudiant->religion_belief) == 'bouddhiste' ? 'selected' : '' }}>Bouddhiste</option>
+                                    <option value="hindou" {{ old('religion_belief', $etudiant->religion_belief) == 'hindou' ? 'selected' : '' }}>Hindou</option>
+                                    <option value="prefere_pas_dire" {{ old('religion_belief', $etudiant->religion_belief) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
                                 </select>
                             </div>
 
@@ -625,9 +618,10 @@
                             <div class="form-group">
                                 <label for="orientation_sexuelle">Orientation sexuelle :</label>
                                 <select class="form-select" id="orientation_sexuelle" name="orientation_sexuelle">
-                                    @foreach($options as $value => $label)
-                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
-                                    @endforeach
+                                    <option value="heterosexuel" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'heterosexuel' ? 'selected' : '' }}>Hétérosexuel</option>
+                                    <option value="homosexuel" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'homosexuel' ? 'selected' : '' }}>Homosexuel</option>
+                                    <option value="bisexuel" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'bisexuel' ? 'selected' : '' }}>Bisexuel</option>
+                                    <option value="prefere_pas_dire" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -830,30 +824,6 @@
                     form.prepend(errorMessageContainer);
                 }
             });
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const checkboxes = document.querySelectorAll('#secteur-activite-container input[type="checkbox"]');
-            const selectedContainer = document.getElementById('selected-secteurs');
-
-            function updateSelected() {
-                selectedContainer.innerHTML = ''; // Réinitialise le conteneur
-                checkboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        const span = document.createElement('span');
-                        span.classList.add('selected-item');
-                        span.textContent = checkbox.value;
-                        selectedContainer.appendChild(span);
-                    }
-                });
-            }
-
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', updateSelected);
-            });
-
-            // Initialisation
-            updateSelected();
         });
     </script>
 
@@ -1111,49 +1081,6 @@
         .is-invalid {
             border-color: #dc3545;
             box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
-        }
-
-        .checkbox-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            max-height: 150px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 5px;
-            background: #f9f9f9;
-        }
-
-        .checkbox-group label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-            color: #333;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            accent-color: #66022b;
-        }
-
-        .selected-secteurs {
-            margin-top: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: #f1f1f1;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        .selected-item {
-            background: #66022b;
-            color: #fff;
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
         }
     </style>
 
