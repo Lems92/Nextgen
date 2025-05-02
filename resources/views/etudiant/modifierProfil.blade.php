@@ -30,6 +30,7 @@
                         </div>
                     @endif
 
+
                     <form id="default-form" method="POST" action="{{ route('etudiants.update_profile') }}"
                         enctype="multipart/form-data">
                         @csrf
@@ -68,8 +69,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="date-naissance" class="form-label">Date de naissance :</label>
-                                    <input type="date" id="date-naissance" name="date_naissance" class="form-control" value="{{ old('date_naissance', $etudiant->date_naissance) }}"
-                                        required>
+                                    <input type="date" id="date-naissance" name="date_naissance" class="form-control" value="{{ old('date_naissance', $etudiant->date_naissance ? \Carbon\Carbon::parse($etudiant->date_naissance)->format('Y-m-d') : '') }}" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="genre" class="form-label">Genre :</label>
@@ -437,42 +437,43 @@
                                 <h4>Disponibilité de l’Étudiant</h4>
                             </legend>
                             <div class="form-group">
-                                <label for="duree_dispo">Durée de Disponibilité :</label>
-                                <select class="form-control" id="duree_dispo" name="duree_disponibilite"
-                                    placeholder="Veuillez choisir">
-                                    <option value="moins_1_mois">Moins de 1 mois</option>
-                                    <option value="1_3_mois">1 à 3 mois</option>
-                                    <option value="3_6_mois">3 à 6 mois</option>
-                                    <option value="6_12_mois">6 à 12 mois</option>
-                                    <option value="plus_12_mois">Plus de 12 mois</option>
+                                <label for="duree_disponibilite">Durée de Disponibilité :</label>
+                                <select class="form-control" id="duree_disponibilite" name="duree_disponibilite">
+                                    <option value="moins_1_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'moins_1_mois' ? 'selected' : '' }}>Moins de 1 mois</option>
+                                    <option value="1_3_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '1_3_mois' ? 'selected' : '' }}>1 à 3 mois</option>
+                                    <option value="3_6_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '3_6_mois' ? 'selected' : '' }}>3 à 6 mois</option>
+                                    <option value="6_12_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '6_12_mois' ? 'selected' : '' }}>6 à 12 mois</option>
+                                    <option value="plus_12_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'plus_12_mois' ? 'selected' : '' }}>Plus de 12 mois</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="semestre">Semestre en Cours :</label>
                                 <select class="form-control" id="semestre" name="semestre_cours">
-                                    <option value="semestre_1">Semestre 1</option>
-                                    <option value="semestre_2">Semestre 2</option>
+                                    <option value="semestre_1" {{ old('semestre_cours', $etudiant->semestre_cours) == 'semestre_1' ? 'selected' : '' }}>Semestre 1</option>
+                                    <option value="semestre_2" {{ old('semestre_cours', $etudiant->semestre_cours) == 'semestre_2' ? 'selected' : '' }}>Semestre 2</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="vacances_ete">Vacances d'Été :</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control" id="vacances_debut"
-                                        name="vacances_ete_debut" placeholder="Date début">
+                                    <input type="date" class="form-control" id="vacances_debut" name="vacances_ete_debut"
+                                        value="{{ old('vacances_ete_debut', $etudiant->vacances_ete_debut ? \Carbon\Carbon::parse($etudiant->vacances_ete_debut)->format('Y-m-d') : '') }}">
                                     <input type="date" class="form-control" id="vacances_fin" name="vacances_ete_fin"
-                                        placeholder="Date fin">
+                                        value="{{ old('vacances_ete_fin', $etudiant->vacances_ete_fin ? \Carbon\Carbon::parse($etudiant->vacances_ete_fin)->format('Y-m-d') : '') }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="vacances_dispo">Date disponible pendant les vacances d'été</label>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control" id="dispo_debut"
-                                            name="dates_disponibles_vacances_ete_debut" placeholder="Date début">
-                                        <input type="date" class="form-control" id="dispo_fin"
-                                            name="dates_disponibles_vacances_ete_fin" placeholder="Date fin">
-                                    </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="vacances_dispo">Date disponible pendant les vacances d'été :</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" id="dispo_debut" name="dates_disponibles_vacances_ete_debut"
+                                        value="{{ old('dates_disponibles_vacances_ete_debut', $etudiant->dates_disponibles_vacances_ete_debut ? \Carbon\Carbon::parse($etudiant->dates_disponibles_vacances_ete_debut)->format('Y-m-d') : '') }}">
+                                    <input type="date" class="form-control" id="dispo_fin" name="dates_disponibles_vacances_ete_fin"
+                                        value="{{ old('dates_disponibles_vacances_ete_fin', $etudiant->dates_disponibles_vacances_ete_fin ? \Carbon\Carbon::parse($etudiant->dates_disponibles_vacances_ete_fin)->format('Y-m-d') : '') }}">
                                 </div>
+                            </div>
                         </fieldset>
 
                         <!-- Détails spécifiques (Inclusivité Entreprise) Section -->
@@ -484,63 +485,55 @@
                                 <p>Avez-vous besoin d’aménagements spécifiques pour participer à des événements ou des
                                     activités ?</p>
                                 <select class="form-control" id="accessibilite" name="accessibilite">
-                                    <option value="oui">Oui</option>
-                                    <option value="non">Non</option>
+                                    <option value="oui" {{ old('accessibilite', $etudiant->accessibilite) == 'oui' ? 'selected' : '' }}>Oui</option>
+                                    <option value="non" {{ old('accessibilite', $etudiant->accessibilite) == 'non' ? 'selected' : '' }}>Non</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="amenagements">Si oui, veuillez préciser :</label>
                                 <textarea class="form-control" id="amenagements" name="details_accessibilite" rows="3"
-                                    placeholder="Précisez les aménagements spécifiques"></textarea>
+                                    placeholder="Précisez les aménagements spécifiques">{{ old('details_accessibilite', $etudiant->details_accessibilite) }}</textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="origine_ethnique">Origine :</label>
-                                <select class="form-select" id="origine_ethnique" name="origine_ethnique">
-                                    <option value="antaimoro">Malagasy</option>
-                                    <option value="antaimoro">Français</option>
-                                    <option value="antandroy">Autres</option>  
-                                </select>
-                            </div>
 
                             <div class="form-group">
                                 <label for="statut_socio_economique">Statut socio-économique :</label>
                                 <select class="form-select" id="statut_socio_economique" name="statut_socio_economique">
-                                    <option value="origine_modeste">Origine modeste</option>
-                                    <option value="classe_moyenne">Classe moyenne</option>
-                                    <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    <option value="origine_modeste" {{ old('statut_socio_economique', $etudiant->statut_socio_economique) == 'origine_modeste' ? 'selected' : '' }}>Origine modeste</option>
+                                    <option value="classe_moyenne" {{ old('statut_socio_economique', $etudiant->statut_socio_economique) == 'classe_moyenne' ? 'selected' : '' }}>Classe moyenne</option>
+                                    <option value="prefere_pas_dire" {{ old('statut_socio_economique', $etudiant->statut_socio_economique) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="conditions_vie">Conditions de vie spécifiques :</label>
                                 <select class="form-select" id="conditions_vie" name="conditions_vie_specifiques">
-                                    <option value="null">null</option>
-                                    <option value="sans_domicile">Sans domicile fixe</option>
-                                    <option value="handicap">En situation de handicap</option>
-                                    <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    <option value="null" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'null' ? 'selected' : '' }}>null</option>
+                                    <option value="sans_domicile" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'sans_domicile' ? 'selected' : '' }}>Sans domicile fixe</option>
+                                    <option value="handicap" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'handicap' ? 'selected' : '' }}>En situation de handicap</option>
+                                    <option value="prefere_pas_dire" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="religion_croyance">Religion ou croyance :</label>
                                 <select class="form-select" id="religion_croyance" name="religion_belief">
-                                    <option value="chretien">Chrétien</option>
-                                    <option value="musulman">Musulman</option>
-                                    <option value="bouddhiste">Bouddhiste</option>
-                                    <option value="hindou">Hindou</option>
-                                    <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    <option value="chretien" {{ old('religion_belief', $etudiant->religion_belief) == 'chretien' ? 'selected' : '' }}>Chrétien</option>
+                                    <option value="musulman" {{ old('religion_belief', $etudiant->religion_belief) == 'musulman' ? 'selected' : '' }}>Musulman</option>
+                                    <option value="bouddhiste" {{ old('religion_belief', $etudiant->religion_belief) == 'bouddhiste' ? 'selected' : '' }}>Bouddhiste</option>
+                                    <option value="hindou" {{ old('religion_belief', $etudiant->religion_belief) == 'hindou' ? 'selected' : '' }}>Hindou</option>
+                                    <option value="prefere_pas_dire" {{ old('religion_belief', $etudiant->religion_belief) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="orientation_sexuelle">Orientation sexuelle :</label>
                                 <select class="form-select" id="orientation_sexuelle" name="orientation_sexuelle">
-                                    <option value="heterosexuel">Hétérosexuel</option>
-                                    <option value="homosexuel">Homosexuel</option>
-                                    <option value="bisexuel">Bisexuel</option>
-                                    <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    <option value="heterosexuel" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'heterosexuel' ? 'selected' : '' }}>Hétérosexuel</option>
+                                    <option value="homosexuel" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'homosexuel' ? 'selected' : '' }}>Homosexuel</option>
+                                    <option value="bisexuel" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'bisexuel' ? 'selected' : '' }}>Bisexuel</option>
+                                    <option value="prefere_pas_dire" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -596,6 +589,23 @@
                 div.remove();
             }
         }
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('default-form');
+
+            form.addEventListener('submit', function (event) {
+                const typeEmploi = document.getElementById('type-emploi');
+                const chosenContainer = document.querySelector('.chosen-container');
+
+                // Vérifiez si le champ est vide
+                if (!typeEmploi.value || typeEmploi.value.length === 0) {
+                    event.preventDefault(); // Empêche la soumission du formulaire
+                    chosenContainer.classList.add('is-invalid'); // Ajoute une classe d'erreur
+                    typeEmploi.focus(); // Met le focus sur le champ
+                } else {
+                    chosenContainer.classList.remove('is-invalid'); // Supprime la classe d'erreur
+                }
+            });
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
             const regions = {
@@ -687,6 +697,47 @@
 
             // Add event listener to update regions when the country changes
             paysSelect.addEventListener('change', updateRegions);
+        });
+
+        $(document).ready(function () {
+            $(".chosen-select").chosen({
+                no_results_text: "Aucun résultat trouvé",
+                placeholder_text_multiple: "Sélectionnez un ou plusieurs types d'emploi"
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('default-form');
+
+            form.addEventListener('submit', function (event) {
+                let isValid = true;
+                const requiredFields = form.querySelectorAll('[required]');
+                const errorMessageContainer = document.createElement('div');
+                errorMessageContainer.classList.add('alert', 'alert-danger', 'mt-3');
+                errorMessageContainer.style.display = 'none';
+                errorMessageContainer.textContent = 'Veuillez remplir tous les champs obligatoires.';
+
+                // Remove existing error message
+                const existingErrorMessage = form.querySelector('.alert-danger');
+                if (existingErrorMessage) {
+                    existingErrorMessage.remove();
+                }
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('is-invalid');
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                });
+
+                if (!isValid) {
+                    event.preventDefault();
+                    errorMessageContainer.style.display = 'block';
+                    form.prepend(errorMessageContainer);
+                }
+            });
         });
     </script>
 
@@ -827,6 +878,10 @@
             width: 100% !important;
             min-height: 45px;
         }
+        .chosen-container.is-invalid .chosen-choices {
+        border: 1px solid #dc3545; /* Rouge pour indiquer une erreur */
+        box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+    }
 
         .chosen-container-multi .chosen-choices {
             min-height: 45px;
@@ -860,6 +915,11 @@
             max-width: 100%;
             margin-bottom: 30px;
             padding: 25px;
+        }
+
+        .is-invalid {
+            border-color: #dc3545;
+            box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
         }
     </style>
 

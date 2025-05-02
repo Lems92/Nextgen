@@ -62,6 +62,7 @@ class EtudiantController extends Controller
         if (is_string($etudiant->competences_en_communication)) {
             $etudiant->competences_en_communication = json_decode($etudiant->competences_en_communication, true);
         }
+        //dd($etudiant);
 
         return view('etudiant.portfolio', compact('etudiant'));
     }
@@ -398,6 +399,7 @@ class EtudiantController extends Controller
         $etudiant->autres_competences = is_string($etudiant->autres_competences) 
             ? json_decode($etudiant->autres_competences, true) ?? explode(',', $etudiant->autres_competences) 
             : $etudiant->autres_competences;
+
 
         // Retourner la vue avec les données de l'étudiant
         return view('etudiant.modifierProfil', compact('etudiant'));

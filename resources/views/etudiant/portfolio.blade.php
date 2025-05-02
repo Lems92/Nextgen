@@ -20,7 +20,7 @@
                             </figure>
                             <h4 class="name">
                                 <a href="#">{{$etudiant->prenom ?? ''}} {{$etudiant->nom ?? ''}}</a>
-                                @if(!empty($etudiant->nom_ecole_universite))
+                                @if(!empty($etudiant->universite))
                                     <span class="badge badge-success" style="background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
                                         Vérifié
                                     </span>
@@ -76,87 +76,81 @@
                                     </div>
                                 </div>
                                 
-                                <!-- Resume / Work & Experience -->
-                                <div class="resume-outer theme-blue">
-                                    <div class="upper-title">
-                                        <h4>Experiences professionnelles</h4>
-                                    </div>
-                                    <!-- Resume BLock -->
-                                    @foreach($etudiant->experiences_professionnelles as $exp_pro)
-                                        <div class="resume-block">
-                                            <div class="inner">
-                                                <span class="name">S</span>
-                                                <div class="title-box">
-                                                    <div class="info-box">
-                                                        <h3>{{$exp_pro->titre_poste}}</h3>
-                                                        <span>{{$exp_pro->nom_entreprise}}</span>
-                                                    </div>
-                                                    <div class="edit-box">
-                                                        <span
-                                                            class="year">{{$exp_pro->date_debut->format('j F Y')}} - {{$exp_pro->date_fin->format('j F Y')}}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="text">{{$exp_pro->description}}</div>
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                <!-- Experiences professionnelles -->
+                                <h4 class="widget-title">Expériences professionnelles</h4>
+                                <div class="widget-content">
+                                    <ul class="job-skills">
+                                        @if(!empty($etudiant->experience_professionnelle))
+                                            @foreach(explode("\n", $etudiant->experience_professionnelle) as $exp_pro)
+                                                <li><a href="#">{{ $exp_pro }}</a></li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune expérience professionnelle disponible</li>
+                                        @endif
+                                    </ul>
                                 </div>
 
-                                <!-- Resume / Work & Experience -->
-                                <div class="resume-outer theme-blue">
-                                    <div class="upper-title">
-                                        <h4>Experiences académiques</h4>
-                                    </div>
-                                    <!-- Resume BLock -->
-                                    @foreach($etudiant->experiences_academiques as $exp_aca)
-                                        <div class="resume-block">
-                                            <div class="inner">
-                                                <span class="name">S</span>
-                                                <div class="title-box">
-                                                    <div class="info-box">
-                                                        <h3>{{$exp_aca->titre}}</h3>
-                                                        <span>{{$exp_aca->type}}</span>
-                                                    </div>
-                                                    <div class="edit-box">
-                                                        <span class="year">{{$exp_aca->annee}}</span>
-                                                    </div>
-                                                </div>
-                                                <div class="text"><h4>Duréé : {{$exp_aca->duree}}</h4></div>
-                                                <div class="text">{{$exp_aca->description}}</div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
+                                <!-- Experiences académiques -->
+                                <h4 class="widget-title mt-3">Expériences académiques</h4>
+                                <div class="widget-content">
+                                    <ul class="job-skills">
+                                        @if(!empty($etudiant->experiences_academique))
+                                            @foreach(explode("\n", $etudiant->experiences_academique) as $exp_aca)
+                                                <li><a href="#">{{ $exp_aca }}</a></li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune expérience académique disponible</li>
+                                        @endif
+                                    </ul>
+                                </div> 
+                                
                                 <h4 class="widget-title">Compétences techniques</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach((array) $etudiant->competences_techniques as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
+                                        @if(!empty($etudiant->competences_techniques) && is_array(json_decode($etudiant->competences_techniques, true)))
+                                            @foreach(json_decode($etudiant->competences_techniques, true) as $comp)
+                                                <li><a href="#">{!! nl2br(e($comp)) !!}</a></li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune compétence technique disponible</li>
+                                        @endif
                                     </ul>
                                 </div>
 
                                 <h4 class="widget-title mt-3">Compétences en recherche et analyse</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach((array) $etudiant->competences_en_recherche_et_analyse as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
+                                        @if(!empty($etudiant->competences_en_recherche_et_analyse) && is_array(json_decode($etudiant->competences_en_recherche_et_analyse, true)))
+                                            @foreach(json_decode($etudiant->competences_en_recherche_et_analyse, true) as $comp)
+                                                <li><a href="#">{!! nl2br(e($comp)) !!}</a></li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune compétence en recherche et analyse disponible</li>
+                                        @endif
                                     </ul>
                                 </div>
 
                                 <h4 class="widget-title mt-3">Compétences en communication</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach((array) $etudiant->competences_en_communication as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
+                                        @if(!empty($etudiant->competences_en_communication) && is_array(json_decode($etudiant->competences_en_communication, true)))
+                                            @foreach(json_decode($etudiant->competences_en_communication, true) as $comp)
+                                                <li><a href="#">{!! nl2br(e($comp)) !!}</a></li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucune compétence en communication disponible</li>
+                                        @endif
                                     </ul>
                                 </div>
 
-
                                 <h4 class="widget-title mt-3">Centres d'intérêts</h4>
-                                <p>{{$etudiant->centres_interet ?? ''}}</p>
+                                <p>
+                                    @if(!empty($etudiant->centres_interet))
+                                        {!! nl2br(e($etudiant->centres_interet)) !!}
+                                    @else
+                                        Aucun centre d'intérêt spécifié.
+                                    @endif
+                                </p>
 
                                 <h4 class="widget-title mt-3">Lien portfolio</h4>
                                 <p>{{$etudiant->portfolio ?? ''}}</p>
@@ -182,33 +176,55 @@
                                     </ul>
                                 </div>
 
-                                <h4 class="widget-title mt-3">Secteur activités préférées</h4>
+                                <h4 class="widget-title mt-3">Secteurs d'activités préférés</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @foreach((array) $etudiant->secteur_activite_preferer as $comp)
-                                            <li><a href="#">{{$comp}}</a></li>
-                                        @endforeach
+                                        @php
+                                            $secteurs = is_array($etudiant->secteur_activite_preferer) 
+                                                        ? $etudiant->secteur_activite_preferer 
+                                                        : json_decode($etudiant->secteur_activite_preferer, true);
+                                        @endphp
+
+                                        @if(!empty($secteurs) && is_array($secteurs))
+                                            @foreach($secteurs as $secteur)
+                                                <li><a href="#">{{ $secteur }}</a></li>
+                                            @endforeach
+                                        @else
+                                            <li>Aucun secteur d'activité préféré spécifié</li>
+                                        @endif
                                     </ul>
                                 </div>
 
-                                <h4 class="widget-title mt-3">Type emploi recherché</h4>
+                                <h4 class="widget-title mt-3">Type d'emploi recherché</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @if(!empty($etudiant->type_emploi_recherche) && is_array($etudiant->type_emploi_recherche))
-                                            @foreach($etudiant->type_emploi_recherche as $comp)
-                                                <li><a href="#">{{$comp}}</a></li>
+                                        @if(!empty($etudiant->type_emploi_recherche) && is_array(json_decode($etudiant->type_emploi_recherche, true)))
+                                            @foreach(json_decode($etudiant->type_emploi_recherche, true) as $emploi)
+                                                <li><a href="#">{{ $emploi }}</a></li>
                                             @endforeach
                                         @else
-                                            <li>Aucune information disponible</li>
+                                            <li>Aucun type d'emploi recherché spécifié</li>
                                         @endif
                                     </ul>
                                 </div>
 
                                 <h4 class="widget-title mt-3">Localisation préférée</h4>
-                                <p>{{$etudiant->localisation_geographique_preferee}}</p>
+                                <p>
+                                    @if(!empty($etudiant->localisation_geographique_preferee))
+                                        {{ $etudiant->localisation_geographique_preferee }}
+                                    @else
+                                        Aucune localisation préférée spécifiée.
+                                    @endif
+                                </p>
 
-                                <h4 class="widget-title mt-3">Durée disponibilité</h4>
-                                <p>{{$etudiant->duree_disponibilite ?? ''}}</p>
+                                <h4 class="widget-title mt-3">Durée de disponibilité</h4>
+                                <p>
+                                    @if(!empty($etudiant->duree_disponibilite))
+                                        {{ $etudiant->duree_disponibilite }}
+                                    @else
+                                        Aucune durée de disponibilité spécifiée.
+                                    @endif
+                                </p>
                             </div>
                         </div>
 
@@ -237,10 +253,16 @@
 
                                             <li>
                                                 <i class="icon icon-language"></i>
-                                                <h5>Langages:</h5>
-                                                <span>@foreach((array) $etudiant->competences_langues as $lang)
-                                                        {{$lang}},
-                                                    @endforeach</span>
+                                                <h5>Langages :</h5>
+                                                <span>
+                                                    @if(!empty($etudiant->competences_langues) && is_array(json_decode($etudiant->competences_langues, true)))
+                                                        @foreach(json_decode($etudiant->competences_langues, true) as $lang)
+                                                            {{ $lang }},
+                                                        @endforeach
+                                                    @else
+                                                        Aucune langue spécifiée.
+                                                    @endif
+                                                </span>
                                             </li>
 
                                             <li>
