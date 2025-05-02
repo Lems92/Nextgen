@@ -282,6 +282,7 @@ class EtudiantController extends Controller
             'region' => 'nullable|string',
             'ville' => 'nullable|string|max:255',
             'code_postal' => 'nullable|string|max:10',
+            'univ' => 'nullable|string|max:255',
             'nom_ecole_universite' => 'nullable|string|max:255',
             'domaine_etudes' => 'nullable|string|max:255',
             'niveau_etudes' => 'nullable|string|max:255',

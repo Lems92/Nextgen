@@ -52,7 +52,7 @@
                             <div class="job-detail">
                                 <h4>A propos du candidat</h4>
 
-                                <p>{{$etudiant->description ?? 'Aucun information à afficher'}}</p>
+                                <p>{!! nl2br(e($etudiant->description ?? 'Aucun information à afficher')) !!}</p>
 
                                 <!-- Resume / Education -->
                                 <div class="resume-outer">
@@ -65,7 +65,7 @@
                                             <div class="title-box">
                                                 <div class="info-box">
                                                     <h3>{{$etudiant->domaine_etudes ?? ''}}</h3>
-                                                    <span>{{$etudiant->nom_ecole_universite ?? ''}}</span>
+                                                    <span>{{$etudiant->univ ?? ''}}</span>
                                                 </div>
                                                 <div class="edit-box">
                                                     <span class="year">{{$etudiant->annee_obtention_diplome ?? ''}}</span>
@@ -82,7 +82,7 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->experience_professionnelle))
                                             @foreach(explode("\n", $etudiant->experience_professionnelle) as $exp_pro)
-                                                <li><a href="#">{{ $exp_pro }}</a></li>
+                                                <li>{{ $exp_pro }}</li>
                                             @endforeach
                                         @else
                                             <li>Aucune expérience professionnelle disponible</li>
@@ -96,7 +96,7 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->experiences_academique))
                                             @foreach(explode("\n", $etudiant->experiences_academique) as $exp_aca)
-                                                <li><a href="#">{{ $exp_aca }}</a></li>
+                                                <li>{{ $exp_aca }}</li>
                                             @endforeach
                                         @else
                                             <li>Aucune expérience académique disponible</li>
@@ -109,7 +109,7 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->competences_techniques) && is_array(json_decode($etudiant->competences_techniques, true)))
                                             @foreach(json_decode($etudiant->competences_techniques, true) as $comp)
-                                                <li><a href="#">{!! nl2br(e($comp)) !!}</a></li>
+                                                <li>{!! nl2br(e($comp)) !!}</li>
                                             @endforeach
                                         @else
                                             <li>Aucune compétence technique disponible</li>
@@ -122,7 +122,7 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->competences_en_recherche_et_analyse) && is_array(json_decode($etudiant->competences_en_recherche_et_analyse, true)))
                                             @foreach(json_decode($etudiant->competences_en_recherche_et_analyse, true) as $comp)
-                                                <li><a href="#">{!! nl2br(e($comp)) !!}</a></li>
+                                                <li>{!! nl2br(e($comp)) !!}</li>
                                             @endforeach
                                         @else
                                             <li>Aucune compétence en recherche et analyse disponible</li>
@@ -135,7 +135,7 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->competences_en_communication) && is_array(json_decode($etudiant->competences_en_communication, true)))
                                             @foreach(json_decode($etudiant->competences_en_communication, true) as $comp)
-                                                <li><a href="#">{!! nl2br(e($comp)) !!}</a></li>
+                                                <li>{!! nl2br(e($comp)) !!}</li>
                                             @endforeach
                                         @else
                                             <li>Aucune compétence en communication disponible</li>
@@ -160,7 +160,7 @@
                                     <ul class="job-skills">
                                         @if($etudiant->document_diplome)
                                             <li>
-                                                <a href="{{ asset('storage/' . $etudiant->document_diplome) }}" target="_blank">Télécharger le diplôme</a>
+                                                <a href="{{ asset('storage/' . $etudiant->document_diplome) }}" target="_blank" style="color: rgba(82, 7, 19, 0.877);">Télécharger le diplôme</a>
                                             </li>
                                         @else
                                             <li>Aucun document de diplôme disponible</li>
@@ -168,10 +168,8 @@
 
                                         @if($etudiant->document_recommandation)
                                             <li>
-                                                <a href="{{ asset('storage/' . $etudiant->document_recommandation) }}" target="_blank">Télécharger la lettre de recommandation</a>
+                                                <a href="{{ asset('storage/' . $etudiant->document_recommandation) }}" target="_blank" style="color: rgba(82, 7, 19, 0.877);">Télécharger la lettre de recommandation</a>
                                             </li>
-                                        @else
-                                            <li>Aucune lettre de recommandation disponible</li>
                                         @endif
                                     </ul>
                                 </div>
@@ -269,8 +267,8 @@
                                                 <i class="icon icon-degree"></i>
                                                 <h5>Université :</h5>
                                                 <span>
-                                                @if($etudiant->universite)
-                                                    {{ $etudiant->universite->nom_etablissement }}
+                                                @if($etudiant->univ)
+                                                    {{ $etudiant->univ}}
                                                 @else
                                                     Aucune université associée.
                                                 @endif</span>

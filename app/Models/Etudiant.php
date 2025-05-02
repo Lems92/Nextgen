@@ -63,6 +63,7 @@ class Etudiant extends Model implements Sluggable
         'orientation_sexuelle',
         'description',
         'profile_picture',
+        'univ',
         'slug',
     ];
 

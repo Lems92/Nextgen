@@ -113,6 +113,10 @@
                                     <input type="text" id="code-postal" name="code_postal" class="form-control" value="{{ old('code_postal', $etudiant->code_postal) }}"
                                         required>
                                 </div>
+                                <div class="col-mb-6">
+                                    <label for="description" class="form-label">Description :</label>
+                                    <textarea id="description" name="description" class="form-control" rows="5" placeholder="Entrez votre description">{{ old('description', $etudiant->description) }}</textarea>
+                                </div>
                             </div>
                         </fieldset>
 
@@ -121,11 +125,10 @@
                             <legend>
                                 <h4>Éducation</h4>
                             </legend>
-                            <!-- <div class="mb-3">
-                                <label for="nom-ecole" class="form-label">Nom de l'école ou de l'université :</label>
-                                <input type="text" id="nom-ecole" name="nom_ecole_universite" class="form-control"
-                                    required>
-                            </div>-->
+                            <div class="mb-3">
+                                <label for="univ" class="form-label">Nom de l'école ou de l'université :</label>
+                                <input type="text" id="univ" name="univ" class="form-control" value="{{ old('univ', $etudiant->univ) }}" required>
+                            </div>
                             <div class="mb-3">
                                 <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
                                 <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
@@ -537,8 +540,6 @@
                                 </select>
                             </div>
                         </fieldset>
-
-
 
                         <div class="text-center mt-4">
                             <button type="submit" class="theme-btn btn-style-one">Soumettre</button>
