@@ -68,6 +68,7 @@ class Etudiant extends Model implements Sluggable
     ];
 
     protected $casts = [
+        'duree_disponibilite' => 'string',
         'competences_techniques' => 'array',
         'competences_en_recherche_et_analyse'  => 'array',
         'competences_en_communication'  => 'array',
@@ -172,17 +173,21 @@ class Etudiant extends Model implements Sluggable
         if (array_key_exists($key, $this->attributes)) {
             // Vérifier si un paramétrage doit être appliqué
             if (in_array($key, [
-                'genre', 'niveau_etudes', 'duree_disponibilite', 'statut_socio_economique', 'conditions_vie_specifiques',
+                'genre', 'niveau_etudes', 'statut_socio_economique', 'conditions_vie_specifiques',
                 'religion_belief', 'orientation_sexuelle'
             ])) {
                 return $this->getParametrageLibelle($key);
             }
 
             // Si c'est un tableau
-            if (in_array($key, [
-                'type_emploi_recherche',
-            ])) {
-                return $this->getParametrageLibelleArray($key);
+            //if (in_array($key, [
+            //    'type_emploi_recherche',
+            //])) {
+            //    return $this->getParametrageLibelleArray($key);
+            //}
+
+            if ($key === 'types_emploi_recherche') {
+                return json_decode($this->attributes[$key], true);
             }
 
             if ($key === 'secteur_activite_preferer') {
