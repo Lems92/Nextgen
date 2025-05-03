@@ -197,14 +197,21 @@
                                 <h4 class="widget-title mt-3">Type d'emploi recherché</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
-                                        @if(!empty($etudiant->type_emploi_recherche) && is_array(json_decode($etudiant->type_emploi_recherche, true)))
-                                            @foreach(json_decode($etudiant->type_emploi_recherche, true) as $emploi)
-                                                <li><a href="#">{{ $emploi }}</a></li>
+                                        @php
+                                            $type_emploi_recherche = is_array($etudiant->type_emploi_recherche) 
+                                                ? $etudiant->type_emploi_recherche
+                                                : json_decode($etudiant->type_emploi_recherche, true);
+                                        @endphp
+
+                                        @if(!empty($type_emploi_recherche) && is_array($type_emploi_recherche))
+                                            @foreach($type_emploi_recherche as $type)
+                                                <li><a href="#">{{ $type }}</a></li>
                                             @endforeach
                                         @else
                                             <li>Aucun type d'emploi recherché spécifié</li>
                                         @endif
-                                    </ul>
+                                    </ul> 
+                                                    
                                 </div>
 
                                 <h4 class="widget-title mt-3">Type d'emploi recherché</h4>

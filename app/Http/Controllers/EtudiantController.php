@@ -406,6 +406,19 @@ class EtudiantController extends Controller
             ? json_decode($etudiant->competences_techniques, true) ?? explode(',', $etudiant->competences_techniques) 
             : $etudiant->competences_techniques;
 
+        // Vérifier et corriger le double encodage pour type_emploi_recherche
+        if (is_string($etudiant->type_emploi_recherche)) {
+            $decodedOnce = json_decode($etudiant->type_emploi_recherche, true);
+            if (is_string($decodedOnce)) {
+                // Si le résultat du premier décodage est encore une chaîne JSON, décodez à nouveau
+                $etudiant->type_emploi_recherche = json_decode($decodedOnce, true);
+            } else {
+                $etudiant->type_emploi_recherche = $decodedOnce ?? [];
+            }
+        } else {
+            $etudiant->type_emploi_recherche = $etudiant->type_emploi_recherche ?? [];
+        }
+
         $etudiant->competences_en_recherche_et_analyse = is_string($etudiant->competences_en_recherche_et_analyse) 
             ? json_decode($etudiant->competences_en_recherche_et_analyse, true) ?? explode(',', $etudiant->competences_en_recherche_et_analyse) 
             : $etudiant->competences_en_recherche_et_analyse;
@@ -421,9 +434,25 @@ class EtudiantController extends Controller
         $etudiant->autres_competences = is_string($etudiant->autres_competences) 
             ? json_decode($etudiant->autres_competences, true) ?? explode(',', $etudiant->autres_competences) 
             : $etudiant->autres_competences;
-
-
         // Retourner la vue avec les données de l'étudiant
         return view('etudiant.modifierProfil', compact('etudiant'));
+    }
+
+    public function fixDoubleEncodedData()
+    {
+        $etudiants = Etudiant::all();
+
+        foreach ($etudiants as $etudiant) {
+            if (is_string($etudiant->type_emploi_recherche)) {
+                $decodedOnce = json_decode($etudiant->type_emploi_recherche, true);
+                if (is_string($decodedOnce)) {
+                    // Si le résultat du premier décodage est encore une chaîne JSON, décodez à nouveau
+                    $etudiant->type_emploi_recherche = json_encode(json_decode($decodedOnce, true));
+                    $etudiant->save();
+                }
+            }
+        }
+
+        return "Correction terminée.";
     }
 }

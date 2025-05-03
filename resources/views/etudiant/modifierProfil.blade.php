@@ -497,11 +497,11 @@
                             <div class="form-group">
                                 <label for="duree_disponibilite">Durée de Disponibilité :</label>
                                 <select class="form-control" id="duree_disponibilite" name="duree_disponibilite">
-                                    <option value="moins_1_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'moins_1_mois' ? 'selected' : '' }}>Moins de 1 mois</option>
-                                    <option value="1_3_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '1_3_mois' ? 'selected' : '' }}>1 à 3 mois</option>
-                                    <option value="3_6_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '3_6_mois' ? 'selected' : '' }}>3 à 6 mois</option>
-                                    <option value="6_12_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '6_12_mois' ? 'selected' : '' }}>6 à 12 mois</option>
-                                    <option value="plus_12_mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'plus_12_mois' ? 'selected' : '' }}>Plus de 12 mois</option>
+                                    <option value="Moins de 1 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'Moins de 1 mois' ? 'selected' : '' }}>Moins de 1 mois</option>
+                                    <option value="1 à 3 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '1 à 3 mois' ? 'selected' : '' }}>1 à 3 mois</option>
+                                    <option value="3 à 6 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '3 à 6 mois' ? 'selected' : '' }}>3 à 6 mois</option>
+                                    <option value="6 à 12 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '6 à 12 mois' ? 'selected' : '' }}>6 à 12 mois</option>
+                                    <option value="plus de 12 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'plus de 12 mois' ? 'selected' : '' }}>Plus de 12 mois</option>
                                 </select>
                             </div>
 
