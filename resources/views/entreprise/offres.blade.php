@@ -86,8 +86,6 @@
                                                             <form method="post" id="delete_offre_form{{$offre->id}}" action="{{route('entreprise.offres.delete', ['offre' => $offre->slug])}}">
                                                                 @csrf
                                                             </form>
-                                                            <button onclick="deleteOffre('delete_offre_form{{$offre->id}}')" data-text="Supprimer l'offre"><span
-                                                                    class="la la-trash"></span></button>
                                                         </li>
                                                     </ul>
                                                 </div>
