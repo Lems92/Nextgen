@@ -80,9 +80,10 @@
                                 <h4 class="widget-title">Expériences professionnelles</h4>
                                 <div class="widget-content">
                                     <ul class="job-skills">
+
                                         @if(!empty($etudiant->experience_professionnelle))
                                             @foreach(explode("\n", $etudiant->experience_professionnelle) as $exp_pro)
-                                                <li>{{ $exp_pro }}</li>
+                                                <p>{{ $exp_pro }}</p>
                                             @endforeach
                                         @else
                                             <li>Aucune expérience professionnelle disponible</li>
@@ -96,10 +97,10 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->experiences_academique))
                                             @foreach(explode("\n", $etudiant->experiences_academique) as $exp_aca)
-                                                <li>{{ $exp_aca }}</li>
+                                                <p>{{ $exp_aca }}</p>
                                             @endforeach
                                         @else
-                                            <li>Aucune expérience académique disponible</li>
+                                            <p>Aucune expérience académique disponible</p>
                                         @endif
                                     </ul>
                                 </div> 
@@ -109,10 +110,10 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->competences_techniques) && is_array(json_decode($etudiant->competences_techniques, true)))
                                             @foreach(json_decode($etudiant->competences_techniques, true) as $comp)
-                                                <li>{!! nl2br(e($comp)) !!}</li>
+                                                <p>{!! nl2br(e($comp)) !!}</p>
                                             @endforeach
                                         @else
-                                            <li>Aucune compétence technique disponible</li>
+                                            <p>Aucune compétence technique disponible</p>
                                         @endif
                                     </ul>
                                 </div>
@@ -122,10 +123,10 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->competences_en_recherche_et_analyse) && is_array(json_decode($etudiant->competences_en_recherche_et_analyse, true)))
                                             @foreach(json_decode($etudiant->competences_en_recherche_et_analyse, true) as $comp)
-                                                <li>{!! nl2br(e($comp)) !!}</li>
+                                                <p>{!! nl2br(e($comp)) !!}</p>
                                             @endforeach
                                         @else
-                                            <li>Aucune compétence en recherche et analyse disponible</li>
+                                            <p>Aucune compétence en recherche et analyse disponible</p>
                                         @endif
                                     </ul>
                                 </div>
@@ -135,10 +136,10 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->competences_en_communication) && is_array(json_decode($etudiant->competences_en_communication, true)))
                                             @foreach(json_decode($etudiant->competences_en_communication, true) as $comp)
-                                                <li>{!! nl2br(e($comp)) !!}</li>
+                                                <p>{!! nl2br(e($comp)) !!}</p>
                                             @endforeach
                                         @else
-                                            <li>Aucune compétence en communication disponible</li>
+                                            <p>Aucune compétence en communication disponible</p>
                                         @endif
                                     </ul>
                                 </div>
@@ -152,6 +153,7 @@
                                     @endif
                                 </p>
 
+                                
                                 <h4 class="widget-title mt-3">Lien portfolio</h4>
                                 <p>{{$etudiant->portfolio ?? ''}}</p>
 
@@ -315,5 +317,14 @@
             </div>
         </div>
     </section>
+<style>
+    .resume-block .title-box {
+    position: relative;
+    display: flex
+;
+    align-items: flex-start;
+    margin-bottom: 0px;
+}
+</style>
 
 @endsection
