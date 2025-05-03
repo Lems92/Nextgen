@@ -141,30 +141,15 @@
                                 <input type="text" id="univ" name="univ" class="form-control" value="{{ old('univ', $etudiant->univ) }}" required>
                             </div>
                             <div class="mb-3">
-                                <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
-                                <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
-                                    <option value="sciences" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'sciences' ? 'selected' : '' }}>Sciences</option>
-                                    <option value="ingenierie" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'ingenierie' ? 'selected' : '' }}>Ingénierie</option>
-                                    <option value="arts" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'arts' ? 'selected' : '' }}>Arts</option>
-                                    <option value="commerce" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'commerce' ? 'selected' : '' }}>Commerce</option>
-                                    <option value="medecine" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'medecine' ? 'selected' : '' }}>Médecine</option>
-                                    <option value="droit" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'droit' ? 'selected' : '' }}>Droit</option>
-                                    <option value="economie" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'economie' ? 'selected' : '' }}>Économie</option>
-                                    <option value="architecture" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'architecture' ? 'selected' : '' }}>Architecture</option>
-                                    <option value="sciences-sociales" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'sciences-sociales' ? 'selected' : '' }}>Sciences sociales</option>
-                                    <option value="sciences-vie" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'sciences-vie' ? 'selected' : '' }}>Sciences de la vie</option>
-                                    <option value="sciences-environnement" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'sciences-environnement' ? 'selected' : '' }}>Sciences de l'environnement</option>
-                                    <option value="education" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'education' ? 'selected' : '' }}>Éducation</option>
-                                    <option value="tourisme-hotel" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'tourisme-hotel' ? 'selected' : '' }}>Tourisme et hôtellerie</option>
-                                    <option value="agriculture-environnement" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'agriculture-environnement' ? 'selected' : '' }}>Agriculture et environnement rural</option>
-                                    <option value="technologies-information" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'technologies-information' ? 'selected' : '' }}>Technologies de l'information</option>
-                                    <option value="communication" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'communication' ? 'selected' : '' }}>Communication</option>
-                                    <option value="langues-cultures" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'langues-cultures' ? 'selected' : '' }}>Langues et cultures</option>
-                                    <option value="sciences-politiques" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'sciences-politiques' ? 'selected' : '' }}>Sciences politiques</option>
-                                    <option value="gestion" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'gestion' ? 'selected' : '' }}>Gestion</option>
-                                    <option value="sciences-sante" {{ old('domaine_etudes', $etudiant->domaine_etudes) == 'sciences-sante' ? 'selected' : '' }}>Sciences de la santé</option>
-                                </select>
-                            </div>
+                            <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
+                            <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
+                                @foreach ($list_categories as $category)
+                                    <option value="{{ $category->name }}" {{ old('domaine_etudes', $etudiant->domaine_etudes) == $category->name ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
                             <div class="mb-3">
                             <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
                             <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
@@ -348,129 +333,37 @@
                             <!-- Secteur d'activité préféré -->
                             <div class="mb-3">
                                 <label for="secteur-activite" class="form-label">Secteur d'activité préféré :</label>
-                                <select id="secteur-activite" name="secteur_activite_preferer[]"
-                                    class="chosen-select multiple" multiple required>
-                                    <optgroup label="Technologie de l'Information">
-                                        <option value="Développement logiciel" {{ in_array('Développement logiciel', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Développement logiciel</option>
-                                        <option value="Cybersécurité" {{ in_array('Cybersécurité', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Cybersécurité</option>
-                                        <option value="Intelligence artificielle" {{ in_array('Intelligence artificielle', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }} >Intelligence artificielle</option>
-                                        <option value="Gestion de systèmes informatiques" {{ in_array('Gestion de systèmes informatiques', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }} >Gestion de systèmes informatiques
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Santé">
-                                        <option value="Médecine" {{ in_array('Médecines', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }} >Médecine</option>
-                                        <option value="Soins infirmiers" {{ in_array('Soins infirmiers', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }} >Soins infirmiers</option>
-                                        <option value="Pharmacie" {{ in_array('Pharmacie', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Pharmacie</option>
-                                        <option value="Médecine vétérinaire" {{ in_array('Médecine vétérinaire', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Médecine vétérinaire</option>
-                                    </optgroup>
-                                    <optgroup label="Finance et Comptabilité">
-                                        <option value="Banque et assurance" {{ in_array('Banque et assurance', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Banque et assurance</option>
-                                        <option value="Gestion de portefeuille" {{ in_array('Gestion de portefeuille', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion de portefeuille</option>
-                                        <option value="Comptabilité" {{ in_array('Comptabilité', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Comptabilité</option>
-                                        <option value="Analyse financière" {{ in_array('Analyse financière', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Analyse financière</option>
-                                    </optgroup>
-                                    <optgroup label="Ingénierie">
-                                        <option value="Génie civil" {{ in_array('Génie civil', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Génie civil</option>
-                                        <option value="Génie mécanique" {{ in_array('Génie mécanique', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Génie mécanique</option>
-                                        <option value="Génie électrique" {{ in_array('Génie électrique', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Génie électrique</option>
-                                        <option value="Génie chimique" {{ in_array('Génie chimique', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Génie chimique</option>
-                                    </optgroup>
-                                    <optgroup label="Commerce et Marketing">
-                                        <option value="Vente et distribution" {{ in_array('Vente et distribution', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Vente et distribution</option>
-                                        <option value="Marketing digital" {{ in_array('Marketing digital', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Marketing digital</option>
-                                        <option value="Gestion de marque" {{ in_array('Gestion de marque', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion de marque</option>
-                                        <option value="Analyse de marché" {{ in_array('Analyse de marché', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Analyse de marché</option>
-                                    </optgroup>
-                                    <optgroup label="Éducation et Formation">
-                                        <option value="Enseignement" {{ in_array('Enseignement', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Enseignement</option>
-                                        <option value="Formation professionnelle" {{ in_array('Formation professionnelle', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Formation professionnelle</option>
-                                        <option value="Pédagogie" {{ in_array('Pédagogie', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Pédagogie</option>
-                                        <option value="Gestion éducative" {{ in_array('Gestion éducative', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion éducative</option>
-                                    </optgroup>
-                                    <optgroup label="Arts et Création">
-                                        <option value="Design graphique" {{ in_array('Design graphique', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Design graphique</option>
-                                        <option value="Arts visuels" {{ in_array('Arts visuels', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Arts visuels</option>
-                                        <option value="Musique et spectacle" {{ in_array('Musique et spectacle', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Musique et spectacle</option>
-                                        <option value="Design d'intérieur" {{ in_array('Design d\'intérieur', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Design d'intérieur</option>
-                                    </optgroup>
-                                    <optgroup label="Sciences et Recherche">
-                                        <option value="Biologie" {{ in_array('Biologie', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Biologie</option>
-                                        <option value="Physique" {{ in_array('Physique', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Physique</option>
-                                        <option value="Chimie" {{ in_array('Chimie', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Chimie</option>
-                                        <option value="Recherche scientifique" {{ in_array('Recherche scientifique', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Recherche scientifique</option>
-                                    </optgroup>
-                                    <optgroup label="Tourisme et Hôtellerie">
-                                        <option value="Gestion hôtelière" {{ in_array('Gestion hôtelière', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion hôtelière</option>
-                                        <option value="Planification de voyages" {{ in_array('Planification de voyages', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Planification de voyages</option>
-                                        <option value="Gestion d'événements" {{ in_array('Gestion d\'événements', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion d'événements</option>
-                                        <option value="Restauration" {{ in_array('Restauration', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Restauration</option>
-                                    </optgroup>
-                                    <optgroup label="Ressources Humaines">
-                                        <option value="Gestion des ressources humaines">Gestion des ressources humaines</option>
-                                        <option value="Recrutement et sélection">Recrutement et sélection</option>
-                                        <option value="Développement organisationnel">Développement organisationnel</option>
-                                        <option value="Formation et développement">Formation et développement</option>
-                                    </optgroup>
-                                    <optgroup label="Marketing et Publicité">
-                                        <option value="Publicité" {{ in_array('Publicité', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Publicité</option>
-                                        <option value="Relations publiques" {{ in_array('Relations publiques', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Relations publiques</option>
-                                        <option value="Marketing numérique" {{ in_array('Marketing numérique', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Marketing numérique</option>
-                                        <option value="Gestion de marque" {{ in_array('Gestion de marque', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion de marque</option>
-                                    </optgroup>
-                                    <optgroup label="Droit et Juridique">
-                                        <option value="Droit pénal" {{ in_array('Droit pénal', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Droit pénal</option>
-                                        <option value="Droit civil" {{ in_array('Droit civil', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Droit civil</option>
-                                        <option value="Droit international" {{ in_array('Droit international', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Droit international</option>
-                                        <option value="Droit commercial" {{ in_array('Droit commercial', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Droit commercial</option>
-                                    </optgroup> 
-                                    <optgroup label="Agriculture et Environnement">
-                                        <option value="Gestion agricole" {{ in_array('Gestion agricole', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion agricole</option>
-                                        <option value="Sciences de l'environnement" {{ in_array('Sciences de l\'environnement', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Sciences de l'environnement</option>
-                                        <option value="Agriculture durable" {{ in_array('Agriculture durable', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Agriculture durable</option>
-                                        <option value="Conservation de la biodiversité" {{ in_array('Conservation de la biodiversité', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Conservation de la biodiversité</option>
-                                    </optgroup>
-                                    <optgroup label="Énergie et Ressources Naturelles">
-                                        <option value="Énergies renouvelables" {{ in_array('Énergies renouvelables', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Énergies renouvelables</option>
-                                        <option value="Gestion des ressources" {{ in_array('Gestion des ressources', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion des ressources</option>
-                                        <option value="Ingénierie énergétique" {{ in_array('Ingénierie énergétique', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Ingénierie énergétique</option>
-                                        <option value="Exploration minière" {{ in_array('Exploration minière', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Exploration minière</option>
-                                    </optgroup>
-                                    <optgroup label="Transport et Logistique">
-                                        <option value="Gestion de la chaîne d'approvisionnement" {{ in_array('Gestion de la chaîne d\'approvisionnement', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion de la chaîne d'approvisionnement</option>
-                                        <option value="Logistique et distribution" {{ in_array('Logistique et distribution', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Logistique et distribution</option>
-                                        <option value="Transport international" {{ in_array('Transport international', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Transport international</option>
-                                        <option value="Gestion des infrastructures de transport" {{ in_array('Gestion des infrastructures de transport', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion des infrastructures de transport</option>
-                                    </optgroup>
-                                    <optgroup label="Développement et Humanitaire">
-                                        <option value="Aide au développement" {{ in_array('Aide au développement', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Aide au développement</option>
-                                        <option value="ONG et organisations humanitaires" {{ in_array('ONG et organisations humanitaires', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>ONG et organisations humanitaires</option>
-                                        <option value="Gestion des projets de développement" {{ in_array('Gestion des projets de développement', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion des projets de développement</option>
-                                        <option value="Travail social" {{ in_array('Travail social', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Travail social</option>
-                                    </optgroup>
-
-                                    <optgroup label="Télécommunications">
-                                        <option value="Réseaux de communication" {{ in_array('Réseaux de communication', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Réseaux de communication</option>
-                                        <option value="Gestion des infrastructures télécom" {{ in_array('Gestion des infrastructures télécom', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Gestion des infrastructures télécom</option>
-                                        <option value="Services Internet" {{ in_array('Services Internet', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Services Internet</option>
-                                        <option value="Développement de technologies de communication" {{ in_array('Développement de technologies de communication', old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'selected' : '' }}>Développement de technologies de communication</option>
-                                    </optgroup>
-                                </select>
+                                <div id="secteur-activite-container" class="checkbox-container">
+                                    <div class="checkbox-group">
+                                        @foreach ($list_categories as $category)
+                                            @if ($category->table === 'secteur_activites')
+                                                <label>
+                                                    <input type="checkbox" name="secteur_activite_preferer[]" value="{{ $category->name }}" 
+                                                        {{ in_array($category->name, old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'checked' : '' }}>
+                                                    {{ $category->name }}
+                                                </label>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Type d'emploi recherché -->
                             <div class="mb-3">
                                 <label for="type-emploi" class="form-label">Type d'emploi recherché :</label>
-                                @php
-                                    $typeEmploiRecherche = old('type_emploi_recherche', is_string($etudiant->type_emploi_recherche) ? json_decode($etudiant->type_emploi_recherche, true) : ($etudiant->type_emploi_recherche ?? []));
-                                @endphp
-
-                                <select id="type-emploi" name="type_emploi_recherche[]" class="chosen-select multiples" multiple required>
-                                    <option value="CDI" {{ in_array('CDI', $typeEmploiRecherche) ? 'selected' : '' }}>CDI</option>
-                                    <option value="Stage" {{ in_array('Stage', $typeEmploiRecherche) ? 'selected' : '' }}>Stage</option>
-                                    <option value="Contrat à durée déterminée" {{ in_array('Contrat à durée déterminée', $typeEmploiRecherche) ? 'selected' : '' }}>Contrat à durée déterminée</option>
-                                    <option value="Freelance" {{ in_array('Freelance', $typeEmploiRecherche) ? 'selected' : '' }}>Freelance</option>
-                                    <option value="Alternance" {{ in_array('Alternance', $typeEmploiRecherche) ? 'selected' : '' }}>Alternance</option>
-                                </select>
+                                <div id="type-emploi-container" class="checkbox-container">
+                                    <div class="checkbox-group">
+                                        @foreach ($parametrage as $param)
+                                            @if ($param->table === 'type_contrat')
+                                                <label>
+                                                    <input type="checkbox" name="type_emploi_recherche[]" value="{{ $param->sigle }}" 
+                                                        {{ in_array($param->sigle, old('type_emploi_recherche', json_decode($etudiant->type_emploi_recherche, true) ?? [])) ? 'checked' : '' }}>
+                                                    {{ $param->sigle }}
+                                                </label>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
 
                             <!-- Localisation géographique préférée -->
@@ -829,6 +722,30 @@
                 }
             });
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('#secteur-activite-container input[type="checkbox"]');
+            const selectedContainer = document.getElementById('selected-secteurs');
+
+            function updateSelected() {
+                selectedContainer.innerHTML = ''; // Réinitialise le conteneur
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const span = document.createElement('span');
+                        span.classList.add('selected-item');
+                        span.textContent = checkbox.value;
+                        selectedContainer.appendChild(span);
+                    }
+                });
+            }
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateSelected);
+            });
+
+            // Initialisation
+            updateSelected();
+        });
     </script>
 
     <style>
@@ -1085,6 +1002,49 @@
         .is-invalid {
             border-color: #dc3545;
             box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+        }
+
+        .checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            accent-color: #66022b;
+        }
+
+        .selected-secteurs {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f1f1f1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .selected-item {
+            background: #66022b;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
         }
     </style>
 
