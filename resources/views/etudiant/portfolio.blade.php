@@ -110,7 +110,7 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->competences_techniques) && is_array(json_decode($etudiant->competences_techniques, true)))
                                             @foreach(json_decode($etudiant->competences_techniques, true) as $comp)
-                                                <p>{!! nl2br(e($comp)) !!}</p>
+                                                <li><a>{!! nl2br(e($comp)) !!}</a></li>
                                             @endforeach
                                         @else
                                             <p>Aucune compétence technique disponible</p>
@@ -123,23 +123,10 @@
                                     <ul class="job-skills">
                                         @if(!empty($etudiant->competences_en_recherche_et_analyse) && is_array(json_decode($etudiant->competences_en_recherche_et_analyse, true)))
                                             @foreach(json_decode($etudiant->competences_en_recherche_et_analyse, true) as $comp)
-                                                <p>{!! nl2br(e($comp)) !!}</p>
+                                                <li><a>{!! nl2br(e($comp)) !!}</a></li>
                                             @endforeach
                                         @else
                                             <p>Aucune compétence en recherche et analyse disponible</p>
-                                        @endif
-                                    </ul>
-                                </div>
-
-                                <h4 class="widget-title mt-3">Compétences en communication</h4>
-                                <div class="widget-content">
-                                    <ul class="job-skills">
-                                        @if(!empty($etudiant->competences_en_communication) && is_array(json_decode($etudiant->competences_en_communication, true)))
-                                            @foreach(json_decode($etudiant->competences_en_communication, true) as $comp)
-                                                <p>{!! nl2br(e($comp)) !!}</p>
-                                            @endforeach
-                                        @else
-                                            <p>Aucune compétence en communication disponible</p>
                                         @endif
                                     </ul>
                                 </div>
@@ -162,7 +149,7 @@
                                     <ul class="job-skills">
                                         @if($etudiant->document_diplome)
                                             <li>
-                                                <a href="{{ asset('storage/' . $etudiant->document_diplome) }}" target="_blank" style="color: rgba(82, 7, 19, 0.877);">Télécharger le diplôme</a>
+                                                <a href="{{ asset('storage/' . $etudiant->document_diplome) }}" target="_blank" style="color: white; background-color: #66022b;">Télécharger le diplôme</a>
                                             </li>
                                         @else
                                             <li>Aucun document de diplôme disponible</li>
@@ -170,7 +157,7 @@
 
                                         @if($etudiant->document_recommandation)
                                             <li>
-                                                <a href="{{ asset('storage/' . $etudiant->document_recommandation) }}" target="_blank" style="color: rgba(82, 7, 19, 0.877);">Télécharger la lettre de recommandation</a>
+                                                <a href="{{ asset('storage/' . $etudiant->document_recommandation) }}" target="_blank" style="color: white; background-color: #66022b;">Télécharger la lettre de recommandation</a>
                                             </li>
                                         @endif
                                     </ul>
@@ -281,15 +268,15 @@
                                             <li>
                                                 <i class="icon icon-language"></i>
                                                 <h5>Langages :</h5>
-                                                <span>
+                                                <div class="language-list">
                                                     @if(!empty($etudiant->competences_langues) && is_array(json_decode($etudiant->competences_langues, true)))
                                                         @foreach(json_decode($etudiant->competences_langues, true) as $lang)
-                                                            {{ $lang }},
+                                                            <span>{{ $lang }}</span>
                                                         @endforeach
                                                     @else
-                                                        Aucune langue spécifiée.
+                                                        <span>Aucune langue spécifiée.</span>
                                                     @endif
-                                                </span>
+                                                </div>
                                             </li>
 
                                             <li>
@@ -345,6 +332,16 @@
     align-items: flex-start;
     margin-bottom: 0px;
 }
+.language-list span {
+        display: inline-block;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        padding: 5px 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #333;
+    }
 </style>
 
 @endsection

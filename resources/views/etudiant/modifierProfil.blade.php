@@ -233,43 +233,44 @@
                             </legend>
                             <div class="mb-3">
                                 <h6>Compétences techniques</h6>
-                                <div class="checkbox-container">
-                                @foreach ($competences_techniques as $competence)
-                                    <label>
-                                        <input type="checkbox" name="competences_techniques[]" value="{{ $competence->sigle }}"
-                                            {{ in_array($competence->sigle, $competences_techniques_array) ? 'checked' : '' }}>
-                                        {{ $competence->sigle }}
-                                    </label>
-                                @endforeach
+                                <div id="competences_techniques" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach ($competences_techniques as $competence)
+                                        <label class="styled-checkbox">
+                                            <input type="checkbox" name="competences_techniques[]" value="{{ $competence->sigle }}"
+                                                {{ in_array($competence->sigle, $competences_techniques_array) ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{ $competence->sigle }}
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <h6>Compétences Transversales</h6>
-                                <p>ex: Recherche documentaire, Analyse de donnée, Rédaction de rapports</p>
-                                <div class="checkbox-container">
-                                @foreach ($competences_transversales as $competence)
-                                    <label>
-                                        <input type="checkbox" name="competences_en_recherche_et_analyse[]" value="{{ $competence->sigle }}" 
-                                            {{ in_array($competence->sigle, $competences_transversales_array) ? 'checked' : '' }}>
-                                        {{ $competence->sigle }}
-                                    </label>
-                                @endforeach
+                                <div id="competences_transversales" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach ($competences_transversales as $competence)
+                                        <label class="styled-checkbox">
+                                            <input type="checkbox" name="competences_en_recherche_et_analyse[]" value="{{ $competence->sigle }}"
+                                                {{ in_array($competence->sigle, $competences_transversales_array) ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{ $competence->sigle }}
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <h6>Langues</h6>
-                                <p>ex: Français, Anglais, Allemand, Espagnol...</p>
-                                <div class="checkbox-container">
-                                @foreach ($competences_langues as $langue)
-                                    <label>
-                                        <input type="checkbox" name="competences_langues[]" value="{{ $langue->sigle }}" 
-                                            {{ in_array($langue->sigle, $competences_langues_array) ? 'checked' : '' }}>
-                                        {{ $langue->sigle }}
-                                    </label>
-                                @endforeach
-                                </div>      
+                                <div id="competences_langues" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach ($competences_langues as $langue)
+                                        <label class="styled-checkbox">
+                                            <input type="checkbox" name="competences_langues[]" value="{{ $langue->sigle }}"
+                                                {{ in_array($langue->sigle, $competences_langues_array) ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{ $langue->sigle }}
+                                        </label>
+                                    @endforeach
+                                </div>   
                             </div>
                                                         
                             
