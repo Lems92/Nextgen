@@ -200,6 +200,22 @@
                             </div>
 
                         </fieldset>
+                        @php
+                            function prepareCompetences($valeur) {
+                                if (is_array($valeur)) {
+                                    return implode("\n", $valeur);
+                                } elseif (is_string($valeur)) {
+                                    $decoded = json_decode($valeur, true);
+                                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                                        return implode("\n", $decoded);
+                                    } else {
+                                        return $valeur;
+                                    }
+                                }
+                                return '';
+                            }
+                        @endphp
+
 
 
                         <!-- Compétences -->
@@ -233,32 +249,27 @@
                             <div class="mb-3">
                                 <h6>Compétences techniques</h6>
                                 <p>ex: Compétences en Informatiques (Bureautique, programmation, gestion de bases de données, systèmes d'information, cybersécurité...)</p>
-                                <textarea id="competences_techniques" name="competences_techniques" class="form-control no-wrap" rows="4" placeholder="Entrez vos compétences techniques" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_techniques', is_array($etudiant->competences_techniques) ? implode("\n", $etudiant->competences_techniques) : (is_string($etudiant->competences_techniques) ? implode("\n", json_decode($etudiant->competences_techniques, true) ?? []) : '') ) }}</textarea>
+                                <textarea id="competences_techniques" name="competences_techniques" class="form-control no-wrap" rows="4" placeholder="Entrez vos compétences techniques" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_techniques', prepareCompetences($etudiant->competences_techniques ?? '')) }}</textarea>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <h6>Compétences en Recherche et Analyse :</h6>
                                 <p>ex: Recherche documentaire, Analyse de donnée, Rédaction de rapports</p>
-                                <textarea id="competences_en_recherche_et_analyse" name="competences_en_recherche_et_analyse" class="form-control no-wrap" rows="4" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_en_recherche_et_analyse', is_array($etudiant->competences_en_recherche_et_analyse) ? implode("\n", $etudiant->competences_en_recherche_et_analyse) : (is_string($etudiant->competences_en_recherche_et_analyse) && json_decode($etudiant->competences_en_recherche_et_analyse, true) ? implode("\n", json_decode($etudiant->competences_en_recherche_et_analyse, true)) : $etudiant->competences_en_recherche_et_analyse)) }}</textarea>
+                                <textarea id="competences_en_recherche_et_analyse" name="competences_en_recherche_et_analyse" class="form-control no-wrap" rows="4" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_en_recherche_et_analyse', prepareCompetences($etudiant->competences_en_recherche_et_analyse ?? '')) }}</textarea>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <h6>Compétences en Communication :</h6>
                                 <p>ex: Communication orale/écrite, compétence en négociation</p>
-                                <textarea id="competences_en_communication" name="competences_en_communication" class="form-control no-wrap" rows="4" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_en_communication', is_array($etudiant->competences_en_communication) ? implode("\n", $etudiant->competences_en_communication) : (is_string($etudiant->competences_en_communication) ? implode("\n", json_decode($etudiant->competences_en_communication, true) ?? []) : '') ) }}</textarea>
+                                <textarea id="competences_en_communication" name="competences_en_communication" class="form-control no-wrap" rows="4" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_en_communication', prepareCompetences($etudiant->competences_en_communication ?? '')) }}</textarea>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <h6>Langues :</h6>
                                 <p>ex: Français, Anglais, Allemand, Espagnol...</p>
-                                <textarea id="competences_langues" name="competences_langues" class="form-control no-wrap" rows="4" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_langues', is_array($etudiant->competences_langues) ? implode("\n", $etudiant->competences_langues) : (is_string($etudiant->competences_langues) ? implode("\n", json_decode($etudiant->competences_langues, true) ?? []) : '') ) }}</textarea>
+                                <textarea id="competences_langues" name="competences_langues" class="form-control no-wrap" rows="4" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_langues', prepareCompetences($etudiant->competences_langues ?? '')) }}</textarea>
                             </div>
-                            
-                            <div class="mb-3">
-                                <h6>Autres compétences</h6>
-                                <p>ex: Compétences interpersonnelles, Résolution des problèmes, adaptabilité, gestion du stress, leadership, éthique et responsabilité, gestion financière...</p>
-                                <textarea id="autres_competences" name="autres_competences" class="form-control no-wrap" rows="4" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('autres_competences', is_array($etudiant->autres_competences) ? implode("\n", $etudiant->autres_competences) : (is_string($etudiant->autres_competences) ? implode("\n", json_decode($etudiant->autres_competences, true) ?? []) : '') ) }}</textarea>
-                            </div>
+                                                        
                             
                         </fieldset>
 
