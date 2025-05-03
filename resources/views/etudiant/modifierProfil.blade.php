@@ -200,21 +200,6 @@
                             </div>
 
                         </fieldset>
-                        @php
-                            function prepareCompetences($valeur) {
-                                if (is_array($valeur)) {
-                                    return implode("\n", $valeur);
-                                } elseif (is_string($valeur)) {
-                                    $decoded = json_decode($valeur, true);
-                                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
-                                        return implode("\n", $decoded);
-                                    } else {
-                                        return $valeur;
-                                    }
-                                }
-                                return '';
-                            }
-                        @endphp
 
 
 
@@ -248,26 +233,43 @@
                             </legend>
                             <div class="mb-3">
                                 <h6>Compétences techniques</h6>
-                                <p>ex: Compétences en Informatiques (Bureautique, programmation, gestion de bases de données, systèmes d'information, cybersécurité...)</p>
-                                <textarea id="competences_techniques" name="competences_techniques" class="form-control no-wrap" rows="4" placeholder="Entrez vos compétences techniques" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_techniques', prepareCompetences($etudiant->competences_techniques ?? '')) }}</textarea>
+                                <div class="checkbox-container">
+                                @foreach ($competences_techniques as $competence)
+                                    <label>
+                                        <input type="checkbox" name="competences_techniques[]" value="{{ $competence->sigle }}"
+                                            {{ in_array($competence->sigle, $competences_techniques_array) ? 'checked' : '' }}>
+                                        {{ $competence->sigle }}
+                                    </label>
+                                @endforeach
+                                </div>
                             </div>
 
                             <div class="mb-3">
-                                <h6>Compétences en Recherche et Analyse :</h6>
+                                <h6>Compétences Transversales</h6>
                                 <p>ex: Recherche documentaire, Analyse de donnée, Rédaction de rapports</p>
-                                <textarea id="competences_en_recherche_et_analyse" name="competences_en_recherche_et_analyse" class="form-control no-wrap" rows="4" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_en_recherche_et_analyse', prepareCompetences($etudiant->competences_en_recherche_et_analyse ?? '')) }}</textarea>
+                                <div class="checkbox-container">
+                                @foreach ($competences_transversales as $competence)
+                                    <label>
+                                        <input type="checkbox" name="competences_en_recherche_et_analyse[]" value="{{ $competence->sigle }}" 
+                                            {{ in_array($competence->sigle, $competences_transversales_array) ? 'checked' : '' }}>
+                                        {{ $competence->sigle }}
+                                    </label>
+                                @endforeach
+                                </div>
                             </div>
 
                             <div class="mb-3">
-                                <h6>Compétences en Communication :</h6>
-                                <p>ex: Communication orale/écrite, compétence en négociation</p>
-                                <textarea id="competences_en_communication" name="competences_en_communication" class="form-control no-wrap" rows="4" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_en_communication', prepareCompetences($etudiant->competences_en_communication ?? '')) }}</textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <h6>Langues :</h6>
+                                <h6>Langues</h6>
                                 <p>ex: Français, Anglais, Allemand, Espagnol...</p>
-                                <textarea id="competences_langues" name="competences_langues" class="form-control no-wrap" rows="4" wrap="off" style="white-space: pre; overflow-wrap: normal;">{{ old('competences_langues', prepareCompetences($etudiant->competences_langues ?? '')) }}</textarea>
+                                <div class="checkbox-container">
+                                @foreach ($competences_langues as $langue)
+                                    <label>
+                                        <input type="checkbox" name="competences_langues[]" value="{{ $langue->sigle }}" 
+                                            {{ in_array($langue->sigle, $competences_langues_array) ? 'checked' : '' }}>
+                                        {{ $langue->sigle }}
+                                    </label>
+                                @endforeach
+                                </div>      
                             </div>
                                                         
                             
