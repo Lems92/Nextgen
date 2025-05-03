@@ -201,43 +201,44 @@
                             </legend>
                             <div class="mb-3">
                                 <h6>Compétences techniques</h6>
-                                <div class="checkbox-container">
-                                @foreach ($competences_techniques as $competence)
-                                    <label>
-                                        <input type="checkbox" name="competences_techniques[]" value="{{ $competence->sigle }}"
-                                            {{ in_array($competence->sigle, $competences_techniques_array) ? 'checked' : '' }}>
-                                        {{ $competence->sigle }}
-                                    </label>
-                                @endforeach
+                                <div id="competences_techniques" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach ($competences_techniques as $competence)
+                                        <label class="styled-checkbox">
+                                            <input type="checkbox" name="competences_techniques[]" value="{{ $competence->sigle }}"
+                                                {{ in_array($competence->sigle, $competences_techniques_array) ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{ $competence->sigle }}
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <h6>Compétences Transversales</h6>
-                                <p>ex: Recherche documentaire, Analyse de donnée, Rédaction de rapports</p>
-                                <div class="checkbox-container">
-                                @foreach ($competences_transversales as $competence)
-                                    <label>
-                                        <input type="checkbox" name="competences_en_recherche_et_analyse[]" value="{{ $competence->sigle }}" 
-                                            {{ in_array($competence->sigle, $competences_transversales_array) ? 'checked' : '' }}>
-                                        {{ $competence->sigle }}
-                                    </label>
-                                @endforeach
+                                <div id="competences_transversales" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach ($competences_transversales as $competence)
+                                        <label class="styled-checkbox">
+                                            <input type="checkbox" name="competences_en_recherche_et_analyse[]" value="{{ $competence->sigle }}"
+                                                {{ in_array($competence->sigle, $competences_transversales_array) ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{ $competence->sigle }}
+                                        </label>
+                                    @endforeach
                                 </div>
                             </div>
 
                             <div class="mb-3">
                                 <h6>Langues</h6>
-                                <p>ex: Français, Anglais, Allemand, Espagnol...</p>
-                                <div class="checkbox-container">
-                                @foreach ($competences_langues as $langue)
-                                    <label>
-                                        <input type="checkbox" name="competences_langues[]" value="{{ $langue->sigle }}" 
-                                            {{ in_array($langue->sigle, $competences_langues_array) ? 'checked' : '' }}>
-                                        {{ $langue->sigle }}
-                                    </label>
-                                @endforeach
-                                </div>      
+                                <div id="competences_langues" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach ($competences_langues as $langue)
+                                        <label class="styled-checkbox">
+                                            <input type="checkbox" name="competences_langues[]" value="{{ $langue->sigle }}"
+                                                {{ in_array($langue->sigle, $competences_langues_array) ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{ $langue->sigle }}
+                                        </label>
+                                    @endforeach
+                                </div>   
                             </div>
                                                         
                             
@@ -744,7 +745,82 @@
             margin-bottom: 15px;
             width: 100%;
         }
+        .checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajuste automatiquement le nombre de colonnes */
+    flex-wrap: wrap;
+    gap: 10px; /* Espacement entre les éléments */
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
 
+.scrollable-checkbox-group {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.styled-checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacement entre la case et le texte */
+    font-size: 14px;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ddd; /* Ajout de la bordure */
+    border-radius: 5px; /* Coins arrondis */
+    background-color: #f9f9f9; /* Couleur de fond */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.styled-checkbox:hover {
+    border-color: #66022b; /* Couleur de bordure au survol */
+    background-color: #f1f1f1; /* Couleur de fond au survol */
+}
+
+.styled-checkbox input[type="checkbox"] {
+    accent-color: #66022b; /* Couleur personnalisée pour les cases cochées */
+}
+
+.styled-checkbox .checkmark {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.styled-checkbox input:checked ~ .checkmark {
+    background-color: #66022b;
+}
+
+.styled-checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.styled-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
         .form-control:focus,
         .form-select:focus {
             border-color: #66022b;
