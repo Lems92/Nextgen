@@ -16,4 +16,9 @@ class Parametrage extends Model
         'libelle',
         'description'
     ];
+
+    public static function getDescriptionsByTable($tableName)
+    {
+        return self::where('table', $tableName)->pluck('description', 'sigle')->toArray();
+    }
 }

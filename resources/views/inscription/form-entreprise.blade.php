@@ -38,21 +38,25 @@
                                 <h3>Informations Générales</h3>
                             </div>
 
-                            <div class="col-lg-6 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label for="nom_entreprise">Nom de l’Entreprise</label>
                                 <input type="text" id="nom_entreprise" name="nom_entreprise"
                                        placeholder="Nom de l’Entreprise" value="{{old('nom_entreprise')}}" required>
                                 <x-input-error :messages="$errors->get('nom_entreprise')" class="mt-2"/>
                             </div>
 
-                            <div class="col-lg-6 form-group">
+                            <div class="col-lg-12 form-group">
                                 <label for="secteur_activite">Secteur d’Activité</label>
-                                <select id="secteur_activite" name="secteur_activite" class="chosen-select">
+                                <div id="secteur_activite" class="radio-group">
                                     @foreach($secteur_activites_categories as $categorie)
-                                        <option
-                                            value="{{$categorie->name}}" {{ old('secteur_activite') == $categorie->name ? 'selected' : '' }}>{{$categorie->name}}</option>
+                                        <label class="styled-radio">
+                                            <input type="radio" name="secteur_activite" value="{{$categorie->name}}" 
+                                                {{ old('secteur_activite') == $categorie->name ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{$categorie->name}}
+                                        </label>
                                     @endforeach
-                                </select>
+                                </div>
                                 <x-input-error :messages="$errors->get('secteur_activite')" class="mt-2"/>
                             </div>
 
@@ -138,36 +142,41 @@
                             </div>
 
                             <!-- Informations sur les Opportunités -->
-<div class="col-lg-12 form-group">
-    <h3>Informations sur les Opportunités</h3>
-</div>
+                            <div class="col-lg-12 form-group">
+                                <h3>Informations sur les Opportunités</h3>
+                            </div>
 
-<div class="col-lg-12 form-group">
-    <label for="opportunites_proposees">Types d'Opportunités Proposées</label>
-    <select id="opportunites_proposees" name="opportunities[]" class="chosen-select" multiple>
-        @foreach($opportunites_proposes as $opportunite)
-            <option value="{{$opportunite->sigle}}" {{ in_array($opportunite->sigle, old('opportunities') ?? []) ? 'selected' : '' }}>
-                {{$opportunite->libelle}}
-            </option>
-        @endforeach
-    </select>
-    <x-input-error :messages="$errors->get('opportunities')" class="mt-2"/>
-</div>
+                            <div class="col-lg-12 form-group">
+                                <label for="opportunites_proposees">Types d'Opportunités Proposées</label>
+                                <div id="opportunites_proposees" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach($opportunites_proposes as $opportunite)
+                                        <label class="styled-checkbox">
+                                            <input type="checkbox" name="opportunities[]" value="{{$opportunite->sigle}}" 
+                                                {{ in_array($opportunite->sigle, old('opportunities') ?? []) ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{$opportunite->libelle}}
+                                        </label>
+                                    @endforeach
+                                </div>
+                                <x-input-error :messages="$errors->get('opportunities')" class="mt-2"/>
+                            </div>
 
-<div class="col-lg-12 form-group">
-    <label for="domaines_activites">Domaines d'Activité des Opportunités</label>
-    <select id="domaines_activites" name="domaines_activites[]" class="chosen-select" multiple>
-        @foreach($domaines_etudes_categories as $categorie)
-            @foreach($categorie->list_with_categories as $sous_cat)
-                <option value="{{$sous_cat->name}}" {{ in_array($sous_cat->name, old('domaines_activites') ?? []) ? 'selected' : '' }}>
-                    {{$sous_cat->name}}
-                </option>
-            @endforeach
-        @endforeach
-    </select>
-    <x-input-error :messages="$errors->get('domaines_activites')" class="mt-2"/>
-</div>
-
+                            <div class="col-lg-12 form-group">
+                                <label for="domaines_activites">Domaines d'Activité des Opportunités</label>
+                                <div id="domaines_activites" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach($domaines_etudes_categories as $categorie)
+                                        @foreach($categorie->list_with_categories as $sous_cat)
+                                            <label class="styled-checkbox">
+                                                <input type="checkbox" name="domaines_activites[]" value="{{$sous_cat->name}}" 
+                                                    {{ in_array($sous_cat->name, old('domaines_activites') ?? []) ? 'checked' : '' }}>
+                                                <span class="checkmark"></span>
+                                                {{$sous_cat->name}}
+                                            </label>
+                                        @endforeach
+                                    @endforeach
+                                </div>
+                                <x-input-error :messages="$errors->get('domaines_activites')" class="mt-2"/>
+                            </div>
 
                             <!-- Responsabilités et Engagement -->
                             <div class="col-lg-12 form-group">
@@ -285,6 +294,83 @@
     </script>
 
     <style>
+        /* Style pour les checkboxes */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajuste automatiquement le nombre de colonnes */
+    flex-wrap: wrap;
+    gap: 10px; /* Espacement entre les éléments */
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+.scrollable-checkbox-group {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.styled-checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacement entre la case et le texte */
+    font-size: 14px;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ddd; /* Ajout de la bordure */
+    border-radius: 5px; /* Coins arrondis */
+    background-color: #f9f9f9; /* Couleur de fond */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.styled-checkbox:hover {
+    border-color: #66022b; /* Couleur de bordure au survol */
+    background-color: #f1f1f1; /* Couleur de fond au survol */
+}
+
+.styled-checkbox input[type="checkbox"] {
+    accent-color: #66022b; /* Couleur personnalisée pour les cases cochées */
+}
+
+.styled-checkbox .checkmark {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.styled-checkbox input:checked ~ .checkmark {
+    background-color: #66022b;
+}
+
+.styled-checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.styled-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
         .progress-container {
             display: flex;
             align-items: center;
@@ -346,6 +432,119 @@
             background-color: #fff;
             color: #66022b; /* Text color for selected button */
         }
+        .checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Colonnes dynamiques */
+    gap: 15px; /* Espacement entre les éléments */
+    max-height: 300px; /* Hauteur maximale avec défilement */
+    overflow-y: auto;
+    border: 1px solid #ddd; /* Bordure autour du groupe */
+    padding: 15px; /* Espacement interne */
+    border-radius: 5px; /* Coins arrondis */
+    background: #f9f9f9; /* Couleur de fond */
+}
+
+/* Style pour chaque checkbox */
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacement entre la case et le texte */
+    font-size: 14px;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ddd; /* Bordure autour de chaque case */
+    border-radius: 5px; /* Coins arrondis */
+    background-color: #fff; /* Couleur de fond */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Effet au survol */
+.checkbox-group label:hover {
+    border-color: #66022b; /* Couleur de bordure au survol */
+    background-color: #f1f1f1; /* Couleur de fond au survol */
+}
+
+/* Style pour les cases cochées */
+.checkbox-group input[type="checkbox"] {
+    accent-color: #66022b; /* Couleur personnalisée pour les cases cochées */
+}
+
+/* Style pour les titres des sections */
+h5.mb-2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #66022b;
+    margin-bottom: 10px;
+}
+.radio-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Colonnes dynamiques */
+    gap: 15px; /* Espacement entre les éléments */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+/* Style pour chaque bouton radio */
+.styled-radio {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacement entre le bouton et le texte */
+    font-size: 14px;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ddd; /* Bordure autour de chaque bouton */
+    border-radius: 5px; /* Coins arrondis */
+    background-color: #fff; /* Couleur de fond */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Effet au survol */
+.styled-radio:hover {
+    border-color: #66022b; /* Couleur de bordure au survol */
+    background-color: #f1f1f1; /* Couleur de fond au survol */
+}
+
+/* Masquer le bouton radio natif 
+.styled-radio input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}*/
+
+/* Style pour le cercle personnalisé */
+.styled-radio .checkmark {
+    display: none;
+    height: 20px;
+    width: 20px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    position: relative;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.styled-radio input[type="radio"] {
+    accent-color: #66022b; /* Couleur personnalisée pour les boutons radio sélectionnés */
+    cursor: pointer;
+}
+
+/* Ajout d'un point au centre lorsque sélectionné */
+.styled-radio .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 6px;
+    left: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+}
+
+.styled-radio input:checked ~ .checkmark:after {
+    display: block;
+}
 
     </style>
 @endsection

@@ -8,7 +8,10 @@ use App\Models\Etudiant;
 use App\Models\EtudiantUniversite;
 use App\Models\Event;
 use App\Models\Offre;
+use App\Models\Parametrage;
+use App\Models\User;
 use App\Models\Postulation;
+use App\Models\ListCategorie;   
 use App\Models\Universite;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -387,6 +390,11 @@ class EtudiantController extends Controller
         if (!$etudiant) {
             return redirect()->back()->with('error', 'Utilisateur non trouvé.');
         }
+        // Charger les relations nécessaires
+        $parametrage = Parametrage::where('table', 'type_contrat')->get();
+        
+        $typeEmploiDescriptions = Parametrage::getDescriptionsByTable('type_contrat');
+        $list_categories = ListCategorie::where('table', 'secteur_activites')->get();
 
         // Convertir les champs JSON ou chaînes en tableaux
         $etudiant->competences_techniques = is_string($etudiant->competences_techniques) 
@@ -421,8 +429,12 @@ class EtudiantController extends Controller
         $etudiant->autres_competences = is_string($etudiant->autres_competences) 
             ? json_decode($etudiant->autres_competences, true) ?? explode(',', $etudiant->autres_competences) 
             : $etudiant->autres_competences;
+        $typeEmploiRecherche = is_string($etudiant->type_emploi_recherche)
+            ? json_decode($etudiant->type_emploi_recherche, true)
+            : ($etudiant->type_emploi_recherche ?? []);
+        //dd(($parametrage));
         // Retourner la vue avec les données de l'étudiant
-        return view('etudiant.modifierProfil', compact('etudiant'));
+        return view('etudiant.modifierProfil', compact('etudiant','typeEmploiDescriptions','typeEmploiRecherche','list_categories','parametrage'));
     }
 
     public function fixDoubleEncodedData()
