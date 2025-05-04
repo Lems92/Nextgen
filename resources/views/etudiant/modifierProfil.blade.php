@@ -236,10 +236,10 @@
                                 <div id="competences_techniques" class="checkbox-group scrollable-checkbox-group">
                                     @foreach ($competences_techniques as $competence)
                                         <label class="styled-checkbox">
-                                            <input type="checkbox" name="competences_techniques[]" value="{{ $competence->sigle }}"
-                                                {{ in_array($competence->sigle, $competences_techniques_array) ? 'checked' : '' }}>
+                                            <input type="checkbox" name="competences_techniques[]" value="{{ $competence->libelle }}"
+                                                {{ in_array($competence->libelle, $competences_techniques_array) ? 'checked' : '' }}>
                                             <span class="checkmark"></span>
-                                            {{ $competence->sigle }}
+                                            {{ $competence->libelle }}
                                         </label>
                                     @endforeach
                                 </div>
@@ -250,10 +250,10 @@
                                 <div id="competences_transversales" class="checkbox-group scrollable-checkbox-group">
                                     @foreach ($competences_transversales as $competence)
                                         <label class="styled-checkbox">
-                                            <input type="checkbox" name="competences_en_recherche_et_analyse[]" value="{{ $competence->sigle }}"
-                                                {{ in_array($competence->sigle, $competences_transversales_array) ? 'checked' : '' }}>
+                                            <input type="checkbox" name="competences_en_recherche_et_analyse[]" value="{{ $competence->libelle }}"
+                                                {{ in_array($competence->libelle, $competences_transversales_array) ? 'checked' : '' }}>
                                             <span class="checkmark"></span>
-                                            {{ $competence->sigle }}
+                                            {{ $competence->libelle }}
                                         </label>
                                     @endforeach
                                 </div>
@@ -264,10 +264,10 @@
                                 <div id="competences_langues" class="checkbox-group scrollable-checkbox-group">
                                     @foreach ($competences_langues as $langue)
                                         <label class="styled-checkbox">
-                                            <input type="checkbox" name="competences_langues[]" value="{{ $langue->sigle }}"
-                                                {{ in_array($langue->sigle, $competences_langues_array) ? 'checked' : '' }}>
+                                            <input type="checkbox" name="competences_langues[]" value="{{ $langue->libelle }}"
+                                                {{ in_array($langue->libelle, $competences_langues_array) ? 'checked' : '' }}>
                                             <span class="checkmark"></span>
-                                            {{ $langue->sigle }}
+                                            {{ $langue->libelle }}
                                         </label>
                                     @endforeach
                                 </div>   
@@ -347,36 +347,32 @@
                             <!-- Secteur d'activité préféré -->
                             <div class="mb-3">
                                 <label for="secteur-activite" class="form-label">Secteur d'activité préféré :</label>
-                                <div id="secteur-activite-container" class="checkbox-container">
-                                    <div class="checkbox-group">
+                                <div id="secteur-activite-container" class="checkbox-group scrollable-checkbox-group">
                                         @foreach ($list_categories as $category)
                                             @if ($category->table === 'secteur_activites')
-                                                <label>
+                                                <label class="styled-checkbox">
                                                     <input type="checkbox" name="secteur_activite_preferer[]" value="{{ $category->name }}" 
                                                         {{ in_array($category->name, old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'checked' : '' }}>
                                                     {{ $category->name }}
                                                 </label>
                                             @endif
                                         @endforeach
-                                    </div>
                                 </div>
                             </div>
 
                             <!-- Type d'emploi recherché -->
                             <div class="mb-3">
                                 <label for="type-emploi" class="form-label">Type d'emploi recherché :</label>
-                                <div id="type-emploi-container" class="checkbox-container">
-                                    <div class="checkbox-group">
+                                <div id="type-emploi-container" class="checkbox-group scrollable-checkbox-group">
                                         @foreach ($parametrage as $param)
                                             @if ($param->table === 'type_contrat')
-                                                <label>
-                                                    <input type="checkbox" name="type_emploi_recherche[]" value="{{ $param->sigle }}" 
-                                                        {{ in_array($param->sigle, old('type_emploi_recherche', json_decode($etudiant->type_emploi_recherche, true) ?? [])) ? 'checked' : '' }}>
-                                                    {{ $param->sigle }}
+                                                <label class="styled-checkbox">
+                                                    <input type="checkbox" name="type_emploi_recherche[]" value="{{ $param->libelle }}" 
+                                                        {{ in_array($param->libelle, old('type_emploi_recherche', json_decode($etudiant->type_emploi_recherche, true) ?? [])) ? 'checked' : '' }}>
+                                                    {{ $param->libelle }}
                                                 </label>
                                             @endif
                                         @endforeach
-                                    </div>
                                 </div>
                             </div>
 
