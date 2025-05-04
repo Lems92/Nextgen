@@ -341,7 +341,7 @@ class EtudiantController extends Controller
         ]);
         $validatedData['secteur_activite_preferer'] = json_encode($request->input('secteur_activite_preferer', []));
         $validatedData['type_emploi_recherche'] = json_encode($request->input('type_emploi_recherche', []));
-        $validatedData['competences_techniques'] = $request->input('competences_techniques', []);
+        $validatedData['competences_techniques'] = $request->input('competences_techniques');
 $validatedData['competences_en_recherche_et_analyse'] = $request->input('competences_en_recherche_et_analyse', []);
 $validatedData['competences_en_communication'] = $request->input('competences_en_communication', []);
 $validatedData['competences_langues'] = $request->input('competences_langues', []);
