@@ -18,14 +18,31 @@
                             <figure class="image">
                                 <img src="{{ $etudiant->profile_picture ? asset('storage/' . $etudiant->profile_picture) : asset('storage/images/default_avatar.png') }}" alt="Photo de profil">
                             </figure>
-                            <h4 class="name">
-                                <a href="#">{{$etudiant->prenom ?? ''}} {{$etudiant->nom ?? ''}}</a>
-                                @if(!empty($etudiant->universite))
-                                    <span class="badge badge-success" style="background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
-                                        Vérifié
-                                    </span>
+                            <div style="text-align: center;">
+                                <div style="display: inline-flex; align-items: center; gap: 10px;">
+                                    <h4 class="name" style="margin: 0;">
+                                        <a href="#" style="text-decoration: none; color: inherit;">
+                                            {{ $etudiant->prenom ?? '' }} {{ $etudiant->nom ?? '' }}
+                                        </a>
+                                    </h4>
+
+                                    @if(!empty($etudiant->universite))
+                                        <span class="badge badge-success" style="background-color: #28a745; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
+                                            Vérifié
+                                        </span>
+                                    @else
+                                        <span class="badge badge-danger" style="background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 5px; font-size: 12px;">
+                                            Non vérifié
+                                        </span>
+                                    @endif
+                                </div>
+
+                                @if(empty($etudiant->universite))
+                                    <p class="text-danger" style="margin-top: 8px;">
+                                        Merci de vous affilier à une université afin de procéder à la vérification de votre compte.
+                                    </p>
                                 @endif
-                            </h4>
+                            </div>
                             <span class="designation">{{$etudiant->domaine_etudes ?? ''}}</span>
                             <div class="content">
                                 <!--<ul class="post-tags">
@@ -317,7 +334,7 @@
         margin-right: 10px;
         margin-bottom: 5px;
         padding: 5px 10px;
-        background-color: #f0f0f0;
+        background-color:rgb(255, 255, 255);
         border-radius: 5px;
         font-size: 14px;
         color: #333;
