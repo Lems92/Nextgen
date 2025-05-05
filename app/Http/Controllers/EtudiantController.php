@@ -347,9 +347,9 @@ class EtudiantController extends Controller
         $validatedData['secteur_activite_preferer'] = json_encode($request->input('secteur_activite_preferer', []));
         $validatedData['type_emploi_recherche'] = json_encode($request->input('type_emploi_recherche', []));
         $validatedData['competences_techniques'] = $request->input('competences_techniques');
-$validatedData['competences_en_recherche_et_analyse'] = $request->input('competences_en_recherche_et_analyse', []);
-$validatedData['competences_en_communication'] = $request->input('competences_en_communication', []);
-$validatedData['competences_langues'] = $request->input('competences_langues', []);
+        $validatedData['competences_en_recherche_et_analyse'] = $request->input('competences_en_recherche_et_analyse', []);
+        $validatedData['competences_en_communication'] = $request->input('competences_en_communication', []);
+        $validatedData['competences_langues'] = $request->input('competences_langues', []);
         //$validatedData['competences_techniques'] = trim($request->input('competences_techniques'));
         //$validatedData['autres_competences'] = json_encode($request->input('autres_competences', []));
         // Gérer les fichiers téléchargés
@@ -398,7 +398,7 @@ $validatedData['competences_langues'] = $request->input('competences_langues', [
     {
         // Récupérer l'utilisateur connecté
         $etudiant = Auth::user()->userable;
-
+        
         if (!$etudiant) {
             return redirect()->back()->with('error', 'Utilisateur non trouvé.');
         }
@@ -410,13 +410,13 @@ $validatedData['competences_langues'] = $request->input('competences_langues', [
             'competence_linguistique',
         ])->get();   
         $competences_techniques = $parametrages->where('table', 'competence_technique');
-    $competences_transversales = $parametrages->where('table', 'competence_transversale');
-    $competences_langues = $parametrages->where('table', 'competence_linguistique');
+        $competences_transversales = $parametrages->where('table', 'competence_transversale');
+        $competences_langues = $parametrages->where('table', 'competence_linguistique');
         $typeEmploiDescriptions = Parametrage::getDescriptionsByTable('type_contrat');
         $list_categories = ListCategorie::where('table', 'secteur_activites')->get();
 
         //dd($competences_techniques, $competences_transversales, $competences_langues);
-
+        //dd($etudiant->accessibilite);
         // Convertir les champs JSON ou chaînes en tableaux
         $etudiant->competences_techniques = is_string($etudiant->competences_techniques) 
             ? json_decode($etudiant->competences_techniques, true) ?? explode(',', $etudiant->competences_techniques) 
@@ -454,6 +454,9 @@ $validatedData['competences_langues'] = $request->input('competences_langues', [
             ? json_decode($etudiant->type_emploi_recherche, true)
             : ($etudiant->type_emploi_recherche ?? []);
         //dd(($parametrage));
+
+        
+        //dd($etudiant->religion_belief);
         // Retourner la vue avec les données de l'étudiant
         return view('etudiant.modifierProfil', compact('etudiant','typeEmploiDescriptions','typeEmploiRecherche','list_categories','parametrage','competences_techniques',
         'competences_transversales',

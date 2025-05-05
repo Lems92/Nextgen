@@ -256,6 +256,50 @@
                                         Aucune durée de disponibilité spécifiée.
                                     @endif
                                 </p>
+                                <h4 class="widget-title mt-3">Accessibilité</h4>
+                                <p>
+                                    @if(!empty($etudiant->getAttribute('accessibilite')))
+                                        {{ $etudiant->getAttribute('accessibilite') }}
+                                    @else
+                                        Aucune information sur l'accessibilité spécifiée.
+                                    @endif
+                                </p>
+
+                                <h4 class="widget-title mt-3">Statut socio-économique</h4>
+                                <p>
+                                    @if(!empty($etudiant->getAttribute('statut_socio_economique')))
+                                        {{ $etudiant->getAttribute('statut_socio_economique') }}
+                                    @else
+                                        Aucune information sur le statut socio-économique spécifiée.
+                                    @endif
+                                </p>
+
+                                <h4 class="widget-title mt-3">Conditions de vie spécifiques</h4>
+                                <p>
+                                    @if(!empty($etudiant->getAttribute('conditions_vie_specifiques')))
+                                        {{ $etudiant->getAttribute('conditions_vie_specifiques') }}
+                                    @else
+                                        Aucune condition de vie spécifique spécifiée.
+                                    @endif
+                                </p>
+
+                                <h4 class="widget-title mt-3">Religion ou croyance</h4>
+                                <p>
+                                    @if(!empty($etudiant->getAttribute('religion_belief')))
+                                        {{ $etudiant->getAttribute('religion_belief') }}
+                                    @else
+                                        Aucune religion ou croyance spécifiée.
+                                    @endif
+                                </p>
+
+                                <h4 class="widget-title mt-3">Orientation sexuelle</h4>
+                                <p>
+                                    @if(!empty($etudiant->getAttribute('orientation_sexuelle')))
+                                        {{ $etudiant->getAttribute('orientation_sexuelle') }}
+                                    @else
+                                        Aucune orientation sexuelle spécifiée.
+                                    @endif
+</p>
                             </div>
                         </div>
 

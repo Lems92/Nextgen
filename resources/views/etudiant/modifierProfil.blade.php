@@ -85,10 +85,9 @@
                                 <div class="col-md-6">
                                     <label for="genre" class="form-label">Genre :</label>
                                     <select id="genre" name="genre" class="form-select" required>
-                                        <option value="masculin" {{ old('genre', $etudiant->genre) == 'masculin' ? 'selected' : '' }}>Masculin</option>
-                                        <option value="feminin" {{ old('genre', $etudiant->genre) == 'feminin' ? 'selected' : '' }}>Féminin</option>
-                                        <option value="non-binaire" {{ old('genre', $etudiant->genre) == 'non-binaire' ? 'selected' : '' }}>Non-binaire</option>
-                                        <option value="prefere-pas-dire" {{ old('genre', $etudiant->genre) == 'prefere-pas-dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
+                                        @foreach($options as $value => $label)
+                                            <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-12">
@@ -150,6 +149,16 @@
                                 @endforeach
                             </select>
                         </div>
+                            @php
+                                $options = [
+                                    'licence' => 'Licence',
+                                    'master' => 'Master',
+                                    'doctorat' => 'Doctorat',
+                                ];
+                            
+                                $selected = old('niveau_etudes') ?? $etudiant->getAttribute('niveau_etudes');
+                            @endphp
+                            
                             <div class="mb-3">
                             <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
                             <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
@@ -173,9 +182,9 @@
                             <div class="mb-3">
                                 <label for="niveau-etudes" class="form-label">Niveau d'études :</label>
                                 <select id="niveau-etudes" name="niveau_etudes" class="form-select" required>
-                                    <option value="licence" {{ old('niveau_etudes', $etudiant->niveau_etudes) == 'licence' ? 'selected' : '' }}>Licence</option>
-                                    <option value="master" {{ old('niveau_etudes', $etudiant->niveau_etudes) == 'master' ? 'selected' : '' }}>Master</option>
-                                    <option value="doctorat" {{ old('niveau_etudes', $etudiant->niveau_etudes) == 'doctorat' ? 'selected' : '' }}>Doctorat</option>
+                                    @foreach($options as $value => $label)
+                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
@@ -445,8 +454,8 @@
                                 <label for="accessibilite">Accessibilité :</label>
                                 <p>Avez-vous besoin d’aménagements spécifiques pour participer à des événements ou des activités ?</p>
                                 <select class="form-control" id="accessibilite" name="accessibilite">
-                                    <option value="oui" {{ old('accessibilite', $etudiant->accessibilite) == 'oui' ? 'selected' : '' }}>Oui</option>
-                                    <option value="non" {{ old('accessibilite', $etudiant->accessibilite) == 'non' ? 'selected' : '' }}>Non</option>
+                                    <option value="1" {{ old('accessibilite', $etudiant->accessibilite) == '1' ? 'selected' : '' }}>Oui</option>
+                                    <option value="0" {{ old('accessibilite', $etudiant->accessibilite) == '0' ? 'selected' : '' }}>Non</option>
                                 </select>
                             </div>
 
@@ -457,12 +466,21 @@
                             </div>
 
 
+                            @php
+                                $options = [
+                                    'Origine modeste' => 'Origine modeste',
+                                    'Classe moyenne' => 'Classe moyenne',
+                                    'Préfère ne pas dire' => 'Préfère ne pas dire',
+                                ];
+                                $selected = old('statut_socio_economique') ?? $etudiant->getAttribute('statut_socio_economique');
+                            @endphp
+
                             <div class="form-group">
                                 <label for="statut_socio_economique">Statut socio-économique :</label>
                                 <select class="form-select" id="statut_socio_economique" name="statut_socio_economique">
-                                    <option value="origine_modeste" {{ old('statut_socio_economique', $etudiant->statut_socio_economique) == 'origine_modeste' ? 'selected' : '' }}>Origine modeste</option>
-                                    <option value="classe_moyenne" {{ old('statut_socio_economique', $etudiant->statut_socio_economique) == 'classe_moyenne' ? 'selected' : '' }}>Classe moyenne</option>
-                                    <option value="prefere_pas_dire" {{ old('statut_socio_economique', $etudiant->statut_socio_economique) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
+                                    @foreach($options as $value => $label)
+                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             
@@ -480,11 +498,10 @@
 
                             <div class="form-group">
                                 <label for="conditions_vie">Conditions de vie spécifiques :</label>
-                                <select class="form-select" id="conditions_vie" name="conditions_vie_specifiques">
-                                    <option value="null" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'null' ? 'selected' : '' }}>null</option>
-                                    <option value="sans_domicile" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'sans_domicile' ? 'selected' : '' }}>Sans domicile fixe</option>
-                                    <option value="handicap" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'handicap' ? 'selected' : '' }}>En situation de handicap</option>
-                                    <option value="prefere_pas_dire" {{ old('conditions_vie_specifiques', $etudiant->conditions_vie_specifiques) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
+                                <select name="conditions_vie_specifiques" class="form-select" id="conditions_vie">
+                                    @foreach($options as $value => $label)
+                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             
@@ -503,11 +520,9 @@
                             <div class="form-group">
                                 <label for="religion_croyance">Religion ou croyance :</label>
                                 <select class="form-select" id="religion_croyance" name="religion_belief">
-                                    <option value="chretien" {{ old('religion_belief', $etudiant->religion_belief) == 'chretien' ? 'selected' : '' }}>Chrétien</option>
-                                    <option value="musulman" {{ old('religion_belief', $etudiant->religion_belief) == 'musulman' ? 'selected' : '' }}>Musulman</option>
-                                    <option value="bouddhiste" {{ old('religion_belief', $etudiant->religion_belief) == 'bouddhiste' ? 'selected' : '' }}>Bouddhiste</option>
-                                    <option value="hindou" {{ old('religion_belief', $etudiant->religion_belief) == 'hindou' ? 'selected' : '' }}>Hindou</option>
-                                    <option value="prefere_pas_dire" {{ old('religion_belief', $etudiant->religion_belief) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
+                                    @foreach($options as $value => $label)
+                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
 
@@ -525,10 +540,9 @@
                             <div class="form-group">
                                 <label for="orientation_sexuelle">Orientation sexuelle :</label>
                                 <select class="form-select" id="orientation_sexuelle" name="orientation_sexuelle">
-                                    <option value="heterosexuel" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'heterosexuel' ? 'selected' : '' }}>Hétérosexuel</option>
-                                    <option value="homosexuel" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'homosexuel' ? 'selected' : '' }}>Homosexuel</option>
-                                    <option value="bisexuel" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'bisexuel' ? 'selected' : '' }}>Bisexuel</option>
-                                    <option value="prefere_pas_dire" {{ old('orientation_sexuelle', $etudiant->orientation_sexuelle) == 'prefere_pas_dire' ? 'selected' : '' }}>Préfère ne pas dire</option>
+                                    @foreach($options as $value => $label)
+                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </fieldset>
