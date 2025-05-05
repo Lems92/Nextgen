@@ -74,6 +74,7 @@ class Etudiant extends Model implements Sluggable
         'competences_en_communication'  => 'array',
         'competences_langues' => 'array',
         'autres_competences' => 'array',
+        'religion_belief' => 'string',
         'date_naissance' => 'date',
         'vacances_ete_debut' => 'date',
         'vacances_ete_fin' => 'date',
