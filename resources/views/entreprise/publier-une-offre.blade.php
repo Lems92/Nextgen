@@ -74,41 +74,44 @@
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12">
-                            <label for="comptetences_techniques">Compétences techniques requises</label>
-                            <select id="comptetences_techniques" name="competences_techniques[]" class="chosen-select multiple" multiple required>
+                            <label for="competences_techniques">Compétences techniques requises</label>
+                            <div id="competences_techniques" class="checkbox-group">
                                 @foreach($competences_techniques as $competence_technique)
-                                    <option value="{{$competence_technique->sigle}}"
-                                        {{ in_array($competence_technique->sigle, old('competences_techniques', isset($offre) ? ($offre->competences_techniques ?? []) : [])) ? 'selected' : '' }}>
+                                    <label class="styled-checkbox">
+                                        <input type="checkbox" name="competences_techniques[]" value="{{$competence_technique->sigle}}" 
+                                            {{ in_array($competence_technique->sigle, old('competences_techniques', isset($offre) ? ($offre->competences_techniques ?? []) : [])) ? 'checked' : '' }}>
                                         {{$competence_technique->libelle}}
-                                    </option>
+                                    </label>
                                 @endforeach
-                            </select>
+                            </div>
                             <x-input-error :messages="$errors->get('competences_techniques')" class="mt-2" />
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12">
                             <label for="competences_transversales">Compétences transversales recherchées</label>
-                            <select id="competences_transversales" name="competences_transversales[]" class="chosen-select multiple" multiple required>
+                            <div id="competences_transversales" class="checkbox-group">
                                 @foreach($competences_transversales as $competence_transversale)
-                                    <option value="{{$competence_transversale->sigle}}"
-                                        {{ in_array($competence_transversale->sigle, old('competences_transversales', isset($offre) ? ($offre->competences_transversales ?? []) : [])) ? 'selected' : '' }}>
+                                    <label class="styled-checkbox">
+                                        <input type="checkbox" name="competences_transversales[]" value="{{$competence_transversale->sigle}}" 
+                                            {{ in_array($competence_transversale->sigle, old('competences_transversales', isset($offre) ? ($offre->competences_transversales ?? []) : [])) ? 'checked' : '' }}>
                                         {{$competence_transversale->libelle}}
-                                    </option>
+                                    </label>
                                 @endforeach
-                            </select>
+                            </div>
                             <x-input-error :messages="$errors->get('competences_transversales')" class="mt-2" />
                         </div>
 
                         <div class="form-group col-lg-12 col-md-12">
                             <label for="langues_requises">Langues Requises</label>
-                            <select id="langues_requises" name="langues_requises[]" class="chosen-select multiple" multiple required>
+                            <div id="langues_requises" class="checkbox-group">
                                 @foreach($langues as $langue)
-                                    <option value="{{$langue->sigle}}"
-                                        {{ in_array($langue->sigle, old('langues_requises', isset($offre) ? ($offre->langues_requises ?? []) : [])) ? 'selected' : '' }}>
+                                    <label class="styled-checkbox">
+                                        <input type="checkbox" name="langues_requises[]" value="{{$langue->sigle}}" 
+                                            {{ in_array($langue->sigle, old('langues_requises', isset($offre) ? ($offre->langues_requises ?? []) : [])) ? 'checked' : '' }}>
                                         {{$langue->libelle}}
-                                    </option>
+                                    </label>
                                 @endforeach
-                            </select>
+                            </div>
                             <x-input-error :messages="$errors->get('langues_requises')" class="mt-2" />
                         </div>
 
@@ -136,6 +139,49 @@
 
 </div>
         <style>
+.form-group.text-right {
+    text-align: center; /* Centre le bouton horizontalement */
+}
+
+.theme-btn.btn-style-one {
+    display: inline-block; /* Assure que le bouton reste à sa taille normale */
+    margin: 0 auto; /* Centre le bouton si nécessaire */
+}
+    /* Style pour le groupe de checkboxes */
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Colonnes dynamiques */
+    gap: 15px; /* Espacement entre les éléments */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
+
+/* Style pour chaque checkbox */
+.styled-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacement entre la case et le texte */
+    font-size: 14px;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ddd; /* Bordure autour de chaque case */
+    border-radius: 5px; /* Coins arrondis */
+    background-color: #fff; /* Couleur de fond */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Effet au survol */
+.styled-checkbox:hover {
+    border-color: #66022b; /* Couleur de bordure au survol */
+    background-color: #f1f1f1; /* Couleur de fond au survol */
+}
+
+/* Style pour les cases cochées */
+.styled-checkbox input[type="checkbox"] {
+    accent-color: #66022b; /* Couleur personnalisée pour les cases cochées */
+}
     .form-container {
         max-width: 800px;
         margin: 0 auto;

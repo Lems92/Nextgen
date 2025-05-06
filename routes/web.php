@@ -42,6 +42,7 @@ Route::middleware(['auth'])->group(function () {
         return view('etudiant.modifierProfil');
     })->middleware('role:etudiant')->name('etudiants.edit_profile');
     Route::post('/etudiants/modifer-profile', [EtudiantController::class, 'updateProfile'])->name('etudiants.update_profile');
+    Route::get('/etudiant/modifier-profil', [EtudiantController::class, 'editProfile'])->name('etudiants.edit_profile');
 });
 
 //commun

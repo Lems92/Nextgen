@@ -182,8 +182,7 @@ class RegistrationController extends Controller
 
         $list_avec_categories_tables = ['domaines_etudes', 'secteur_activites'];
         $list_categories = ListCategorie::whereIn('table', $list_avec_categories_tables)->get()->groupBy('table');
-
-        $domaines_etudes_categories = $list_categories->get('domaines_etudes');
+        $domaines_etudes_categories = $list_categories->get('domaines_etudes')->sortBy('name');
         $secteur_activites_categories = $list_categories->get('secteur_activites');
 
 

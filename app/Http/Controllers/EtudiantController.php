@@ -8,7 +8,10 @@ use App\Models\Etudiant;
 use App\Models\EtudiantUniversite;
 use App\Models\Event;
 use App\Models\Offre;
+use App\Models\Parametrage;
+use App\Models\User;
 use App\Models\Postulation;
+use App\Models\ListCategorie;   
 use App\Models\Universite;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -47,13 +50,22 @@ class EtudiantController extends Controller
 
         // Vérifiez si le champ est une chaîne JSON avant de le décoder
         if (is_string($etudiant->type_emploi_recherche)) {
-            $etudiant->type_emploi_recherche = json_decode($etudiant->type_emploi_recherche, true);
+            $decodedOnce = json_decode($etudiant->type_emploi_recherche, true);
+            if (is_string($decodedOnce)) {
+                // Si le résultat du premier décodage est encore une chaîne JSON, décodez à nouveau
+                $etudiant->type_emploi_recherche = json_decode($decodedOnce, true);
+            } else {
+                $etudiant->type_emploi_recherche = $decodedOnce ?? [];
+            }
+        } else {
+            $etudiant->type_emploi_recherche = $etudiant->type_emploi_recherche ?? [];
         }
         if (is_string($etudiant->secteur_activite_preferer)) {
             $etudiant->secteur_activite_preferer = json_decode($etudiant->secteur_activite_preferer, true);
         }
         if (is_string($etudiant->competences_techniques)) {
             $etudiant->competences_techniques = json_decode($etudiant->competences_techniques, true);
+            
         }
         if (is_string($etudiant->competences_en_recherche_et_analyse)) {
             $etudiant->competences_en_recherche_et_analyse = json_decode($etudiant->competences_en_recherche_et_analyse, true);
@@ -61,6 +73,7 @@ class EtudiantController extends Controller
         if (is_string($etudiant->competences_en_communication)) {
             $etudiant->competences_en_communication = json_decode($etudiant->competences_en_communication, true);
         }
+        //dd($etudiant);
 
         return view('etudiant.portfolio', compact('etudiant'));
     }
@@ -267,12 +280,12 @@ class EtudiantController extends Controller
         $request->merge([
             'accessibilite' => $request->accessibilite === 'oui' ? true : false,
         ]);
+        
 
         // Valider les données
         $validatedData = $request->validate([
             'prenom' => 'required|string|max:255',
             'nom' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
             'numero_telephone' => 'required|string|max:20',
             'date_naissance' => 'required|date',
             'genre' => 'required|string',
@@ -281,22 +294,28 @@ class EtudiantController extends Controller
             'region' => 'nullable|string',
             'ville' => 'nullable|string|max:255',
             'code_postal' => 'nullable|string|max:10',
+            'univ' => 'nullable|string|max:255',
             'nom_ecole_universite' => 'nullable|string|max:255',
             'domaine_etudes' => 'nullable|string|max:255',
             'niveau_etudes' => 'nullable|string|max:255',
             'annee_obtention_diplome' => 'nullable|integer',
-            'competences_techniques' => 'nullable|string|max:4294967295',
-            'competences_en_recherche_et_analyse' => 'nullable|string|max:4294967295',
-            'competences_en_communication' => 'nullable|string|max:4294967295',
-            'competences_interpersonnelles' => 'nullable|string|max:4294967295',
-            'competences_resolution_problemes' => 'nullable|string|max:4294967295',
-            'competences_adaptabilite' => 'nullable|string|max:4294967295',
-            'competences_gestion_stress' => 'nullable|string|max:4294967295',
-            'competences_leadership' => 'nullable|string|max:4294967295',
-            'competences_ethique_responsabilite' => 'nullable|string|max:4294967295',
-            'competences_gestion_financiere' => 'nullable|string|max:4294967295',
-            'competences_langues' => 'nullable|string|max:4294967295',
-            'experience_professionnelle' => 'nullable|string|max:4294967295',
+            'competences_techniques' => 'nullable|string',
+            'competences_techniques' => 'nullable|array',
+            'competences_en_recherche_et_analyse' => 'nullable|string',
+            'competences_en_recherche_et_analyse' => 'nullable|array',
+            'competences_en_communication' => 'nullable|string',
+            'competences_interpersonnelles' => 'nullable|string',
+            'competences_resolution_problemes' => 'nullable|string',
+            'competences_adaptabilite' => 'nullable|string',
+            'competences_gestion_stress' => 'nullable|string',
+            'competences_leadership' => 'nullable|string',
+            'competences_ethique_responsabilite' => 'nullable|string',
+            'competences_gestion_financiere' => 'nullable|string',
+            'competences_langues' => 'nullable|string',
+            'competences_langues' => 'nullable|array',
+            'autres_competences' => 'nullable|string',
+            'experiences_academique' => 'nullable|string',	
+            'experience_professionnelle' => 'nullable|string',
             'portfolio' => 'nullable|string',
             'centres_interet' => 'nullable|string',
             'document_diplome' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
@@ -323,8 +342,12 @@ class EtudiantController extends Controller
         ]);
         $validatedData['secteur_activite_preferer'] = json_encode($request->input('secteur_activite_preferer', []));
         $validatedData['type_emploi_recherche'] = json_encode($request->input('type_emploi_recherche', []));
-        $validatedData['competences_techniques'] = trim($request->input('competences_techniques'));// Récupérer l'utilisateur connecté
-        
+        $validatedData['competences_techniques'] = $request->input('competences_techniques');
+        $validatedData['competences_en_recherche_et_analyse'] = $request->input('competences_en_recherche_et_analyse', []);
+        $validatedData['competences_en_communication'] = $request->input('competences_en_communication', []);
+        $validatedData['competences_langues'] = $request->input('competences_langues', []);
+        //$validatedData['competences_techniques'] = trim($request->input('competences_techniques'));
+        //$validatedData['autres_competences'] = json_encode($request->input('autres_competences', []));
         // Gérer les fichiers téléchargés
         if ($request->hasFile('document_diplome')) {
             $validatedData['document_diplome'] = $request->file('document_diplome')->store('documents/diplomes', 'public');
@@ -339,9 +362,17 @@ class EtudiantController extends Controller
         }
         $etudiant = Auth::user()->userable;
 
+        
+
         if (!$etudiant) {
             return redirect()->back()->with('error', 'Utilisateur non trouvé.');
         }
+
+        $etudiant->accessibilite = $request->accessibilite; // où le select envoie "oui"/"non"
+        $etudiant->conditions_vie_specifiques = $request->conditions_vie_specifiques;
+        $etudiant->statut_socio_economique = $request->statut_socio_economique;
+        $etudiant->religion_belief = $request->religion_belief;
+        $etudiant->save();
         //dd($request->all());
         //dd($validatedData);
         // Mettre à jour les données
@@ -355,8 +386,94 @@ class EtudiantController extends Controller
         //    'requette' => end($queries),
         //    'resultat' => $etudiant->fresh(), // Récupérer les données mises à jour
         //]);
-
         // Rediriger avec un message de succès
         return redirect()->route('etudiants.edit_profile')->with('success', 'Profil mis à jour avec succès.');
+    }
+
+    public function editProfile(): View
+    {
+        // Récupérer l'utilisateur connecté
+        $etudiant = Auth::user()->userable;
+        
+        if (!$etudiant) {
+            return redirect()->back()->with('error', 'Utilisateur non trouvé.');
+        }
+        // Charger les relations nécessaires
+        $parametrage = Parametrage::where('table', 'type_contrat')->get();     
+        $parametrages = Parametrage::whereIn('table', [
+            'competence_technique',
+            'competence_transversale',
+            'competence_linguistique',
+        ])->get();   
+        $competences_techniques = $parametrages->where('table', 'competence_technique');
+        $competences_transversales = $parametrages->where('table', 'competence_transversale');
+        $competences_langues = $parametrages->where('table', 'competence_linguistique');
+        $typeEmploiDescriptions = Parametrage::getDescriptionsByTable('type_contrat');
+        $list_categories = ListCategorie::where('table', 'secteur_activites')->get();
+
+        //dd($competences_techniques, $competences_transversales, $competences_langues);
+        //dd($etudiant->accessibilite);
+        // Convertir les champs JSON ou chaînes en tableaux
+        $etudiant->competences_techniques = is_string($etudiant->competences_techniques) 
+            ? json_decode($etudiant->competences_techniques, true) ?? explode(',', $etudiant->competences_techniques) 
+            : $etudiant->competences_techniques;
+
+        // Vérifier et corriger le double encodage pour type_emploi_recherche
+        if (is_string($etudiant->type_emploi_recherche)) {
+            $decodedOnce = json_decode($etudiant->type_emploi_recherche, true);
+            if (is_string($decodedOnce)) {
+                // Si le résultat du premier décodage est encore une chaîne JSON, décodez à nouveau
+                $etudiant->type_emploi_recherche = json_decode($decodedOnce, true);
+            } else {
+                $etudiant->type_emploi_recherche = $decodedOnce ?? [];
+            }
+        } else {
+            $etudiant->type_emploi_recherche = $etudiant->type_emploi_recherche ?? [];
+        }
+
+        $etudiant->competences_en_recherche_et_analyse = is_string($etudiant->competences_en_recherche_et_analyse) 
+            ? json_decode($etudiant->competences_en_recherche_et_analyse, true) ?? explode(',', $etudiant->competences_en_recherche_et_analyse) 
+            : $etudiant->competences_en_recherche_et_analyse;
+
+        $etudiant->competences_en_communication = is_string($etudiant->competences_en_communication) 
+            ? json_decode($etudiant->competences_en_communication, true) ?? explode(',', $etudiant->competences_en_communication) 
+            : $etudiant->competences_en_communication;
+
+        $etudiant->competences_langues = is_string($etudiant->competences_langues) 
+            ? json_decode($etudiant->competences_langues, true) ?? explode(',', $etudiant->competences_langues) 
+            : $etudiant->competences_langues;
+
+        $etudiant->autres_competences = is_string($etudiant->autres_competences) 
+            ? json_decode($etudiant->autres_competences, true) ?? explode(',', $etudiant->autres_competences) 
+            : $etudiant->autres_competences;
+        $typeEmploiRecherche = is_string($etudiant->type_emploi_recherche)
+            ? json_decode($etudiant->type_emploi_recherche, true)
+            : ($etudiant->type_emploi_recherche ?? []);
+        //dd(($parametrage));
+
+        
+        //dd($etudiant->religion_belief);
+        // Retourner la vue avec les données de l'étudiant
+        return view('etudiant.modifierProfil', compact('etudiant','typeEmploiDescriptions','typeEmploiRecherche','list_categories','parametrage','competences_techniques',
+        'competences_transversales',
+        'competences_langues'));
+    }
+
+    public function fixDoubleEncodedData()
+    {
+        $etudiants = Etudiant::all();
+
+        foreach ($etudiants as $etudiant) {
+            if (is_string($etudiant->type_emploi_recherche)) {
+                $decodedOnce = json_decode($etudiant->type_emploi_recherche, true);
+                if (is_string($decodedOnce)) {
+                    // Si le résultat du premier décodage est encore une chaîne JSON, décodez à nouveau
+                    $etudiant->type_emploi_recherche = json_encode(json_decode($decodedOnce, true));
+                    $etudiant->save();
+                }
+            }
+        }
+
+        return "Correction terminée.";
     }
 }

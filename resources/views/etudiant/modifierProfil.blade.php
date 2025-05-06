@@ -30,6 +30,7 @@
                         </div>
                     @endif
 
+
                     <form id="default-form" method="POST" action="{{ route('etudiants.update_profile') }}"
                         enctype="multipart/form-data">
                         @csrf
@@ -41,76 +42,90 @@
                             <div class="row">
                                 <div class="uploading-outer">
                                     <div class="uploadButton">
-                                        <input class="uploadButton-input" type="file" name="profile_picture"
-                                            accept="image/*, application/pdf" id="upload" multiple />
-                                        <label class="uploadButton-button ripple-effect" for="upload">Importer votre
-                                            photo</label>
+                                        <input class="uploadButton-input" type="file" name="profile_picture" accept="image/*" id="upload" />
+                                        <label class="uploadButton-button ripple-effect" for="upload">Importer votre photo</label>
                                         <span class="uploadButton-file-name"></span>
                                     </div>
                                     <div class="text">Taille maximale : 1 Mo · Dimensions minimales : 330×300 px · Formats acceptés : .jpg, .png</div>
+
+                                    @if ($etudiant->profile_picture)
+                                        <div class="current-profile-picture mt-3">
+                                            <p>Photo actuelle :</p>
+                                            <img src="{{ asset('storage/' . $etudiant->profile_picture) }}" alt="Photo de profil" class="img-thumbnail" style="max-width: 150px; max-height: 150px;">
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="form-group col-lg-12 col-md-12 mt-4">
                                     <label for="prenom" class="form-label">Prénom :</label>
-                                    <input type="text" id="prenom" name="prenom" class="form-control"  required>
+                                    <input type="text" id="prenom" name="prenom" class="form-control" value="{{old('prenom', $etudiant->prenom)}}"  required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="nom" class="form-label">Nom :</label>
-                                    <input type="text" id="nom" name="nom" class="form-control" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="email" class="form-label">Adresse e-mail :</label>
-                                    <input type="email" id="email" name="email" class="form-control" required>
+                                    <input type="text" id="nom" name="nom" class="form-control" value="{{old('nom', $etudiant->nom)}}" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="telephone" class="form-label">Numéro de téléphone :</label>
-                                    <input type="tel" id="telephone" name="numero_telephone" class="form-control">
+                                    <input type="tel" id="telephone" name="numero_telephone" class="form-control" value="{{ old('numero_telephone', $etudiant->numero_telephone) }}" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="date-naissance" class="form-label">Date de naissance :</label>
-                                    <input type="date" id="date-naissance" name="date_naissance" class="form-control"
-                                        required>
+                                    <input type="date" id="date-naissance" name="date_naissance" class="form-control" value="{{ old('date_naissance', $etudiant->date_naissance ? \Carbon\Carbon::parse($etudiant->date_naissance)->format('Y-m-d') : '') }}" required>
                                 </div>
+                                @php
+                                    $options = [
+                                        'masculin' => 'Masculin',
+                                        'feminin' => 'Féminin',
+                                        'non-binaire' => 'Non-binaire',
+                                        'prefere-pas-dire' => 'Préfère ne pas dire',
+                                    ];
+
+                                    $selected = old('genre') ?? $etudiant->getAttribute('genre');
+                                @endphp
+
                                 <div class="col-md-6">
                                     <label for="genre" class="form-label">Genre :</label>
                                     <select id="genre" name="genre" class="form-select" required>
-                                        <option value="masculin">Masculin</option>
-                                        <option value="feminin">Féminin</option>
-                                        <option value="non-binaire">Non-binaire</option>
-                                        <option value="prefere-pas-dire">Préfère ne pas dire</option>
+                                        @foreach($options as $value => $label)
+                                            <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-md-12">
                                     <label for="adresse-postale" class="form-label">Adresse postale :</label>
-                                    <input type="text" id="adresse-postale" name="adresse_postale" class="form-control"
+                                    <input type="text" id="adresse-postale" name="adresse_postale" class="form-control" value="{{ old('adresse_postale', $etudiant->adresse_postale) }}"
                                         required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="pays" class="form-label">Pays :</label>
                                     <select id="pays" name="pays" class="form-select" required>
-                                        <option value="madagascar">Madagascar</option>
-                                        <option value="france">France</option>
+                                        <option value="madagascar" {{ old('pays', $etudiant->pays) == 'madagascar' ? 'selected' : '' }}>Madagascar</option>
+                                        <option value="france" {{ old('pays', $etudiant->pays) == 'france' ? 'selected' : '' }}>France</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="region" class="form-label">Région :</label>
                                     <select id="region" name="region" class="form-select" required>
-                                        <option value="analamanga">Analamanga</option>
-                                        <option value="atsinanana">Atsinanana</option>
-                                        <option value="boeny">Boeny</option>
-                                        <option value="ihorombe">Ihorombe</option>
-                                        <option value="menabe">Menabe</option>
-                                        <option value="sava">Sava</option>
-                                        <option value="vakinankaratra">Vakinankaratra</option>
+                                        <option value="analamanga" {{ old('region', $etudiant->region) == 'analamanga' ? 'selected' : '' }}>Analamanga</option>
+                                        <option value="atsinanana" {{ old('region', $etudiant->region) == 'atsinanana' ? 'selected' : '' }}>Atsinanana</option>
+                                        <option value="boeny" {{ old('region', $etudiant->region) == 'boeny' ? 'selected' : '' }}>Boeny</option>
+                                        <option value="ihorombe" {{ old('region', $etudiant->region) == 'ihorombe' ? 'selected' : '' }}>Ihorombe</option>
+                                        <option value="menabe" {{ old('region', $etudiant->region) == 'menabe' ? 'selected' : '' }}>Menabe</option>
+                                        <option value="sava" {{ old('region', $etudiant->region) == 'sava' ? 'selected' : '' }}>Sava</option>
+                                        <option value="vakinankaratra" {{ old('region', $etudiant->region) == 'vakinankaratra' ? 'selected' : '' }}>Vakinankaratra</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="ville" class="form-label">Ville :</label>
-                                    <input type="text" id="ville" name="ville" class="form-control" required>
+                                    <input type="text" id="ville" name="ville" class="form-control" value="{{ old('ville', $etudiant->ville) }}" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="code-postal" class="form-label">Code postal :</label>
-                                    <input type="text" id="code-postal" name="code_postal" class="form-control"
+                                    <label for="code-postal" class="form-label">Code postal : </label>
+                                    <input type="text" id="code-postal" name="code_postal" class="form-control" value="{{ old('code_postal', $etudiant->code_postal) }}"
                                         required>
+                                </div>
+                                <div class="col-mb-6">
+                                    <label for="description" class="form-label">Description :</label>
+                                    <textarea id="description" name="description" class="form-control" rows="5" placeholder="Entrez votre description">{{ old('description', $etudiant->description) }}</textarea>
                                 </div>
                             </div>
                         </fieldset>
@@ -120,49 +135,41 @@
                             <legend>
                                 <h4>Éducation</h4>
                             </legend>
-                            <!-- <div class="mb-3">
-                                <label for="nom-ecole" class="form-label">Nom de l'école ou de l'université :</label>
-                                <input type="text" id="nom-ecole" name="nom_ecole_universite" class="form-control"
-                                    required>
-                            </div>-->
                             <div class="mb-3">
-                                <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
-                                <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
-                                    <option value="sciences">Sciences</option>
-                                    <option value="ingenierie">Ingénierie</option>
-                                    <option value="arts">Arts</option>
-                                    <option value="commerce">Commerce</option>
-                                    <option value="medecine">Médecine</option>
-                                    <option value="droit">Droit</option>
-                                    <option value="economie">Économie</option>
-                                    <option value="architecture">Architecture</option>
-                                    <option value="sciences-sociales">Sciences sociales</option>
-                                    <option value="sciences-vie">Sciences de la vie</option>
-                                    <option value="sciences-environnement">Sciences de l'environnement</option>
-                                    <option value="education">Éducation</option>
-                                    <option value="tourisme-hotel">Tourisme et hôtellerie</option>
-                                    <option value="agriculture-environnement">Agriculture et environnement rural</option>
-                                    <option value="technologies-information">Technologies de l'information</option>
-                                    <option value="communication">Communication</option>
-                                    <option value="langues-cultures">Langues et cultures</option>
-                                    <option value="sciences-politiques">Sciences politiques</option>
-                                    <option value="gestion">Gestion</option>
-                                    <option value="sciences-sante">Sciences de la santé</option>
-                                </select>
+                                <label for="univ" class="form-label">Nom de l'école ou de l'université :</label>
+                                <input type="text" id="univ" name="univ" class="form-control" value="{{ old('univ', $etudiant->univ) }}" required>
                             </div>
+                            <div class="mb-3">
+                            <label for="domaine-etudes" class="form-label">Domaine d'études :</label>
+                            <select id="domaine-etudes" name="domaine_etudes" class="form-select" required>
+                                @foreach ($list_categories as $category)
+                                    <option value="{{ $category->name }}" {{ old('domaine_etudes', $etudiant->domaine_etudes) == $category->name ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                            @php
+                                $options = [
+                                    'licence' => 'Licence',
+                                    'master' => 'Master',
+                                    'doctorat' => 'Doctorat',
+                                ];
+                            
+                                $selected = old('niveau_etudes') ?? $etudiant->getAttribute('niveau_etudes');
+                            @endphp
+                            
                             <div class="mb-3">
                                 <label for="niveau-etudes" class="form-label">Niveau d'études :</label>
                                 <select id="niveau-etudes" name="niveau_etudes" class="form-select" required>
-                                    <option value="licence">Licence</option>
-                                    <option value="master">Master</option>
-                                    <option value="doctorat">Doctorat</option>
+                                    @foreach($options as $value => $label)
+                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <label for="annee-diplome" class="form-label">Année d'obtention du diplôme ou année
-                                    d'inscription en cours :</label>
-                                <input type="text" id="annee-diplome" name="annee_obtention_diplome"
-                                    class="form-control" required>
+                                <label for="annee-diplome" class="form-label">Année d'obtention du diplôme ou année d'inscription en cours :</label>
+                                <input type="text" id="annee-diplome" name="annee_obtention_diplome" class="form-control" value="{{ old('annee_obtention_diplome', $etudiant->annee_obtention_diplome) }}" required>
                             </div>
                         </fieldset>
 
@@ -172,98 +179,89 @@
                                 <h4>Expérience Académique</h4>
                             </legend>
                             <div class="mb-3">
-                                <h6>Stage Académique</h6>
-                                <p>ex: Stage de recherche, Stage en laboratoire, Stage en entreprise...</p>
-                                <div id="stage_academique"></div>
-                                <textarea type="text" id="stage_academique" name="stage_academique" rows="10" class="form-control"
-                                    placeholder="Veuillez préciser le titre, l'année, durée, et description"></textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <h6>Projet Académique</h6>
-                                <p>ex. Projet de groupe, projet individuel, projet fin d'étude, projet de recherche...</p>
-                                <div id="projet_academique"></div>
-                                <textarea type="text" id="projet_academique" name="projet_academique" rows="10" class="form-control"
-                                    placeholder="Veuillez préciser le titre, l'année, durée, et description"></textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <h6>Thèse et Mémoire</h6>
-                                <p>ex: Thèse de doctorat, Mémoire de Master, Mémoire de Licence, Dissertation...</p>
-                                <div id="these_memoire"></div>
-                                <textarea type="text" id="these_memoire" name="these_memoire" rows="10" class="form-control"
-                                    placeholder="Veuillez préciser le titre, l'année, durée, et description"></textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <h6>Réalisations</h6>
-                                <p>ex: Publication dans une revue académique, Présentation à une conférence universitaire,
-                                    Récompense ou distinction académique, Participation à un concours académique...</p>
-                                <div id="realisations"></div>
-                                <textarea type="text" id="realisations" name="realisations" rows="10" class="form-control"
-                                    placeholder="Veuillez préciser le titre, l'année, durée, et description"></textarea>
-                            </div>
-
-                            <div class="mb-3">
-                                <h6>Cours Spécialisés</h6>
-                                <p>ex: Cours de spécialisation, Séminaire, Atelier spécialisé</p>
-                                <div id="cours_speciaux"></div>
-                                <textarea type="text" id="cours_speciaux" name="cours_speciaux" rows="10" class="form-control"
-                                    placeholder="Veuillez préciser le titre, l'année, durée, et description"></textarea>
-                            </div>
-
-
-                            <div class="mb-3">
-                                <h6>Autres Expériences</h6>
-                                <p>ex: Participation à des Evenements académiques, recherche, encadrement, activités
+                                <h6>Stage Académique, Projet Académique,Thèse et Mémoire, Réalisations, Cours Spécialisés</h6>
+                                <p>ex: Stage de recherche, Stage en laboratoire, Stage en entreprise, Projet de groupe, projet individuel, projet fin d'étude, projet de recherche, Thèse de doctorat, Mémoire de Master, Mémoire de Licence, Dissertation, Publication dans une revue académique, Présentation à une conférence universitaire,
+                                    Récompense ou distinction académique, Participation à un concours académique, Cours de spécialisation, Séminaire, Atelier spécialisé, Participation à des Evenements académiques, recherche, encadrement, activités
                                     Parascolaires; programmes d'échange, Certificats et diplômes complémentaires...</p>
-                                <div id="autres_experiences"></div>
-                                <textarea type="text" id="autres_experiences" name="autres_experiences" rows="10" class="form-control"
-                                    placeholder="Veuillez préciser le titre, l'année, durée, et description"></textarea>
+                                <div id="experiences_academique"></div>
+                                <textarea type="text" id="experiences_academique" name="experiences_academique" rows="10" class="form-control"
+                                    placeholder="Veuillez préciser le titre, l'année, durée, et description">{{ old('experiences_academique', $etudiant->experiences_academique) }}</textarea>
                             </div>
+
                         </fieldset>
+
 
                         <!-- Compétences -->
                         <fieldset class="form-section">
+                                @php
+                                    $competences_techniques_array = old('competences_techniques') 
+                                        ?? (is_array($etudiant->competences_techniques) 
+                                            ? $etudiant->competences_techniques 
+                                            : (is_string($etudiant->competences_techniques) && json_decode($etudiant->competences_techniques, true)
+                                                ? json_decode($etudiant->competences_techniques, true)
+                                                : [])
+                                        );
+                                    $competences_transversales_array = old('competences_en_recherche_et_analyse') 
+                                        ?? (is_array($etudiant->competences_en_recherche_et_analyse) 
+                                            ? $etudiant->competences_en_recherche_et_analyse 
+                                            : (is_string($etudiant->competences_en_recherche_et_analyse) && json_decode($etudiant->competences_en_recherche_et_analyse, true)
+                                                ? json_decode($etudiant->competences_en_recherche_et_analyse, true)
+                                                : [])
+                                        );
+                                    $competences_langues_array = old('competences_langues') 
+                                        ?? (is_array($etudiant->competences_langues) 
+                                            ? $etudiant->competences_langues 
+                                            : (is_string($etudiant->competences_langues) && json_decode($etudiant->competences_langues, true)
+                                                ? json_decode($etudiant->competences_langues, true)
+                                                : [])
+                                        );
+                                @endphp
                             <legend>
                                 <h4>Compétences</h4>
                             </legend>
                             <div class="mb-3">
                                 <h6>Compétences techniques</h6>
-                                <p>ex: Compétences en Informatiques (Bureautique, programmation, gestion de bases de
-                                    données, systèmes d'information, cybersécurité...)</p>
-                                <div id="competences_techniques"></div>
-                                <input type="text" id="competences_techniques" name="competences_techniques" class="form-control">
+                                <div id="competences_techniques" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach ($competences_techniques as $competence)
+                                        <label class="styled-checkbox">
+                                            <input type="checkbox" name="competences_techniques[]" value="{{ $competence->libelle }}"
+                                                {{ in_array($competence->libelle, $competences_techniques_array) ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{ $competence->libelle }}
+                                        </label>
+                                    @endforeach
+                                </div>
                             </div>
+
                             <div class="mb-3">
-                                <h6>Compétences en Recherche et Analyse :</h6>
-                                <p>ex: Recherche documentaire, Analyse de donnée, Rédaction de rapports</p>
-                                <div id="competences_en_recherche_et_analyse"></div>
-                                <input type="text" id="competences_en_recherche_et_analyse" name="competences_en_recherche_et_analyse"
-                                    class="form-control">
+                                <h6>Compétences Transversales</h6>
+                                <div id="competences_transversales" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach ($competences_transversales as $competence)
+                                        <label class="styled-checkbox">
+                                            <input type="checkbox" name="competences_en_recherche_et_analyse[]" value="{{ $competence->libelle }}"
+                                                {{ in_array($competence->libelle, $competences_transversales_array) ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{ $competence->libelle }}
+                                        </label>
+                                    @endforeach
+                                </div>
                             </div>
+
                             <div class="mb-3">
-                                <h6>Compétences en Communication :</h6>
-                                <p>ex: Communication orale/ecrite, compétence en négociation</p>
-                                <div id="competences_en_communication"></div>
-                                <input type="text" id="competences_en_communication"
-                                    name="competences_en_communication" class="form-control">
+                                <h6>Langues</h6>
+                                <div id="competences_langues" class="checkbox-group scrollable-checkbox-group">
+                                    @foreach ($competences_langues as $langue)
+                                        <label class="styled-checkbox">
+                                            <input type="checkbox" name="competences_langues[]" value="{{ $langue->libelle }}"
+                                                {{ in_array($langue->libelle, $competences_langues_array) ? 'checked' : '' }}>
+                                            <span class="checkmark"></span>
+                                            {{ $langue->libelle }}
+                                        </label>
+                                    @endforeach
+                                </div>   
                             </div>
-                            <div class="mb-3">
-                                <h6>Langues :</h6>
-                                <p>ex: Français, Anglais, Allemand, Espagnol...</p>
-                                <div id="competences_langues"></div>
-                                <input type="text" id="competences_en_communication"
-                                    name="competences_langues" class="form-control">
-                            </div>
-                            <div class="mb-3">
-                                <h6>Autres compétences</h6>
-                                <p>ex: Compétences interpersonnelles, Résolutions des problèmes, adaptabilités, gestion du
-                                    stress, leadership, Ethique et responsabilité, gestion financière...</p>
-                                <div id="autres_competences"></div>
-                                <input type="text" id="autres_competences" name="autres_competences"
-                                    class="form-control">
-                            </div>
+                                                        
+                            
                         </fieldset>
 
                         <!-- Expérience Professionnelle -->
@@ -277,10 +275,10 @@
                                     projets professionnels, bénévolat, entrepreneuriat, formations professionnelles,
                                     responsabilités additionnelles, expérience internationale, publications et
                                     contributions...</p>
-                                <div id="experiences_professionnelles"></div>
-                                <textarea type="text" id="experiences_professionnelles" name="experiences_professionnelles" rows="4"
+                                <div id="experience_professionnelle"></div>
+                                <textarea type="text" id="experience_professionnelle" name="experience_professionnelle" rows="4"
                                     class="form-control"
-                                    placeholder="Veuillez préciser le titre, l'année, la durée et la description de l'expérience"></textarea>
+                                    placeholder="Veuillez préciser le titre, l'année, la durée et la description de l'expérience">{{ old('experience_professionnelle', $etudiant->experience_professionnelle) }}</textarea>
                             </div>
                         </fieldset>
 
@@ -292,7 +290,7 @@
                             <div class="mb-3">
                                 <label for="portfolio" class="form-label">Liens vers des projets, articles, créations
                                     artistiques :</label>
-                                <textarea id="portfolio" name="portfolio" class="form-control" rows="4" required></textarea>
+                                <textarea id="portfolio" name="portfolio" class="form-control" rows="4" placeholder="Si vous n’en avez pas, veuillez indiquer « Aucun »">{{ old('portfolio', $etudiant->portfolio) }}</textarea>
                             </div>
                         </fieldset>
 
@@ -303,8 +301,7 @@
                             </legend>
                             <div class="mb-3">
                                 <label for="centres-interet" class="form-label">Hobbies et intérêts personnels :</label>
-                                <textarea id="centres-interet" name="centres_interet" class="form-control" rows="4" required></textarea>
-                            </div>
+                                <textarea id="centres-interet" name="centres_interet" class="form-control" rows="4" required>{{ old('centres_interet', $etudiant->centres_interet) }}</textarea>                            </div>
                         </fieldset>
 
                         <!-- Documents -->
@@ -314,13 +311,18 @@
                             </legend>
                             <div class="mb-3">
                                 <label for="diplome" class="form-label">Diplôme :</label>
-                                <input type="file" id="diplome" name="document_diplome" class="form-control"
-                                    accept=".pdf,.doc,.docx">
+                                <input type="file" id="diplome" name="document_diplome" class="form-control" accept=".pdf,.doc,.docx">
+                                @if ($etudiant->document_diplome)
+                                    <p>Document actuel : <a href="{{ asset('storage/' . $etudiant->document_diplome) }}" target="_blank">Voir le document</a></p>
+                                @endif
                             </div>
                             <div class="mb-3">
                                 <label for="lettre-recommandation" class="form-label">Lettre de recommandation :</label>
                                 <input type="file" id="lettre-recommandation" name="document_recommandation"
                                     class="form-control" accept=".pdf,.doc,.docx">
+                                @if ($etudiant->document_recommandation)
+                                    <p>Document actuel : <a href="{{ asset('storage/' . $etudiant->document_recommandation) }}" target="_blank">Voir le document</a></p> 
+                                @endif
                             </div>
                         </fieldset>
 
@@ -333,120 +335,33 @@
                             <!-- Secteur d'activité préféré -->
                             <div class="mb-3">
                                 <label for="secteur-activite" class="form-label">Secteur d'activité préféré :</label>
-                                <select id="secteur-activite" name="secteur_activite_preferer[]"
-                                    class="chosen-select multiple" multiple required>
-                                    <optgroup label="Technologie de l'Information">
-                                        <option value="Développement logiciel">Développement logiciel</option>
-                                        <option value="Cybersécurité">Cybersécurité</option>
-                                        <option value="Intelligence artificielle">Intelligence artificielle</option>
-                                        <option value="Gestion de systèmes informatiques">Gestion de systèmes informatiques
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Santé">
-                                        <option value="Médecine">Médecine</option>
-                                        <option value="Soins infirmiers">Soins infirmiers</option>
-                                        <option value="Pharmacie">Pharmacie</option>
-                                        <option value="Médecine vétérinaire">Médecine vétérinaire</option>
-                                    </optgroup>
-                                    <optgroup label="Finance et Comptabilité">
-                                        <option value="Banque et assurance">Banque et assurance</option>
-                                        <option value="Gestion de portefeuille">Gestion de portefeuille</option>
-                                        <option value="Comptabilité">Comptabilité</option>
-                                        <option value="Analyse financière">Analyse financière</option>
-                                    </optgroup>
-                                    <optgroup label="Ingénierie">
-                                        <option value="Génie civil">Génie civil</option>
-                                        <option value="Génie mécanique">Génie mécanique</option>
-                                        <option value="Génie électrique">Génie électrique</option>
-                                        <option value="Génie chimique">Génie chimique</option>
-                                    </optgroup>
-                                    <optgroup label="Commerce et Marketing">
-                                        <option value="Vente et distribution">Vente et distribution</option>
-                                        <option value="Marketing digital">Marketing digital</option>
-                                        <option value="Gestion de marque">Gestion de marque</option>
-                                        <option value="Analyse de marché">Analyse de marché</option>
-                                    </optgroup>
-                                    <optgroup label="Éducation et Formation">
-                                        <option value="Enseignement">Enseignement</option>
-                                        <option value="Formation professionnelle">Formation professionnelle</option>
-                                        <option value="Pédagogie">Pédagogie</option>
-                                        <option value="Gestion éducative">Gestion éducative</option>
-                                    </optgroup>
-                                    <optgroup label="Arts et Création">
-                                        <option value="Design graphique">Design graphique</option>
-                                        <option value="Arts visuels">Arts visuels</option>
-                                        <option value="Musique et spectacle">Musique et spectacle</option>
-                                        <option value="Design d'intérieur">Design d'intérieur</option>
-                                    </optgroup>
-                                    <optgroup label="Sciences et Recherche">
-                                        <option value="Biologie">Biologie</option>
-                                        <option value="Physique">Physique</option>
-                                        <option value="Chimie">Chimie</option>
-                                        <option value="Recherche scientifique">Recherche scientifique</option>
-                                    </optgroup>
-                                    <optgroup label="Tourisme et Hôtellerie">
-                                        <option value="Gestion hôtelière">Gestion hôtelière</option>
-                                        <option value="Planification de voyages">Planification de voyages</option>
-                                        <option value="Gestion d'événements">Gestion d'événements</option>
-                                        <option value="Tourisme durable">Tourisme durable</option>
-                                    </optgroup>
-                                    <optgroup label="Droit et Juridique">
-                                        <option value="Droit pénal">Droit pénal</option>
-                                        <option value="Droit civil">Droit civil</option>
-                                        <option value="Droit international">Droit international</option>
-                                        <option value="Droit commercial">Droit commercial</option>
-                                    </optgroup>
-                                    <optgroup label="Agriculture et Environnement">
-                                        <option value="Gestion agricole">Gestion agricole</option>
-                                        <option value="Sciences de l'environnement">Sciences de l'environnement</option>
-                                        <option value="Agriculture durable">Agriculture durable</option>
-                                        <option value="Conservation de la biodiversité">Conservation de la biodiversité
-                                        </option>
-                                    </optgroup>
-                                    <optgroup label="Énergie et Ressources Naturelles">
-                                        <option value="Énergies renouvelables">Énergies renouvelables</option>
-                                        <option value="Gestion des ressources">Gestion des ressources</option>
-                                        <option value="Ingénierie énergétique">Ingénierie énergétique</option>
-                                        <option value="Exploration minière">Exploration minière</option>
-                                    </optgroup>
-                                    <optgroup label="Transport et Logistique">
-                                        <option value="Gestion de la chaîne d'approvisionnement">Gestion de la chaîne
-                                            d'approvisionnement</option>
-                                        <option value="Logistique et distribution">Logistique et distribution</option>
-                                        <option value="Transport international">Transport international</option>
-                                        <option value="Gestion des infrastructures de transport">Gestion des
-                                            infrastructures de transport</option>
-                                    </optgroup>
-                                    <optgroup label="Développement et Humanitaire">
-                                        <option value="Aide au développement">Aide au développement</option>
-                                        <option value="ONG et organisations humanitaires">ONG et organisations humanitaires
-                                        </option>
-                                        <option value="Gestion des projets de développement">Gestion des projets de
-                                            développement</option>
-                                        <option value="Travail social">Travail social</option>
-                                    </optgroup>
-                                    <optgroup label="Télécommunications">
-                                        <option value="Réseaux de communication">Réseaux de communication</option>
-                                        <option value="Gestion des infrastructures télécom">Gestion des infrastructures
-                                            télécom</option>
-                                        <option value="Services Internet">Services Internet</option>
-                                        <option value="Développement de technologies de communication">Développement de
-                                            technologies de communication</option>
-                                    </optgroup>
-                                </select>
+                                <div id="secteur-activite-container" class="checkbox-group scrollable-checkbox-group">
+                                        @foreach ($list_categories as $category)
+                                            @if ($category->table === 'secteur_activites')
+                                                <label class="styled-checkbox">
+                                                    <input type="checkbox" name="secteur_activite_preferer[]" value="{{ $category->name }}" 
+                                                        {{ in_array($category->name, old('secteur_activite_preferer', json_decode($etudiant->secteur_activite_preferer, true) ?? [])) ? 'checked' : '' }}>
+                                                    {{ $category->name }}
+                                                </label>
+                                            @endif
+                                        @endforeach
+                                </div>
                             </div>
 
                             <!-- Type d'emploi recherché -->
                             <div class="mb-3">
                                 <label for="type-emploi" class="form-label">Type d'emploi recherché :</label>
-                                <select id="type-emploi" name="type_emploi_recherche[]" class="chosen-select multiples"
-                                    multiple required>
-                                    <option value="CDI">CDI</option>
-                                    <option value="Stage">Stage</option>
-                                    <option value="Contrat à durée déterminée">Contrat à durée déterminée</option>
-                                    <option value="Freelance">Freelance</option>
-                                    <option value="Alternance">Alternance</option>
-                                </select>
+                                <div id="type-emploi-container" class="checkbox-group scrollable-checkbox-group">
+                                        @foreach ($parametrage as $param)
+                                            @if ($param->table === 'type_contrat')
+                                                <label class="styled-checkbox">
+                                                    <input type="checkbox" name="type_emploi_recherche[]" value="{{ $param->libelle }}" 
+                                                        {{ in_array($param->libelle, old('type_emploi_recherche', json_decode($etudiant->type_emploi_recherche, true) ?? [])) ? 'checked' : '' }}>
+                                                    {{ $param->libelle }}
+                                                </label>
+                                            @endif
+                                        @endforeach
+                                </div>
                             </div>
 
                             <!-- Localisation géographique préférée -->
@@ -454,59 +369,60 @@
                                 <label for="localisation-preferree" class="form-label">Localisation géographique préférée
                                     :</label>
                                 <input type="text" id="localisation-preferree"
-                                    name="localisation_geographique_preferee" class="form-control" required>
+                                    name="localisation_geographique_preferee" class="form-control"  value="{{ old('localisation_geographique_preferee', $etudiant->localisation_geographique_preferee) }}" required>
                             </div>
 
-                            <!-- Salaire souhaité -->
+                            <!-- Salaire souhaité
                             <div class="mb-3">
                                 <label for="salaire-souhaite" class="form-label">Salaire souhaité :</label>
                                 <input type="text" id="salaire-souhaite" name="salaire_souhaite" class="form-control"
                                     required>
-                            </div>
+                            </div> -->
                         </fieldset>
-
+                        
                         <!-- Disponibilité de l’Étudiant Section -->
                         <fieldset class="form-section">
                             <legend>
                                 <h4>Disponibilité de l’Étudiant</h4>
                             </legend>
                             <div class="form-group">
-                                <label for="duree_dispo">Durée de Disponibilité :</label>
-                                <select class="form-control" id="duree_dispo" name="duree_disponibilite"
-                                    placeholder="Veuillez choisir">
-                                    <option value="moins_1_mois">Moins de 1 mois</option>
-                                    <option value="1_3_mois">1 à 3 mois</option>
-                                    <option value="3_6_mois">3 à 6 mois</option>
-                                    <option value="6_12_mois">6 à 12 mois</option>
-                                    <option value="plus_12_mois">Plus de 12 mois</option>
+                                <label for="duree_disponibilite">Durée de Disponibilité :</label>
+                                <select class="form-control" id="duree_disponibilite" name="duree_disponibilite">
+                                    <option value="Moins de 1 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'Moins de 1 mois' ? 'selected' : '' }}>Moins de 1 mois</option>
+                                    <option value="1 à 3 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '1 à 3 mois' ? 'selected' : '' }}>1 à 3 mois</option>
+                                    <option value="3 à 6 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '3 à 6 mois' ? 'selected' : '' }}>3 à 6 mois</option>
+                                    <option value="6 à 12 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === '6 à 12 mois' ? 'selected' : '' }}>6 à 12 mois</option>
+                                    <option value="plus de 12 mois" {{ old('duree_disponibilite', $etudiant->duree_disponibilite) === 'plus de 12 mois' ? 'selected' : '' }}>Plus de 12 mois</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="semestre">Semestre en Cours :</label>
                                 <select class="form-control" id="semestre" name="semestre_cours">
-                                    <option value="semestre_1">Semestre 1</option>
-                                    <option value="semestre_2">Semestre 2</option>
+                                    <option value="semestre_1" {{ old('semestre_cours', $etudiant->semestre_cours) == 'semestre_1' ? 'selected' : '' }}>Semestre 1</option>
+                                    <option value="semestre_2" {{ old('semestre_cours', $etudiant->semestre_cours) == 'semestre_2' ? 'selected' : '' }}>Semestre 2</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="vacances_ete">Vacances d'Été :</label>
                                 <div class="input-group">
-                                    <input type="date" class="form-control" id="vacances_debut"
-                                        name="vacances_ete_debut" placeholder="Date début">
+                                    <input type="date" class="form-control" id="vacances_debut" name="vacances_ete_debut"
+                                        value="{{ old('vacances_ete_debut', $etudiant->vacances_ete_debut ? \Carbon\Carbon::parse($etudiant->vacances_ete_debut)->format('Y-m-d') : '') }}">
                                     <input type="date" class="form-control" id="vacances_fin" name="vacances_ete_fin"
-                                        placeholder="Date fin">
+                                        value="{{ old('vacances_ete_fin', $etudiant->vacances_ete_fin ? \Carbon\Carbon::parse($etudiant->vacances_ete_fin)->format('Y-m-d') : '') }}">
                                 </div>
-                                <div class="form-group">
-                                    <label for="vacances_dispo">Date disponible pendant les vacances d'été</label>
-                                    <div class="input-group">
-                                        <input type="date" class="form-control" id="dispo_debut"
-                                            name="dates_disponibles_vacances_ete_debut" placeholder="Date début">
-                                        <input type="date" class="form-control" id="dispo_fin"
-                                            name="dates_disponibles_vacances_ete_fin" placeholder="Date fin">
-                                    </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="vacances_dispo">Date disponible pendant les vacances d'été :</label>
+                                <div class="input-group">
+                                    <input type="date" class="form-control" id="dispo_debut" name="dates_disponibles_vacances_ete_debut"
+                                        value="{{ old('dates_disponibles_vacances_ete_debut', $etudiant->dates_disponibles_vacances_ete_debut ? \Carbon\Carbon::parse($etudiant->dates_disponibles_vacances_ete_debut)->format('Y-m-d') : '') }}">
+                                    <input type="date" class="form-control" id="dispo_fin" name="dates_disponibles_vacances_ete_fin"
+                                        value="{{ old('dates_disponibles_vacances_ete_fin', $etudiant->dates_disponibles_vacances_ete_fin ? \Carbon\Carbon::parse($etudiant->dates_disponibles_vacances_ete_fin)->format('Y-m-d') : '') }}">
                                 </div>
+                            </div>
                         </fieldset>
 
                         <!-- Détails spécifiques (Inclusivité Entreprise) Section -->
@@ -515,71 +431,100 @@
 
                             <div class="form-group">
                                 <label for="accessibilite">Accessibilité :</label>
-                                <p>Avez-vous besoin d’aménagements spécifiques pour participer à des événements ou des
-                                    activités ?</p>
+                                <p>Avez-vous besoin d’aménagements spécifiques pour participer à des événements ou des activités ?</p>
                                 <select class="form-control" id="accessibilite" name="accessibilite">
-                                    <option value="oui">Oui</option>
-                                    <option value="non">Non</option>
+                                    <option value="1" {{ old('accessibilite', $etudiant->accessibilite) == '1' ? 'selected' : '' }}>Oui</option>
+                                    <option value="0" {{ old('accessibilite', $etudiant->accessibilite) == '0' ? 'selected' : '' }}>Non</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="amenagements">Si oui, veuillez préciser :</label>
+                                <label for="amenagements">Si oui, veuillez préciser   :</label>
                                 <textarea class="form-control" id="amenagements" name="details_accessibilite" rows="3"
-                                    placeholder="Précisez les aménagements spécifiques"></textarea>
+                                    placeholder="Précisez les aménagements spécifiques">{{ old('details_accessibilite', $etudiant->details_accessibilite) }}</textarea>
                             </div>
 
-                            <div class="form-group">
-                                <label for="origine_ethnique">Origine :</label>
-                                <select class="form-select" id="origine_ethnique" name="origine_ethnique">
-                                    <option value="antaimoro">Malagasy</option>
-                                    <option value="antaimoro">Français</option>
-                                    <option value="antandroy">Autres</option>  
-                                </select>
-                            </div>
+
+                            @php
+                                $options = [
+                                    'Origine modeste' => 'Origine modeste',
+                                    'Classe moyenne' => 'Classe moyenne',
+                                    'Préfère ne pas dire' => 'Préfère ne pas dire',
+                                ];
+                                $selected = old('statut_socio_economique') ?? $etudiant->getAttribute('statut_socio_economique');
+                            @endphp
 
                             <div class="form-group">
                                 <label for="statut_socio_economique">Statut socio-économique :</label>
                                 <select class="form-select" id="statut_socio_economique" name="statut_socio_economique">
-                                    <option value="origine_modeste">Origine modeste</option>
-                                    <option value="classe_moyenne">Classe moyenne</option>
-                                    <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    @foreach($options as $value => $label)
+                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
+                            
+                            
+
+                            @php
+                                $selected = old('conditions_vie_specifiques') ?? $etudiant->getAttribute('conditions_vie_specifiques');
+                                $options = [
+                                    '' => 'Aucune',
+                                    'sans_domicile' => 'Sans domicile fixe',
+                                    'handicap' => 'En situation de handicap',
+                                    'prefere_pas_dire' => 'Préfère ne pas dire',
+                                ];
+                            @endphp
 
                             <div class="form-group">
                                 <label for="conditions_vie">Conditions de vie spécifiques :</label>
-                                <select class="form-select" id="conditions_vie" name="conditions_vie_specifiques">
-                                    <option value="null">null</option>
-                                    <option value="sans_domicile">Sans domicile fixe</option>
-                                    <option value="handicap">En situation de handicap</option>
-                                    <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                <select name="conditions_vie_specifiques" class="form-select" id="conditions_vie">
+                                    @foreach($options as $value => $label)
+                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
+                            
+                            @php
+                                $options = [
+                                    'chretien' => 'Chrétien',
+                                    'musulman' => 'Musulman',
+                                    'bouddhiste' => 'Bouddhiste',
+                                    'hindou' => 'Hindou',
+                                    'prefere_pas_dire' => 'Préfère ne pas dire',
+                                ];
+
+                                $selected = old('religion_belief') ?? $etudiant->getAttribute('religion_belief');
+                            @endphp
 
                             <div class="form-group">
                                 <label for="religion_croyance">Religion ou croyance :</label>
                                 <select class="form-select" id="religion_croyance" name="religion_belief">
-                                    <option value="chretien">Chrétien</option>
-                                    <option value="musulman">Musulman</option>
-                                    <option value="bouddhiste">Bouddhiste</option>
-                                    <option value="hindou">Hindou</option>
-                                    <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    @foreach($options as $value => $label)
+                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
+
+                            @php
+                                $options = [
+                                    'heterosexuel' => 'Hétérosexuel',
+                                    'homosexuel' => 'Homosexuel',
+                                    'bisexuel' => 'Bisexuel',
+                                    'prefere_pas_dire' => 'Préfère ne pas dire',
+                                ];
+
+                                $selected = old('orientation_sexuelle') ?? $etudiant->getAttribute('orientation_sexuelle');
+                            @endphp
 
                             <div class="form-group">
                                 <label for="orientation_sexuelle">Orientation sexuelle :</label>
                                 <select class="form-select" id="orientation_sexuelle" name="orientation_sexuelle">
-                                    <option value="heterosexuel">Hétérosexuel</option>
-                                    <option value="homosexuel">Homosexuel</option>
-                                    <option value="bisexuel">Bisexuel</option>
-                                    <option value="prefere_pas_dire">Préfère ne pas dire</option>
+                                    @foreach($options as $value => $label)
+                                        <option value="{{ $value }}" {{ $selected === $value ? 'selected' : '' }}>{{ $label }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </fieldset>
-
-
 
                         <div class="text-center mt-4">
                             <button type="submit" class="theme-btn btn-style-one">Soumettre</button>
@@ -630,6 +575,23 @@
                 div.remove();
             }
         }
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('default-form');
+
+            form.addEventListener('submit', function (event) {
+                const typeEmploi = document.getElementById('type-emploi');
+                const chosenContainer = document.querySelector('.chosen-container');
+
+                // Vérifiez si le champ est vide
+                if (!typeEmploi.value || typeEmploi.value.length === 0) {
+                    event.preventDefault(); // Empêche la soumission du formulaire
+                    chosenContainer.classList.add('is-invalid'); // Ajoute une classe d'erreur
+                    typeEmploi.focus(); // Met le focus sur le champ
+                } else {
+                    chosenContainer.classList.remove('is-invalid'); // Supprime la classe d'erreur
+                }
+            });
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
             const regions = {
@@ -722,6 +684,71 @@
             // Add event listener to update regions when the country changes
             paysSelect.addEventListener('change', updateRegions);
         });
+
+        $(document).ready(function () {
+            $(".chosen-select").chosen({
+                no_results_text: "Aucun résultat trouvé",
+                placeholder_text_multiple: "Sélectionnez un ou plusieurs types d'emploi"
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('default-form');
+
+            form.addEventListener('submit', function (event) {
+                let isValid = true;
+                const requiredFields = form.querySelectorAll('[required]');
+                const errorMessageContainer = document.createElement('div');
+                errorMessageContainer.classList.add('alert', 'alert-danger', 'mt-3');
+                errorMessageContainer.style.display = 'none';
+                errorMessageContainer.textContent = 'Veuillez remplir tous les champs obligatoires.';
+
+                // Remove existing error message
+                const existingErrorMessage = form.querySelector('.alert-danger');
+                if (existingErrorMessage) {
+                    existingErrorMessage.remove();
+                }
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('is-invalid');
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                });
+
+                if (!isValid) {
+                    event.preventDefault();
+                    errorMessageContainer.style.display = 'block';
+                    form.prepend(errorMessageContainer);
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('#secteur-activite-container input[type="checkbox"]');
+            const selectedContainer = document.getElementById('selected-secteurs');
+
+            function updateSelected() {
+                selectedContainer.innerHTML = ''; // Réinitialise le conteneur
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const span = document.createElement('span');
+                        span.classList.add('selected-item');
+                        span.textContent = checkbox.value;
+                        selectedContainer.appendChild(span);
+                    }
+                });
+            }
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateSelected);
+            });
+
+            // Initialisation
+            updateSelected();
+        });
     </script>
 
     <style>
@@ -773,7 +800,82 @@
             margin-bottom: 15px;
             width: 100%;
         }
+        .checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajuste automatiquement le nombre de colonnes */
+    flex-wrap: wrap;
+    gap: 10px; /* Espacement entre les éléments */
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background: #f9f9f9;
+}
 
+.scrollable-checkbox-group {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.styled-checkbox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacement entre la case et le texte */
+    font-size: 14px;
+    color: #333;
+    padding: 10px;
+    border: 1px solid #ddd; /* Ajout de la bordure */
+    border-radius: 5px; /* Coins arrondis */
+    background-color: #f9f9f9; /* Couleur de fond */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.styled-checkbox:hover {
+    border-color: #66022b; /* Couleur de bordure au survol */
+    background-color: #f1f1f1; /* Couleur de fond au survol */
+}
+
+.styled-checkbox input[type="checkbox"] {
+    accent-color: #66022b; /* Couleur personnalisée pour les cases cochées */
+}
+
+.styled-checkbox .checkmark {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.styled-checkbox input:checked ~ .checkmark {
+    background-color: #66022b;
+}
+
+.styled-checkbox .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.styled-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
         .form-control:focus,
         .form-select:focus {
             border-color: #66022b;
@@ -861,6 +963,10 @@
             width: 100% !important;
             min-height: 45px;
         }
+        .chosen-container.is-invalid .chosen-choices {
+        border: 1px solid #dc3545; /* Rouge pour indiquer une erreur */
+        box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+    }
 
         .chosen-container-multi .chosen-choices {
             min-height: 45px;
@@ -894,6 +1000,54 @@
             max-width: 100%;
             margin-bottom: 30px;
             padding: 25px;
+        }
+
+        .is-invalid {
+            border-color: #dc3545;
+            box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+        }
+
+        .checkbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            accent-color: #66022b;
+        }
+
+        .selected-secteurs {
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #f1f1f1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .selected-item {
+            background: #66022b;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
         }
     </style>
 
