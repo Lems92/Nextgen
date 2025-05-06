@@ -152,7 +152,7 @@ h3, h4 {
             <div class="contact-admin">
                 <h4>Besoin d'aide ?</h4>
                 <p>Si vous avez des questions ou avez besoin de renouveler votre abonnement, n'hésitez pas à contacter l'administrateur.</p>
-                <a href="mailto:admin@example.com" class="btn btn-secondary">Contacter l'administrateur</a>
+                <a href="mailto:admin@join-nextgen.com" class="btn btn-secondary">Contacter l'administrateur</a>
             </div>
 
         </div>

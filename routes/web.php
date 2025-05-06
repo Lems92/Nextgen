@@ -47,8 +47,6 @@ Route::middleware(['auth'])->group(function () {
     })->middleware('role:etudiant')->name('etudiants.edit_profile');
     Route::post('/etudiants/modifer-profile', [EtudiantController::class, 'updateProfile'])->name('etudiants.update_profile');
     Route::get('/etudiant/modifier-profil', [EtudiantController::class, 'editProfile'])->name('etudiants.edit_profile');
-    Route::get('/changer-mot-de-passe', [\App\Http\Controllers\AccountController::class, 'showChangePasswordForm'])->name('password.change');
-    Route::post('/changer-mot-de-passe', [\App\Http\Controllers\AccountController::class, 'changePassword'])->name('password.update');
 });
 
 //commun

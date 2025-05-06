@@ -39,14 +39,14 @@
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <label for="nom_entreprise">Nom de l'Entreprise</label>
+                                <label for="nom_entreprise">Nom de l’Entreprise</label>
                                 <input type="text" id="nom_entreprise" name="nom_entreprise"
                                        placeholder="Nom de l'Entreprise" value="{{old('nom_entreprise')}}" required>
                                 <x-input-error :messages="$errors->get('nom_entreprise')" class="mt-2"/>
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <label for="secteur_activite">Secteur d'Activité</label>
+                                <label for="secteur_activite">Secteur d’Activité</label>
                                 <div id="secteur_activite" class="radio-group">
                                     @foreach($secteur_activites_categories as $categorie)
                                         <label class="styled-radio">
@@ -620,24 +620,6 @@ h5.mb-2 {
 
 .styled-radio input:checked ~ .checkmark:after {
     display: block;
-}
-
-.error-message {
-    font-size: 0.875rem;
-    color: #dc3545;
-    margin-top: 0.25rem;
-}
-
-.is-invalid {
-    border-color: #dc3545 !important;
-}
-
-.is-invalid:focus {
-    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
-}
-
-.checkbox-group.is-invalid {
-    border-color: #dc3545 !important;
 }
 
     </style>
