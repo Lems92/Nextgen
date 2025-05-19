@@ -14,6 +14,12 @@ use App\Mail\CandidatApproved;
 use App\Mail\CandidatRejected;
 use App\Mail\CandidatRecruited; // Assurez-vous de créer ce mail
 
+function normalize($value) {
+    $value = trim(mb_strtolower($value));
+    $value = iconv('UTF-8', 'ASCII//TRANSLIT', $value);
+    return $value;
+}
+
 class EntrepriseController extends Controller
 {
     public function dashboard(Request $request): View
@@ -385,7 +391,64 @@ class EntrepriseController extends Controller
 
     public function shortlist_vip(): View
     {
-        return view('entreprise.shortlist-vip');
+        $user = auth()->user();
+        $user->load('userable');
+        $entreprise = $user->userable;
+
+        // Récupérer les candidats avec leurs compétences et expériences
+        $candidats = Etudiant::with(['user', 'experiences_professionnelles', 'experiences_academiques', 'offres_postules'])
+            ->whereHas('offres_postules', function($query) use ($entreprise) {
+                $query->whereHas('entreprise', function($q) use ($entreprise) {
+                    $q->where('id', $entreprise->id);
+                });
+            })
+            ->get()
+            ->map(function($candidat) {
+                $score = 0;
+                $offre = $candidat->offres_postules->first();
+                if ($offre) {
+                    // Compétences techniques
+                    $competencesOffre = is_array($offre->competences_techniques) 
+                        ? $offre->competences_techniques 
+                        : (empty($offre->competences_techniques) ? [] : json_decode($offre->competences_techniques, true));
+                    $competencesCandidat = is_array($candidat->competences_techniques) 
+                        ? $candidat->competences_techniques 
+                        : (empty($candidat->competences_techniques) ? [] : json_decode($candidat->competences_techniques, true));
+                    $nbCompetencesDemandees = count($competencesOffre);
+                    $nbCompetencesCorrespondantes = count(array_intersect($competencesOffre, $competencesCandidat));
+                    $scoreCompetences = $nbCompetencesDemandees > 0 ? ($nbCompetencesCorrespondantes / $nbCompetencesDemandees) * 100 : 0;
+
+                    // Compétences transversales
+                    $transvOffre = is_array($offre->competences_transversales) 
+                        ? $offre->competences_transversales 
+                        : (empty($offre->competences_transversales) ? [] : json_decode($offre->competences_transversales, true));
+                    $transvCandidat = is_array($candidat->competences_en_recherche_et_analyse) 
+                        ? $candidat->competences_en_recherche_et_analyse 
+                        : (empty($candidat->competences_en_recherche_et_analyse) ? [] : json_decode($candidat->competences_en_recherche_et_analyse, true));
+                    $nbTransvDemandees = count($transvOffre);
+                    $nbTransvCorrespondantes = count(array_intersect($transvOffre, $transvCandidat));
+                    $scoreTransv = $nbTransvDemandees > 0 ? ($nbTransvCorrespondantes / $nbTransvDemandees) * 100 : 0;
+
+                    // Langues
+                    $languesOffre = is_array($offre->langues_requises) 
+                        ? $offre->langues_requises 
+                        : (empty($offre->langues_requises) ? [] : json_decode($offre->langues_requises, true));
+                    $languesCandidat = is_array($candidat->competences_langues) 
+                        ? $candidat->competences_langues 
+                        : (empty($candidat->competences_langues) ? [] : json_decode($candidat->competences_langues, true));
+                    $nbLanguesDemandees = count($languesOffre);
+                    $nbLanguesCorrespondantes = count(array_intersect($languesOffre, $languesCandidat));
+                    $scoreLangues = $nbLanguesDemandees > 0 ? ($nbLanguesCorrespondantes / $nbLanguesDemandees) * 100 : 0;
+
+                    // Score global (moyenne des trois)
+                    $score = ($scoreCompetences + $scoreTransv + $scoreLangues) / 3;
+                }
+                $candidat->score = $score;
+                return $candidat;
+            })
+            ->sortByDesc('score');
+
+        return view('entreprise.shortlist-vip', compact('candidats'));
     }
 
     public function mon_abonnement(): View
