@@ -21,6 +21,12 @@ function normalize($value) {
     return $value;
 }
 
+function normalize($value) {
+    $value = trim(mb_strtolower($value));
+    $value = iconv('UTF-8', 'ASCII//TRANSLIT', $value);
+    return $value;
+}
+
 class EntrepriseController extends Controller
 {
     public function dashboard(Request $request): View
