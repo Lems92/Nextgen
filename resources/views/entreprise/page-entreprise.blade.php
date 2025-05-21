@@ -35,7 +35,7 @@
                         <div class="content">
                             <h4>{{$entreprise->nom_entreprise}}</h4>
                             <ul class="job-other-info">
-                                <li class="time">Offres disponible – {{count($entreprise->offres)}}</li>
+                                <li class="time">Offres disponible : {{count($entreprise->offres)}}</li>
                             </ul>
                         </div>
                     </div>
