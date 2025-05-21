@@ -153,12 +153,22 @@
                             </li>
                             <hr class="dropdown-divider">
                             <li>
+                                <a href="#" onclick="event.preventDefault(); openChangePasswordModal();">
+                                    <i class="la la-key"></i>Changer le mot de passe
+                                </a>
+                            </li>
+                            <li>
                                 <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST"
                                       style="display: none;">
                                     @csrf
                                 </form>
                                 <a class="text-danger" href="#"
                                    onclick="event.preventDefault(); document.getElementById('dropdown-logout-form').submit();">Déconnexion</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-danger" onclick="event.preventDefault(); openDeleteAccountModal();">
+                                    <i class="la la-user-times"></i>Supprimer mon compte
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -251,6 +261,9 @@
                         <li class="{{ is_active('entreprises/page-entreprise') ? 'active' : '' }}">
                             <a href="{{ route('entreprise.page_entreprise') }}"><i class="la la-stream"></i>Page entreprise</a>
                         </li>
+                        <li class="{{ is_active('entreprises/modifier-page-entreprise') ? 'active' : '' }}">
+                            <a href="{{ route('entreprise.modifier_page_entreprise') }}"><i class="la la-pen"></i>Modifier page entreprise</a>
+                        </li>
                         @endif
                         @if($user->hasPermissionTo('shortlist_vip'))
                         <li class="{{ is_active('entreprises/shortlist-vip') ? 'active' : '' }}">
@@ -327,6 +340,37 @@
             });
         });
 
+        function openDeleteAccountModal() {
+            document.getElementById('deleteAccountModal').style.display = 'flex';
+        }
+        function closeDeleteAccountModal() {
+            document.getElementById('deleteAccountModal').style.display = 'none';
+        }
+
+        function openChangePasswordModal() {
+            document.getElementById('changePasswordModal').style.display = 'flex';
+        }
+        function closeChangePasswordModal() {
+            document.getElementById('changePasswordModal').style.display = 'none';
+        }
+
+        @if($errors->has('password'))
+            document.addEventListener("DOMContentLoaded", function() {
+                openDeleteAccountModal();
+            });
+        @endif
+
+        // Pour rouvrir la modal en cas d'erreur de validation
+        @if($errors->has('current_password') || $errors->has('password'))
+            document.addEventListener("DOMContentLoaded", function() {
+                openChangePasswordModal();
+            });
+        @endif
+        @if(session('success'))
+            document.addEventListener("DOMContentLoaded", function() {
+                openChangePasswordModal();
+            });
+        @endif
     </script>
 
     <style>
@@ -453,3 +497,60 @@
         }
 
     </style>
+
+    <!-- Modal de suppression de compte -->
+    <div id="deleteAccountModal" style="display:none; position:fixed; z-index:2000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
+        <div style="background:#fff; padding:30px; border-radius:8px; max-width:400px; margin:auto;">
+            <h5>Confirmer la suppression</h5>
+            <form id="deleteAccountForm" method="POST" action="{{ route('delete.account') }}">
+                @csrf
+                <p>Entrez votre mot de passe pour confirmer la suppression de votre compte. Cette action est irréversible.</p>
+                @if($errors->has('password'))
+                    <div class="alert alert-danger mt-2">
+                        {{ $errors->first('password') }}
+                    </div>
+                @endif
+                <input type="password" name="password" class="form-control" placeholder="Mot de passe" required>
+                <div class="mt-3 d-flex justify-content-between">
+                    <button type="button" onclick="closeDeleteAccountModal()" class="btn btn-secondary">Annuler</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de changement de mot de passe -->
+    <div id="changePasswordModal" style="display:none; position:fixed; z-index:2000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); align-items:center; justify-content:center;">
+        <div style="background:#fff; padding:30px; border-radius:8px; max-width:400px; margin:auto;">
+            <h5>Changer le mot de passe</h5>
+            <form id="changePasswordForm" method="POST" action="{{ route('password.update') }}">
+                @csrf
+                @if(session('success'))
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                @endif
+                @if($errors->has('current_password') || $errors->has('password'))
+                    <div class="alert alert-danger mt-2">
+                        @foreach($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </div>
+                @endif
+                <div class="mb-3">
+                    <label>Mot de passe actuel</label>
+                    <input type="password" name="current_password" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label>Nouveau mot de passe</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label>Confirmer le nouveau mot de passe</label>
+                    <input type="password" name="password_confirmation" class="form-control" required>
+                </div>
+                <div class="mt-3 d-flex justify-content-between">
+                    <button type="button" onclick="closeChangePasswordModal()" class="btn btn-secondary">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Changer</button>
+                </div>
+            </form>
+        </div>
+    </div>

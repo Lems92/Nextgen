@@ -27,6 +27,7 @@ Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
         // page entreprise
         Route::middleware('subscription.permission:page_presentation_entreprise')->group(function () {
             Route::get('/page-entreprise', [EntrepriseController::class, 'page_entreprise'])->name('entreprise.page_entreprise');
+            Route::post('/page-entreprise', [EntrepriseController::class, 'update_page'])->name('entreprise.update_page');
         });
 
         //page shortlist vip

@@ -14,8 +14,7 @@
                 <div class="job-block-seven style-three">
                     <div class="inner-box">
                         <div class="content">
-                            <span class="company-logo"><img src="images/resource/company-logo/5-1.png" alt=""></span>
-                            <h4>Invision</h4>
+                            <h4>{{$entreprise->nom_entreprise}}</h4>
                             <ul class="job-other-info">
                                 <li class="time">Offres disponible – {{count($entreprise->offres)}}</li>
                             </ul>
@@ -38,10 +37,19 @@
 
                             <h4 class="widget-title mt-3">Opportunités</h4>
                             <div class="widget-content">
+                                @php
+                                    $oppsRaw = $entreprise->getRawOriginal('opportunities');
+                                    $oppsArray = json_decode($oppsRaw, true);
+                                    if (is_string($oppsArray)) {
+                                        $oppsArray = json_decode($oppsArray, true);
+                                    }
+                                @endphp
                                 <ul class="job-skills">
-                                    @foreach($entreprise->opportunities as $comp)
-                                        <li><a href="#">{{$comp}}</a></li>
-                                    @endforeach
+                                    @if(is_array($oppsArray))
+                                        @foreach($oppsArray as $comp)
+                                            <li><a href="#">{{ str_replace('_', ' ', $comp) }}</a></li>
+                                        @endforeach
+                                    @endif
                                 </ul>
                             </div>
 
@@ -56,18 +64,34 @@
 
                             <h4 class="widget-title mt-3">Inclusion et diversité</h4>
                             <div class="widget-content">
+                                @php
+                                    $inclusionsRaw = $entreprise->getRawOriginal('inclusion_diversity');
+                                    $inclusionsArray = json_decode($inclusionsRaw, true);
+                                    if (is_string($inclusionsArray)) {
+                                        $inclusionsArray = json_decode($inclusionsArray, true);
+                                    }
+                                    if (!is_array($inclusionsArray)) $inclusionsArray = [];
+                                @endphp
                                 <ul class="job-skills">
-                                    @foreach($entreprise->inclusion_diversity as $comp)
-                                        <li><a href="#">{{$comp}}</a></li>
+                                    @foreach($inclusionsArray as $comp)
+                                        <li><a href="#">{{ str_replace('_', ' ', $comp) }}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
 
                             <h4 class="widget-title mt-3">Support de formation</h4>
                             <div class="widget-content">
+                                @php
+                                    $supportsRaw = $entreprise->getRawOriginal('training_support');
+                                    $supportsArray = json_decode($supportsRaw, true);
+                                    if (is_string($supportsArray)) {
+                                        $supportsArray = json_decode($supportsArray, true);
+                                    }
+                                    if (!is_array($supportsArray)) $supportsArray = [];
+                                @endphp
                                 <ul class="job-skills">
-                                    @foreach($entreprise->training_support as $comp)
-                                        <li><a href="#">{{$comp}}</a></li>
+                                    @foreach($supportsArray as $comp)
+                                        <li><a href="#">{{ str_replace('_', ' ', $comp) }}</a></li>
                                     @endforeach
                                 </ul>
                             </div>

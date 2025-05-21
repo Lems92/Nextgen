@@ -13,6 +13,7 @@ use App\Http\Controllers\EtudiantController;
 use App\Http\Controllers\EntrepriseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\AccountController;
 
 Route::get('/', [HomeController::class, 'home'])->name('accueil');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -43,6 +44,8 @@ Route::middleware(['auth'])->group(function () {
     })->middleware('role:etudiant')->name('etudiants.edit_profile');
     Route::post('/etudiants/modifer-profile', [EtudiantController::class, 'updateProfile'])->name('etudiants.update_profile');
     Route::get('/etudiant/modifier-profil', [EtudiantController::class, 'editProfile'])->name('etudiants.edit_profile');
+    Route::get('/changer-mot-de-passe', [\App\Http\Controllers\AccountController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/changer-mot-de-passe', [\App\Http\Controllers\AccountController::class, 'changePassword'])->name('password.update');
 });
 
 //commun
@@ -93,3 +96,12 @@ Route::post('/candidats/recruit-with-email', [EntrepriseController::class, 'recr
 Route::get('/entreprise/recruit/{id}', [EntrepriseController::class, 'showRecruitPage'])->name('entreprise.recruit');
 Route::delete('/admin/universites/{universite}', [UniversiteController::class, 'deleteUniversite'])->name('admin.delete_universite');
 Route::post('/etudiants/mes-candidatures/annuler', [EtudiantController::class, 'annuler_postulation'])->name('etudiant.postulation.annuler');
+
+Route::middleware('subscription.permission:page_presentation_entreprise')->group(function () {
+    Route::get('/page-entreprise', [EntrepriseController::class, 'page_entreprise'])->name('entreprise.page_entreprise');
+    Route::post('/page-entreprise', [EntrepriseController::class, 'update_page'])->name('entreprise.update_page');
+});
+
+Route::get('/modifier-page-entreprise', [EntrepriseController::class, 'edit_page_entreprise'])->name('entreprise.modifier_page_entreprise');
+
+Route::post('/delete-account', [AccountController::class, 'delete'])->name('delete.account');
