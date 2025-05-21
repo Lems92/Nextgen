@@ -30,21 +30,13 @@
         <div class="upper-box" style="padding-left: 0; padding-right: 0; width: 100vw; margin-left: calc(-50vw + 50%); background: #f8f9fb;">
             <div class="auto-container" style="padding-left: 40px; padding-right: 0; margin: 0; max-width: none; width: 100vw;">
                 <!-- Job Block -->
-                <div class="job-block-seven style-three" style="margin-left: 0;">
-                    <div class="inner-box" style="margin-left: 0;">
-                        <div class="entreprise-header" style="display: flex; align-items: flex-start; gap: 24px; padding: 30px 0 0 0; justify-content: flex-start;">
-                            <div class="entreprise-logo" style="flex-shrink: 0;">
-                                <img src="{{ $entreprise->profile_picture ? asset('storage/' . $entreprise->profile_picture) : asset('images/pdp_entreprise.png') }}" alt="Logo de l'entreprise" style="width: 100px; height: 100px; object-fit: cover; border-radius: 16px; border: 2px solid #eee; background: #fff;">
-                            </div>
-                            <div class="content" style="display: flex; flex-direction: column; align-items: flex-start;">
-                                <h2 style="margin-bottom: 8px; font-size: 2.2rem; font-weight: bold;">{{$entreprise->nom_entreprise}}</h2>
-                                <ul class="job-other-info" style="margin-top: 0; margin-bottom: 12px;">
-                                    <li class="time">Offres disponible : {{count($entreprise->offres)}}</li>
-                                </ul>
-                                @if(!empty($entreprise->site_web))
-                                    <a href="{{ (str_starts_with($entreprise->site_web, 'http') ? $entreprise->site_web : 'https://' . $entreprise->site_web) }}" target="_blank" class="theme-btn btn-style-three" style="background-color: #66022b; color: #fff; border: none; padding: 8px 22px; border-radius: 6px; font-size: 1rem; font-weight: 500; text-decoration: none;">Visiter le site</a>
-                                @endif
-                            </div>
+                <div class="job-block-seven style-three">
+                    <div class="inner-box">
+                        <div class="content">
+                            <h4>{{$entreprise->nom_entreprise}}</h4>
+                            <ul class="job-other-info">
+                                <li class="time">Offres disponible – {{count($entreprise->offres)}}</li>
+                            </ul>
                         </div>
                     </div>
                 </div>

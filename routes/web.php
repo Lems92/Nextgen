@@ -47,6 +47,8 @@ Route::middleware(['auth'])->group(function () {
     })->middleware('role:etudiant')->name('etudiants.edit_profile');
     Route::post('/etudiants/modifer-profile', [EtudiantController::class, 'updateProfile'])->name('etudiants.update_profile');
     Route::get('/etudiant/modifier-profil', [EtudiantController::class, 'editProfile'])->name('etudiants.edit_profile');
+    Route::get('/changer-mot-de-passe', [\App\Http\Controllers\AccountController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/changer-mot-de-passe', [\App\Http\Controllers\AccountController::class, 'changePassword'])->name('password.update');
 });
 
 //commun
@@ -106,17 +108,3 @@ Route::middleware('subscription.permission:page_presentation_entreprise')->group
 Route::get('/modifier-page-entreprise', [EntrepriseController::class, 'edit_page_entreprise'])->name('entreprise.modifier_page_entreprise');
 
 Route::post('/delete-account', [AccountController::class, 'delete'])->name('delete.account');
-
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/admin/stats', [AdminController::class, 'getStats'])->name('admin.stats');
-});
-
-// Routes pour les entreprises
-Route::prefix('entreprise')->name('entreprise.')->group(function () {
-    Route::get('/{entreprise}', [EntrepriseController::class, 'public_show_entreprise'])->name('public_show');
-});
-
-Route::post('/password/email', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('/password/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');

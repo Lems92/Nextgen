@@ -36,16 +36,6 @@
                                 <h4>Informations Générales</h4>
                             </legend>
                             <div class="mb-3">
-                                <label for="profile_picture" class="form-label">Photo de profil :</label>
-                                <div class="current-profile-picture mb-3">
-                                    <p class="mb-2">Photo actuelle :</p>
-                                    <img src="{{ $entreprise->profile_picture ? asset('storage/' . $entreprise->profile_picture) : asset('images/pdp_entreprise.png') }}" 
-                                         alt="Photo de profil actuelle" 
-                                         style="width: 150px; height: 150px; object-fit: cover; border-radius: 16px; border: 2px solid #eee; background: #fff;">
-                                </div>
-                                <input type="file" id="profile_picture" name="profile_picture" class="form-control" accept="image/*">
-                            </div>
-                            <div class="mb-3">
                                 <label for="nom_entreprise" class="form-label">Nom de l'entreprise :</label>
                                 <input type="text" id="nom_entreprise" name="nom_entreprise" class="form-control" value="{{ old('nom_entreprise', $entreprise->nom_entreprise) }}" required>
                             </div>
@@ -86,7 +76,6 @@
                                 <label for="site_web" class="form-label">Site web :</label>
                                 <input type="text" id="site_web" name="site_web" class="form-control" value="{{ old('site_web', $entreprise->site_web) }}">
                             </div>
-                            
                         </fieldset>
 
                         <fieldset class="form-section">
@@ -120,20 +109,14 @@
                                 <h4>Domaines d'activités</h4>
                             </legend>
                             @php
-                                $domsRaw = $entreprise->getAttributes()['domaines_activites'] ?? '[]';
-                                $domsArray = json_decode($domsRaw, true);
-                                if (is_string($domsArray)) {
-                                    $domsArray = json_decode($domsArray, true);
-                                }
-                                $doms = old('domaines_activites', $domsArray);
-                                if (!is_array($doms)) $doms = [];
+                                $doms = is_array($entreprise->domaines_activites) ? $entreprise->domaines_activites : (empty($entreprise->domaines_activites) ? [] : json_decode($entreprise->domaines_activites, true));
                             @endphp
                             <div class="checkbox-group scrollable-checkbox-group">
                                 @foreach($domaines_etudes_categories as $categorie)
                                     @foreach($categorie->list_with_categories as $sous_cat)
                                         <label class="styled-checkbox">
                                             <input type="checkbox" name="domaines_activites[]" value="{{$sous_cat->name}}"
-                                                {{ in_array($sous_cat->name, $doms) ? 'checked' : '' }}>
+                                                {{ in_array($sous_cat->name, old('domaines_activites', $doms)) ? 'checked' : '' }}>
                                             <span class="checkmark"></span>
                                             {{$sous_cat->name}}
                                         </label>

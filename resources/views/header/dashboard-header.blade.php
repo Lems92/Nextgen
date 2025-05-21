@@ -425,7 +425,7 @@
                 openChangePasswordModal();
             });
         @endif
-        @if(session('password_success'))
+        @if(session('success'))
             document.addEventListener("DOMContentLoaded", function() {
                 openChangePasswordModal();
             });
