@@ -143,7 +143,7 @@ CREATE TABLE `etudiants` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `experiences_academique` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `univ` varchar(11) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `univ` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `etudiants_slug_unique` (`slug`)
