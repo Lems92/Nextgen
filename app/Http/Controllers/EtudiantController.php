@@ -86,6 +86,7 @@ class EtudiantController extends Controller
 
     public function show_offer(Request $request, Offre $offre) : View | RedirectResponse
     {
+        $offre->increment('views');
         $offre->load(['entreprise', 'etudiants']);
         return view('etudiant.show-offer', compact('offre'));
     }

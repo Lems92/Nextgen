@@ -26,8 +26,53 @@ class EntrepriseController extends Controller
     {
         $user = $request->user();
         $user->load('userable');
-        $offres = Offre::where('entreprise_id', '=', $user->userable->id)->limit(3)->get();
-        return view('entreprise.tableau-de-bord', compact('offres'));
+        $offres = Offre::where('entreprise_id', '=', $user->userable->id)->with('etudiants')->get();
+
+        // Statistiques globales
+        $stats = [
+            'total_views' => 0,
+            'total_postules' => 0,
+            'total_pending' => 0,
+            'total_accepted' => 0,
+            'total_rejected' => 0,
+            'total_recruited' => 0,
+        ];
+
+        // Statistiques par offre
+        $stats_by_offer = [];
+
+        foreach ($offres as $offre) {
+            $offre_stats = [
+                'id' => $offre->id,
+                'titre_poste' => $offre->titre_poste,
+                'total_views' => $offre->views ?? 0,
+                'total_postules' => $offre->etudiants->count(),
+                'total_pending' => 0,
+                'total_accepted' => 0,
+                'total_rejected' => 0,
+                'total_recruited' => 0,
+            ];
+
+            foreach ($offre->etudiants as $etudiant) {
+                $status = $etudiant->pivot->status ?? 'pending';
+                if ($status === 'pending') $offre_stats['total_pending']++;
+                if ($status === 'accepted') $offre_stats['total_accepted']++;
+                if ($status === 'rejected') $offre_stats['total_rejected']++;
+                if ($status === 'recruited') $offre_stats['total_recruited']++;
+            }
+
+            // Ajout au global
+            $stats['total_views'] += $offre_stats['total_views'];
+            $stats['total_postules'] += $offre_stats['total_postules'];
+            $stats['total_pending'] += $offre_stats['total_pending'];
+            $stats['total_accepted'] += $offre_stats['total_accepted'];
+            $stats['total_rejected'] += $offre_stats['total_rejected'];
+            $stats['total_recruited'] += $offre_stats['total_recruited'];
+
+            $stats_by_offer[$offre->id] = $offre_stats;
+        }
+
+        return view('entreprise.tableau-de-bord', compact('offres', 'stats', 'stats_by_offer'));
     }
 
     public function offres(Request $request): View

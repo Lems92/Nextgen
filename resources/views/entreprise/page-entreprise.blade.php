@@ -16,7 +16,7 @@
                         <div class="content">
                             <h4>{{$entreprise->nom_entreprise}}</h4>
                             <ul class="job-other-info">
-                                <li class="time">Offres disponible – {{count($entreprise->offres)}}</li>
+                                <li class="time">Offres disponible : {{count($entreprise->offres)}}</li>
                             </ul>
                         </div>
                     </div>
@@ -55,9 +55,18 @@
 
                             <h4 class="widget-title mt-3">Domaines d'activités</h4>
                             <div class="widget-content">
+                                @php
+                                    $domsRaw = $entreprise->getAttributes()['domaines_activites'] ?? '[]';
+                                    $domsArray = json_decode($domsRaw, true);
+                                    if (is_string($domsArray)) {
+                                        $domsArray = json_decode($domsArray, true);
+                                    }
+                                    $doms = old('domaines_activites', $domsArray);
+                                    if (!is_array($doms)) $doms = [];
+                                @endphp
                                 <ul class="job-skills">
-                                    @foreach($entreprise->domaines_activites as $comp)
-                                        <li><a href="#">{{$comp}}</a></li>
+                                    @foreach($doms as $comp)
+                                        <li><a href="#">{{ str_replace('_', ' ', $comp) }}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -144,8 +153,12 @@
                                         <li>Emplacement: <span>{{$entreprise->adresse ?? ''}}</span></li>
                                     </ul>
 
-                                    <div class="btn-box"><a href="#"
-                                                            class="theme-btn btn-style-three">{{$entreprise->site_web ?? ''}}</a>
+                                    <div class="btn-box">
+                                        @if(!empty($entreprise->site_web))
+                                            <a href="{{ (str_starts_with($entreprise->site_web, 'http') ? $entreprise->site_web : 'https://' . $entreprise->site_web) }}" target="_blank" class="theme-btn btn-style-three" style="background-color: #66022b; color: #fff; border: none;">
+                                                Visiter le site web de l'entreprise
+                                            </a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

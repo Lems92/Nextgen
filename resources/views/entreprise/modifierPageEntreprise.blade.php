@@ -109,14 +109,20 @@
                                 <h4>Domaines d'activités</h4>
                             </legend>
                             @php
-                                $doms = is_array($entreprise->domaines_activites) ? $entreprise->domaines_activites : (empty($entreprise->domaines_activites) ? [] : json_decode($entreprise->domaines_activites, true));
+                                $domsRaw = $entreprise->getAttributes()['domaines_activites'] ?? '[]';
+                                $domsArray = json_decode($domsRaw, true);
+                                if (is_string($domsArray)) {
+                                    $domsArray = json_decode($domsArray, true);
+                                }
+                                $doms = old('domaines_activites', $domsArray);
+                                if (!is_array($doms)) $doms = [];
                             @endphp
                             <div class="checkbox-group scrollable-checkbox-group">
                                 @foreach($domaines_etudes_categories as $categorie)
                                     @foreach($categorie->list_with_categories as $sous_cat)
                                         <label class="styled-checkbox">
                                             <input type="checkbox" name="domaines_activites[]" value="{{$sous_cat->name}}"
-                                                {{ in_array($sous_cat->name, old('domaines_activites', $doms)) ? 'checked' : '' }}>
+                                                {{ in_array($sous_cat->name, $doms) ? 'checked' : '' }}>
                                             <span class="checkmark"></span>
                                             {{$sous_cat->name}}
                                         </label>
