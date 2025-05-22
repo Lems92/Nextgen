@@ -105,3 +105,8 @@ Route::middleware('subscription.permission:page_presentation_entreprise')->group
 Route::get('/modifier-page-entreprise', [EntrepriseController::class, 'edit_page_entreprise'])->name('entreprise.modifier_page_entreprise');
 
 Route::post('/delete-account', [AccountController::class, 'delete'])->name('delete.account');
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/stats', [AdminController::class, 'getStats'])->name('admin.stats');
+});

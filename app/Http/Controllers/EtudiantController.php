@@ -135,14 +135,14 @@ class EtudiantController extends Controller
 
     public function explorer_event(): View
     {
-        $event_coming = Event::with('universite')->where('end_date', '>', now())
-            ->orderBy('end_date', 'asc')
-            ->limit(5)
+        $event_coming = Event::with('universite')
+            ->where('end_date', '>', now())
+            ->orderBy('start_date', 'asc')
             ->get();
 
-        $event_passed = Event::with('universite')->where('end_date', '<', now())
-            ->orderBy('end_date', 'desc')
-            ->limit(5)
+        $event_passed = Event::with('universite')
+            ->where('end_date', '<', now())
+            ->orderBy('start_date', 'desc')
             ->get();
 
         return view('etudiant.evenements', compact('event_coming', 'event_passed'));
