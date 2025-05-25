@@ -42,11 +42,20 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/attente-verification-email', [WaitingController::class, 'waiting_email'])->name('attente_verification_email');
     Route::post('/deconnexion', [LoginController::class, 'logout'])->name('logout');
-    Route::get('/etudiants/modifer-profile', function () {
-        return view('etudiant.modifierProfil');
-    })->middleware('role:etudiant')->name('etudiants.edit_profile');
+    
+    // Supprimez cette route car vous avez déjà une route qui utilise le contrôleur
+    // Route::get('/etudiants/modifer-profile', function () {
+    //     return view('etudiant.modifierProfil');
+    // })->middleware('role:etudiant')->name('etudiants.edit_profile');
+    
+    // Gardez cette route qui utilise le contrôleur
+    Route::get('/etudiant/modifier-profil', [EtudiantController::class, 'editProfile'])
+        ->middleware('role:etudiant')
+        ->name('etudiants.edit_profile');
+        
     Route::post('/etudiants/modifer-profile', [EtudiantController::class, 'updateProfile'])->name('etudiants.update_profile');
-    Route::get('/etudiant/modifier-profil', [EtudiantController::class, 'editProfile'])->name('etudiants.edit_profile');
+    Route::get('/changer-mot-de-passe', [\App\Http\Controllers\AccountController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/changer-mot-de-passe', [\App\Http\Controllers\AccountController::class, 'changePassword'])->name('password.update');
 });
 
 //commun
@@ -90,7 +99,7 @@ Route::delete('/admin/subscriptions/remove/{user}', [SubscriptionController::cla
 Route::post('/entreprise/reject-candidat/{etudiantId}', [EntrepriseController::class, 'rejectCandidat'])->name('entreprise.reject-candidat');
 Route::post('/candidats/recruit/{id}', [EntrepriseController::class, 'recruitCandidat'])->name('candidats.recruit');
 Route::post('/candidats/{id}/pending', [EntrepriseController::class, 'setPending'])->name('candidats.pending');
-Route::post('/candidats/approve-with-email', [EntrepriseController::class, 'approveWithEmail'])->name('candidats.approveWithEmail');
+// Route::post('/candidats/approve-with-email', [EntrepriseController::class, 'approveWithEmail'])->name('candidats.approveWithEmail');
 Route::post('/candidats/approveWithEmail', [EntrepriseController::class, 'approveWithEmail'])->name('candidats.approveWithEmail');
 Route::get('/candidats/{id}/recruit-page', [EntrepriseController::class, 'showRecruitPage'])->name('candidats.recruitPage');
 Route::post('/candidats/recruit-with-email', [EntrepriseController::class, 'recruitWithEmail'])->name('candidats.recruitWithEmail');
@@ -99,7 +108,7 @@ Route::delete('/admin/universites/{universite}', [UniversiteController::class, '
 Route::post('/etudiants/mes-candidatures/annuler', [EtudiantController::class, 'annuler_postulation'])->name('etudiant.postulation.annuler');
 
 Route::middleware('subscription.permission:page_presentation_entreprise')->group(function () {
-    Route::get('/page-entreprise', [EntrepriseController::class, 'page_entreprise'])->name('entreprise.page_entreprise');
+    Route::get('/page-entreprise', [EntrepriseController::class, 'page_entreprise'])->name('entreprise.page_entrepris');
     Route::post('/page-entreprise', [EntrepriseController::class, 'update_page'])->name('entreprise.update_page');
 });
 
@@ -111,12 +120,3 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/stats', [AdminController::class, 'getStats'])->name('admin.stats');
 });
-
-// Routes pour les entreprises
-Route::prefix('entreprise')->name('entreprise.')->group(function () {
-    Route::get('/{entreprise}', [EntrepriseController::class, 'public_show_entreprise'])->name('public_show');
-});
-
-Route::post('/password/email', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
-Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('/password/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');

@@ -129,6 +129,11 @@
                                                                 @csrf
                                                             </form>
                                                         </li>
+                                                        <li>
+                                                            <button type="button" class="btn btn-link p-0 m-0" onclick="deleteOffre('delete_offre_form{{$offre->id}}')" title="Supprimer l'offre" data-text="Supprimer l'offre">
+                                                                <span class="la la-trash"></span>
+                                                            </button>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </td>
@@ -176,30 +181,6 @@
             background-color: #66022b;
             border-color: #000000;
         }
-
-        .btn-secondary {
-            color: #fff;
-            background-color: #6c757d;
-            border-color: #6c757d;
-            cursor: not-allowed;
-        }
-
-        .alert {
-            margin-bottom: 20px;
-            padding: 15px;
-            border-radius: 4px;
-        }
-
-        .alert-warning {
-            background-color: #fff3cd;
-            border-color: #ffeeba;
-            color: #856404;
-        }
-
-        .alert-warning strong {
-            color: #533f03;
-        }
-
         /* Ensure the entire section fills the screen */
         .user-dashboard {
             min-height: 100vh; /* Ensure the section fills the screen height */

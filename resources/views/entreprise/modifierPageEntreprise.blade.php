@@ -36,16 +36,6 @@
                                 <h4>Informations Générales</h4>
                             </legend>
                             <div class="mb-3">
-                                <label for="profile_picture" class="form-label">Photo de profil :</label>
-                                <div class="current-profile-picture mb-3">
-                                    <p class="mb-2">Photo actuelle :</p>
-                                    <img src="{{ $entreprise->profile_picture ? asset('storage/' . $entreprise->profile_picture) : asset('images/pdp_entreprise.png') }}" 
-                                         alt="Photo de profil actuelle" 
-                                         style="width: 150px; height: 150px; object-fit: cover; border-radius: 16px; border: 2px solid #eee; background: #fff;">
-                                </div>
-                                <input type="file" id="profile_picture" name="profile_picture" class="form-control" accept="image/*">
-                            </div>
-                            <div class="mb-3">
                                 <label for="nom_entreprise" class="form-label">Nom de l'entreprise :</label>
                                 <input type="text" id="nom_entreprise" name="nom_entreprise" class="form-control" value="{{ old('nom_entreprise', $entreprise->nom_entreprise) }}" required>
                             </div>
@@ -86,7 +76,6 @@
                                 <label for="site_web" class="form-label">Site web :</label>
                                 <input type="text" id="site_web" name="site_web" class="form-control" value="{{ old('site_web', $entreprise->site_web) }}">
                             </div>
-                            
                         </fieldset>
 
                         <fieldset class="form-section">
