@@ -82,10 +82,15 @@
                                                             <a href="{{route('entreprise.offres.edit', ['offre' => $offre->slug])}}" data-text="Modifier l'offre"><span
                                                                     class="la la-pencil"></span></a>
                                                         </li>
-                                                        <li>
+                                                        <li style="display: none;">
                                                             <form method="post" id="delete_offre_form{{$offre->id}}" action="{{route('entreprise.offres.delete', ['offre' => $offre->slug])}}">
                                                                 @csrf
                                                             </form>
+                                                        </li>
+                                                        <li>
+                                                            <button type="button" class="btn btn-link p-0 m-0" onclick="deleteOffre('delete_offre_form{{$offre->id}}')" title="Supprimer l'offre" data-text="Supprimer l'offre">
+                                                                <span class="la la-trash"></span>
+                                                            </button>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -129,6 +134,11 @@
         }
     </script>
     <style>
+        .btn-primary {
+            color: #fff;
+            background-color: #66022b;
+            border-color: #000000;
+        }
         /* Ensure the entire section fills the screen */
         .user-dashboard {
             min-height: 100vh; /* Ensure the section fills the screen height */

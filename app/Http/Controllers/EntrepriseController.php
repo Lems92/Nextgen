@@ -14,14 +14,65 @@ use App\Mail\CandidatApproved;
 use App\Mail\CandidatRejected;
 use App\Mail\CandidatRecruited; // Assurez-vous de créer ce mail
 
+function normalize($value) {
+    $value = trim(mb_strtolower($value));
+    $value = iconv('UTF-8', 'ASCII//TRANSLIT', $value);
+    return $value;
+}
+
 class EntrepriseController extends Controller
 {
     public function dashboard(Request $request): View
     {
         $user = $request->user();
         $user->load('userable');
-        $offres = Offre::where('entreprise_id', '=', $user->userable->id)->limit(3)->get();
-        return view('entreprise.tableau-de-bord', compact('offres'));
+        $offres = Offre::where('entreprise_id', '=', $user->userable->id)->with('etudiants')->get();
+
+        // Statistiques globales
+        $stats = [
+            'total_views' => 0,
+            'total_postules' => 0,
+            'total_pending' => 0,
+            'total_accepted' => 0,
+            'total_rejected' => 0,
+            'total_recruited' => 0,
+        ];
+
+        // Statistiques par offre
+        $stats_by_offer = [];
+
+        foreach ($offres as $offre) {
+            $offre_stats = [
+                'id' => $offre->id,
+                'titre_poste' => $offre->titre_poste,
+                'total_views' => $offre->views ?? 0,
+                'total_postules' => $offre->etudiants->count(),
+                'total_pending' => 0,
+                'total_accepted' => 0,
+                'total_rejected' => 0,
+                'total_recruited' => 0,
+            ];
+
+            foreach ($offre->etudiants as $etudiant) {
+                $status = $etudiant->pivot->status ?? 'pending';
+                if ($status === 'pending') $offre_stats['total_pending']++;
+                if ($status === 'accepted') $offre_stats['total_accepted']++;
+                if ($status === 'rejected') $offre_stats['total_rejected']++;
+                if ($status === 'recruited') $offre_stats['total_recruited']++;
+            }
+
+            // Ajout au global
+            $stats['total_views'] += $offre_stats['total_views'];
+            $stats['total_postules'] += $offre_stats['total_postules'];
+            $stats['total_pending'] += $offre_stats['total_pending'];
+            $stats['total_accepted'] += $offre_stats['total_accepted'];
+            $stats['total_rejected'] += $offre_stats['total_rejected'];
+            $stats['total_recruited'] += $offre_stats['total_recruited'];
+
+            $stats_by_offer[$offre->id] = $offre_stats;
+        }
+
+        return view('entreprise.tableau-de-bord', compact('offres', 'stats', 'stats_by_offer'));
     }
 
     public function offres(Request $request): View
@@ -369,6 +420,15 @@ class EntrepriseController extends Controller
         $user = $request->user();
         $user->load('userable');
         $entreprise = Entreprise::with(['user', 'offres'])->findOrFail($user->userable->id);
+
+        // Correction ici
+        foreach (['opportunities', 'domaines_activites', 'inclusion_diversity', 'training_support'] as $field) {
+            $entreprise->$field = is_string($entreprise->$field) ? json_decode($entreprise->$field, true) : [];
+            if (!is_array($entreprise->$field)) {
+                $entreprise->$field = [];
+            }
+        }
+
         return view('entreprise.page-entreprise', compact('entreprise'));
     }
 
@@ -385,12 +445,146 @@ class EntrepriseController extends Controller
 
     public function shortlist_vip(): View
     {
-        return view('entreprise.shortlist-vip');
+        $user = auth()->user();
+        $user->load('userable');
+        $entreprise = $user->userable;
+
+        // Récupérer les candidats avec leurs compétences et expériences
+        $candidats = Etudiant::with(['user', 'experiences_professionnelles', 'experiences_academiques', 'offres_postules'])
+            ->whereHas('offres_postules', function($query) use ($entreprise) {
+                $query->whereHas('entreprise', function($q) use ($entreprise) {
+                    $q->where('id', $entreprise->id);
+                });
+            })
+            ->get()
+            ->map(function($candidat) {
+                $score = 0;
+                $offre = $candidat->offres_postules->first();
+                if ($offre) {
+                    // Compétences techniques
+                    $competencesOffre = is_array($offre->competences_techniques) 
+                        ? $offre->competences_techniques 
+                        : (empty($offre->competences_techniques) ? [] : json_decode($offre->competences_techniques, true));
+                    $competencesCandidat = is_array($candidat->competences_techniques) 
+                        ? $candidat->competences_techniques 
+                        : (empty($candidat->competences_techniques) ? [] : json_decode($candidat->competences_techniques, true));
+                    $nbCompetencesDemandees = count($competencesOffre);
+                    $nbCompetencesCorrespondantes = count(array_intersect($competencesOffre, $competencesCandidat));
+                    $scoreCompetences = $nbCompetencesDemandees > 0 ? ($nbCompetencesCorrespondantes / $nbCompetencesDemandees) * 100 : 0;
+
+                    // Compétences transversales
+                    $transvOffre = is_array($offre->competences_transversales) 
+                        ? $offre->competences_transversales 
+                        : (empty($offre->competences_transversales) ? [] : json_decode($offre->competences_transversales, true));
+                    $transvCandidat = is_array($candidat->competences_en_recherche_et_analyse) 
+                        ? $candidat->competences_en_recherche_et_analyse 
+                        : (empty($candidat->competences_en_recherche_et_analyse) ? [] : json_decode($candidat->competences_en_recherche_et_analyse, true));
+                    $nbTransvDemandees = count($transvOffre);
+                    $nbTransvCorrespondantes = count(array_intersect($transvOffre, $transvCandidat));
+                    $scoreTransv = $nbTransvDemandees > 0 ? ($nbTransvCorrespondantes / $nbTransvDemandees) * 100 : 0;
+
+                    // Langues
+                    $languesOffre = is_array($offre->langues_requises) 
+                        ? $offre->langues_requises 
+                        : (empty($offre->langues_requises) ? [] : json_decode($offre->langues_requises, true));
+                    $languesCandidat = is_array($candidat->competences_langues) 
+                        ? $candidat->competences_langues 
+                        : (empty($candidat->competences_langues) ? [] : json_decode($candidat->competences_langues, true));
+                    $nbLanguesDemandees = count($languesOffre);
+                    $nbLanguesCorrespondantes = count(array_intersect($languesOffre, $languesCandidat));
+                    $scoreLangues = $nbLanguesDemandees > 0 ? ($nbLanguesCorrespondantes / $nbLanguesDemandees) * 100 : 0;
+
+                    // Score global (moyenne des trois)
+                    $score = ($scoreCompetences + $scoreTransv + $scoreLangues) / 3;
+                }
+                $candidat->score = $score;
+                return $candidat;
+            })
+            ->sortByDesc('score');
+
+        return view('entreprise.shortlist-vip', compact('candidats'));
     }
 
     public function mon_abonnement(): View
     {
         return view('entreprise.mon-abonnement');
+    }
+
+    public function edit_page_entreprise(Request $request)
+    {
+        $user = $request->user();
+        $entreprise = $user->userable;
+
+        // Charger les listes comme dans form-entreprise
+        $list_avec_categories_tables = ['domaines_etudes', 'secteur_activites'];
+        $list_categories = \App\Models\ListCategorie::whereIn('table', $list_avec_categories_tables)->get()->groupBy('table');
+        $domaines_etudes_categories = $list_categories->get('domaines_etudes')->sortBy('name');
+        $secteur_activites_categories = $list_categories->get('secteur_activites');
+
+        $parametres_tables = [
+            'opportunites_proposes', 'engagement_inclusivite_diversite', 'soutien_formation'
+        ];
+        $parametres = Parametrage::whereIn('table', $parametres_tables)->get()->groupBy('table');
+
+        $opportunites_proposes = $parametres->get('opportunites_proposes');
+        $engagement_inclusivite_diversites = $parametres->get('engagement_inclusivite_diversite');
+        $soutien_formations = $parametres->get('soutien_formation');
+
+        return view('entreprise.modifierPageEntreprise', compact(
+            'entreprise',
+            'secteur_activites_categories',
+            'opportunites_proposes',
+            'domaines_etudes_categories',
+            'engagement_inclusivite_diversites',
+            'soutien_formations'
+        ));
+    }
+
+    public function update_page(Request $request)
+    {
+        $user = $request->user();
+        $entreprise = $user->userable;
+
+        $validated = $request->validate([
+            'nom_entreprise' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'date_creation' => 'nullable|date',
+            'secteur_activite' => 'required|string',
+            'telephone_contact' => 'nullable|string|max:50',
+            'email_contact' => 'nullable|email|max:255',
+            'adresse' => 'nullable|string|max:255',
+            'site_web' => 'nullable|string|max:255',
+            'logo' => 'nullable|image|max:2048',
+            'opportunities' => 'nullable|array',
+            'domaines_activites' => 'nullable|array',
+            'inclusion_diversity' => 'nullable|array',
+            'training_support' => 'nullable|array',
+        ]);
+
+        // Gestion du logo
+        if ($request->hasFile('logo')) {
+            $logoPath = $request->file('logo')->store('logos', 'public');
+            $entreprise->logo = $logoPath;
+        }
+
+        $entreprise->nom_entreprise = $validated['nom_entreprise'];
+        $entreprise->description = $validated['description'] ?? null;
+        $entreprise->date_creation = $validated['date_creation'] ?? null;
+        $entreprise->secteur_activite = $validated['secteur_activite'];
+        $entreprise->telephone_contact = $validated['telephone_contact'] ?? null;
+        $entreprise->email_contact = $validated['email_contact'] ?? null;
+        $entreprise->adresse = $validated['adresse'] ?? null;
+        $entreprise->site_web = $validated['site_web'] ?? null;
+
+        // Stockage des listes en JSON
+        $entreprise->opportunities = isset($validated['opportunities']) ? json_encode($validated['opportunities']) : json_encode([]);
+        $entreprise->domaines_activites = isset($validated['domaines_activites']) ? json_encode($validated['domaines_activites']) : json_encode([]);
+        $entreprise->inclusion_diversity = isset($validated['inclusion_diversity']) ? json_encode($validated['inclusion_diversity']) : json_encode([]);
+        $entreprise->training_support = isset($validated['training_support']) ? json_encode($validated['training_support']) : json_encode([]);
+
+        $entreprise->save();
+
+        return redirect()->route('entreprise.modifier_page_entreprise')->with('success', 'Informations de l\'entreprise mises à jour avec succès.');
     }
 
 }

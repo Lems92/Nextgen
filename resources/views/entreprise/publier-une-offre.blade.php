@@ -22,6 +22,44 @@
 
             <div class="form-container">
 
+                @php
+                    // Compétences techniques
+                    $competencesTechniquesRaw = isset($offre) ? ($offre->competences_techniques ?? '[]') : '[]';
+                    $competencesTechniquesArray = is_string($competencesTechniquesRaw) ? json_decode($competencesTechniquesRaw, true) : $competencesTechniquesRaw;
+                    if (!is_array($competencesTechniquesArray)) {
+                        $competencesTechniquesArray = [];
+                    }
+                    $competencesTechniquesChecked = old('competences_techniques', $competencesTechniquesArray);
+                    $competencesTechniquesCheckedNormalized = array_map('strtolower', array_map('trim', $competencesTechniquesChecked));
+
+                    // Compétences transversales
+                    $competencesTransversalesRaw = isset($offre) ? ($offre->competences_transversales ?? '[]') : '[]';
+                    $competencesTransversalesArray = is_string($competencesTransversalesRaw) ? json_decode($competencesTransversalesRaw, true) : $competencesTransversalesRaw;
+                    if (!is_array($competencesTransversalesArray)) {
+                        $competencesTransversalesArray = [];
+                    }
+                    $competencesTransversalesChecked = old('competences_transversales', $competencesTransversalesArray);
+                    $competencesTransversalesCheckedNormalized = array_map('strtolower', array_map('trim', $competencesTransversalesChecked));
+
+                    // Langues requises
+                    $languesRequisesRaw = isset($offre) ? ($offre->langues_requises ?? '[]') : '[]';
+                    $languesRequisesArray = is_string($languesRequisesRaw) ? json_decode($languesRequisesRaw, true) : $languesRequisesRaw;
+                    if (!is_array($languesRequisesArray)) {
+                        $languesRequisesArray = [];
+                    }
+                    $languesRequisesChecked = old('langues_requises', $languesRequisesArray);
+                    $languesRequisesCheckedNormalized = array_map('strtolower', array_map('trim', $languesRequisesChecked));
+
+                    //dump('offre:', $offre);
+                    //dump('competencesTechniquesRaw:', $competencesTechniquesRaw);
+                    //dump('competencesTechniquesArray:', $competencesTechniquesArray);
+                    //dump('competencesTechniquesChecked:', $competencesTechniquesChecked);
+                    //dump('competencesTransversalesRaw:', $competencesTransversalesRaw);
+                    //dump('competencesTransversalesArray:', $competencesTransversalesArray);
+                    //dump('competencesTransversalesChecked:', $competencesTransversalesChecked);
+                    //dump('competencesTransversalesCheckedNormalized:', $competencesTransversalesCheckedNormalized);
+                @endphp
+
                 <form action="{{ isset($offre) ? route('entreprise.offres.update', ['offre' => $offre->slug]) : route('entreprise.offres.store') }}" method="POST" class="default-form">
                     @csrf
                     <div class="row">
@@ -79,7 +117,7 @@
                                 @foreach($competences_techniques as $competence_technique)
                                     <label class="styled-checkbox">
                                         <input type="checkbox" name="competences_techniques[]" value="{{$competence_technique->sigle}}" 
-                                            {{ in_array($competence_technique->sigle, old('competences_techniques', isset($offre) ? ($offre->competences_techniques ?? []) : [])) ? 'checked' : '' }}>
+                                            {{ in_array(strtolower(trim($competence_technique->sigle)), $competencesTechniquesCheckedNormalized) ? 'checked' : '' }}>
                                         {{$competence_technique->libelle}}
                                     </label>
                                 @endforeach
@@ -91,9 +129,13 @@
                             <label for="competences_transversales">Compétences transversales recherchées</label>
                             <div id="competences_transversales" class="checkbox-group">
                                 @foreach($competences_transversales as $competence_transversale)
+                                    @php
+                                        $currentValue = strtolower(trim($competence_transversale->libelle));
+                                        $isChecked = in_array($currentValue, $competencesTransversalesCheckedNormalized);
+                                    @endphp
                                     <label class="styled-checkbox">
-                                        <input type="checkbox" name="competences_transversales[]" value="{{$competence_transversale->sigle}}" 
-                                            {{ in_array($competence_transversale->sigle, old('competences_transversales', isset($offre) ? ($offre->competences_transversales ?? []) : [])) ? 'checked' : '' }}>
+                                        <input type="checkbox" name="competences_transversales[]" value="{{$competence_transversale->libelle}}" 
+                                            {{ $isChecked ? 'checked' : '' }}>
                                         {{$competence_transversale->libelle}}
                                     </label>
                                 @endforeach
@@ -107,7 +149,7 @@
                                 @foreach($langues as $langue)
                                     <label class="styled-checkbox">
                                         <input type="checkbox" name="langues_requises[]" value="{{$langue->sigle}}" 
-                                            {{ in_array($langue->sigle, old('langues_requises', isset($offre) ? ($offre->langues_requises ?? []) : [])) ? 'checked' : '' }}>
+                                            {{ in_array(strtolower(trim($langue->sigle)), $languesRequisesCheckedNormalized) ? 'checked' : '' }}>
                                         {{$langue->libelle}}
                                     </label>
                                 @endforeach

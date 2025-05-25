@@ -17,6 +17,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
+use App\Models\Offre;
 
 class AdminController extends Controller
 {
@@ -24,7 +26,110 @@ class AdminController extends Controller
     {
         $entreprises = Entreprise::limit(5)->orderBy('created_at', 'DESC')->get();
         $type_abonnements = Subscription::all();
-        return view('admin.admin-dashboard', compact('entreprises', 'type_abonnements'));
+
+        // Comptage des utilisateurs par type
+        $total_students = User::where('userable_type', 'App\Models\Etudiant')->count();
+        $total_companies = User::where('userable_type', 'App\Models\Entreprise')->count();
+        $total_universities = User::where('userable_type', 'App\Models\Universite')->count();
+
+        // Statistiques des utilisateurs
+        $stats = [
+            'total_users' => $total_students + $total_companies + $total_universities,
+            'total_students' => $total_students,
+            'total_companies' => $total_companies,
+            'total_universities' => $total_universities,
+            
+            // Statistiques des candidatures
+            'total_applications' => DB::table('postulations')->count(),
+            'accepted_applications' => DB::table('postulations')->where('status', 'accepted')->count(),
+            'rejected_applications' => DB::table('postulations')->where('status', 'rejected')->count(),
+            'pending_applications' => DB::table('postulations')->where('status', 'pending')->count(),
+            
+            // Statistiques des entreprises
+            'total_jobs' => Offre::count(),
+            'total_accepted_candidates' => DB::table('postulations')->where('status', 'accepted')->count(),
+            'total_rejected_candidates' => DB::table('postulations')->where('status', 'rejected')->count(),
+        ];
+
+        return view('admin.admin-dashboard', compact('entreprises', 'type_abonnements', 'stats'));
+    }
+
+    public function getStats(Request $request)
+    {
+        $period = $request->get('period', 'all');
+        $companyId = $request->get('company', 'all');
+
+        // Requêtes de base
+        $postulationsQuery = DB::table('postulations');
+        $offresQuery = Offre::query();
+
+        // Filtre par période
+        if ($period !== 'all') {
+            $date = now();
+            switch ($period) {
+                case 'today':
+                    $date = $date->startOfDay();
+                    break;
+                case 'week':
+                    $date = $date->startOfWeek();
+                    break;
+                case 'month':
+                    $date = $date->startOfMonth();
+                    break;
+                case 'year':
+                    $date = $date->startOfYear();
+                    break;
+            }
+            $postulationsQuery->where('created_at', '>=', $date);
+            $offresQuery->where('created_at', '>=', $date);
+        }
+
+        // Filtre par entreprise
+        if ($companyId !== 'all') {
+            $offresQuery->where('entreprise_id', $companyId);
+            $postulationsQuery->whereIn('offre_id', function($query) use ($companyId) {
+                $query->select('id')
+                    ->from('offres')
+                    ->where('entreprise_id', $companyId);
+            });
+        }
+
+        // Comptage des utilisateurs par type avec filtre de date
+        $total_students = User::where('userable_type', 'App\Models\Etudiant')
+            ->when($period !== 'all', function($query) use ($date) {
+                $query->where('created_at', '>=', $date);
+            })
+            ->count();
+
+        $total_companies = User::where('userable_type', 'App\Models\Entreprise')
+            ->when($period !== 'all', function($query) use ($date) {
+                $query->where('created_at', '>=', $date);
+            })
+            ->count();
+
+        $total_universities = User::where('userable_type', 'App\Models\Universite')
+            ->when($period !== 'all', function($query) use ($date) {
+                $query->where('created_at', '>=', $date);
+            })
+            ->count();
+
+        $stats = [
+            'total_users' => $total_students + $total_companies + $total_universities,
+            'total_students' => $total_students,
+            'total_companies' => $total_companies,
+            'total_universities' => $total_universities,
+            
+            'total_applications' => $postulationsQuery->count(),
+            'accepted_applications' => (clone $postulationsQuery)->where('status', 'accepted')->count(),
+            'rejected_applications' => (clone $postulationsQuery)->where('status', 'rejected')->count(),
+            'pending_applications' => (clone $postulationsQuery)->where('status', 'pending')->count(),
+            
+            'total_jobs' => $offresQuery->count(),
+            'total_accepted_candidates' => (clone $postulationsQuery)->where('status', 'accepted')->count(),
+            'total_rejected_candidates' => (clone $postulationsQuery)->where('status', 'rejected')->count(),
+        ];
+
+        return response()->json($stats);
     }
 
     public function list_entreprises(Request $request): View

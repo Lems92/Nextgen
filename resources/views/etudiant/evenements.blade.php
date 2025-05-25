@@ -19,6 +19,7 @@
                 <div class="ls-outer">
 
                     <!-- Event Block -->
+                                        
                     @forelse($event_coming as $event)
                         <div class="job-block">
                             <div class="inner-box">
@@ -39,12 +40,13 @@
                                         </li>
                                     </ul>
                                     <p>
-                                        {{$event->description}}
+                                        {{$event->event_description}}
                                     </p>
+                                    
                                     <div class="d-flex justify-content-between flex-wrap gap-3">
                                         <h6>Organisé par : {{$event->universite->nom_etablissement}}</h6>
                                         <h6>Lieu: {{$event->universite->adresse_etablissement}}</h6>
-                                    <h6>Contact email : {{$event->universite->adresse_email_contact}}</h6>
+                                        <h6>Contact email : {{$event->universite->adresse_email_contact}}</h6>
                                         <h6>Téléphone : {{$event->universite->numero_telephone_contact}}</h6>
                                     </div>
                                 </div>
@@ -82,8 +84,8 @@
                                         </li>
                                     </ul>
                                     <p>
-                                        {{$event->description}}
-                                    </p>
+                                        {{$event->event_description}}
+                                 
                                     <h6>Organisé par : {{$event->universite->nom_etablissement}}<br>
                                         Lieu: {{$event->universite->adresse_etablissement}}<br>
                                         Contact email : {{$event->universite->adresse_email_contact}}<br>
