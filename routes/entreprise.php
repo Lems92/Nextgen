@@ -9,7 +9,7 @@ Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
         Route::get('/dashboard', [EntrepriseController::class, 'dashboard'])->name('entreprise.dashboard');
 
         //offre
-        Route::middleware('subscription.permission:mise_en_ligne_offre')->group(function () {
+        Route::middleware(['subscription.permission:mise_en_ligne_offre', 'subscription.limits'])->group(function () {
             Route::get('/offres/publier', [EntrepriseController::class, 'publier_offre'])->name('entreprise.offres.create');
             Route::post('/offres/publier', [EntrepriseController::class, 'validate_publier_offre'])->name('entreprise.offres.store');
             Route::get('/offres', [EntrepriseController::class, 'offres'])->name('entreprise.offres');
@@ -20,7 +20,7 @@ Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
         });
 
         //candidature
-        Route::middleware('subscription.permission:gestion_candidature')->group(function () {
+        Route::middleware(['subscription.permission:gestion_candidature', 'subscription.limits'])->group(function () {
             Route::get('/gerer-candidat', [EntrepriseController::class, 'gerer_candidat'])->name('entreprise.gerer-candidat');
         });
 
@@ -31,7 +31,7 @@ Route::middleware(['auth', 'verified', 'role:entreprise', 'user_state'])
         });
 
         //page shortlist vip
-        Route::middleware('subscription.permission:shortlist_vip')->group(function () {
+        Route::middleware(['subscription.permission:shortlist_vip', 'subscription.limits'])->group(function () {
             Route::get('/shortlist-vip', [EntrepriseController::class, 'shortlist_vip'])->name('entreprise.shortlist_vip');
         });
 

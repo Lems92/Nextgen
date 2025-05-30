@@ -16,7 +16,27 @@
                         <div class="text">Gérer vos offres ?</div>
                     </div>
                     <div>
-                        <a href="{{route('entreprise.offres.create')}}" class="btn btn-primary"><i class="la la-plus"></i> Publier annonce</a>
+                        @php
+                            $user = auth()->user();
+                            $entreprise = $user->userable;
+                            $offresCount = $entreprise->offres()->count();
+                            $subscription = $user->subscription;
+                            $maxOffres = match($subscription->name) {
+                                'Standard' => 2,
+                                'Premium' => 5,
+                                'Gold' => PHP_INT_MAX,
+                                default => 0,
+                            };
+                            $canPublish = $offresCount < $maxOffres;
+                        @endphp
+
+                        @if($canPublish)
+                            <a href="{{route('entreprise.offres.create')}}" class="btn btn-primary"><i class="la la-plus"></i> Publier annonce</a>
+                        @else
+                            <button class="btn btn-secondary" disabled title="Limite d'annonces atteinte">
+                                <i class="la la-plus"></i> Limite atteinte
+                            </button>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -27,6 +47,25 @@
                         {{ session('success') }}
                     </div>
                 @endif
+
+                @if(session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if(!$canPublish)
+                    <div class="alert alert-warning">
+                        <strong>Limite d'annonces atteinte !</strong>
+                        <p>
+                            Vous avez atteint la limite de {{ $maxOffres }} annonce(s) avec votre abonnement {{ $subscription->name }}.
+                            @if($subscription->name !== 'Gold')
+                                Pour publier plus d'annonces, veuillez passer à un abonnement supérieur.
+                            @endif
+                        </p>
+                    </div>
+                @endif
+
                 <!-- Ls widget -->
                 <div class="ls-widget">
                     <div class="tabs-box">
@@ -139,6 +178,30 @@
             background-color: #66022b;
             border-color: #000000;
         }
+
+        .btn-secondary {
+            color: #fff;
+            background-color: #6c757d;
+            border-color: #6c757d;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            border-color: #ffeeba;
+            color: #856404;
+        }
+
+        .alert-warning strong {
+            color: #533f03;
+        }
+
         /* Ensure the entire section fills the screen */
         .user-dashboard {
             min-height: 100vh; /* Ensure the section fills the screen height */

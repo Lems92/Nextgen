@@ -112,6 +112,7 @@ class EntrepriseController extends Controller
     {
         // Validation des données
         $entrepriseId = $request->user()->userable->id;
+        $user = $request->user();
 
         $validatedData = $request->validate([
             'titre_poste' => 'required|string|max:255',
@@ -125,9 +126,31 @@ class EntrepriseController extends Controller
             'langues_requises' => 'required|array',
             'avantages' => 'nullable|string',
             'date_limite_candidature' => 'required|date',
+            'mise_en_avant' => 'nullable|boolean',
         ]);
 
         $validatedData['entreprise_id'] = $entrepriseId;
+
+        // Gestion de la mise en avant selon l'abonnement
+        if (isset($validatedData['mise_en_avant'])) {
+            if ($user->subscription->name === 'Standard') {
+                return redirect()->route('entreprise.offres')
+                    ->with('error', 'La mise en avant des annonces n\'est pas disponible avec l\'abonnement Standard.');
+            } elseif ($user->subscription->name === 'Premium') {
+                // Vérifier si une annonce est déjà mise en avant ce mois-ci
+                $currentMonth = now()->startOfMonth();
+                $existingFeatured = Offre::where('entreprise_id', $entrepriseId)
+                    ->where('mise_en_avant', true)
+                    ->where('created_at', '>=', $currentMonth)
+                    ->exists();
+                
+                if ($existingFeatured && $validatedData['mise_en_avant']) {
+                    return redirect()->route('entreprise.offres')
+                        ->with('error', 'Vous ne pouvez avoir qu\'une seule annonce mise en avant par mois avec l\'abonnement Premium.');
+                }
+            }
+            // Pour Gold, pas de limite sur la mise en avant
+        }
 
         Offre::create($validatedData);
 
