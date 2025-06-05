@@ -24,10 +24,8 @@ class AppServiceProvider extends ServiceProvider
     {
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
             return (new MailMessage)
-                ->subject('Verification de adresse email')
-                ->line('Cliquez sur le bouton ci-dessous pour vérifier votre adresse e-mail.')
-                ->action('Vérifier l\'adresse e-mail', $url)
-                ->line('Si vous n\'avez pas créé de compte, aucune autre action n\'est requise.');
+                ->subject('Vérification de votre adresse email')
+                ->view('mails.email_verification', ['url' => $url]);
         });
 
         Paginator::useBootstrapFive();
