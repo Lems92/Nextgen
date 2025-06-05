@@ -480,4 +480,30 @@ class EtudiantController extends Controller
 
         return "Correction terminée.";
     }
+
+    public function explorer_entreprises(): View
+    {
+        // Récupérer toutes les entreprises avec leurs relations
+        $entreprises = Entreprise::with(['user', 'offres', 'user.permissions'])
+            ->whereHas('user', function($query) {
+                $query->where('is_accepted_by_admin', true);
+            })
+            ->get();
+
+        // Debug des entreprises et leurs permissions
+        foreach ($entreprises as $entreprise) {
+            \Log::info('Entreprise: ' . $entreprise->nom_entreprise, [
+                'is_accepted_by_admin' => $entreprise->user->is_accepted_by_admin,
+                'permissions' => $entreprise->user->permissions->pluck('name'),
+                'has_page_presentation' => $entreprise->user->hasPermissionTo('page_presentation_entreprise')
+            ]);
+        }
+
+        // Filtrer les entreprises qui ont la permission page_presentation_entreprise
+        $entreprises = $entreprises->filter(function($entreprise) {
+            return $entreprise->user->hasPermissionTo('page_presentation_entreprise');
+        });
+
+        return view('etudiant.explorer-entreprises', compact('entreprises'));
+    }
 }

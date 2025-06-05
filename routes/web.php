@@ -113,3 +113,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/stats', [AdminController::class, 'getStats'])->name('admin.stats');
 });
+
+// Routes pour les entreprises
+Route::prefix('entreprise')->name('entreprise.')->group(function () {
+    Route::get('/{entreprise}', [EntrepriseController::class, 'public_show_entreprise'])->name('public_show');
+});

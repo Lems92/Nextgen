@@ -21,12 +21,6 @@ function normalize($value) {
     return $value;
 }
 
-function normalize($value) {
-    $value = trim(mb_strtolower($value));
-    $value = iconv('UTF-8', 'ASCII//TRANSLIT', $value);
-    return $value;
-}
-
 class EntrepriseController extends Controller
 {
     public function dashboard(Request $request): View
@@ -609,17 +603,22 @@ class EntrepriseController extends Controller
             'email_contact' => 'nullable|email|max:255',
             'adresse' => 'nullable|string|max:255',
             'site_web' => 'nullable|string|max:255',
-            'logo' => 'nullable|image|max:2048',
+            'profile_picture' => 'nullable|image|max:2048',
             'opportunities' => 'nullable|array',
             'domaines_activites' => 'nullable|array',
             'inclusion_diversity' => 'nullable|array',
             'training_support' => 'nullable|array',
         ]);
 
-        // Gestion du logo
-        if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('logos', 'public');
-            $entreprise->logo = $logoPath;
+        // Gestion de la photo de profil
+        if ($request->hasFile('profile_picture')) {
+            // Supprimer l'ancienne photo si elle existe
+            if ($entreprise->profile_picture) {
+                Storage::disk('public')->delete($entreprise->profile_picture);
+            }
+            // Stocker la nouvelle photo
+            $profilePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+            $entreprise->profile_picture = $profilePath;
         }
 
         $entreprise->nom_entreprise = $validated['nom_entreprise'];
