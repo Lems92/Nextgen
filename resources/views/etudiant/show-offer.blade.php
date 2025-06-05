@@ -26,12 +26,34 @@
                         <div class="content">
                             <span class="company-logo"><img src="images/resource/company-logo/5-1.png" alt=""></span>
                             <h4><a href="#">{{$offre->titre_poste}}</a></h4>
+                            <div class="company-title">
+                                <div class="company-logo">
+                                    <img src="{{ $offre->entreprise->profile_picture ? asset('storage/' . $offre->entreprise->profile_picture) : asset('images/pdp_entreprise.png') }}" 
+                                         alt="Logo de l'entreprise" 
+                                         style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; border: 1px solid #eee;">
+                                </div>
+                                <h5 class="company-name">
+                                    <a href="{{ route('entreprise.public_show', ['entreprise' => $offre->entreprise->slug]) }}" 
+                                       style="color: #66022b; text-decoration: none;">
+                                        {{$offre->entreprise->nom_entreprise}}
+                                    </a>
+                                </h5>
+                                
+                            </div>
+                            @if($offre->mise_en_avant)
+                                <span class="badge bg-danger">Urgent</span>
+                            @endif
                             <ul class="job-info">
                                 <li><span class="icon flaticon-briefcase"></span> {{$offre->type_contrat}}</li>
                                 <li><span class="icon flaticon-map-locator"></span> {{$offre->lieu_poste}}</li>
                                 <li><span class="icon flaticon-clock-3"></span>{{$offre->created_at->diffForHumans()}}</li>
                                 <li><span class="icon flaticon-target"></span> {{$offre->duree_contrat}}</li>
                             </ul>
+                            <a href="{{ route('entreprise.public_show', ['entreprise' => $offre->entreprise->slug]) }}" 
+                                           class="theme-btn btn-style-three" 
+                                           style="background-color: #66022b; color: #fff; border: none; padding: 8px 22px; border-radius: 6px; font-size: 0.9rem; font-weight: 500; text-decoration: none; display: inline-block; margin-bottom: 10px;">
+                                            Voir la page de l'entreprise
+                            </a>
                             <!--<ul class="job-other-info">
                                 <li class="time">Full Time</li>
                                 <li class="privacy">Private</li>
@@ -44,7 +66,7 @@
                             <form method="post" id="postuler_offre" action="{{route('etudiants.offers.apply', ['offre' => $offre->slug])}}">
                                 @csrf
                             </form>
-                            <a href="javascript:void(0);" onclick="postuler()" class="theme-btn btn-style-one">Postuler</a>
+                            <a href="javascript:void(0);" onclick="postuler()" class="theme-btn btn-style-one" style="background-color: #8a0339; color: #fff; border: none; padding: 10px 25px; border-radius: 6px; font-size: 1rem; font-weight: 500; text-decoration: none; display: inline-block;">Postuler</a>
                         </div>
                     </div>
                 </div>
@@ -120,8 +142,17 @@
                             <div class="sidebar-widget company-widget">
                                 <div class="widget-content">
                                     <div class="company-title">
-                                        <div class="company-logo"><img src="images/resource/company-7.png" alt=""></div>
-                                        <h5 class="company-name">{{$offre->entreprise->nom_entreprise}}</h5>
+                                        <div class="company-logo">
+                                            <img src="{{ $offre->entreprise->profile_picture ? asset('storage/' . $offre->entreprise->profile_picture) : asset('images/pdp_entreprise.png') }}" 
+                                                 alt="Logo de l'entreprise" 
+                                                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px; border: 2px solid #eee; background: #fff;">
+                                        </div>
+                                        <h5 class="company-name">
+                                            <a href="{{ route('entreprise.public_show', ['entreprise' => $offre->entreprise->slug]) }}" 
+                                               style="color: #66022b; text-decoration: none;">
+                                                {{$offre->entreprise->nom_entreprise}}
+                                            </a>
+                                        </h5>
                                     </div>
 
                                     <ul class="company-info">
@@ -132,8 +163,7 @@
                                         <li>Email: <span>{{$offre->entreprise->email_contact}}</span></li>
                                     </ul>
 
-                                    <div class="btn-box"><a href="{{$offre->entreprise->site_web}}" class="theme-btn btn-style-three">{{$offre->entreprise->site_web}}</a>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </aside>
@@ -147,6 +177,27 @@
         .job-block-seven {
             position: relative;
             padding-left: 50px;
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .theme-btn.btn-style-one {
+            animation: blink 2s infinite;
+        }
+
+        .icon {
+            color: #66022b !important;
+        }
+
+        .flaticon-briefcase,
+        .flaticon-map-locator,
+        .flaticon-clock-3,
+        .flaticon-target {
+            color: #66022b !important;
         }
     </style>
 

@@ -121,6 +121,16 @@
 .default-table {
   margin-right: 0;
 }
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.badge {
+    animation: blink 2s infinite;
+}
 </style>
 
     <script>

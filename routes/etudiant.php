@@ -18,6 +18,7 @@ Route::middleware(['auth', 'verified', 'role:etudiant'])->prefix('etudiants')->g
     Route::get('/universites', [EtudiantController::class, 'mon_universite'])->name('etudiant.mon_universite');
     Route::get('/demande-affiliation-universite', [EtudiantController::class, 'demander_affiliation_get'])->name('etudiant.demande_affiliation_univ_get');
     Route::post('/demande-affiliation-universite', [EtudiantController::class, 'demander_affiliation_post'])->name('etudiant.demande_affiliation_univ_post');
+    Route::get('/explorer-entreprises', [EtudiantController::class, 'explorer_entreprises'])->name('etudiants.explorer_entreprises');
 
 });
 

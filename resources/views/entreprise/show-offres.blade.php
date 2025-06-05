@@ -1,168 +1,150 @@
 @extends('dashboard-layout')
 
-@section('title', $offre->titre_poste)
+@section('title', 'NextGen - Détails de l\'offre')
 
 @section('content')
-
     @include('header.dashboard-header')
 
-    @php
-        use Illuminate\Support\Facades\Auth;
-        $user = Auth::user();
-        $user->load('userable');
-    @endphp
+    <section class="job-detail-section">
+        <!-- Upper Box -->
+        <div class="upper-box" style="padding-left: 0; padding-right: 0; width: 100vw; margin-left: calc(-50vw + 50%); background: #f8f9fb;">
+            <div class="auto-container" style="padding-left: 40px; padding-right: 0; margin: 0; max-width: none; width: 100vw;">
+                <!-- Job Block -->
+                <div class="job-block-seven style-three" style="margin-left: 0;">
+                    <div class="inner-box" style="margin-left: 0;">
+                        <div class="content" style="padding: 30px 0;">
+                            <h4 style="font-size: 2rem; margin-bottom: 20px;">{{ $offre->titre_poste }}</h4>
+                            
+                            <div class="company-info" style="display: flex; align-items: center; gap: 20px; margin-bottom: 30px;">
+                                <div class="company-logo">
+                                    <img src="{{ $offre->entreprise->profile_picture ? asset('storage/' . $offre->entreprise->profile_picture) : asset('images/pdp_entreprise.png') }}" 
+                                         alt="Logo de l'entreprise" 
+                                         style="width: 80px; height: 80px; object-fit: cover; border-radius: 12px; border: 2px solid #eee; background: #fff;">
+                                </div>
+                                <div class="company-details">
+                                    <h5 style="font-size: 1.5rem; margin-bottom: 10px;">
+                                        <a href="{{ route('entreprise.public_show', ['entreprise' => $offre->entreprise->slug]) }}" 
+                                           style="color: #66022b; text-decoration: none;">
+                                            {{ $offre->entreprise->nom_entreprise }}
+                                        </a>
+                                    </h5>
+                                    <a href="{{ route('entreprise.public_show', ['entreprise' => $offre->entreprise->slug]) }}" 
+                                       class="theme-btn btn-style-three" 
+                                       style="background-color: #66022b; color: #fff; border: none; padding: 8px 22px; border-radius: 6px; font-size: 0.9rem; font-weight: 500; text-decoration: none; display: inline-block;">
+                                        Voir la page de l'entreprise
+                                    </a>
+                                </div>
+                            </div>
 
-        <!-- Dashboard -->
-    <section class="user-dashboard">
-        <div class="dashboard-outer">
-            <div class="row justify-content-center">
-                <div class="col-lg-12">
-                    <div class="text-center mb-5">
-                        <h2>Détails offres</h2>
+                            <ul class="job-info" style="display: flex; gap: 20px; margin-bottom: 20px;">
+                                <li><span class="icon flaticon-briefcase"></span> {{ $offre->type_contrat }}</li>
+                                <li><span class="icon flaticon-map-locator"></span> {{ $offre->lieu_poste }}</li>
+                                <li><span class="icon flaticon-clock-3"></span> {{ $offre->duree_contrat }}</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="container">
-                <div class="card mb-5" style="height: auto;">
-                    <div class="card-body pt-4" style="height: auto;">
-                        <div class="d-flex gap-3 justify-content-end align-items-center mb-3">
-                            <div>
-                                <span class="badge bg-success">Active</span>
-                            </div>
-                            <a href="{{route('entreprise.offres.edit', ['offre' => $offre->slug])}}"
-                               class="btn btn-warning">Modifier</a>
-                            <form method="post" id="delete_offre_form"
-                                  action="{{route('entreprise.offres.delete', ['offre' => $offre->slug])}}">
-                                @csrf
-                            </form>
-                            <button class="btn btn-danger" onclick="deleteOffre('delete_offre_form')">Supprimer</button>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h4 class="mb-3 ms-3">A propos de l'offre</h4>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        <h5>Titre du poste</h5>
-                                        <p class="h6 mt-2">{{ $offre->titre_poste }}</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Type de contrat</h5>
-                                        <p class="h6 mt-2">{{ $offre->type_contrat }}</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Durée du contrat</h5>
-                                        <p class="h6 mt-2">{{ $offre->duree_contrat }}</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Lieu du poste</h5>
-                                        <p class="h6 mt-2">{{ $offre->lieu_poste }}</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Date du début</h5>
-                                        <p class="h6 mt-2">{{ $offre->date_debut->format('j F Y') }}</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Description du poste</h5>
-                                        <p class="h6 mt-2">{!! nl2br(e($offre->description_poste)) !!}</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Compétences techniques requis</h5>
-                                        <div class="h6 mt-2">
-                                            <ul class="list-group">
-                                                @forelse($offre->competences_techniques as $comp)
-                                                    <li class="list-group-item">{{$comp}}</li>
-                                                @empty
-                                                    <li class="list-group-item">Pas de compétence technique requis</li>
-                                                @endforelse
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Compétences transversales requis</h5>
-                                        <div class="h6 mt-2">
-                                            <ul class="list-group">
-                                                @forelse($offre->competences_transversales as $comp)
-                                                    <li class="list-group-item">{{$comp}}</li>
-                                                @empty
-                                                    <li class="list-group-item">Pas de compétence transversale requis
-                                                    </li>
-                                                @endforelse
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Langues requises</h5>
-                                        <div class="h6 mt-2">
-                                            <ul class="list-group">
-                                                @forelse($offre->langues_requises as $comp)
-                                                    <li class="list-group-item">{{$comp}}</li>
-                                                @empty
-                                                    <li class="list-group-item">Pas de langue requise</li>
-                                                @endforelse
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Avantages</h5>
-                                        <p class="h6 mt-2">{!! nl2br(e($offre->avantages)) !!}</p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5>Date limite de candidature</h5>
-                                        <p class="h6 mt-2">{{ $offre->date_limite_candidature->format('j F Y') }}</p>
-                                    </li>
+        </div>
+
+        <div class="job-detail-outer">
+            <div class="auto-container">
+                <div class="row">
+                    <div class="content-column col-lg-8 col-md-12 col-sm-12">
+                        <div class="job-detail">
+                            <h4>Description du poste</h4>
+                            <p>{{ $offre->description_poste }}</p>
+
+                            <h4 class="mt-4">Compétences requises</h4>
+                            <div class="widget-content">
+                                <h6>Compétences techniques</h6>
+                                <ul class="job-skills">
+                                    @foreach($offre->competences_techniques as $comp)
+                                        <li><a href="#">{{ str_replace('_', ' ', $comp) }}</a></li>
+                                    @endforeach
+                                </ul>
+
+                                <h6 class="mt-3">Compétences transversales</h6>
+                                <ul class="job-skills">
+                                    @foreach($offre->competences_transversales as $comp)
+                                        <li><a href="#">{{ str_replace('_', ' ', $comp) }}</a></li>
+                                    @endforeach
+                                </ul>
+
+                                <h6 class="mt-3">Langues requises</h6>
+                                <ul class="job-skills">
+                                    @foreach($offre->langues_requises as $langue)
+                                        <li><a href="#">{{ str_replace('_', ' ', $langue) }}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
-                            <div class="col-md-6">
-                                <h4 class="mb-3 ms-3">Candidatures</h4>
-                                <div>
-                                    @forelse($offre->etudiants as $etudiant)
-                                        <div class="candidate-block-three">
-                                            <div class="inner-box">
-                                                <div class="content" style="padding-left: 0;">
-                                                    <h4 class="name"><a href="#">{{$etudiant->prenom . ' ' .$etudiant->nom}}</a></h4>
-                                                    <ul class="candidate-info">
-                                                        <li class="designation">{{$etudiant->domaine_etudes}}</li>
-                                                        <li><span class="icon flaticon-map-locator"></span> {{$etudiant->adresse_postale}}
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="btn-box">
-                                                    <a href="{{route('etudiants.portfolio', ['etudiant' => $etudiant->slug])}}" class="theme-btn btn-style-three"><span
-                                                            class="btn-title">Voir profile</span></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @empty
-                                        <p>Aucun étudiant n'a encore postulé</p>
-                                    @endforelse
-                                </div>
+
+                            @if($offre->avantages)
+                                <h4 class="mt-4">Avantages</h4>
+                                <p>{{ $offre->avantages }}</p>
+                            @endif
+
+                            <div class="mt-4">
+                                <p><strong>Date de début :</strong> {{ $offre->date_debut->format('d/m/Y') }}</p>
+                                <p><strong>Date limite de candidature :</strong> {{ $offre->date_limite_candidature->format('d/m/Y') }}</p>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="sidebar-column col-lg-4 col-md-12 col-sm-12">
+                        <aside class="sidebar">
+                            <div class="sidebar-widget">
+                                <div class="widget-content">
+                                    <div class="btn-box">
+                                        <a href="#" class="theme-btn btn-style-one" style="background-color: #66022b; color: #fff; border: none; padding: 12px 30px; border-radius: 6px; font-size: 1rem; font-weight: 500; text-decoration: none; display: block; text-align: center;">
+                                            Postuler maintenant
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </aside>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Copyright -->
-
-    </div><!-- End Page Wrapper -->
-
-    <script>
-        function deleteOffre(form_id) {
-            Swal.fire({
-                title: "Voulez vous vraiment supprimer cet élément?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#ff2443",
-                cancelButtonColor: "#3d3d3d",
-                confirmButtonText: "Oui, supprimer"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    document.getElementById(form_id).submit();
-                }
-            });
+    <style>
+        .job-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            list-style: none;
+            padding: 0;
         }
-    </script>
-
+        .job-skills li a {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #f8f9fb;
+            border-radius: 6px;
+            color: #66022b;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .job-skills li a:hover {
+            background: #66022b;
+            color: #fff;
+        }
+        .job-info {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+        .job-info li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #666;
+        }
+        .job-info .icon {
+            color: #66022b;
+        }
+    </style>
 @endsection

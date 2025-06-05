@@ -8,9 +8,9 @@
                                 <div class="big-column col-xl-3 col-lg-3 col-md-12">
                                     <div class="footer-column about-widget">
                                         <div class="logo"><a href="{{ route('accueil') }}"><img src="images/NextGen-logo.svg" alt=""></a></div>
-                                        <p class="phone-num"><span>Contactez-nous </span><a href="#">+33 7 66 91 92 92</a></p>
+                                        <p class="phone-num"><span>Contactez-nous </span><a href="#">+261 38 91 978 51</a></p>
                                         <!--<p class="address">329 Queensberry Street, North Melbourne VIC<br> 3051, Australia.-->
-                                            <br><a href="mailto:join-nextgen@gmail.com" class="email">join-nextgen@gmail.com</a>
+                                            <br><a href="mailto:join-nextgen@gmail.com" class="email">join.nextgen.mada@gmail.com</a>
                                         </p>
                                     </div>
                                 </div>

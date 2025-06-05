@@ -105,6 +105,9 @@
                                             <td>
                                                 <h6>{{$offre->titre_poste}}</h6>
                                                 <span class="info"><i class="icon flaticon-map-locator"></i> {{$offre->lieu_poste}}</span>
+                                                @if($offre->mise_en_avant)
+                                                    <span class="badge bg-danger">Urgent</span>
+                                                @endif
                                             </td>
                                             <td class="applied"><a href="#">{{count($offre->etudiants)}} candidature(s)</a></td>
                                             <td>{{ $offre->created_at->format('j F Y') }}</td>
@@ -256,6 +259,24 @@
             vertical-align: middle;
             border-top: 1px solid #ddd;
             word-wrap: break-word; /* Prevent content from overflowing cells */
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.35em 0.65em;
+            font-size: 0.75em;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: baseline;
+            border-radius: 0.25rem;
+            margin-left: 10px;
+        }
+
+        .bg-danger {
+            background-color: #dc3545;
+            color: #fff;
         }
 
     </style>

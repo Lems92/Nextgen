@@ -19,6 +19,9 @@ Route::get('/', [HomeController::class, 'home'])->name('accueil');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/faq', [HomeController::class, 'faq'])->name('faq');
 
+// Route publique pour voir une entreprise
+Route::get('/entreprise/{entreprise}', [EntrepriseController::class, 'public_show_entreprise'])->name('entreprise.public_show');
+
 Route::middleware(['guest'])->group(function () {
 
     // Authentification
@@ -109,4 +112,9 @@ Route::post('/delete-account', [AccountController::class, 'delete'])->name('dele
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/stats', [AdminController::class, 'getStats'])->name('admin.stats');
+});
+
+// Routes pour les entreprises
+Route::prefix('entreprise')->name('entreprise.')->group(function () {
+    Route::get('/{entreprise}', [EntrepriseController::class, 'public_show_entreprise'])->name('public_show');
 });

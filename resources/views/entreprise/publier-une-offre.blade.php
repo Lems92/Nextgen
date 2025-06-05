@@ -169,6 +169,24 @@
                             <x-input-error :messages="$errors->get('date_limite_candidature')" class="mt-2" />
                         </div>
 
+                        @php
+                            $user = auth()->user();
+                            $subscription = $user->subscription;
+                            $canFeature = in_array($subscription->name, ['Premium', 'Gold']);
+                        @endphp
+
+                        @if($canFeature)
+                            <div class="form-group col-lg-12 col-md-12">
+                                <label class="styled-checkbox">
+                                    <input type="checkbox" name="mise_en_avant" value="1" {{ old('mise_en_avant', isset($offre) ? $offre->mise_en_avant : false) ? 'checked' : '' }}>
+                                    Mettre en avant cette offre (Urgent)
+                                </label>
+                                @if($subscription->name === 'Premium')
+                                    <small class="text-muted d-block mt-2">Vous pouvez avoir une seule offre mise en avant par mois avec l'abonnement Premium.</small>
+                                @endif
+                            </div>
+                        @endif
+
                         <div class="form-group col-lg-12 col-md-12 text-right">
                             <button class="theme-btn btn-style-one" type="submit">@if(isset($offre)) Modifier l'offre @else Publier l'offre @endif</button>
                         </div>
