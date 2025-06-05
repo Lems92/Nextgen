@@ -118,3 +118,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 Route::prefix('entreprise')->name('entreprise.')->group(function () {
     Route::get('/{entreprise}', [EntrepriseController::class, 'public_show_entreprise'])->name('public_show');
 });
+
+Route::post('/password/email', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+Route::get('/password/reset/{token}', [App\Http\Controllers\Auth\ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/password/reset', [App\Http\Controllers\Auth\ResetPasswordController::class, 'reset'])->name('password.update');
