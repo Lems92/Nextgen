@@ -7,7 +7,7 @@
     <title>@yield('title', 'NextGen')</title>
 
     <!-- Lien vers les fichiers CSS -->
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
 
@@ -38,9 +38,8 @@
 
 <!-- Scripts JavaScript -->
 <script src="{{ asset('js/jquery.js') }}"></script>
-<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('js/chosen.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/jquery.fancybox.js') }}"></script>
 <script src="{{ asset('js/jquery.modal.min.js') }}"></script>
 <script src="{{ asset('js/mmenu.polyfills.js') }}"></script>
