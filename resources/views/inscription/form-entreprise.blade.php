@@ -39,14 +39,14 @@
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <label for="nom_entreprise">Nom de l’Entreprise</label>
+                                <label for="nom_entreprise">Nom de l'Entreprise</label>
                                 <input type="text" id="nom_entreprise" name="nom_entreprise"
-                                       placeholder="Nom de l’Entreprise" value="{{old('nom_entreprise')}}" required>
+                                       placeholder="Nom de l'Entreprise" value="{{old('nom_entreprise')}}" required>
                                 <x-input-error :messages="$errors->get('nom_entreprise')" class="mt-2"/>
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <label for="secteur_activite">Secteur d’Activité</label>
+                                <label for="secteur_activite">Secteur d'Activité</label>
                                 <div id="secteur_activite" class="radio-group">
                                     @foreach($secteur_activites_categories as $categorie)
                                         <label class="styled-radio">
@@ -61,7 +61,7 @@
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <label>Adresse de l’Entreprise</label>
+                                <label>Adresse de l'Entreprise</label>
                                 <div class="address-fields">
                                     <label for="adresse">Numéro et Rue</label>
                                     <input type="text" id="adresse" name="adresse" value="{{old('adresse')}}"
@@ -184,7 +184,7 @@
                             </div>
 
                             <div class="col-lg-12 form-group">
-                                <h5 class="mb-2">Engagement en matière d’Inclusion et Diversité</h5>
+                                <h5 class="mb-2">Engagement en matière d'Inclusion et Diversité</h5>
                                 <div class="checkbox-group">
                                     @foreach($engagement_inclusivite_diversites as $engagement)
                                         <label>
@@ -223,31 +223,29 @@
                         <div class="tab active-tab" id="monthly">
                             <div class="content">
                                 <div class="row">
-                                    <!-- Pricing Table - Standard -->
+                                    <!-- Pricing Tables -->
                                     @foreach($offres as $offre)
-                                        @if($offre->name === 'Standard') <!-- Afficher uniquement le plan Standard -->
-                                            <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
-                                                <div class="inner-box d-flex justify-content-between flex-column" style="min-height: 580px;">
-                                                    <div>
-                                                        <div class="title">{{$offre->name}}</div>
-                                                        <div class="price">€ {{$offre->price}} <span class="duration">/ mois</span></div>
-                                                        <div class="table-content">
-                                                            <ul>
-                                                                @foreach($offre->permissions as $permission)
-                                                                    <li>
-                                                                        <span>{{ ucwords(str_replace('_', ' ', $permission->name)) }}</span>
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div class="table-footer">
-                                                        <a href="#tabs-content" class="theme-btn btn-style-three"
-                                                           data-offer="{{$offre->name}}" onclick="selectOffer(this)">Sélectionner</a>
+                                        <div class="pricing-table col-lg-4 col-md-6 col-sm-12">
+                                            <div class="inner-box d-flex justify-content-between flex-column" style="min-height: 580px;">
+                                                <div>
+                                                    <div class="title">{{$offre->name}}</div>
+                                                    <div class="price">€ {{$offre->price}} <span class="duration">/ mois</span></div>
+                                                    <div class="table-content">
+                                                        <ul>
+                                                            @foreach($offre->permissions as $permission)
+                                                                <li>
+                                                                    <span>{{ ucwords(str_replace('_', ' ', $permission->name)) }}</span>
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
                                                     </div>
                                                 </div>
+                                                <div class="table-footer">
+                                                    <a href="#tabs-content" class="theme-btn btn-style-three"
+                                                       data-offer="{{$offre->name}}" onclick="selectOffer(this)">Sélectionner</a>
+                                                </div>
                                             </div>
-                                        @endif
+                                        </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -257,11 +255,11 @@
                     <!-- Hidden input to store selected offer -->
                     <input type="hidden" id="selected-offer" name="selected_offer" value="">
 
-                    <!-- Back and Next buttons -->
+                    <!-- Back and Next buttons 
                     <div class="text mb-4 mt-2">En remplissant ce formulaire, vous acceptez d'être contacté par
                         NextGen à des fins d'informations et de marketing, conformément à notre <a href="#">politique
                             de protection des données personnelles</a>.
-                    </div>
+                    </div>-->
 
                     <div class="col-lg-12 col-md-12 col-sm-12 form-group"
                          style="display: flex; justify-content: center;">
@@ -291,6 +289,84 @@
             // Mettre à jour le champ caché avec l'offre sélectionnée
             document.getElementById('selected-offer').value = button.getAttribute('data-offer');
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            const inputs = form.querySelectorAll('input, select, textarea');
+            
+            inputs.forEach(input => {
+                // Ajouter un message d'erreur personnalisé
+                input.addEventListener('invalid', function(e) {
+                    e.preventDefault();
+                    if (!input.validity.valid) {
+                        let message = '';
+                        if (input.validity.valueMissing) {
+                            message = 'Ce champ est obligatoire';
+                        } else if (input.validity.typeMismatch && input.type === 'email') {
+                            message = 'Veuillez entrer une adresse email valide';
+                        } else if (input.validity.typeMismatch && input.type === 'tel') {
+                            message = 'Veuillez entrer un numéro de téléphone valide';
+                        } else if (input.validity.typeMismatch && input.type === 'url') {
+                            message = 'Veuillez entrer une URL valide';
+                        }
+                        
+                        // Créer ou mettre à jour le message d'erreur
+                        let errorDiv = input.nextElementSibling;
+                        if (!errorDiv || !errorDiv.classList.contains('error-message')) {
+                            errorDiv = document.createElement('div');
+                            errorDiv.className = 'error-message text-danger mt-1';
+                            input.parentNode.insertBefore(errorDiv, input.nextSibling);
+                        }
+                        errorDiv.textContent = message;
+                        input.classList.add('is-invalid');
+                    }
+                });
+
+                // Supprimer le message d'erreur lors de la saisie
+                input.addEventListener('input', function() {
+                    if (input.validity.valid) {
+                        const errorDiv = input.nextElementSibling;
+                        if (errorDiv && errorDiv.classList.contains('error-message')) {
+                            errorDiv.textContent = '';
+                        }
+                        input.classList.remove('is-invalid');
+                    }
+                });
+            });
+
+            // Validation des groupes de checkboxes
+            const checkboxGroups = document.querySelectorAll('.checkbox-group');
+            checkboxGroups.forEach(group => {
+                const checkboxes = group.querySelectorAll('input[type="checkbox"]');
+                const requiredCheckboxes = Array.from(checkboxes).filter(cb => cb.hasAttribute('required'));
+                
+                if (requiredCheckboxes.length > 0) {
+                    group.addEventListener('change', function() {
+                        const isChecked = requiredCheckboxes.some(cb => cb.checked);
+                        if (!isChecked) {
+                            group.classList.add('is-invalid');
+                        } else {
+                            group.classList.remove('is-invalid');
+                        }
+                    });
+                }
+            });
+
+            // Validation du formulaire avant soumission
+            form.addEventListener('submit', function(e) {
+                let isValid = true;
+                inputs.forEach(input => {
+                    if (!input.validity.valid) {
+                        isValid = false;
+                        input.dispatchEvent(new Event('invalid'));
+                    }
+                });
+                
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
     </script>
 
     <style>
@@ -544,6 +620,24 @@ h5.mb-2 {
 
 .styled-radio input:checked ~ .checkmark:after {
     display: block;
+}
+
+.error-message {
+    font-size: 0.875rem;
+    color: #dc3545;
+    margin-top: 0.25rem;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+.is-invalid:focus {
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+}
+
+.checkbox-group.is-invalid {
+    border-color: #dc3545 !important;
 }
 
     </style>

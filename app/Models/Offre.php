@@ -27,6 +27,7 @@ class Offre extends Model implements Sluggable
         'avantages',
         'date_limite_candidature',
         'entreprise_id',
+        'mise_en_avant',
         'slug'
     ];
 
@@ -36,6 +37,7 @@ class Offre extends Model implements Sluggable
         'langues_requises' => 'array',
         'date_limite_candidature' => 'date',
         'date_debut' => 'date',
+        'mise_en_avant' => 'boolean',
     ];
 
 
@@ -59,19 +61,15 @@ class Offre extends Model implements Sluggable
     public function getTypeContratAttribute()
     {
         $attr = $this->attributes['type_contrat'];
-
         $param = Parametrage::where('sigle', 'LIKE', $attr)->first();
-
-        return $param->libelle;
+        return $param ? $param->libelle : $attr;
     }
 
     public function getDureeContratAttribute()
     {
         $attr = $this->attributes['duree_contrat'];
-
         $param = Parametrage::where('sigle', 'LIKE', $attr)->first();
-
-        return $param->libelle;
+        return $param ? $param->libelle : $attr;
     }
 
     public function getCompetencesTransversalesAttribute(): array
@@ -81,7 +79,9 @@ class Offre extends Model implements Sluggable
         if(is_array($attr)) {
             foreach ($attr as $sigle) {
                 $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
-                $new_array[] = $param->libelle;
+                if ($param) {
+                    $new_array[] = $param->libelle;
+                }
             }
         }
         return $new_array;
@@ -94,7 +94,9 @@ class Offre extends Model implements Sluggable
         if(is_array($attr)) {
             foreach ($attr as $sigle) {
                 $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
-                $new_array[] = $param->libelle;
+                if ($param) {
+                    $new_array[] = $param->libelle;
+                }
             }
         }
         return $new_array;
@@ -107,7 +109,9 @@ class Offre extends Model implements Sluggable
         if(is_array($attr)) {
             foreach ($attr as $sigle) {
                 $param = Parametrage::where('sigle', 'LIKE', $sigle)->first();
-                $new_array[] = $param->libelle;
+                if ($param) {
+                    $new_array[] = $param->libelle;
+                }
             }
         }
         return $new_array;

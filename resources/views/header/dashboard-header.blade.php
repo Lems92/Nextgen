@@ -6,7 +6,58 @@
 
     if (!function_exists('is_active')) {
         function is_active($url_pattern): bool {
-            return request()->is("$url_pattern*");
+            $current_path = request()->path();
+            $url_pattern = trim($url_pattern, '/');
+            
+            // Si le pattern est vide, retourner false
+            if (empty($url_pattern)) {
+                return false;
+            }
+            
+            // Vérifier si le chemin actuel commence par le pattern
+            if (strpos($current_path, $url_pattern) === 0) {
+                return true;
+            }
+            
+            // Vérifier les routes spécifiques
+            $specific_routes = [
+                'etudiants/dashboard' => ['etudiants/dashboard'],
+                'etudiants/explorer-offre' => ['etudiants/explorer-offre'],
+                'etudiants/mes-candidatures' => ['etudiants/mes-candidatures'],
+                'etudiants/explorer-event' => ['etudiants/explorer-event'],
+                'etudiants/explorer-entreprises' => ['etudiants/explorer-entreprises'],
+                'portfolio' => ['portfolio'],
+                'etudiants/modfier-profile' => ['etudiants/modfier-profile'],
+                'etudiant/mon-universite' => ['etudiant/mon-universite'],
+                'entreprises/dashboard' => ['entreprises/dashboard'],
+                'entreprises/offres' => ['entreprises/offres'],
+                'entreprises/gerer-candidat' => ['entreprises/gerer-candidat'],
+                'entreprises/page-entreprise' => ['entreprises/page-entreprise'],
+                'entreprises/modifier-page-entreprise' => ['entreprises/modifier-page-entreprise'],
+                'entreprises/shortlist-vip' => ['entreprises/shortlist-vip'],
+                'entreprises/mon-abonnement' => ['entreprises/mon-abonnement'],
+                'service-carriere/dashboard' => ['service-carriere/dashboard'],
+                'service-carriere/gerer-event' => ['service-carriere/gerer-event'],
+                'service-carriere/gestion-etudiants' => ['service-carriere/gestion-etudiants'],
+                'admin/dashboard' => ['admin/dashboard'],
+                'admin/entreprises' => ['admin/entreprises'],
+                'admin/abonnements' => ['admin/abonnements'],
+                'admin/universites' => ['admin/universites'],
+                'admin/etudiants' => ['admin/etudiants'],
+                'admin/type-abonnements' => ['admin/type-abonnements'],
+                'admin/parametrages' => ['admin/parametrages'],
+                'admin/list-avec-categories' => ['admin/list-avec-categories']
+            ];
+            
+            if (isset($specific_routes[$url_pattern])) {
+                foreach ($specific_routes[$url_pattern] as $route) {
+                    if (strpos($current_path, $route) === 0) {
+                        return true;
+                    }
+                }
+            }
+            
+            return false;
         }
     }
 
@@ -106,7 +157,7 @@
                            id="userDropdown" aria-expanded="false">
                             <!-- Avatar -->
                             @if($user->hasRole('admin'))
-                                <img src="{{url('images/default_entreprise.png')}}" alt="avatar"
+                                <img src="{{url('images/pdp_entreprise.png')}}" alt="avatar"
                                      class="rounded-circle"
                                      width="40" height="40">
                                 <i class="la la-caret-down" style="color: white;"></i>
@@ -114,7 +165,11 @@
                                 @if($user->userable && $user->userable->profile_picture)
                                     <img src="{{asset('storage/' . $user->userable->profile_picture)}}" alt="avatar" class="rounded-circle" width="40" height="40">
                                 @else
-                                    <img src="{{asset('images/default_avatar.png')}}" alt="avatar" class="rounded-circle" width="40" height="40">
+                                    @if($user->hasRole('entreprise'))
+                                        <img src="{{asset('images/pdp_entreprise.png')}}" alt="avatar" class="rounded-circle" width="40" height="40">
+                                    @else
+                                        <img src="{{asset('images/default_avatar.png')}}" alt="avatar" class="rounded-circle" width="40" height="40">
+                                    @endif
                                 @endif
                                 <i class="la la-caret-down" style="color: white;"></i>
                             @endif
@@ -232,15 +287,19 @@
                             <a href="{{route('etudiants.explorer_event')}}"><i
                                     class="lar la-calendar"></i>Evenements</a>
                         </li>
-                        <li class="{{ is_active('/portfolio') ? 'active' : '' }}">
+                        <li class="{{ is_active('etudiants/explorer-entreprises') ? 'active' : '' }}">
+                            <a href="{{route('etudiants.explorer_entreprises')}}"><i
+                                    class="la la-building"></i>Explorer entreprises</a>
+                        </li>
+                        <li class="{{ is_active('etudiants/portfolio') ? 'active' : '' }}">
                             <a href="{{route('etudiants.portfolio', ['etudiant' => optional($user->userable)->slug ?? 'default-slug'])}}">
                                 <i class="la la-user-tie"></i>Mon portfolio
                             </a>
                         </li>
-                        <li class="{{ is_active('etudiants/modfier-profile') ? 'active' : '' }}">
+                        <li class="{{ is_active('etudiants/modifier-profile') ? 'active' : '' }}">
                             <a href="{{route('etudiants.edit_profile')}}"> <i class="la la-pen"></i>Modifier profil</a>
                         </li>
-                        <li>
+                        <li class="{{ is_active('etudiant/mon-universite') ? 'active' : '' }}">
                             <a href="{{route('etudiant.mon_universite')}}"> <i class="la la-university"></i>Mon Université</a>
                         </li>
 

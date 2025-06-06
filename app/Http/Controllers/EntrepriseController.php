@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\CandidatApproved;
 use App\Mail\CandidatRejected;
 use App\Mail\CandidatRecruited; // Assurez-vous de créer ce mail
+use Illuminate\Support\Facades\Storage;
 
 function normalize($value) {
     $value = trim(mb_strtolower($value));
@@ -112,6 +113,7 @@ class EntrepriseController extends Controller
     {
         // Validation des données
         $entrepriseId = $request->user()->userable->id;
+        $user = $request->user();
 
         $validatedData = $request->validate([
             'titre_poste' => 'required|string|max:255',
@@ -125,9 +127,31 @@ class EntrepriseController extends Controller
             'langues_requises' => 'required|array',
             'avantages' => 'nullable|string',
             'date_limite_candidature' => 'required|date',
+            'mise_en_avant' => 'nullable|boolean',
         ]);
 
         $validatedData['entreprise_id'] = $entrepriseId;
+
+        // Gestion de la mise en avant selon l'abonnement
+        if (isset($validatedData['mise_en_avant'])) {
+            if ($user->subscription->name === 'Standard') {
+                return redirect()->route('entreprise.offres')
+                    ->with('error', 'La mise en avant des annonces n\'est pas disponible avec l\'abonnement Standard.');
+            } elseif ($user->subscription->name === 'Premium') {
+                // Vérifier si une annonce est déjà mise en avant ce mois-ci
+                $currentMonth = now()->startOfMonth();
+                $existingFeatured = Offre::where('entreprise_id', $entrepriseId)
+                    ->where('mise_en_avant', true)
+                    ->where('created_at', '>=', $currentMonth)
+                    ->exists();
+                
+                if ($existingFeatured && $validatedData['mise_en_avant']) {
+                    return redirect()->route('entreprise.offres')
+                        ->with('error', 'Vous ne pouvez avoir qu\'une seule annonce mise en avant par mois avec l\'abonnement Premium.');
+                }
+            }
+            // Pour Gold, pas de limite sur la mise en avant
+        }
 
         Offre::create($validatedData);
 
@@ -176,7 +200,31 @@ class EntrepriseController extends Controller
             'langues_requises' => 'required|array',
             'avantages' => 'nullable|string',
             'date_limite_candidature' => 'required|date',
+            'mise_en_avant' => 'nullable|boolean',
         ]);
+
+        // Gestion de la mise en avant selon l'abonnement
+        $user = $request->user();
+        if (isset($validatedData['mise_en_avant'])) {
+            if ($user->subscription->name === 'Standard') {
+                return redirect()->route('entreprise.offres')
+                    ->with('error', 'La mise en avant des annonces n\'est pas disponible avec l\'abonnement Standard.');
+            } elseif ($user->subscription->name === 'Premium') {
+                // Vérifier si une autre annonce est déjà mise en avant ce mois-ci
+                $currentMonth = now()->startOfMonth();
+                $existingFeatured = Offre::where('entreprise_id', $offre->entreprise_id)
+                    ->where('id', '!=', $offre->id)
+                    ->where('mise_en_avant', true)
+                    ->where('created_at', '>=', $currentMonth)
+                    ->exists();
+                
+                if ($existingFeatured && $validatedData['mise_en_avant']) {
+                    return redirect()->route('entreprise.offres')
+                        ->with('error', 'Vous ne pouvez avoir qu\'une seule annonce mise en avant par mois avec l\'abonnement Premium.');
+                }
+            }
+            // Pour Gold, pas de limite sur la mise en avant
+        }
 
         $offre->update($validatedData);
 
@@ -432,8 +480,9 @@ class EntrepriseController extends Controller
         return view('entreprise.page-entreprise', compact('entreprise'));
     }
 
-    public function public_show_entreprise(Request $request, Entreprise $entreprise): View | RedirectResponse
+    public function public_show_entreprise(Request $request, $slug): View | RedirectResponse
     {
+        $entreprise = Entreprise::where('slug', $slug)->firstOrFail();
         $entreprise->load(['user', 'offres']);
 
         if($entreprise->user->hasPermissionTo('page_presentation_entreprise')) {
@@ -554,17 +603,22 @@ class EntrepriseController extends Controller
             'email_contact' => 'nullable|email|max:255',
             'adresse' => 'nullable|string|max:255',
             'site_web' => 'nullable|string|max:255',
-            'logo' => 'nullable|image|max:2048',
+            'profile_picture' => 'nullable|image|max:2048',
             'opportunities' => 'nullable|array',
             'domaines_activites' => 'nullable|array',
             'inclusion_diversity' => 'nullable|array',
             'training_support' => 'nullable|array',
         ]);
 
-        // Gestion du logo
-        if ($request->hasFile('logo')) {
-            $logoPath = $request->file('logo')->store('logos', 'public');
-            $entreprise->logo = $logoPath;
+        // Gestion de la photo de profil
+        if ($request->hasFile('profile_picture')) {
+            // Supprimer l'ancienne photo si elle existe
+            if ($entreprise->profile_picture) {
+                Storage::disk('public')->delete($entreprise->profile_picture);
+            }
+            // Stocker la nouvelle photo
+            $profilePath = $request->file('profile_picture')->store('profile_pictures', 'public');
+            $entreprise->profile_picture = $profilePath;
         }
 
         $entreprise->nom_entreprise = $validated['nom_entreprise'];

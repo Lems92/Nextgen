@@ -10,7 +10,7 @@
 <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full bg-white shadow-lg rounded-lg p-6">
         <div class="text-center">
-            <img class="mx-auto h-12 w-auto" src="<?= asset("/storage/NextGen-logo.svg"); ?>" alt="Logo">
+            <img class="mx-auto h-12 w-auto" src="{{ asset('images/NextGen-logo.svg') }}" alt="Logo NextGen">
             <h2 class="mt-6 text-2xl font-bold text-gray-900">Compte Confirmé</h2>
             <p class="mt-2 text-sm text-gray-600">Votre compte a été confirmé avec succès.</p>
         </div>

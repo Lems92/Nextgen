@@ -22,6 +22,11 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CompleteProfileReminderMail;
+use App\Events\EmailVerified;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 
 class RegistrationController extends Controller
@@ -103,17 +108,6 @@ class RegistrationController extends Controller
                 'domaine_etudes' => '',
                 'niveau_etudes' => '',
                 'annee_obtention_diplome' => '',
-                //'competences_techniques' => '',
-                //'competences_en_recherche_et_analyse' => '',
-                //'competences_en_communication' => '',
-                //'competences_interpersonnelles' => '',
-                //'competences_resolution_problemes' => '',
-                //'competences_adaptabilite' => '',
-                //'competences_gestion_stress' => '',
-                //'competences_leadership' => '',
-                //'competences_ethique_responsabilite' => '',
-                //'competences_gestion_financiere' => '',
-                //'competences_langues' => '',
                 'experience_professionnelle' => '',
                 'portfolio' => '',
                 'centres_interet' => '',
@@ -128,7 +122,7 @@ class RegistrationController extends Controller
                 'vacances_ete_fin' => null,
                 'dates_disponibles_vacances_ete_debut' => null,
                 'dates_disponibles_vacances_ete_fin' => null,
-                'accessibilite' => false, // Valeur par défaut
+                'accessibilite' => false,
                 'details_accessibilite' => '',
                 'origine_ethnique' => '',
                 'statut_socio_economique' => '',
@@ -255,7 +249,6 @@ class RegistrationController extends Controller
                 $user->sendEmailVerificationNotification();
 
                 Auth::login($user);
-
             });
         } catch (\Exception $exception) {
             throw new Exception($exception->getMessage());
@@ -347,5 +340,67 @@ class RegistrationController extends Controller
         Session::forget('register_data');
 
         return redirect()->route('attente_verification_email');
+    }
+
+    public function register_etudiant(Request $request)
+    {
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'type' => 'etudiant',
+        ]);
+
+        $etudiant = Etudiant::create([
+            'user_id' => $user->id,
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect()->route('verification.notice');
+    }
+
+    public function register_entreprise(Request $request)
+    {
+        $request->validate([
+            'nom_entreprise' => 'required|string|max:255',
+            'prenom' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'nom' => $request->nom_entreprise,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'type' => 'entreprise',
+        ]);
+
+        $entreprise = Entreprise::create([
+            'user_id' => $user->id,
+            'nom_entreprise' => $request->nom_entreprise,
+            'prenom' => $request->prenom,
+            'email' => $request->email,
+        ]);
+
+        event(new Registered($user));
+
+        Auth::login($user);
+
+        return redirect()->route('verification.notice');
     }
 }

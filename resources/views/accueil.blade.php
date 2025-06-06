@@ -26,7 +26,7 @@
                         </div>
                         <!-- Colonne d'image à droite -->
                         <div class="col-md-6 d-flex align-items-center justify-content-end">
-                            <img src="images/Imghero.png" alt="Homme qui croise les bras" class="img-fluid">
+                            <img src="images/Imghero.png" alt="Homme qui croise les bras" width="600" height="600" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         </div>
                         <!-- Colonne d'image à droite -->
                         <div class="col-md-6 d-flex align-items-center justify-content-end">
-                            <img src="images/Imghero.png" alt="Image description" class="img-fluid">
+                            <img src="images/Imghero.png" alt="Image description" width="600" height="600" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                         </div>
                         <!-- Colonne d'image à droite -->
                         <div class="col-md-6 d-flex align-items-center justify-content-end">
-                            <img src="images/Imghero.png" alt="Image description" class="img-fluid">
+                            <img src="images/Imghero.png" alt="Image description" width="600" height="600" class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -140,7 +140,7 @@
 
                     <!-- Image Column -->
                     <div class="image-column col-lg-6 col-md-12 col-sm-12">
-                        <figure class="image wow fadeInLeft"><img src="images/inscription3.jpg" alt=""></figure>
+                        <figure class="image wow fadeInLeft"><img src="images/inscription3.png" alt=""></figure>
 
                         <!-- Count Employers 
                         <div class="count-employers wow fadeInUp">
@@ -170,7 +170,7 @@
 
                     <!-- Image Column -->
                     <div class="image-column col-lg-6 mb-4 mb-lg-0">
-                        <figure class="image-box wow fadeInLeft mx-0"><img src="images/hero2.jpeg"
+                        <figure class="image-box wow fadeInLeft mx-0"><img src="images/hero2.jpg"
                                 alt=""></figure>
                     </div>
                 </div>
@@ -320,7 +320,7 @@
                     <div class="sec-title light">
                         <h2>Besoin d’aide ?</h2>
                         <div class="text text-white"> Contactez notre équipe via le formulaire en ligne ou par email : 
-                            join-nextgen@gmail.com<br />ou appelez au +33 7 66 91 92 92</div>
+                            join.nextgen.mada@gmail.com<br />ou appelez au +261 38 91 978 51</div>
                     </div>
 
                     <div class="btn-box">
@@ -426,6 +426,12 @@
     padding: 60px 0;
     background-color: #f9f9f9;
     text-align: center
+}
+
+.hero-img {
+  width: 600px;
+  height: 600px;
+  object-fit: cover; /* or 'contain', depending on how you want to handle aspect ratio */
 }
 
 .apropos-section .inner-column {

@@ -83,6 +83,9 @@
                                     <h4>
                                         {{ $offre->titre_poste }}
                                     </h4>
+                                    <p class="company-name mb-2" style="color: #66022b;">
+                                        {{ $offre->entreprise->nom_entreprise }}
+                                    </p>
                                     <ul class="job-info">
                                         <li><span class="icon flaticon-briefcase"></span> {{ $offre->type_contrat }}</li>
                                         <li><span class="icon flaticon-map-locator"></span> {{ $offre->lieu_poste }}</li>
@@ -91,13 +94,15 @@
                                     <ul class="job-other-info">
                                         <li class="time">{{ $offre->duree_contrat }}</li>
                                         <li class="privacy">Disponible</li>
-                                        <li class="required">Urgent</li>
+                                        @if($offre->mise_en_avant)
+                                            <li class="required">Urgent</li>
+                                        @endif
                                     </ul>
                                 </div>
                             </div>
                         </a>
                     @empty
-                        <h5>Aucune offre n’a été trouvée</h5>
+                        <h5>Aucune offre n'a été trouvée</h5>
                     @endforelse
                 </div>
             </div>

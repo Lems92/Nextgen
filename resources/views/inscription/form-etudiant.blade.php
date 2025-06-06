@@ -220,6 +220,20 @@
     .group-result {
         color: #333;
     }
+
+    .error-message {
+        font-size: 0.875rem;
+        color: #dc3545;
+        margin-top: 0.25rem;
+    }
+
+    .is-invalid {
+        border-color: #dc3545 !important;
+    }
+
+    .is-invalid:focus {
+        box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+    }
 </style>
 
 <!-- Lien vers Bootstrap JS et dépendances Popper.js -->
@@ -397,6 +411,64 @@
 
         // Add event listener to update regions when the country changes
         paysSelect.addEventListener('change', updateRegions);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const inputs = form.querySelectorAll('input, select');
+        
+        inputs.forEach(input => {
+            // Ajouter un message d'erreur personnalisé
+            input.addEventListener('invalid', function(e) {
+                e.preventDefault();
+                if (!input.validity.valid) {
+                    let message = '';
+                    if (input.validity.valueMissing) {
+                        message = 'Ce champ est obligatoire';
+                    } else if (input.validity.typeMismatch && input.type === 'email') {
+                        message = 'Veuillez entrer une adresse email valide';
+                    } else if (input.validity.typeMismatch && input.type === 'tel') {
+                        message = 'Veuillez entrer un numéro de téléphone valide';
+                    }
+                    
+                    // Créer ou mettre à jour le message d'erreur
+                    let errorDiv = input.nextElementSibling;
+                    if (!errorDiv || !errorDiv.classList.contains('error-message')) {
+                        errorDiv = document.createElement('div');
+                        errorDiv.className = 'error-message text-danger mt-1';
+                        input.parentNode.insertBefore(errorDiv, input.nextSibling);
+                    }
+                    errorDiv.textContent = message;
+                    input.classList.add('is-invalid');
+                }
+            });
+
+            // Supprimer le message d'erreur lors de la saisie
+            input.addEventListener('input', function() {
+                if (input.validity.valid) {
+                    const errorDiv = input.nextElementSibling;
+                    if (errorDiv && errorDiv.classList.contains('error-message')) {
+                        errorDiv.textContent = '';
+                    }
+                    input.classList.remove('is-invalid');
+                }
+            });
+        });
+
+        // Validation du formulaire avant soumission
+        form.addEventListener('submit', function(e) {
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!input.validity.valid) {
+                    isValid = false;
+                    input.dispatchEvent(new Event('invalid'));
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
     });
 </script>
 
