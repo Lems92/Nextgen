@@ -19,7 +19,10 @@
                         @php
                             $user = auth()->user();
                             $entreprise = $user->userable;
-                            $offresCount = $entreprise->offres()->count();
+                            $currentMonth = now()->startOfMonth();
+                            $offresCount = $entreprise->offres()
+                                ->where('created_at', '>=', $currentMonth)
+                                ->count();
                             $subscription = $user->subscription;
                             $maxOffres = match($subscription->name) {
                                 'Standard' => 2,
@@ -28,6 +31,18 @@
                                 default => 0,
                             };
                             $canPublish = $offresCount < $maxOffres;
+                            
+                            // Vérifier la mise en avant
+                            $canFeature = true;
+                            if ($subscription->name === 'Standard') {
+                                $canFeature = false;
+                            } elseif ($subscription->name === 'Premium') {
+                                $featuredThisMonth = $entreprise->offres()
+                                    ->where('mise_en_avant', true)
+                                    ->where('created_at', '>=', $currentMonth)
+                                    ->exists();
+                                $canFeature = !$featuredThisMonth;
+                            }
                         @endphp
 
                         @if($canPublish)
@@ -279,5 +294,22 @@
             color: #fff;
         }
 
+        .subscription-limit-warning {
+            margin-top: 15px;
+        }
+
     </style>
+
+    <script>
+        // Données de limites pour JavaScript
+        window.subscriptionLimits = {
+            canPublish: {{ $canPublish ? 'true' : 'false' }},
+            canFeature: {{ $canFeature ? 'true' : 'false' }},
+            subscriptionName: '{{ $subscription->name }}',
+            currentCount: {{ $offresCount }},
+            maxCount: {{ $maxOffres === PHP_INT_MAX ? 'Infinity' : $maxOffres }}
+        };
+    </script>
+    
+    <script src="{{ asset('js/subscription-limits.js') }}"></script>
 @endsection

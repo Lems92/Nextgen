@@ -133,7 +133,7 @@ class EntrepriseController extends Controller
         $validatedData['entreprise_id'] = $entrepriseId;
 
         // Gestion de la mise en avant selon l'abonnement
-        if (isset($validatedData['mise_en_avant'])) {
+        if (isset($validatedData['mise_en_avant']) && $validatedData['mise_en_avant']) {
             if ($user->subscription->name === 'Standard') {
                 return redirect()->route('entreprise.offres')
                     ->with('error', 'La mise en avant des annonces n\'est pas disponible avec l\'abonnement Standard.');
@@ -145,7 +145,7 @@ class EntrepriseController extends Controller
                     ->where('created_at', '>=', $currentMonth)
                     ->exists();
                 
-                if ($existingFeatured && $validatedData['mise_en_avant']) {
+                if ($existingFeatured) {
                     return redirect()->route('entreprise.offres')
                         ->with('error', 'Vous ne pouvez avoir qu\'une seule annonce mise en avant par mois avec l\'abonnement Premium.');
                 }
@@ -205,7 +205,7 @@ class EntrepriseController extends Controller
 
         // Gestion de la mise en avant selon l'abonnement
         $user = $request->user();
-        if (isset($validatedData['mise_en_avant'])) {
+        if (isset($validatedData['mise_en_avant']) && $validatedData['mise_en_avant']) {
             if ($user->subscription->name === 'Standard') {
                 return redirect()->route('entreprise.offres')
                     ->with('error', 'La mise en avant des annonces n\'est pas disponible avec l\'abonnement Standard.');
@@ -218,7 +218,7 @@ class EntrepriseController extends Controller
                     ->where('created_at', '>=', $currentMonth)
                     ->exists();
                 
-                if ($existingFeatured && $validatedData['mise_en_avant']) {
+                if ($existingFeatured) {
                     return redirect()->route('entreprise.offres')
                         ->with('error', 'Vous ne pouvez avoir qu\'une seule annonce mise en avant par mois avec l\'abonnement Premium.');
                 }

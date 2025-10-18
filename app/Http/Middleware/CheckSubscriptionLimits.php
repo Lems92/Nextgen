@@ -43,14 +43,13 @@ class CheckSubscriptionLimits
                 if ($request->route()->getName() === 'entreprise.gerer-candidat') {
                     $currentMonth = now()->startOfMonth();
                     $verifiedCandidates = $entreprise->offres()
-                        ->where('created_at', '>=', $currentMonth)
-                        ->withCount(['etudiants' => function ($query) {
+                        ->whereHas('etudiants', function ($query) use ($currentMonth) {
                             $query->whereHas('user', function ($q) {
                                 $q->where('email_verified_at', '!=', null);
-                            });
-                        }])
-                        ->get()
-                        ->sum('etudiants_count');
+                            })
+                            ->where('created_at', '>=', $currentMonth);
+                        })
+                        ->count();
                     
                     if ($verifiedCandidates > 10) {
                         return redirect()->route('entreprise.dashboard')
@@ -105,6 +104,11 @@ class CheckSubscriptionLimits
             case 'Gold':
                 // Pas de limites pour l'abonnement Gold
                 break;
+                
+            default:
+                // Gestion des abonnements invalides ou inconnus
+                return redirect()->route('entreprise.mon_abonnement')
+                    ->with('error', 'Type d\'abonnement non reconnu. Veuillez contacter le support technique.');
         }
 
         return $next($request);

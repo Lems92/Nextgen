@@ -60,7 +60,7 @@
                     //dump('competencesTransversalesCheckedNormalized:', $competencesTransversalesCheckedNormalized);
                 @endphp
 
-                <form action="{{ isset($offre) ? route('entreprise.offres.update', ['offre' => $offre->slug]) : route('entreprise.offres.store') }}" method="POST" class="default-form">
+                <form action="{{ isset($offre) ? route('entreprise.offres.update', ['offre' => $offre->slug]) : route('entreprise.offres.store') }}" method="POST" class="default-form" data-subscription-check>
                     @csrf
                     <div class="row">
                         <div class="form-group col-lg-12 col-md-12">
